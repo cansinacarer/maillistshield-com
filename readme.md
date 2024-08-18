@@ -36,7 +36,7 @@ This repository contains Flask based my 'Base SaaS', which is the starter framew
   - Last, but not least: User configurable dark mode.
 
 ## Demo
-TODO
+### See my [Live Demo](https://base-saas-flask.apps.cansin.net/) with Stripe (in test mode) and Google OAuth connected.
 
 ## Screenshots
 <table>
