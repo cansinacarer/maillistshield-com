@@ -36,8 +36,9 @@ class Config:
 
     # Self signed certificates for local development
     # Only used when FLASK_DEBUG is True
-    FLASK_RUN_CERT = config("FLASK_RUN_CERT")
-    FLASK_RUN_KEY = config("FLASK_RUN_KEY")
+    if FLASK_DEBUG:
+        FLASK_RUN_CERT = config("FLASK_RUN_CERT")
+        FLASK_RUN_KEY = config("FLASK_RUN_KEY")
 
     # Database
     SQLALCHEMY_DATABASE_URI = config(
