@@ -100,7 +100,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
 ## How to Deploy for Production
 This app is containerized and intended to be deployed in a Docker container. The `Dockerfile` will install the dependencies from the `requirements.txt` in the container. Be sure to not use the debug environment variable (`FLASK_DEBUG=True`).
 
-I use CapRover, which is a self-hosted PaaS built as a layer on Docker. It simplifies continuous deployment with `git push`, setting environment variables, as well as DNS and SSL set up.
+I use CapRover with the continuous deployment mechanism I wrote about in [my Better Programming article here](https://betterprogramming.pub/migrate-from-heroku-to-aws-ec2-756328d8e58a). It is a self-hosted PaaS built as a layer on Docker. It simplifies continuous deployment with `git push`, setting environment variables, as well as DNS and SSL set up.
 
 ## How to Build On Top of This App
 
