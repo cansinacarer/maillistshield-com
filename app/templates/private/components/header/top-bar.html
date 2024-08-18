@@ -1,0 +1,31 @@
+<div
+	class="d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 border-bottom"
+>
+	<a href="/" class="d-inline-flex fs-5 fw-semibold text-decoration-none">
+		{{ APP_NAME }}
+	</a>
+	<div class="text-end">
+		{% include 'shared-components/dark-mode-selector-button.html' %}
+		<a
+			class="btn btn-outline-secondary d-md-none"
+			data-bs-toggle="offcanvas"
+			data-bs-target="#sidebarMenu"
+			aria-controls="sidebarMenu"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			Menu
+		</a>
+	</div>
+</div>
+<header
+	class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+>
+	<h4 class="mb-0">{{ page_title }}</h4>
+	<div class="text-end">
+		<ul class="nav align-items-center d-none d-md-block">
+			{% include 'shared-components/dark-mode-selector-nav-list-item.html'
+			%}
+		</ul>
+	</div>
+</header>

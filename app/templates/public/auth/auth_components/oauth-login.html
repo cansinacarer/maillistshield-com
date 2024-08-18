@@ -1,0 +1,21 @@
+{% if next %}
+<a
+	href="/login?sso=google&next={{ next }}"
+	class="d-flex align-items-center justify-content-center btn btn-light w-100 border-primary"
+>
+	{% else %}
+	<a
+		href="/login?sso=google"
+		class="d-flex align-items-center justify-content-center btn btn-light w-100 border-primary"
+	>
+		{% endif %}
+		<img
+			alt="Logo"
+			src="/static/media/svg/brand-logos/google-icon.svg"
+			class="me-3"
+			height=""
+			width="20px"
+		/>
+		Sign in with Google
+	</a>
+</a>

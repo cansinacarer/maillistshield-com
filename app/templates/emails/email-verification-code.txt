@@ -1,0 +1,8 @@
+Hi {{ current_user.firstName }},
+
+Your email verification code is {{ current_user.email_confirmation_code }}.
+
+Please enter this code when prompted to verify your email address.
+
+Best,
+{{ appName }}

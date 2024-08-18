@@ -1,0 +1,45 @@
+# Environment variables
+.env
+
+# Local test database
+database.db
+
+# Local SSL certificates
+cert.pem
+key.pem
+
+flask/
+*.pyc
+dev
+node_modules
+app/database.db
+app/build
+yarn.lock
+yarn-error.log
+*.psd
+__pycache__
+.vscode/symbols.json
+app/db.sqlite3
+
+app/static/assets/node_modules
+app/static/assets/yarn.lock
+app/static/assets/.temp
+
+
+# Environments
+env/
+env__/
+.env
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Visual Studio Code #
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history

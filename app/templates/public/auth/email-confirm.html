@@ -1,0 +1,21 @@
+{% set page_title = "Email Confirmation" %}
+<!--  -->
+{% extends "public/layouts/auth.html" %}
+<!--  -->
+{% block content %}
+<!--  -->
+<form method="post">
+	<a
+		href="/"
+		class="d-block w-100 mb-4 col-md-4 text-center fs-3 fw-semibold text-decoration-none"
+		tabindex="-1"
+	>
+		{{ APP_NAME }}
+	</a>
+	<h2 class="h4 mb-3 fw-normal text-center">Email Confirmation</h2>
+	{% include 'shared-components/flash-alerts.html' %}
+	<p class="mb-3">Type your 6 digit verification code:</p>
+	<!--  -->
+	{% include 'public/auth/auth_components/email-confirmation-fields.html' %}
+</form>
+{% endblock content %}

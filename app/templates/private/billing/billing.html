@@ -1,0 +1,62 @@
+{% set page_title = "Billing" %}
+<!--  -->
+{% extends "private/layouts/base.html" %}
+<!--  -->
+{% block content %}
+
+<h2 class="h4 border-bottom mt-5 my-3 pb-2">Subscription Details</h2>
+
+<p>You are currently on the {{ current_user.tier.label }} plan.</p>
+{% if current_user.tier.name != 'free'  %}
+    <form method="post" action="{{ url_for("views_private.billing") }}/billingPortal">
+        <input class="btn btn-primary" type="submit" value="Manage Billing" />
+    </form>
+{% else %}
+    <p>Upgrade to:</p>
+    <form method="post" action="{{ url_for("views_private.billing") }}/checkout">
+        {% for tier in tiers %}
+            <!--  -->
+            {% if tier.name != 'free' %}
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="tier" id="{{ tier.name }}" value="{{ tier.name }}">
+                    <label class="form-check-label" for="{{ tier.name }}">{{ tier.label }}</label>
+                </div>
+            {% endif %}
+            <!--  -->
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="Subscribe" />
+    </form>
+{% endif %}
+
+<h2 class="h4 border-bottom mt-5 my-3 pb-2">Invoices</h2>
+{% if invoices.data %}
+<!--  -->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Invoice ID</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">Download</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices.data %}
+            <tr>
+                <td>{{ invoice.id }}</td>
+                <td>{{ invoice.amount_paid }} <span class="text-uppercase">{{ invoice.currency }}</span></td>
+                <td class="text-capitalize">{{ invoice.status }}</td>
+                <td><a href="{{ invoice.invoice_pdf }}">Download as PDF</a></td>
+                <td>{{ invoice.created | dateformat }}</td>
+                <td>{{ invoice.created | timeformat }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<p>No invoices found.</p>
+{%endif%}
+<!--  -->
+{% endblock content %}

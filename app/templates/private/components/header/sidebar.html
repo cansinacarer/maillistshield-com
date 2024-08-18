@@ -1,0 +1,78 @@
+<div
+	id="sidebarMenu"
+	class="d-flex flex-column flex-shrink-0 px-3 py-0 min-vh-100 offcanvas-md offcanvas-end border-end"
+	style="width: 280px"
+>
+	<a
+		href="/"
+		class="d-inline-flex fs-5 py-3 mb-3 border-bottom fw-semibold text-decoration-none"
+	>
+		{{ APP_NAME }}
+	</a>
+	<ul class="nav nav-pills flex-column mb-auto">
+		<li class="nav-item mb-1">
+			<a
+				href="/app/"
+				class="nav-link {% if path == '/' or path == 'index' %}active{% endif %}"
+				aria-current="page"
+			>
+				<i class="bi bi-house"></i>
+				Home
+			</a>
+		</li>
+		<li class="nav-item mb-1">
+			<a
+				href="/app/account"
+				class="nav-link {% if path == 'account' %}active{% endif %}"
+			>
+				<i class="bi bi-person"></i>
+				My Account
+			</a>
+		</li>
+		<li class="nav-item mb-1">
+			<a
+				href="/app/billing"
+				class="nav-link {% if path == 'billing' %}active{% endif %}"
+			>
+				<i class="bi bi-wallet2"></i>
+				Billing
+			</a>
+		</li>
+		<li class="nav-item mb-1">
+			<a
+				href="/app/sample-page"
+				class="nav-link {% if path == 'sample-page' %}active{% endif %}"
+			>
+				<i class="bi bi-info-circle"></i>
+				Sample Page
+			</a>
+		</li>
+	</ul>
+	<hr class="mb-0" />
+	<div id="sidebarBottom">
+		<div class="dropdown py-4">
+			<a
+				href="#"
+				class="d-flex align-items-center text-decoration-none dropdown-toggle"
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+			>
+				<img
+					src="{{ current_user.avatar() }}"
+					alt="avatar"
+					width="32"
+					height="32"
+					class="rounded-circle me-2"
+				/>
+				<span>{{ current_user.firstName }}</span>
+			</a>
+			<ul class="dropdown-menu text-small">
+				<li>
+					<a class="dropdown-item" href="/app/account">My Account</a>
+				</li>
+				<li><hr class="dropdown-divider" /></li>
+				<li><a class="dropdown-item" href="/logout">Log out</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
