@@ -46,7 +46,7 @@
         {% for invoice in invoices.data %}
             <tr>
                 <td>{{ invoice.id }}</td>
-                <td>{{ invoice.amount_paid }} <span class="text-uppercase">{{ invoice.currency }}</span></td>
+                <td>{{ invoice.amount_paid / 100 }} <span class="text-uppercase">{{ invoice.currency }}</span></td>
                 <td class="text-capitalize">{{ invoice.status }}</td>
                 <td><a href="{{ invoice.invoice_pdf }}">Download as PDF</a></td>
                 <td>{{ invoice.created | dateformat }}</td>
