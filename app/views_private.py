@@ -223,7 +223,9 @@ def billing(path):
 
             case _:
                 customer_id = current_user.stripe_customer_id
-                invoices = stripe.Invoice.list(customer=customer_id)
+                invoices = None
+                if customer_id != None:
+                    invoices = stripe.Invoice.list(customer=customer_id)
 
                 return render_template(
                     f"private/billing/{path}.html",
