@@ -90,12 +90,8 @@ TODO
    If you want to test subscription events used by this app, run the following to make stripe CLI listen and forward the following events:
    - customer.subscription.updated
    - customer.subscription.deleted
-   - customer.subscription.paused
-   - customer.subscription.resumed
 
-   `stripe listen -e customer.subscription.updated,customer.subscription.deleted,customer.subscription.paused,customer.subscription.resumed --forward-to https://localhost:5000/app/webhook/stripe --skip-verify`
-
-
+   `stripe listen -e customer.subscription.updated,customer.subscription.deleted --forward-to https://localhost:5000/app/webhook/stripe --skip-verify`
 
    This returns the webhook signing secret we use to verify that Stripe is the one sending webhook requests. This secret needs to be saved in the `.env` file as shown in `.env.template`.
     
