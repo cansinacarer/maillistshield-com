@@ -22,8 +22,8 @@ try:
 
     app.config.from_object(Config)
 
-except UndefinedValueError:
-    print("Please make sure you have all the required environment variables set.")
+except UndefinedValueError as e:
+    print("Please make sure you have all the required environment variables set.", e)
     sys.exit()
 
 # Flask Modules
