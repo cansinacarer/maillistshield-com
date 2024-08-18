@@ -25,14 +25,14 @@ app_private = Blueprint("views_private", __name__)
 
 # Custom date format filter
 # In Jinja, we can use this filter like: {{ invoice.created | dateformat }}
-def dateformat(value, format="%Y-%m-%d"):
+def dateformat(value, format="%B %d, %Y"):
     return datetime.datetime.fromtimestamp(value).strftime(format)
 
 
 app.jinja_env.filters["dateformat"] = dateformat
 
 
-def timeformat(value, format="%H:%M"):
+def timeformat(value, format="%I:%M %p"):
     return datetime.datetime.fromtimestamp(value).strftime(format)
 
 
