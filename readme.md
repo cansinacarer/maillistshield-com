@@ -1,6 +1,6 @@
 # Base SaaS
 
-This repository contains Flask based my 'Base SaaS', which is the starter framework I built for my side projects with paid subscriptions. To avoid sharing the paid HTML template I normally use, I rewrote the templates with plain Bootstrap for this repository.
+This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
 ## Main Features
 - Stripe checkout flow for user subscriptions,
