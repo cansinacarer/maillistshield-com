@@ -57,6 +57,12 @@ def server_error(e):
     return error_page(500)
 
 
+# Serve favicon in the default route some clients expect
+@app.route("/favicon.ico")
+def favicon():
+    return app.send_static_file("media/favicon.ico")
+
+
 # App main route + generic routing
 @app.route("/", defaults={"path": "index"})
 @app.route("/<path>")
