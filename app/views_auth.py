@@ -511,7 +511,7 @@ def login_callback_google():
             )
 
         # We preserved the next page to go to after login in the oauth state earlier, reading it back here
-        next = request.args["state"]
+        next = request.args.get("state", "/app")
         return redirect(next)
     else:
         flash(
