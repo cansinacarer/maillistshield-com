@@ -8,9 +8,111 @@
 <div class="container my-5">
 	<h1>Home</h1>
 	<p>This is the public home page where the anonymous visitors land.</p>
+	<p>
+		<a href="/register">Create an account</a>
+		to see the authentication and payment process through the login and
+		application templates.
+	</p>
 	<hr />
 	<h2 class="mt-4">Features of my Base SaaS</h2>
-	<p>This app uses Bootstrap 5 and supports all its components.</p>
+	<ul class="mt-4">
+		<li>
+			Stripe checkout flow for user subscriptions,
+			<ul>
+				<li>Different subscription tiers,</li>
+				<li>Billing page with Invoices,</li>
+				<li>
+					Integration mechanism:
+					<ul>
+						<li>
+							To begin a subscription, we send the user to Stripe
+							with a checkout session,
+						</li>
+						<li>
+							Then listen to Stripe webhook events to process the
+							results,
+						</li>
+						<li>
+							We set the Products in Stripe, then insert their
+							prices into the Tiers table.
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			Authentication,
+			<ul>
+				<li>
+					Sign up flow,
+					<ul>
+						<li>Sign up with Google option,</li>
+						<li>Email validation requirement,</li>
+					</ul>
+				</li>
+				<li>Two factor authentication (TOTP only),</li>
+				<li>Forgot password flow,</li>
+				<li>
+					Account details page where the user can:
+					<ul>
+						<li>Upload a profile picture (stored in S3)</li>
+						<li>Change profile details like first & last name.</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			Transactional emails sent over SMTP:
+			<ul>
+				<li>
+					About Stripe subscriptions:
+					<ul>
+						<li>Confirmation,</li>
+						<li>Cancellation,</li>
+						<li>Expiration reminder.</li>
+					</ul>
+				</li>
+				<li>Email verification on registration,</li>
+				<li>Forgot password.</li>
+			</ul>
+		</li>
+		<li>
+			Database model with ORM, automatically created on first run with ORM
+			to accommodate the features above,
+		</li>
+		<li>
+			HTML templates:
+			<ul>
+				<li>
+					Email templates for the email validation, password reset.
+				</li>
+				<li>
+					2 sets of page templates,
+					<ul>
+						<li>
+							Public pages (
+							<code>templates/public</code>
+							),
+							<ul>
+								<li>Login/sign up pages,</li>
+							</ul>
+						</li>
+						<li>
+							Backend (auth required) pages (
+							<code>templates/private</code>
+							),
+						</li>
+					</ul>
+				</li>
+				<li>
+					Utilizes the new ootb Bootstrap 5 components like floating
+					form labels,
+				</li>
+				<li>Last, but not least: User configurable dark mode.</li>
+			</ul>
+		</li>
+	</ul>
+	<h3 class="mt-4">Components</h3>
 	<a
 		class="btn btn-primary mb-4"
 		href="https://getbootstrap.com/docs/5.3/examples/#snippets"

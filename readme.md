@@ -33,6 +33,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
     - Public pages (`templates/public`),
       - Login/sign up pages,
     - Backend (auth required) pages (`templates/private`),
+  - Utilizes the new ootb Bootstrap 5 components like floating form labels,
   - Last, but not least: User configurable dark mode.
 
 ## Demo
