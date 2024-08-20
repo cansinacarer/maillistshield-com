@@ -1,12 +1,12 @@
 /* Public Nav */
 .nav-masthead .nav-link {
-	color: rgba(255, 255, 255, 0.5);
+	color: var(--bs-body-color);
 	border-bottom: 0.25rem solid transparent;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-	border-bottom-color: rgba(255, 255, 255, 0.25);
+	border-bottom-color: var(--bs-body-color);
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -14,6 +14,6 @@
 }
 
 .nav-masthead .active {
-	color: #fff;
-	border-bottom-color: #fff;
+	color: var(--bs-body-color);
+	border-bottom-color: var(--bs-body-color);
 }
