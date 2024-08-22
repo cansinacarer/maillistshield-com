@@ -3,14 +3,14 @@
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
 ## Main Features
-- Stripe checkout flow for user subscriptions,
+- 💳 Stripe checkout flow for user subscriptions,
   - Different subscription tiers,
   - Billing page with Invoices,
   - Integration mechanism:
     - To begin a subscription, we send the user to Stripe with a checkout session,
     - Then listen to Stripe webhook events to process the results,
     - We set the Products in Stripe, then insert their prices into the Tiers table.
-- Authentication,
+- 🔒 Authentication,
   - Sign up flow,
     - Sign up with Google option,
     - Email validation requirement,
@@ -19,22 +19,22 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
   - Account details page where the user can:
     - ~~Upload a profile picture (stored in S3)~~,
     - Change profile details like first & last name.
-- Transactional emails sent over SMTP:
+- 📧 Transactional emails sent over SMTP:
   - About Stripe subscriptions:
     - ~~Confirmation,~~
     - ~~Cancellation,~~
     - ~~Expiration reminder.~~
   - Email verification on registration,
   - Forgot password.
-- Database model with ORM, automatically created on first run with ORM to accommodate the features above,
-- HTML templates:
-  - Email templates for the email validation, password reset.
+- 🗄️ Database model with ORM, automatically created on first run with ORM to accommodate the features above,
+- 🌐 HTML templates:
+  - Email templates for the email validation, password reset,
   - 2 sets of page templates,
     - Public pages (`templates/public`),
       - Login/sign up pages,
     - Backend (auth required) pages (`templates/private`),
   - Utilizes the new ootb Bootstrap 5 components like floating form labels,
-  - Last, but not least: User configurable dark mode.
+  - Last, but not least: User configurable dark mode. 😎
 
 ## Demo
 ### See my [Live Demo](https://base-saas-flask.apps.cansin.net/) with Stripe (in test mode) and Google OAuth connected.
