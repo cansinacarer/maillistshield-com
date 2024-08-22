@@ -26,7 +26,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
     - ~~Expiration reminder.~~
   - Email verification on registration,
   - Forgot password.
-- 🗄️ Database model with ORM, automatically created on first run with ORM to accommodate the features above,
+- 🗄️ Database model with ORM, automatically created on first run to accommodate the features above,
 - 🌐 HTML templates:
   - Email templates for the email validation, password reset,
   - 2 sets of page templates,
