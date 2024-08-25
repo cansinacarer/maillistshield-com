@@ -20,10 +20,10 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
     - ~~Upload a profile picture (stored in S3)~~,
     - Change profile details like first & last name.
 - 📧 Transactional emails sent over SMTP:
-  - About Stripe subscriptions:
-    - ~~Confirmation,~~
-    - ~~Cancellation,~~
-    - ~~Expiration reminder.~~
+  - About Stripe subscription changes:
+    - Confirmation,
+    - Cancellation,
+    - Expiration.
   - Email verification on registration,
   - Forgot password.
 - 🗄️ Database model with ORM, automatically created on first run to accommodate the features above,
