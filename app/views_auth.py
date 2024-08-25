@@ -406,6 +406,15 @@ def login_callback_google():
         flash("You are already logged in.", "info")
         return redirect("/app")
 
+    # Handling the case where the callback has an error arg
+    if request.args.get("error") is not None:
+        print(
+            "Error on callback, redirecting to login.\nError from Google: ",
+            request.args.get("error"),
+        )
+        flash("Google authentication was not completed. Please try again.", "danger")
+        return redirect("/login")
+
     # Get authorization code Google sent back to you
     code = request.args.get("code")
     google_config = get_google_sso_config()
