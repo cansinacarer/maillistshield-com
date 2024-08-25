@@ -14,33 +14,31 @@ ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
 
 # Sends an email with the password reset link
 def send_email_to_reset_password(email):
-    # TODO: Add sent counter to prevent spamming
-    if True:
-        # Tokenize the email address
-        token = ts.dumps(email, salt="recover-key")
-        resetLink = url_for("set_new_password", _external=True) + "/" + token
+    # Tokenize the email address
+    token = ts.dumps(email, salt="recover-key")
+    resetLink = url_for("set_new_password", _external=True) + "/" + token
 
-        user = Users.query.filter_by(email=email).first_or_404()
+    user = Users.query.filter_by(email=email).first_or_404()
 
-        # Email with this information:
-        msg = Message("Password Reset")
-        msg.add_recipient(email)
-        msg.sender = (app.config["APP_NAME"], app.config["MAIL_FROM"])
-        msg.body = render_template(
-            "emails/password-reset.txt",
-            user=user,
-            appName=app.config["APP_NAME"],
-            appHome=app.config["APP_ROOT_URL"],
-            resetLink=resetLink,
-        )
-        msg.html = render_template(
-            "emails/password-reset.html",
-            user=user,
-            appName=app.config["APP_NAME"],
-            appHome=app.config["APP_ROOT_URL"],
-            resetLink=resetLink,
-        )
-        send_async_email(msg)
+    # Email with this information:
+    msg = Message("Password Reset")
+    msg.add_recipient(email)
+    msg.sender = (app.config["APP_NAME"], app.config["MAIL_FROM"])
+    msg.body = render_template(
+        "emails/password-reset.txt",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        resetLink=resetLink,
+    )
+    msg.html = render_template(
+        "emails/password-reset.html",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        resetLink=resetLink,
+    )
+    send_async_email(msg)
 
 
 # Send the email for user the verify their email address
