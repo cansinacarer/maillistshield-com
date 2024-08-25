@@ -47,10 +47,12 @@ def handle_stripe_event(event):
 
         # Are we canceling the subscription now?
         if event.type == "customer.subscription.deleted":
+            # Send the email about subscription ending while we can still read the tier
+            send_email_about_subscription_deletion(user_matched, tier_matched)
+
+            # Change the tier to the first level
             user_matched.tier_id = 1
             user_matched.cancel_at = None
-            # TODO: Transactional email
-            send_email_about_subscription_deletion(user_matched, tier_matched)
 
         elif event.type == "customer.subscription.updated":
             # Is the update about an upcoming cancellation?
