@@ -1,7 +1,8 @@
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask_login import current_user
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from jinja2 import TemplateNotFound
-from flask import redirect
 from datetime import datetime
 
 from app import app, lm
@@ -51,10 +52,25 @@ def page_not_found(e):
     return error_page(405)
 
 
+@app.errorhandler(429)
+def rate_limited(e):
+    print(f"ERROR 429: {e}")
+    return error_page(429)
+
+
 @app.errorhandler(500)
 def server_error(e):
     print(f"ERROR 500: {e}")
     return error_page(500)
+
+
+# Configure rate limiting
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per minute", "400 per hour"],
+    on_breach=rate_limited,
+)
 
 
 # Serve favicon in the default route some clients expect

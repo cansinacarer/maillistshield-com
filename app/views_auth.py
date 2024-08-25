@@ -39,7 +39,7 @@ from app.forms import (
     SetNewPassword,
     TwoFactorAuthenticationForm,
 )
-
+from app.views import limiter
 from app.config import appTimezone
 from app.emails import send_email_with_code, send_email_to_reset_password, ts
 from app.utilities.user_registration_actions import new_user_actions_for_email_confirmed
@@ -75,6 +75,7 @@ def logout():
 
 # Register a new user
 @app.route("/register", methods=["GET", "POST"])
+@limiter.limit("10 per day", methods=["POST"])
 def register():
     # Don't allow logged in users here
     if current_user.is_authenticated:
@@ -146,6 +147,7 @@ def register():
 
 # Authenticate user
 @app.route("/login", methods=["GET", "POST"])
+@limiter.limit("10 per day", methods=["POST"])
 def login():
 
     if request.method == "GET":
@@ -218,6 +220,7 @@ def login():
 
 # Authenticate user with the second factor
 @app_auth.route("/two-factor", methods=["GET", "POST"])
+@limiter.limit("10 per day", methods=["POST"])
 def two_factor():
 
     # Don't allow logged in users here
@@ -335,6 +338,7 @@ def email_confirmation_by_code():
 
 # Password Reset
 @app.route("/forgot-password", methods=["GET", "POST"])
+@limiter.limit("1 per day", methods=["POST"])
 def password_reset():
     # Declare the login form
     form = ResetPassword(request.form)
