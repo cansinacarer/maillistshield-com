@@ -1,6 +1,7 @@
 Hi {{ current_user.firstName }},
 
-Your email verification code is {{ current_user.email_confirmation_code }}.
+Your email verification code is {{ current_user.email_confirmation_code | default("000000") if
+		current_user.email_confirmation_code else "000000" }}.
 
 Please enter this code when prompted to verify your email address.
 
