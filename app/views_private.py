@@ -127,7 +127,7 @@ def billing(path):
 
             case "cancel":
                 # This is only informational, we process the membership change with the webhook events
-                flash("Your payment has been cancelled.", "danger")
+                flash("Your payment has been canceled.", "danger")
                 return redirect(
                     url_for(
                         "views_private.billing",
