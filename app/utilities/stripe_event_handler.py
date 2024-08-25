@@ -2,6 +2,11 @@ import datetime
 
 from app.config import appTimezone
 from app.models import Users, Tiers
+from app.emails import (
+    send_email_about_subscription_confirmation,
+    send_email_about_subscription_cancellation,
+    send_email_about_subscription_deletion,
+)
 
 
 def is_subscription_event(event):
@@ -42,10 +47,10 @@ def handle_stripe_event(event):
 
         # Are we canceling the subscription now?
         if event.type == "customer.subscription.deleted":
-            print(f"Subscription is canceled immediately for customer_id {customer_id}")
             user_matched.tier_id = 1
             user_matched.cancel_at = None
             # TODO: Transactional email
+            send_email_about_subscription_deletion(user_matched, tier_matched)
 
         elif event.type == "customer.subscription.updated":
             # Is the update about an upcoming cancellation?
@@ -53,15 +58,21 @@ def handle_stripe_event(event):
                 cancellation_date = datetime.datetime.fromtimestamp(
                     subscription["current_period_end"]
                 ).astimezone(appTimezone)
-                print(f"Subscription will be canceled on {cancellation_date}")
                 user_matched.cancel_at = cancellation_date
-                # TODO: Transactional email
+
+                # Send email about subscription cancellation
+                send_email_about_subscription_cancellation(
+                    user_matched, tier_matched, cancellation_date
+                )
 
             # Is the update about a tier change? Including from free to paid.
             if subscription["cancel_at"] is None:
-                print(f"Updating {user_matched.email}'s tier to {tier_matched.label}.")
                 # Update the user's tier
+                # TODO: Check if they had a subscription to a better tier before cancellation, if yes, keep that until that ends, then switch to new tier
                 user_matched.tier_id = tier_matched.id
+
+                # Send email about subscription confirmation
+                send_email_about_subscription_confirmation(user_matched, tier_matched)
 
                 # Clear any prior cancellation date if it exists
                 user_matched.cancel_at = None

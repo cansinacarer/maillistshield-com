@@ -90,6 +90,80 @@ def send_email_with_code(user):
         )
 
 
+# Sends an email with the password reset link
+def send_email_about_subscription_confirmation(user, tier_name):
+
+    # Email with this information:
+    msg = Message("Subscription Confirmed")
+    msg.add_recipient(user.email)
+    msg.sender = (app.config["APP_NAME"], app.config["MAIL_FROM"])
+    msg.body = render_template(
+        "emails/email-subscription-confirmed.txt",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+    )
+    msg.html = render_template(
+        "emails/email-subscription-confirmed.html",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+    )
+    send_async_email(msg)
+
+
+# Sends an email with the password reset link
+def send_email_about_subscription_cancellation(user, tier_name, cancellation_date):
+
+    # Email with this information:
+    msg = Message("Subscription Canceled")
+    msg.add_recipient(user.email)
+    msg.sender = (app.config["APP_NAME"], app.config["MAIL_FROM"])
+    msg.body = render_template(
+        "emails/email-subscription-canceled.txt",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+        cancellation_date=cancellation_date,
+    )
+    msg.html = render_template(
+        "emails/email-subscription-canceled.html",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+        cancellation_date=cancellation_date,
+    )
+    send_async_email(msg)
+
+
+# Sends an email with the password reset link
+def send_email_about_subscription_deletion(user, tier_name):
+
+    # Email with this information:
+    msg = Message("Subscription Ended")
+    msg.add_recipient(user.email)
+    msg.sender = (app.config["APP_NAME"], app.config["MAIL_FROM"])
+    msg.body = render_template(
+        "emails/email-subscription-deleted.txt",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+    )
+    msg.html = render_template(
+        "emails/email-subscription-deleted.html",
+        user=user,
+        appName=app.config["APP_NAME"],
+        appHome=app.config["APP_ROOT_URL"],
+        tier_name=tier_name,
+    )
+    send_async_email(msg)
+
+
 # Async emailing - all information is passed in an instance of the Message object
 @asyncr
 def send_async_email(msg):

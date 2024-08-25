@@ -1,0 +1,8 @@
+Hi {{ current_user.firstName }},
+
+Your subscription of the {{ tier_name }} plan has been cancelled
+
+You can find your receipts and update your subscription status on our billing page.
+
+Best,
+{{ appName }}
