@@ -27,6 +27,9 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
   - Email verification on registration,
   - Forgot password.
 - 🗄️ Database model with ORM, automatically created on first run to accommodate the features above,
+- 🚨 Security measures:
+  - CSRF (Cross-Site Request Forgery) protection in all forms,
+  - Rate limiting: App-wide and form specific limits.
 - 🐳 Dockerized for stateless continuous deployment,
 - 🌐 HTML templates:
   - Email templates for the email validation, password reset,
