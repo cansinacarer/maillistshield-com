@@ -294,7 +294,9 @@ def account(path):
                 form = ProfileDetailsForm()
                 if request.method == "POST":
 
-                    # Response to JS request after a new profile pic is uploaded
+                    # If bucket upload request returns 200, JS calls this endpoint
+                    # Then we set the avatar_uploaded flag to True,
+                    # so that user.avatar() serves the image from the bucket
                     if request.form.get("profile-pic-updated") == "yes":
                         try:
                             current_user.avatar_uploaded = True

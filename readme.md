@@ -17,7 +17,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
   - Two factor authentication (TOTP only),
   - Forgot password flow,
   - Account details page where the user can:
-    - ~~Upload a profile picture (stored in S3)~~,
+    - Upload a profile picture (stored in S3),
     - Change profile details like first & last name.
 - 📧 Transactional emails sent over SMTP:
   - About Stripe subscription changes:

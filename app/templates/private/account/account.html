@@ -6,6 +6,29 @@
 
 <h2 class="h4 border-bottom mt-5 my-3 pb-2">Account Details</h2>
 <img class="rounded-circle my-3" src="{{ current_user.avatar() }}" height="140" width="140" alt="avatar">
+<label
+    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+    data-bs-toggle="tooltip"
+    title="Change avatar"
+    for="profile_picture"
+>
+    <i class="bi bi-pencil-fill"></i>
+    <form method="post">
+        <input
+            type="file"
+            id="profile_picture"
+            name="profile_picture"
+            accept=".png, .jpg, .jpeg"
+            style="display: none"
+        />
+        <input
+            type="hidden"
+            id="profile_picture_url"
+            name="profile_picture_url"
+            value="{{ user.avatar() }}"
+        />
+    </form>
+</label>
 <form method="post">
     {{ form.hidden_tag() }}
 	<!--  -->
@@ -196,3 +219,8 @@
 {% endif %}
 <!--  -->
 {% endblock content %}
+
+<!--  -->
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/profile-picture-uploader.js') }}"></script>
+{% endblock %}

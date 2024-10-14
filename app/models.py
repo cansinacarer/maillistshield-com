@@ -104,14 +104,19 @@ class Users(db.Model, UserMixin):
         return self
 
     def avatar(self, size=256):
+        # If the user has uploaded an avatar, we return the s3 link
         if self.avatar_uploaded:
             url = generate_download_link(
                 bucket_name=app.config["S3_BUCKET_NAME"],
                 key=f"profile-pictures/{self.id}.png",
                 s3=s3,
             )
+
+        # If the user has a google avatar, we return that
         elif not self.google_avatar_url == None:
             url = self.google_avatar_url
+
+        # Otherwise we return a gravatar
         else:
             email_hashed = md5(self.email.encode("utf-8")).hexdigest()
             url = f"http://www.gravatar.com/avatar/{email_hashed}?d=mp&s={str(size)}"
