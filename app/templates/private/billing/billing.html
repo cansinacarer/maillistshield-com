@@ -53,24 +53,24 @@
                 <th scope="col" class="text-center">Amount</th>
                 <th scope="col" class="text-center">Status</th>
                 <th scope="col"class="text-center">Invoice ID</th>
-                <th scope="col" class="text-center">Download</th>
+                <th scope="col" class="text-center">Receipt</th>
             </tr>
         </thead>
         <tbody>
             {% for charge in charges.data %}
-                <tr>
+            <tr>
                     <td class="text-center">{{ charge.created | dateformat }}</td>
                     <td class="text-center">{{ charge.created | timeformat }}</td>
                     <td class="text-center">{{ charge.description }}</td>
                     <td class="text-center">{{ charge.amount / 100 }} <span class="text-uppercase">{{ charge.currency }}</span></td>
                     <td class="text-center text-capitalize">{{ charge.status }}</td>
                     <td class="text-center">{{ charge.id }}</td>
-                    <td class="text-center"><a href="{{ charge.receipt_url }}" class="btn btn-success btn-sm">Download PDF</a></td>
+                    <td class="text-center"><a href="{{ charge.receipt_url }}" class="btn btn-success btn-sm">View Receipt</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    <i>Only the 10 most recent payments are shown. Please contact us if you need to access older invoices.</i>
+    <i>Only the 10 most recent payments are shown. Please contact us if you need any information your older payments.</i>
 </div>
 
 {% else %}
