@@ -17,27 +17,33 @@
 	<h2 class="mt-4">Features of my Base SaaS</h2>
 	<ul class="mt-4">
 		<li class="mt-4">
-			💳 Stripe checkout flow for user subscriptions,
+			💳 Stripe checkout flows:
 			<ul>
-				<li>Different subscription tiers,</li>
-				<li>Billing page with Invoices,</li>
 				<li>
-					Integration mechanism:
+					Subscriptions,
 					<ul>
+						<li>Different subscription tiers,</li>
+						<li>Billing page with Invoices,</li>
 						<li>
-							To begin a subscription, we send the user to Stripe
-							with a checkout session,
-						</li>
-						<li>
-							Then listen to Stripe webhook events to process the
-							results,
-						</li>
-						<li>
-							We set the Products in Stripe, then insert their
-							prices into the Tiers table.
+							Integration mechanism:
+							<ul>
+								<li>
+									To begin a subscription, we send the user to
+									Stripe with a checkout session,
+								</li>
+								<li>
+									Then listen to Stripe webhook events to
+									process the results,
+								</li>
+								<li>
+									We set the Products in Stripe, then insert
+									their prices into the Tiers table.
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</li>
+				<li>One-off credit purchases for pre-paid metered usage.</li>
 			</ul>
 		</li>
 		<li class="mt-4">

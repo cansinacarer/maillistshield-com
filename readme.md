@@ -3,13 +3,15 @@
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
 ## Main Features
-- 💳 Stripe checkout flow for user subscriptions,
-  - Different subscription tiers,
-  - Billing page with Invoices,
-  - Integration mechanism:
-    - To begin a subscription, we send the user to Stripe with a checkout session,
-    - Then listen to Stripe webhook events to process the results,
-    - We set the Products in Stripe, then insert their prices into the Tiers table.
+- 💳 Stripe checkout flows:
+  - Subscriptions,
+    - Different subscription tiers,
+    - Billing page with Invoices,
+    - Integration mechanism:
+      - To begin a subscription, we send the user to Stripe with a checkout session,
+      - Then listen to Stripe webhook events to process the results,
+      - We set the Products in Stripe, then insert their prices into the Tiers table.
+  - One-off credit purchases for pre-paid metered usage.
 - 🔒 Authentication,
   - Sign up flow,
     - Sign up with Google option,
