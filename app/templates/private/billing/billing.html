@@ -58,7 +58,7 @@
         </thead>
         <tbody>
             {% for charge in charges.data %}
-            <tr>
+                <tr>
                     <td class="text-center">{{ charge.created | dateformat }}</td>
                     <td class="text-center">{{ charge.created | timeformat }}</td>
                     <td class="text-center">{{ charge.description }}</td>
@@ -70,7 +70,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <i>Only the 10 most recent payments are shown. Please contact us if you need any information your older payments.</i>
+    <i>Only the 100 most recent payments are shown. Please contact us if you need any information your older payments.</i>
 </div>
 
 {% else %}

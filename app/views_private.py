@@ -310,7 +310,7 @@ def billing(path):
                 charges = None
                 if customer_id != None:
                     charges = stripe.Charge.list(
-                        customer=customer_id, status="succeeded"
+                        customer=customer_id, status="succeeded", limit=100
                     )
 
                 return render_template(
