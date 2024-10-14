@@ -98,7 +98,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
    - customer.subscription.updated
    - customer.subscription.deleted
 
-   `stripe listen -e customer.subscription.updated,customer.subscription.deleted --forward-to https://localhost:5000/app/webhook/stripe --skip-verify`
+   `stripe listen -e customer.subscription.updated,customer.subscription.deleted,checkout.session.completed --forward-to https://localhost:5000/app/webhook/stripe --skip-verify`
 
    This returns the webhook signing secret we use to verify that Stripe is the one sending webhook requests. This secret needs to be saved in the `.env` file as shown in `.env.template`.
     
