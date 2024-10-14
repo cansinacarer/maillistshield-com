@@ -40,8 +40,8 @@
     </form>
 {% endif %}
 
-<h2 class="h4 border-bottom mt-5 my-3 pb-2">Billing History</h2>
-{% if invoices.data %}
+<h2 class="h4 border-bottom mt-5 my-3 pb-2">Payment History</h2>
+{% if charges.data %}
 <!--  -->
 <div class="table-responsive">
     <table class="table table-striped table-hover">
@@ -49,6 +49,7 @@
             <tr>
                 <th scope="col" class="text-center">Date</th>
                 <th scope="col" class="text-center">Time</th>
+                <th scope="col" class="text-center">Description</th>
                 <th scope="col" class="text-center">Amount</th>
                 <th scope="col" class="text-center">Status</th>
                 <th scope="col"class="text-center">Invoice ID</th>
@@ -56,21 +57,25 @@
             </tr>
         </thead>
         <tbody>
-            {% for invoice in invoices.data %}
+            {% for charge in charges.data %}
                 <tr>
-                    <td class="text-center">{{ invoice.created | dateformat }}</td>
-                    <td class="text-center">{{ invoice.created | timeformat }}</td>
-                    <td class="text-center">{{ invoice.amount_paid / 100 }} <span class="text-uppercase">{{ invoice.currency }}</span></td>
-                    <td class="text-center text-capitalize">{{ invoice.status }}</td>
-                    <td class="text-center">{{ invoice.id }}</td>
-                    <td class="text-center"><a href="{{ invoice.invoice_pdf }}" class="btn btn-success btn-sm">Download PDF</a></td>
+                    <td class="text-center">{{ charge.created | dateformat }}</td>
+                    <td class="text-center">{{ charge.created | timeformat }}</td>
+                    <td class="text-center">{{ charge.description }}</td>
+                    <td class="text-center">{{ charge.amount / 100 }} <span class="text-uppercase">{{ charge.currency }}</span></td>
+                    <td class="text-center text-capitalize">{{ charge.status }}</td>
+                    <td class="text-center">{{ charge.id }}</td>
+                    <td class="text-center"><a href="{{ charge.receipt_url }}" class="btn btn-success btn-sm">Download PDF</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <i>Only the 10 most recent payments are shown. Please contact us if you need to access older invoices.</i>
 </div>
+
 {% else %}
-<p>No payment history found.</p>
+<p>No payment history.</p>
 {%endif%}
+
 <!--  -->
 {% endblock content %}

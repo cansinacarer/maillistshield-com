@@ -24,7 +24,7 @@ app_private = Blueprint("views_private", __name__)
 
 
 # Custom date format filter
-# In Jinja, we can use this filter like: {{ invoice.created | dateformat }}
+# In Jinja, we can use this filter like: {{ charge.created | dateformat }}
 def dateformat(value, format="%B %d, %Y"):
     return datetime.datetime.fromtimestamp(value).strftime(format)
 
@@ -185,6 +185,10 @@ def billing(path):
                             # Otherwise, Stripe doesn't tell us how many credits were purchased
                             "quantity": int(creditsRequested),
                         },
+                        payment_intent_data={
+                            # The description shown in the list of charges
+                            "description": f"Purchase of {creditsRequested} credits",
+                        },
                         mode="payment",
                         payment_method_types=["card"],
                         success_url=app.config["APP_ROOT_URL"]
@@ -303,16 +307,18 @@ def billing(path):
 
             case _:
                 customer_id = current_user.stripe_customer_id
-                invoices = None
+                charges = None
                 if customer_id != None:
-                    invoices = stripe.Invoice.list(customer=customer_id)
+                    charges = stripe.Charge.list(
+                        customer=customer_id, status="succeeded"
+                    )
 
                 return render_template(
                     f"private/billing/{path}.html",
                     user=current_user,
                     path=path,
                     tiers=Tiers.query.all(),
-                    invoices=invoices,
+                    charges=charges,
                 )
     except TemplateNotFound:
         return error_page(404)
