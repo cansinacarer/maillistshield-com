@@ -134,8 +134,88 @@ def billing(path):
                     )
                 )
 
-            # Redirect to the Stripe billing portal
-            case "billingPortal":
+            # Redirect to the Stripe for purchase
+            case "purchase-credits":
+                if request.method != "POST":
+                    return error_page(400)
+
+                try:
+                    # If the user doesn't have a stripe_customer_id, create a new customer
+                    if current_user.stripe_customer_id == None:
+                        customer = stripe.Customer.create(
+                            email=current_user.email,
+                            name=current_user.firstName + " " + current_user.lastName,
+                        )
+                        current_user.stripe_customer_id = customer.id
+                        current_user.save()
+
+                    # Based on the tier selected, select the price
+                    try:
+                        creditsRequested = request.form.get("numberOfCredits")
+
+                        # Validate the number of credits
+                        if not creditsRequested.isdigit():
+                            flash("Invalid number of credits selected.", "danger")
+                            return redirect(url_for("views_private.billing"))
+
+                    except Exception as e:
+                        print(f"Error while parsing the numberOfCredits requested: {e}")
+                        flash("Invalid tier selected.", "danger")
+                        return redirect(request.referrer)
+
+                    checkout_session = stripe.checkout.Session.create(
+                        customer=current_user.stripe_customer_id,
+                        line_items=[
+                            {
+                                "price_data": {
+                                    "unit_amount": app.config[
+                                        "STRIPE_PRODUCT_UNIT_COST"
+                                    ],
+                                    "currency": "usd",
+                                    "product": app.config[
+                                        "STRIPE_PRODUCT_ID_FOR_CREDITS"
+                                    ],
+                                },
+                                "quantity": int(creditsRequested),
+                            }
+                        ],
+                        metadata={
+                            # Save the number of credits requested in the metadata
+                            # So that we can update the user's credits in the webhook
+                            # Otherwise, Stripe doesn't tell us how many credits were purchased
+                            "quantity": int(creditsRequested),
+                        },
+                        mode="payment",
+                        payment_method_types=["card"],
+                        success_url=app.config["APP_ROOT_URL"]
+                        + url_for("views_private.billing")
+                        + "/success",
+                        cancel_url=app.config["APP_ROOT_URL"]
+                        + url_for("views_private.billing")
+                        + "/cancel",
+                        automatic_tax={"enabled": True},
+                        customer_update={
+                            "address": "auto",  # Automatically update the customer's address
+                        },
+                    )
+                except Exception as e:
+                    flash(
+                        "An error occurred while processing your payment. Please try again later.",
+                        "danger",
+                    )
+                    print(
+                        f"An error occurred while creating the Stripe checkout session:\n{e}"
+                    )
+                    return redirect(
+                        url_for(
+                            "views_private.billing",
+                        )
+                    )
+
+                return redirect(checkout_session.url, code=303)
+
+            # Redirect to the Stripe for subscription
+            case "billing-portal":
                 if request.method != "POST":
                     return error_page(400)
                 try:

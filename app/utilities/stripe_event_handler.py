@@ -13,6 +13,10 @@ def is_subscription_event(event):
     return event.type[:21] == "customer.subscription"
 
 
+def is_checkout_completed_event(event):
+    return event.type == "checkout.session.completed"
+
+
 def user_from_stripe_customer_id(customer_id):
     user_matched = Users.query.filter_by(stripe_customer_id=customer_id).first()
 
@@ -33,16 +37,27 @@ def tier_from_stripe_price_id(price_id):
 
 def handle_stripe_event(event):
 
+    # If it is a credit purchase event, try to parse user and update credits
+    if is_checkout_completed_event(event):
+        # Get the Stripe customer and find the matching user
+        customer_id = event.data.object["customer"]
+        user_matched = user_from_stripe_customer_id(customer_id)
+
+        # Update the user's credits
+        quantity = event.data.object.metadata.quantity
+        user_matched.credits = user_matched.credits + int(quantity)
+        user_matched.save()
+
     # If it is a subscription event, try to parse user and tier
     if is_subscription_event(event):
         subscription = event.data.object
 
-        # Get the Stripe customer and price_id
+        # Get the Stripe customer and find the matching user
         customer_id = subscription["customer"]
-        price_id = subscription["items"]["data"][0]["price"]["id"]
-
-        # Try to get the user and tier based on customer_id and price_id
         user_matched = user_from_stripe_customer_id(customer_id)
+
+        # Get the price_id and find the matching tier
+        price_id = subscription["items"]["data"][0]["price"]["id"]
         tier_matched = tier_from_stripe_price_id(price_id)
 
         # Are we canceling the subscription now?

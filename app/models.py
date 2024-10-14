@@ -40,6 +40,8 @@ class Users(db.Model, UserMixin):
     # Define the Foreign Key
     tier_id = db.Column(db.Integer, db.ForeignKey("Tiers.id"))
 
+    credits = db.Column(db.BigInteger, default=0)
+
     # We use this to access the tier object from the user object
     # E.g. current_user.tier.name
     tier = db.relationship("Tiers", back_populates="users")

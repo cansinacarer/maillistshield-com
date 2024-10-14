@@ -4,11 +4,23 @@
 <!--  -->
 {% block content %}
 
+<h2 class="h4 border-bottom mt-5 my-3 pb-2">Credit Balance</h2>
+
+<p>You have {{ "{:,}".format(current_user.credits) }} credits.</p>
+
+<form method="post" action="{{ url_for("views_private.billing") }}/purchase-credits">
+    <div class="form-floating mb-3">
+        <input class="form-control" id="numberOfCredits" name="numberOfCredits" required="" type="number" value="100">
+		<label for="numberOfCredits">Number of credits to purchase</label>
+	</div>
+    <input class="btn btn-primary" type="submit" value="Purchase Credits" />
+</form>
+
 <h2 class="h4 border-bottom mt-5 my-3 pb-2">Subscription Details</h2>
 
 <p>You are currently on the {{ current_user.tier.label }} plan.</p>
 {% if current_user.tier.name != 'free'  %}
-    <form method="post" action="{{ url_for("views_private.billing") }}/billingPortal">
+    <form method="post" action="{{ url_for("views_private.billing") }}/billing-portal">
         <input class="btn btn-primary" type="submit" value="Manage Billing" />
     </form>
 {% else %}
