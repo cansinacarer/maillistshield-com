@@ -169,7 +169,7 @@ def billing(path):
                             {
                                 "price_data": {
                                     "unit_amount": app.config[
-                                        "STRIPE_PRODUCT_UNIT_COST"
+                                        "STRIPE_CREDIT_UNIT_COST"
                                     ],
                                     "currency": "usd",
                                     "product": app.config[
