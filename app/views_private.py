@@ -9,7 +9,6 @@ import datetime
 
 # Stripe
 import stripe
-import stripe.webhook
 
 # App modules
 from app import app
