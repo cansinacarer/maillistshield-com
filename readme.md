@@ -3,6 +3,7 @@
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
 ## Main Features
+
 - 💳 Stripe checkout flows:
   - Subscriptions,
     - Different subscription tiers,
@@ -43,9 +44,11 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
   - Last, but not least: User configurable dark mode. 😎
 
 ## Demo
+
 ### See my [Live Demo](https://base-saas-flask.apps.cansin.net/) with Stripe (in test mode) and Google OAuth connected.
 
 ## Screenshots
+
 <table>
     <tr>
         <td colspan="2" align="center"><strong>Billing Page</strong> <code>/app/billing</code></td>
@@ -70,7 +73,6 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
     </tr>
 </table>
 
-
 ## How to Run this App in a Virtual Environment for Testing
 
 1. Clone the repo, navigate to the repo directory,
@@ -80,20 +82,20 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
 
      `env\Scripts\activate`
    - For macOS/Linux:
-    
+
      `source env/bin/activate`
 4. Install the dependencies inside the virtual environment:
-   
+
    `pip install -r requirements.txt`
 5. Set the environment variables listed in the `.env.template` file
 6. Generate a self signed SSL certificate for using https locally. On Linux or with WSL in the root path:
-   
+
    `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes`
 
 7. For testing with Stripe, you'll need to get the webhook secret (`whsec_...`) using this Stripe CLI command:
 
    `stripe listen --forward-to https://localhost:5000/app/webhook --skip-verify`
-   
+
    If you want to test subscription events used by this app, run the following to make stripe CLI listen and forward the following events:
    - customer.subscription.updated
    - customer.subscription.deleted
@@ -101,10 +103,11 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
    `stripe listen -e customer.subscription.updated,customer.subscription.deleted,checkout.session.completed --forward-to https://localhost:5000/app/webhook/stripe --skip-verify`
 
    This returns the webhook signing secret we use to verify that Stripe is the one sending webhook requests. This secret needs to be saved in the `.env` file as shown in `.env.template`.
-    
+
 8. Run `flask run`
 
 ## How to Deploy for Production
+
 This app is containerized and intended to be deployed in a Docker container. The `Dockerfile` will install the dependencies from the `requirements.txt` in the container. Be sure to not use the debug environment variable (`FLASK_DEBUG=True`).
 
 I use CapRover with the continuous deployment mechanism I wrote about in [my Better Programming article here](https://betterprogramming.pub/migrate-from-heroku-to-aws-ec2-756328d8e58a). It is a self-hosted PaaS built as a layer on Docker. It simplifies continuous deployment with `git push`, setting environment variables, as well as DNS and SSL set up.
@@ -112,6 +115,7 @@ I use CapRover with the continuous deployment mechanism I wrote about in [my Bet
 ## How to Build On Top of This App
 
 ### Adding New Pages
+
 1. In both `public` and `private` directories, you can copy the `sample-page.html` as a starter and rename it (e.g. `test.html`). The generic routing in `views.py` will automatically be served at `/test` directory.
 2. Update the page title at `{% set page_title = "Sample Page" %}`.
 3. Insert a link to this page in `components/header/nav-menu.html`. For the active page highlighting, we also need to update the path for active link condition in this class: `class="nav-link {% if path == 'sample-page' %}active{% endif %}"`.
@@ -120,14 +124,18 @@ I use CapRover with the continuous deployment mechanism I wrote about in [my Bet
 Note that URLs with trailing slashes (e.g. `/test/`) are redirected to the alternatives without one (e.g. `/test`).
 
 ### Defining More Configuration Variables
+
 If you need to have more config variables (e.g. credentials for a new OAuth provider):
+
 1. Define environment variables for them both in your local `.env` file and in prod,
 2. In `app/config.py`, add a new attribute for the `Config` class. Use the `config` method from decouple.
 3. You can then call the config value anywhere in the app as `app.config[""]`.
 
 ### Updating Dependencies
+
 To include new Python packages, you can first install them in your local virtual environment during development. Before pushing a change with a new package, also update the dependencies using `pip freeze > requirements.txt`.
 
 ### Pitfalls
--   I did not want to run this app without the configuration variables set, since many functionalities depends on them. So, most config variables do not have a default fallback. If you see the error message `Please make sure you have all the required environment variables set.` on the terminal when you try to run this app, that means you did not set all the environment variables listed in `.env.template`.
--   If the domain is proxied over Cloudflare, set SSL to Full (strict) to prevent ERR_TOO_MANY_REDIRECTS error.
+
+- I did not want to run this app without the configuration variables set, since many functionalities depends on them. So, most config variables do not have a default fallback. If you see the error message `Please make sure you have all the required environment variables set.` on the terminal when you try to run this app, that means you did not set all the environment variables listed in `.env.template`.
+- If the domain is proxied over Cloudflare, set SSL to Full (strict) to prevent ERR_TOO_MANY_REDIRECTS error.
