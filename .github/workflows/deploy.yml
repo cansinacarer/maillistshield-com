@@ -1,0 +1,35 @@
+name: Build & Deploy
+
+on:
+    push:
+        branches: ["main"]
+
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        environment: Demo
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install CapRover
+              run: npm install -g caprover
+
+            - name: Login w/ CapRover
+              run: caprover login -u "${{ secrets.CAPROVER_SERVER }}" -p "${{ secrets.CAPROVER_PW }}" -n my_machine
+
+            - name: Create tar file
+              run: tar -cvf deploy.tar ./*
+
+            # Try to deploy the app within 5 minutes, otherwise fail to avoid holding the queue
+            - name: Deploy the tar file
+              run: timeout 300 caprover deploy -n my_machine -a "${{ secrets.CAPROVER_APP_NAME }}" -t  ${{ github.workspace }}/deploy.tar -p "${{ secrets.CAPROVER_PW }}"
