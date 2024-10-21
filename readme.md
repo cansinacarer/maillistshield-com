@@ -1,5 +1,7 @@
 # Base SaaS
 
+[![Build & Deploy](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml)
+
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
 ## Main Features
