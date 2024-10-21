@@ -112,7 +112,9 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
 
 This app is containerized and intended to be deployed in a Docker container. The `Dockerfile` will install the dependencies from the `requirements.txt` in the container. Be sure to not use the debug environment variable (`FLASK_DEBUG=True`).
 
-I use CapRover with the continuous deployment mechanism I wrote about in [my Better Programming article here](https://betterprogramming.pub/migrate-from-heroku-to-aws-ec2-756328d8e58a). It is a self-hosted PaaS built as a layer on Docker. It simplifies continuous deployment with `git push`, setting environment variables, as well as DNS and SSL set up.
+### Continuous Deployment
+
+I use CapRover with the continuous deployment mechanism ~~I wrote about in [my Better Programming article here](https://betterprogramming.pub/migrate-from-heroku-to-aws-ec2-756328d8e58a)~~ I set up in [this GitHub Actions workflow](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml). CapRover is a self-hosted PaaS built as a layer on Docker. It simplifies setting environment variables, routing traffic to containers nginx reverse proxy, and SSL set up.
 
 ## How to Build On Top of This App
 
