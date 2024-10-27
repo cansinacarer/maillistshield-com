@@ -15,3 +15,8 @@ Then you can fetch and merge:
 git fetch upstream
 git merge upstream/main
 ```
+
+## MailListShield repositories:
+- [MailListShield Flask SaaS](https://github.com/cansinacarer/maillistshield-com)
+- [MailListShield Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
+- [Initial Tests & Notes](https://github.com/cansinacarer/email-verification-test)
