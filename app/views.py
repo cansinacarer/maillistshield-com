@@ -5,8 +5,8 @@ from flask_limiter.util import get_remote_address
 from jinja2 import TemplateNotFound
 from datetime import datetime
 
-from app import app, lm
-from app.models import Users
+from app import app, lm, db
+from app.models import Users, BatchJobs
 from app.utilities.error_handlers import error_page
 
 
@@ -77,6 +77,21 @@ limiter = Limiter(
 @app.route("/favicon.ico")
 def favicon():
     return app.send_static_file("media/favicon.ico")
+
+
+@app.route("/test")
+def test():
+    if current_user.email == "cansinacarer@gmail.com":
+        test_job = BatchJobs(
+            user=current_user,
+            uploaded_file="file_path",
+            file_length=100,
+        )
+        db.session.add(test_job)
+        db.session.commit()
+        return "done"
+    else:
+        return "unauthorized", 403
 
 
 # App main route + generic routing

@@ -2,6 +2,7 @@ from datetime import datetime, timezone, timedelta
 from email.policy import default
 from hashlib import md5
 import pyotp
+import uuid
 
 from flask_login import UserMixin
 
@@ -10,6 +11,47 @@ from app.config import s3, appTimezone
 from app.utilities.object_storage import generate_download_link, user_folder_size
 from app.utilities.qr import qrcode_img_src
 from app.utilities.helpers import readable_file_size
+
+
+class BatchJobs(db.Model):
+    __tablename__ = "BatchJobs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.String(120), nullable=False, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
+    user = db.relationship("Users", backref="batch_jobs")
+    uploaded_file = db.Column(db.String(120), nullable=False)
+    results_file = db.Column(db.String(120), nullable=True)
+    completed_length = db.Column(db.Integer, nullable=False, default=0)
+    file_length = db.Column(db.Integer, nullable=False)
+    source = db.Column(db.String(120), nullable=False, default="web")
+    status = db.Column(db.String(120), nullable=False, default="pending_start")
+    uploaded = db.Column(
+        db.DateTime(),
+        nullable=False,
+        default=datetime.now(timezone.utc).astimezone(appTimezone),
+    )
+    started = db.Column(
+        db.DateTime(),
+        nullable=True,
+    )
+    finished = db.Column(db.DateTime(), nullable=True)
+    result = db.Column(db.String(120), nullable=True)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.generate_job_uid()
+
+    def generate_job_uid(self):
+        while True:
+            new_uid = str(uuid.uuid4())[:6]
+            existing_job = BatchJobs.query.filter_by(uid=new_uid).first()
+            if not existing_job:
+                self.uid = new_uid
+                break
+
+    def __repr__(self):
+        return self.uid
 
 
 class Tiers(db.Model):
