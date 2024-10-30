@@ -71,7 +71,7 @@ function uploadFile(file, s3Data, url) {
 				// Tell the server we uploaded a profile picture
 				profilePicUploadedNotice();
 
-				// Update the UI with the new profile picture
+				// Optimistically update the UI with the new profile picture
 				document
 					.querySelectorAll('img[alt="avatar"]')
 					.forEach((img) => {
