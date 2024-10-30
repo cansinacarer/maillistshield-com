@@ -121,7 +121,7 @@ class Users(db.Model, UserMixin):
         # Otherwise we return a gravatar
         else:
             email_hashed = md5(self.email.encode("utf-8")).hexdigest()
-            url = f"http://www.gravatar.com/avatar/{email_hashed}?d=mp&s={str(size)}"
+            url = f"https://www.gravatar.com/avatar/{email_hashed}?d=mp&s={str(size)}"
         return url
 
     def is_connected_google(self):
