@@ -222,5 +222,6 @@
 
 <!--  -->
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/profile-picture-uploader.js') }}"></script>
+{{ super() }}
+    <script defer src="{{ url_for('static', filename='js/profile-picture-uploader.js') }}"></script>
 {% endblock %}
