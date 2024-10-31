@@ -94,7 +94,7 @@
 								target="_blank"
 							>
 								<img
-									src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+									src="{{ url_for('static', filename='media/mail-list-shield-logo.png', _external=True) }}"
 									alt="Mail List Shield Email Validation Service"
 									id="email-logo"
 									width="140"
@@ -141,7 +141,7 @@
 						>
 							<p>{{ appName }}</p>
 							<img
-								src="{{ url_for('static', filename='media/mail-list-shield-logo-badge-padded.png') }}"
+								src="{{ url_for('static', filename='media/mail-list-shield-logo-badge-padded.png', _external=True) }}"
 								alt="Mail List Shield Email Validation Service"
 								id="email-logo"
 								width="40"
