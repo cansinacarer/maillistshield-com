@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, Response
 from flask_login import current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -77,6 +77,14 @@ limiter = Limiter(
 @app.route("/favicon.ico")
 def favicon():
     return app.send_static_file("media/favicon.ico")
+
+
+@app.route("/robots.txt")
+def robots():
+    return Response(
+        "User-agent: *\nDisallow: /",
+        mimetype="text/plain",
+    )
 
 
 @app.route("/test")
