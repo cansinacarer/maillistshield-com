@@ -1,4 +1,4 @@
-/* Public Nav */
+/* Public Styles */
 .nav-masthead .nav-link {
 	color: var(--bs-body-color);
 	border-bottom: 0.25rem solid transparent;
@@ -16,4 +16,13 @@
 .nav-masthead .active {
 	color: var(--bs-body-color);
 	border-bottom-color: var(--bs-body-color);
+}
+
+#header-logo {
+	width: 120px;
+	margin: 10px 0;
+}
+
+#footer-logo {
+	width: 50px;
 }

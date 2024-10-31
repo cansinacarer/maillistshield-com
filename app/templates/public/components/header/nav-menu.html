@@ -7,7 +7,11 @@
 				href="/"
 				class="d-inline-flex fs-5 fw-semibold text-decoration-none"
 			>
-				{{ APP_NAME }}
+				<img
+					src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+					alt="Mail List Shield Email Validation Service"
+					id="header-logo"
+				/>
 			</a>
 		</div>
 
@@ -26,9 +30,9 @@
 			<li class="nav-item px-2">
 				<a
 					class="nav-link {% if path == 'sample-page' %}active{% endif %}"
-					href="/sample-page"
+					href="/pricing"
 				>
-					Sample Page
+					Pricing
 				</a>
 			</li>
 		</ul>
