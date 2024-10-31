@@ -17,7 +17,14 @@ main {
 
 #header-logo {
 	height: 36px;
-	margin: 0 auto;
+	margin: 0 0 0 10px;
+}
+
+@media (max-width: 768px) {
+	#header-logo {
+		height: 36px;
+		margin: 0 auto;
+	}
 }
 
 #mobile-logo {
