@@ -15,7 +15,7 @@ from app.utilities.error_handlers import error_page
 def inject_globals():
     return {
         "APP_NAME": app.config["APP_NAME"],
-        "COPYRIGHT": f"2021–{datetime.now().year} HC Digital Solutions Inc.",
+        "COPYRIGHT": f"2021–{datetime.now().year} - {app.config['APP_NAME']}",
     }
 
 
