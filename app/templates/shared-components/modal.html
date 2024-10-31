@@ -6,27 +6,25 @@
 	aria-labelledby="alertModalLabel"
 	aria-hidden="true"
 >
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="alertModalLabel">Alert</h5>
+				<h5 class="modal-title" id="alertModalLabel"></h5>
 				<button
 					type="button"
-					class="close"
+					class="btn-close"
 					data-bs-dismiss="modal"
 					aria-label="Close"
-				>
-					<span aria-hidden="true">&times;</span>
-				</button>
+				></button>
 			</div>
-			<div class="modal-body">This is an alert message.</div>
+			<div class="modal-body"></div>
 			<div class="modal-footer">
 				<button
 					type="button"
-					class="btn btn-secondary"
+					class="btn btn-primary"
 					data-bs-dismiss="modal"
 				>
-					Close
+					<span class="buttonText"></span>
 				</button>
 			</div>
 		</div>
@@ -36,9 +34,23 @@
 <!-- Modal JS -->
 <script defer>
 	// Function to show the modal with dynamic content
-	function showAlert(title, message) {
+	function showAlert(title, message, buttonText = "OK", type = "secondary") {
+		// Set the alert title
 		document.getElementById("alertModalLabel").innerText = title;
+
+		// Set the alert message
 		document.querySelector("#alertModal .modal-body").innerText = message;
+
+		// Set the button text
+		document.querySelector("#alertModal .buttonText").innerText =
+			buttonText;
+
+		// Set the alert title color
+		document.querySelector(
+			"#alertModal .modal-title"
+		).className = `modal-title text-${type}`;
+
+		// Show the modal
 		var alertModal = new bootstrap.Modal(
 			document.getElementById("alertModal")
 		);
