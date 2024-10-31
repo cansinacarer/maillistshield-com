@@ -9,7 +9,8 @@
 				if (aspectRatio === 1) {
 					getSignedRequest(file);
 				} else {
-					alert(
+					showAlert(
+						"Error",
 						`Please select a square image.\n\nThe image you selected has an aspect ratio of ${aspectRatio.toFixed(
 							2
 						)}.`
@@ -43,7 +44,8 @@ function getSignedRequest(file) {
 				var response = JSON.parse(xhr.responseText);
 				uploadFile(file, response.data, response.url);
 			} else {
-				alert(
+				showAlert(
+					"Error",
 					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-1."
 				).then(() => {
 					location.reload();
@@ -78,7 +80,8 @@ function uploadFile(file, s3Data, url) {
 						img.src = url;
 					});
 			} else {
-				alert(
+				showAlert(
+					"Error",
 					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-2."
 				).then(() => {
 					location.reload();
@@ -100,9 +103,10 @@ function profilePicUploadedNotice() {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200 || xhr.status === 204) {
-				alert("Profile picture is updated.");
+				showAlert("Success", "Profile picture is updated.");
 			} else {
-				alert(
+				showAlert(
+					"Error",
 					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-3."
 				).then(() => {
 					location.reload();
