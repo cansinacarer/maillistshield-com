@@ -15,6 +15,11 @@ main {
 	overflow-y: hidden;
 }
 
+#header-logo,
+#footer-logo {
+	height: 36px;
+}
+
 .dropdown-toggle {
 	outline: 0;
 }
