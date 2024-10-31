@@ -13,7 +13,9 @@
 						"Error",
 						`Please select a square image.\n\nThe image you selected has an aspect ratio of ${aspectRatio.toFixed(
 							2
-						)}.`
+						)}.`,
+						"Try again",
+						"danger"
 					);
 				}
 			});
@@ -46,10 +48,10 @@ function getSignedRequest(file) {
 			} else {
 				showAlert(
 					"Error",
-					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-1."
-				).then(() => {
-					location.reload();
-				});
+					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-1.",
+					"Try again",
+					"danger"
+				);
 			}
 		}
 	};
@@ -82,10 +84,10 @@ function uploadFile(file, s3Data, url) {
 			} else {
 				showAlert(
 					"Error",
-					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-2."
-				).then(() => {
-					location.reload();
-				});
+					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-2.",
+					"Try again",
+					"danger"
+				);
 			}
 		}
 	};
@@ -103,14 +105,19 @@ function profilePicUploadedNotice() {
 	xhr.onreadystatechange = function () {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200 || xhr.status === 204) {
-				showAlert("Success", "Profile picture is updated.");
+				showAlert(
+					"Success",
+					"Profile picture is updated.",
+					"OK",
+					"success"
+				);
 			} else {
 				showAlert(
 					"Error",
-					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-3."
-				).then(() => {
-					location.reload();
-				});
+					"We were not able to update your profile picture. If this error persists, please contact us and let us know you received the error code APPU-3.",
+					"Try again",
+					"danger"
+				);
 			}
 		}
 	};
