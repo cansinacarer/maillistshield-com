@@ -15,7 +15,16 @@ main {
 	overflow-y: hidden;
 }
 
-#header-logo,
+#header-logo {
+	height: 36px;
+	margin: 0 auto;
+}
+
+#mobile-logo {
+	height: 30px;
+	margin: 0 auto;
+}
+
 #footer-logo {
 	height: 36px;
 }

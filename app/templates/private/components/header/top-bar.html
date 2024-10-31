@@ -2,7 +2,11 @@
 	class="d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 border-bottom"
 >
 	<a href="/" class="d-inline-flex fs-5 fw-semibold text-decoration-none">
-		{{ APP_NAME }}
+		<img
+			src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+			alt="Mail List Shield Email Validation Service"
+			id="mobile-logo"
+		/>
 	</a>
 	<div class="text-end">
 		{% include 'shared-components/dark-mode-selector-button.html' %}

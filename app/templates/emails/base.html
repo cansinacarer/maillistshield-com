@@ -20,7 +20,7 @@
 				margin: 0;
 				padding: 0;
 				width: 100%;
-				background-color: #f8f6f2;
+				background-color: #e8fcff;
 			}
 			p {
 				margin: 1em 0;
@@ -93,7 +93,13 @@
 								rel="noopener"
 								target="_blank"
 							>
-								{{ appName }}
+								<img
+									src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+									alt="Mail List Shield Email Validation Service"
+									id="email-logo"
+									width="140"
+									style="width: 140px"
+								/>
 							</a>
 						</td>
 					</tr>
@@ -133,12 +139,14 @@
 								color: #6d6e7c;
 							"
 						>
-							<p>
-								©
-								<a href="{{ appHome }}" target="_blank">
-									{{ appName }}
-								</a>
-							</p>
+							<p>{{ appName }}</p>
+							<img
+								src="{{ url_for('static', filename='media/mail-list-shield-logo-badge-padded.png') }}"
+								alt="Mail List Shield Email Validation Service"
+								id="email-logo"
+								width="40"
+								style="width: 40px"
+							/>
 						</td>
 					</tr>
 				</tbody>
