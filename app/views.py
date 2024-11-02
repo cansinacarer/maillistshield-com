@@ -6,6 +6,7 @@ from jinja2 import TemplateNotFound
 from datetime import datetime
 
 from app import app, lm, db
+from app.utilities.validation import request_validation
 from app.models import Users, BatchJobs
 from app.utilities.error_handlers import error_page
 
@@ -100,6 +101,44 @@ def test():
         return "done"
     else:
         return "unauthorized", 403
+
+
+email_validation_from_IPs = {}
+
+
+@app.route("/validate")
+def validate():
+    # TODO: must be post
+
+    # If the visitor has made more than 5 requests in the last 5 minutes, return 429
+    # If user is logged in, we don't care about IP, we check the user's credit
+    if False:
+        pass
+    else:
+        # If the visitor has made more than 5 requests in the last 5 minutes, return 429
+        if limiter.is_limited(
+            f"{request.remote_addr}",
+            limit="5 per 5 minutes",
+        ):
+            return "", 429
+
+    # Otherwise, we check the usage from their IP
+    visitor_IP = request.remote_addr
+
+    # Count the number of validation requests from the visitor's IP
+    request_count_from_IP = (
+        email_validation_from_IPs[visitor_IP]
+        if visitor_IP in email_validation_from_IPs
+        else 1
+    )
+    # TODO: Remove 999
+    if request_count_from_IP > app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"] + 999:
+        return "", 429
+    else:
+        response = request_validation("m@cansin.net")
+        # Increment usage from the visitor's IP
+        email_validation_from_IPs[visitor_IP] = request_count_from_IP + 1
+        return response if response else "", 500
 
 
 # App main route + generic routing
