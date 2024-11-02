@@ -58,8 +58,7 @@ class Users(db.Model, UserMixin):
     email_confirmation_code = db.Column(db.String(20))
     last_confirmation_codes_sent = db.Column(
         db.DateTime(),
-        default=datetime.now(timezone.utc).astimezone(appTimezone)
-        - timedelta(minutes=10),
+        default=datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(minutes=10),
     )
     number_of_email_confirmation_codes_sent = db.Column(db.Integer, default=0)
     email_confirmed = db.Column(db.Integer, default=0)
