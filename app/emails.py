@@ -81,12 +81,13 @@ def send_email_with_code(user):
         )
     elif max_email_limit_reached:
         flash(
-            "We are not able to send more than 5 verification emails. Please contact us if you think you are seeing this message by error."
+            "We are not able to send more than 5 verification emails. Please contact us if you think you are seeing this message by error.",
+            "error",
         )
     else:
         flash(
             "Please wait for 60 seconds before requesting another email to be sent.",
-            "error",
+            "danger",
         )
 
 
