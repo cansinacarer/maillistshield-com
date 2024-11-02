@@ -5,6 +5,7 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_sslify import SSLify
 from flask_cors import CORS
+from flask_wtf.csrf import CSRFProtect
 from decouple import UndefinedValueError
 
 # Stripe
@@ -31,6 +32,7 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 bc = Bcrypt(app)
 lm = LoginManager()
+csrf = CSRFProtect(app)
 lm.init_app(app)
 
 # SSL
