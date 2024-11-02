@@ -44,8 +44,8 @@ def send_email_to_reset_password(email):
 # Send the email for user the verify their email address
 def send_email_with_code(user):
     # If last confirmation email was sent more than 60 seconds ago
-    now = datetime.now(timezone.utc).astimezone(appTimezone)
-    last_sent = user.last_confirmation_codes_sent.astimezone(appTimezone)
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    last_sent = user.last_confirmation_codes_sent
     long_enough_since_last_email = last_sent + timedelta(minutes=1) < now
 
     # If total number of confirmation emails sent is not greater than 5:
@@ -71,8 +71,8 @@ def send_email_with_code(user):
         send_async_email(msg)
 
         user.number_of_email_confirmation_codes_sent += 1
-        user.last_confirmation_codes_sent = datetime.now(timezone.utc).astimezone(
-            appTimezone
+        user.last_confirmation_codes_sent = datetime.now(timezone.utc).replace(
+            tzinfo=None
         )
         user.save()
         flash(
@@ -81,12 +81,13 @@ def send_email_with_code(user):
         )
     elif max_email_limit_reached:
         flash(
-            "We are not able to send more than 5 verification emails. Please contact us if you think you are seeing this message by error."
+            "We are not able to send more than 5 verification emails. Please contact us if you think you are seeing this message by error.",
+            "danger",
         )
     else:
         flash(
             "Please wait for 60 seconds before requesting another email to be sent.",
-            "error",
+            "danger",
         )
 
 

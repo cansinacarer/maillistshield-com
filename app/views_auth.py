@@ -103,8 +103,8 @@ def register():
         newsletter = "0" if request.form.get("newsletter", "0") == "0" else "1"
 
         # Log current date
-        member_since = datetime.now(timezone.utc).astimezone(appTimezone)
-        last_login = datetime.now(timezone.utc).astimezone(appTimezone)
+        member_since = datetime.now(timezone.utc).replace(tzinfo=None)
+        last_login = datetime.now(timezone.utc).replace(tzinfo=None)
 
         # filter User out of database through user email
         user_by_email = Users.query.filter_by(email=email).first()
@@ -262,7 +262,7 @@ def two_factor():
         codeMatched = user.totp_match(entered_code)
         if codeMatched:
             login_user(user)
-            current_user.last_login = datetime.now(timezone.utc).astimezone(appTimezone)
+            current_user.last_login = datetime.now(timezone.utc).replace(tzinfo=None)
             current_user.save()
             if "next" in request.args:
                 return redirect(request.args["next"])
@@ -473,11 +473,11 @@ def login_callback_google():
             db.session.commit()
 
             # Log current date
-            member_since = datetime.now(timezone.utc).astimezone(appTimezone)
+            member_since = datetime.now(timezone.utc).replace(tzinfo=None)
 
             # Log them in
             login_user(found_user, remember=True)
-            current_user.last_login = datetime.now(timezone.utc).astimezone(appTimezone)
+            current_user.last_login = datetime.now(timezone.utc).replace(tzinfo=None)
             current_user.save()
 
             flash("Logged in with Google successfully!", category="success")
@@ -489,8 +489,8 @@ def login_callback_google():
             random_password = "".join(random.choice(letter_set) for i in range(16))
 
             # Log current date
-            member_since = datetime.now(timezone.utc).astimezone(appTimezone)
-            last_login = datetime.now(timezone.utc).astimezone(appTimezone)
+            member_since = datetime.now(timezone.utc).replace(tzinfo=None)
+            last_login = datetime.now(timezone.utc).replace(tzinfo=None)
 
             # Register them as new user
             new_user = Users(

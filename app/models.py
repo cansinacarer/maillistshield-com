@@ -100,8 +100,7 @@ class Users(db.Model, UserMixin):
     email_confirmation_code = db.Column(db.String(20))
     last_confirmation_codes_sent = db.Column(
         db.DateTime(),
-        default=datetime.now(timezone.utc).astimezone(appTimezone)
-        - timedelta(minutes=10),
+        default=datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(minutes=10),
     )
     number_of_email_confirmation_codes_sent = db.Column(db.Integer, default=0)
     email_confirmed = db.Column(db.Integer, default=0)
@@ -199,3 +198,11 @@ class Users(db.Model, UserMixin):
 
     def folder_usage_percentage(self):
         return int(user_folder_size(self) / (500 * 1024 * 1024) * 100)
+
+    def add_credits(self, amount):
+        self.credits += amount
+        self.save()
+
+    def deduct_credits(self, amount):
+        self.credits -= amount
+        self.save()

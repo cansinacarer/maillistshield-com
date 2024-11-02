@@ -62,7 +62,7 @@
 		/>
 		<label for="dummyPw">Password</label>
 	</div>
-	<a href="/forgot-password" class="btn btn-light">Reset Password</a>
+	<a href="/forgot-password" class="btn btn-light btn-outline-secondary">Reset Password</a>
 	<div class="form-check form-switch text-start my-3">
         {% if current_user.newsletter == 1 %}
             <!--  -->
@@ -97,7 +97,7 @@
 </p>
 <a
     href="#"
-    class="btn btn-light btn-active-light-primary"
+    class="btn btn-light btn-active-light-primary btn-outline-secondary"
     data-bs-toggle="modal"
     data-bs-target="#totpModal"
 >
@@ -119,13 +119,13 @@
 
 <h2 class="h4 border-bottom mt-5 my-3 pb-2">Connected Accounts</h2>
 {% if current_user.is_connected_google() %}
-    <a class="btn btn-light btn-lg disabled" disabled><img
+    <a class="btn btn-light btn-lg disabled btn-outline-secondary" disabled><img
         alt="Logo"
         src="/static/media/svg/brand-logos/google-icon.svg"
         class="h-20px me-3"
     />Google account is connected</a>
 {% else %}
-    <a href="/login?sso=google" class="btn btn-light btn-lg" >
+    <a href="/login?sso=google" class="btn btn-light btn-lg btn-outline-secondary" >
     <img
         alt="Logo"
         src="/static/media/svg/brand-logos/google-icon.svg"
