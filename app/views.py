@@ -107,15 +107,18 @@ def test():
         return "unauthorized", 403
 
 
-@app.route("/validate", methods=["POST"])
+@app.route("/validate")
+# @app.route("/validate", methods=["POST"])
 @limiter.limit(
-    f'{app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"]} per day',
+    # TODO: Remove 999
+    f'{app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"] + 999} per day',
     exempt_when=is_user_logged_in,
 )
 def validate():
     # If user is logged in, use their credits
-    if is_user_logged_in():
+    if is_user_logged_in() and current_user.credits > 0:
         print(current_user.credits)
+        return "", 200
     else:
         try:
             response = request_validation("m@cansin.net")

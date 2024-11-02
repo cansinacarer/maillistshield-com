@@ -1,4 +1,4 @@
-from decouple import config
+from decouple import config, Csv
 import pytz
 import boto3
 
@@ -82,5 +82,6 @@ class Config:
     STRIPE_CREDIT_UNIT_COST = config("STRIPE_CREDIT_UNIT_COST", cast=int)
 
     # Mail List Shield Config
+    MLS_WORKERS = config("MLS_WORKERS", cast=Csv())
     MLS_WORKER_API_KEY = config("MLS_WORKER_API_KEY")
     MLS_MAX_ANONYMOUS_USAGE_PER_IP = config("MLS_MAX_ANONYMOUS_USAGE_PER_IP", cast=int)
