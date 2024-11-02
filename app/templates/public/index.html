@@ -5,9 +5,79 @@
 {% block content %}
 <!--  -->
 
-<div class="container my-5">
-	<h1>Home</h1>
-	<p>Stay tuned until we launch our services.</p>
+<div class="container mb-4" id="jumbotron">
+	<div class="row p-3 p-md-5 text-center bg-body-tertiary">
+		<div class="col-md-9 p-lg-5 mx-auto my-3">
+			<h1 class="display-3 fw-bold">
+				Email validation
+				<span class="colorful-text">simplified</span>
+			</h1>
+			<h3 class="fw-normal text-muted mb-3">
+				Upload your list or automate validation
+			</h3>
+			<div class="d-flex gap-3 justify-content-center fw-normal my-2">
+				<div class="input-group my-4">
+					<input
+						class="form-control px-3 py-2"
+						id="emailToValidate"
+						name="emailToValidate"
+						placeholder="or validate an email here!"
+						required=""
+						type="email"
+						autofocus
+						value=""
+					/>
+					<button type="button" class="btn btn-primary">
+						Validate
+					</button>
+				</div>
+			</div>
+			<div class="d-flex gap-3 justify-content-center lead fw-normal">
+				<a class="icon-link" href="#">Self service</a>
+				or
+				<a class="icon-link" href="#">Turnkey solution</a>
+			</div>
+		</div>
+		<div class="product-device shadow-sm d-none d-md-block"></div>
+		<div
+			class="product-device product-device-2 shadow-sm d-none d-md-block"
+		></div>
+	</div>
+</div>
+<div class="container mb-md-4" id="demo-results">
+	<div class="row">
+		<div class="col-md me-md-4 bg-body-tertiary py-3 py-md-5 text-center">
+			<div class="my-3 p-3">
+				<h2 class="display-5">Validation result</h2>
+				<p class="lead">And an even wittier subheading.</p>
+			</div>
+			<div
+				class="bg-dark rounded-3 shadow-sm mx-auto"
+				style="width: 80%; height: 300px"
+			></div>
+		</div>
+		<div class="col-md text-bg-dark py-3 py-md-5 text-center">
+			<div class="my-3 py-3">
+				<h2 class="display-5">Validation API result</h2>
+				<p class="lead">And an even wittier subheading.</p>
+			</div>
+			<div
+				class="bg-body-tertiary rounded-3 shadow-sm mx-auto"
+				style="width: 80%; height: 300px"
+			></div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<p class="text-center">
+		If anonymous, they can try one, then need to give me their email for
+		more free credits.
+	</p>
+	<p class="text-center">
+		If they are logged in, we give them 20, then start deducting credits
+		immediately.
+	</p>
+	<p class="text-center">Show credits on the top right?</p>
 </div>
 <!--  -->
 {% endblock content %}

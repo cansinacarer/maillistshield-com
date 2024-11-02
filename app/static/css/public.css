@@ -26,3 +26,20 @@
 #footer-logo {
 	width: 100px;
 }
+
+/* Home page */
+#jumbotron {
+	/* color: #505050; */
+}
+
+#jumbotron #emailToValidate:focus {
+	box-shadow: none;
+}
+
+.colorful-text {
+	background-image: url(/static/media/header-bg.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-clip: text;
+	-webkit-text-fill-color: rgba(0, 0, 0, 0);
+}
