@@ -74,6 +74,10 @@ limiter = Limiter(
 )
 
 
+def is_user_logged_in():
+    return current_user.is_authenticated
+
+
 # Serve favicon in the default route some clients expect
 @app.route("/favicon.ico")
 def favicon():
@@ -103,42 +107,26 @@ def test():
         return "unauthorized", 403
 
 
-email_validation_from_IPs = {}
-
-
-@app.route("/validate")
+@app.route("/validate", methods=["POST"])
+@limiter.limit(
+    f'{app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"]} per day',
+    exempt_when=is_user_logged_in,
+)
 def validate():
-    # TODO: must be post
-
-    # If the visitor has made more than 5 requests in the last 5 minutes, return 429
-    # If user is logged in, we don't care about IP, we check the user's credit
-    if False:
-        pass
+    # If user is logged in, use their credits
+    if is_user_logged_in():
+        print(current_user.credits)
     else:
-        # If the visitor has made more than 5 requests in the last 5 minutes, return 429
-        if limiter.is_limited(
-            f"{request.remote_addr}",
-            limit="5 per 5 minutes",
-        ):
-            return "", 429
-
-    # Otherwise, we check the usage from their IP
-    visitor_IP = request.remote_addr
-
-    # Count the number of validation requests from the visitor's IP
-    request_count_from_IP = (
-        email_validation_from_IPs[visitor_IP]
-        if visitor_IP in email_validation_from_IPs
-        else 1
-    )
-    # TODO: Remove 999
-    if request_count_from_IP > app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"] + 999:
-        return "", 429
-    else:
-        response = request_validation("m@cansin.net")
-        # Increment usage from the visitor's IP
-        email_validation_from_IPs[visitor_IP] = request_count_from_IP + 1
-        return response if response else "", 500
+        try:
+            response = request_validation("m@cansin.net")
+            if response:
+                return response
+            else:
+                print("Validation response from the worker is None")
+                return "", 500
+        except Exception as e:
+            print(f"Validation request failed: {e}")
+            return "", 500
 
 
 # App main route + generic routing

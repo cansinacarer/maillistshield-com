@@ -6,42 +6,52 @@
 <!--  -->
 
 <div class="container mb-4" id="jumbotron">
-	<div class="row p-3 p-md-5 text-center bg-body-tertiary">
-		<div class="col-md-9 p-lg-5 mx-auto my-3">
-			<h1 class="display-3 fw-bold">
-				Email validation
-				<span class="colorful-text">simplified</span>
-			</h1>
-			<h3 class="fw-normal text-muted mb-3">
-				Upload your list or automate validation
-			</h3>
-			<div class="d-flex gap-3 justify-content-center fw-normal my-2">
-				<div class="input-group my-4">
-					<input
-						class="form-control px-3 py-2"
-						id="emailToValidate"
-						name="emailToValidate"
-						placeholder="or validate an email here!"
-						required=""
-						type="email"
-						autofocus
-						value=""
-					/>
-					<button type="button" class="btn btn-primary">
-						Validate
-					</button>
+	<div class="row">
+		<div class="p-3 p-md-5 text-center bg-body-tertiary">
+			<div class="col-md-9 p-lg-5 mx-auto my-3">
+				<h1 class="display-3 fw-bold">
+					Email validation
+					<span class="colorful-text">simplified</span>
+				</h1>
+				<h3 class="fw-normal text-muted mb-3">
+					Upload your list or automate validation
+				</h3>
+				<div class="d-flex gap-3 justify-content-center fw-normal my-2">
+					<form class="input-group my-4" id="validationForm">
+						<input
+							class="form-control px-3 py-2"
+							id="emailToValidate"
+							name="emailToValidate"
+							placeholder="or validate an email here!"
+							required=""
+							type="email"
+							autofocus
+							value="asddfasd@asdf"
+						/>
+						<button
+							type="submit"
+							class="btn btn-primary"
+							id="validationButton"
+						>
+							<span
+								class="loading spinner-border spinner-border-sm d-none"
+								aria-hidden="true"
+							></span>
+							<span class="text">Validate</span>
+						</button>
+					</form>
+				</div>
+				<div class="d-flex gap-3 justify-content-center lead fw-normal">
+					<a class="icon-link" href="#">Self service</a>
+					or
+					<a class="icon-link" href="#">Turnkey solution</a>
 				</div>
 			</div>
-			<div class="d-flex gap-3 justify-content-center lead fw-normal">
-				<a class="icon-link" href="#">Self service</a>
-				or
-				<a class="icon-link" href="#">Turnkey solution</a>
-			</div>
+			<div class="product-device shadow-sm d-none d-md-block"></div>
+			<div
+				class="product-device product-device-2 shadow-sm d-none d-md-block"
+			></div>
 		</div>
-		<div class="product-device shadow-sm d-none d-md-block"></div>
-		<div
-			class="product-device product-device-2 shadow-sm d-none d-md-block"
-		></div>
 	</div>
 </div>
 <div class="container mb-md-4" id="demo-results">
@@ -52,17 +62,17 @@
 				<p class="lead">And an even wittier subheading.</p>
 			</div>
 			<div
-				class="bg-dark rounded-3 shadow-sm mx-auto"
+				class="bg-body rounded-3 shadow-sm mx-auto"
 				style="width: 80%; height: 300px"
 			></div>
 		</div>
-		<div class="col-md text-bg-dark py-3 py-md-5 text-center">
+		<div class="col-md bg-body-tertiary py-3 py-md-5 text-center">
 			<div class="my-3 py-3">
-				<h2 class="display-5">Validation API result</h2>
+				<h2 class="display-5">API response</h2>
 				<p class="lead">And an even wittier subheading.</p>
 			</div>
 			<div
-				class="bg-body-tertiary rounded-3 shadow-sm mx-auto"
+				class="bg-dark rounded-3 shadow-sm mx-auto"
 				style="width: 80%; height: 300px"
 			></div>
 		</div>
@@ -81,3 +91,11 @@
 </div>
 <!--  -->
 {% endblock content %}
+
+<!--  -->
+{% block scripts %} {{ super() }}
+<script
+	defer
+	src="{{ url_for('static', filename='js/validation-of-single-email.js') }}"
+></script>
+{% endblock %}
