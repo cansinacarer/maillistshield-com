@@ -156,3 +156,11 @@ class Users(db.Model, UserMixin):
 
     def folder_usage_percentage(self):
         return int(user_folder_size(self) / (500 * 1024 * 1024) * 100)
+
+    def add_credits(self, amount):
+        self.credits += amount
+        self.save()
+
+    def deduct_credits(self, amount):
+        self.credits -= amount
+        self.save()
