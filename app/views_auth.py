@@ -82,7 +82,7 @@ def register():
         flash("You are already registered.", "info")
         return redirect("/app")
 
-    # Declare the registration form
+    # Declare the form
     form = RegisterForm(request.form)
 
     success = False
@@ -92,7 +92,7 @@ def register():
             "public/auth/register.html", form=form, user=current_user
         )
 
-    # check if both http method is POST and form is valid on submit
+    # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
 
         # assign form data to variables
@@ -150,6 +150,11 @@ def register():
 @limiter.limit("10 per day", methods=["POST"])
 def login():
 
+    # Don't allow logged in users here
+    if current_user.is_authenticated:
+        flash("You are already logged in.", "info")
+        return redirect("/app")
+
     if request.method == "GET":
         # If user came here with the login with Google button
         if request.args.get("sso") == "google":
@@ -168,22 +173,17 @@ def login():
 
             return redirect(request_uri)
 
-    # Don't allow logged in users here
-    if current_user.is_authenticated:
-        flash("You are already logged in.", "info")
-        return redirect("/app")
-
-    # Declare the login form
+    # Declare the form
     form = LoginForm(request.form)
 
-    # check if both http method is POST and form is valid on submit
+    # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
 
-        # assign form data to variables
+        # Assign form data to variables
         email = request.form.get("email", "", type=str)
         password = request.form.get("password", "", type=str)
 
-        # filter User out of database through username
+        # Filter User out of database through username
         user = Users.query.filter_by(email=email).first()
         if user and bc.check_password_hash(user.password, password):
 
@@ -239,7 +239,7 @@ def two_factor():
         flash("Something went wrong during two factor authentication.", "danger")
         return redirect(url_for("views_auth.login"))
 
-    # Declare the two factor auth form
+    # Declare the form
     form = TwoFactorAuthenticationForm(request.form)
 
     # If it is a GET request, just show the page
@@ -248,6 +248,7 @@ def two_factor():
             "public/auth/two-factor-auth.html", form=form, user=current_user
         )
 
+    # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
         entered_code = ""
         try:
@@ -280,7 +281,7 @@ def two_factor():
         )
 
 
-# email verification by sending the user an email with a code
+# Email verification by sending the user an email with a code
 @app.route("/email-confirmation", methods=["GET", "POST"])
 def email_confirmation_by_code():
     codeMatched = True
@@ -294,7 +295,7 @@ def email_confirmation_by_code():
         # Verification code
         code = current_user.email_confirmation_code
 
-        # Declare the login form
+        # Declare the form
         form = EmailConfirmationForm(request.form)
 
         # If it is a GET request, just show the page
@@ -305,6 +306,7 @@ def email_confirmation_by_code():
                 "public/auth/email-confirm.html", form=form, user=current_user
             )
 
+        # Check if both http method is POST, form is valid, and csrf token is valid
         if form.validate_on_submit():
             for i in range(0, 6):
                 codeMatched = codeMatched and request.form["code" + str(i)] == code[i]
@@ -312,9 +314,10 @@ def email_confirmation_by_code():
                 # Run the new user actions
                 new_user_actions_for_email_confirmed(current_user)
 
-                # change user attribute in the db
+                # Change user attribute in the db
                 current_user.email_confirmed = 1
                 current_user.save()
+
                 # Flash conformation
                 flash(
                     "Thank you for confirming your email address!", category="success"
@@ -340,7 +343,8 @@ def email_confirmation_by_code():
 @app.route("/forgot-password", methods=["GET", "POST"])
 @limiter.limit("1 per day", methods=["POST"])
 def password_reset():
-    # Declare the login form
+
+    # Declare the form
     form = ResetPassword(request.form)
 
     if request.method == "GET":
@@ -348,6 +352,7 @@ def password_reset():
             "public/auth/password-reset.html", form=form, user=current_user
         )
 
+    # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
         email = request.form.get("email", "", type=str)
         user = Users.query.filter_by(email=email).first()
@@ -376,8 +381,10 @@ def set_new_password(token):
     except:
         abort(404)
 
+    # Declare the form
     form = SetNewPassword()
 
+    # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
         user = Users.query.filter_by(email=email).first_or_404()
 

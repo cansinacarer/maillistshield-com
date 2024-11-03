@@ -339,6 +339,8 @@ def account(path):
         )
         return redirect(url_for("email_confirmation_by_code"))
     try:
+        # Declare the registration form
+        form = ProfileDetailsForm()
         match path:
             case "upload-profile-pic":
                 return generate_upload_link_profile_picture(
@@ -376,7 +378,6 @@ def account(path):
                     return ""
 
             case "" | "account":
-                form = ProfileDetailsForm()
                 if request.method == "POST":
 
                     # If bucket upload request returns 200, JS calls this endpoint
@@ -410,7 +411,6 @@ def account(path):
                     path=path,
                 )
             case _:
-                form = ProfileDetailsForm()
                 return render_template(
                     f"private/account/{path}.html",
                     user=current_user,

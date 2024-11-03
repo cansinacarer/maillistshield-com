@@ -99,6 +99,12 @@ function profilePicUploadedNotice() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "/app/account");
 
+	// Read the CSRF token from the meta tag and add it to the headers
+	const csrfToken = document
+		.querySelector('meta[name="csrf-token"]')
+		.getAttribute("content");
+	xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
 	var postData = new FormData();
 	postData.append("profile-pic-updated", "yes");
 
