@@ -9,6 +9,7 @@
 <p>You have {{ "{:,}".format(current_user.credits) }} credits.</p>
 
 <form method="post" action="{{ url_for("views_private.billing") }}/purchase-credits">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="form-floating mb-3">
         <input class="form-control" id="numberOfCredits" name="numberOfCredits" required="" type="number" value="100">
 		<label for="numberOfCredits">Number of credits to purchase</label>
@@ -21,11 +22,13 @@
 <p>You are currently on the {{ current_user.tier.label }} plan.</p>
 {% if current_user.tier.name != 'free'  %}
     <form method="post" action="{{ url_for("views_private.billing") }}/billing-portal">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input class="btn btn-primary" type="submit" value="Manage Billing" />
     </form>
 {% else %}
     <p>Upgrade to:</p>
     <form method="post" action="{{ url_for("views_private.billing") }}/checkout">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         {% for tier in tiers %}
             <!--  -->
             {% if tier.name != 'free' %}
@@ -70,7 +73,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <i>Only the 100 most recent payments are shown. Please contact us if you need any information your older payments.</i>
+    <i>Only the 100 most recent payments are shown. Please contact us if you need any information about your older payments.</i>
 </div>
 
 {% else %}
