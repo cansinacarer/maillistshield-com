@@ -15,7 +15,7 @@ main {
 	overflow-y: hidden;
 }
 
-#header-logo {
+.header-logo {
 	height: 36px;
 	margin: 0 0 0 10px;
 }
@@ -27,7 +27,7 @@ main {
 	}
 }
 
-#mobile-logo {
+.mobile-logo {
 	height: 30px;
 	margin: 0 auto;
 }

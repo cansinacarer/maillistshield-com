@@ -1,1 +1,13 @@
 /* Shared Styles */
+
+/* Show the logo that matches the color mode */
+[data-bs-theme="dark"] .logo-dark,
+[data-bs-theme="light"] .logo-light {
+	display: block;
+}
+
+/* Hide alternative color logos */
+[data-bs-theme="light"] .logo-dark,
+[data-bs-theme="dark"] .logo-light {
+	display: none;
+}

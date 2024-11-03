@@ -10,7 +10,16 @@
 		class="d-block w-100 mb-4 col-md-4 text-center fs-3 fw-semibold text-decoration-none"
 		tabindex="-1"
 	>
-		{{ APP_NAME }}
+		<img
+			src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+			alt="Mail List Shield Email Validation Service"
+			class="mobile-logo header-logo logo-light mx-auto"
+		/>
+		<img
+			src="{{ url_for('static', filename='media/mail-list-shield-logo-dark-mode.png') }}"
+			alt="Mail List Shield Email Validation Service"
+			class="mobile-logo header-logo logo-dark mx-auto"
+		/>
 	</a>
 	<h2 class="h4 mb-3 fw-normal text-center">Two-Factor Authentication</h2>
 	{% include 'shared-components/flash-alerts.html' %}
