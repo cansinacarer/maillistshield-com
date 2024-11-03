@@ -11,7 +11,7 @@ import datetime
 import stripe
 
 # App modules
-from app import app
+from app import app, csrf
 from app.forms import ProfileDetailsForm
 from app.models import Users, Tiers
 from app.utilities.object_storage import generate_upload_link_profile_picture
@@ -57,6 +57,7 @@ def email_test(email):
 
 # Webhook endpoints for external services to give us updates
 @app_private.route("/webhook/<path>", methods=["POST"])
+@csrf.exempt
 def webhook(path):
     try:
         match path:

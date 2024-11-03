@@ -29,7 +29,7 @@ from jinja2 import TemplateNotFound
 
 
 # App modules
-from app import app, lm, db, bc
+from app import app, lm, db, bc, csrf
 from app.models import Users
 from app.forms import (
     LoginForm,
@@ -411,6 +411,7 @@ def get_google_sso_config():
 
 
 @app_auth.route("/login/callback/google", methods=["GET", "POST"])
+@csrf.exempt
 def login_callback_google():
     # Don't allow logged in users here
     if current_user.is_authenticated and current_user.is_connected_google():
