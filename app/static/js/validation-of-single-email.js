@@ -158,11 +158,27 @@ const endTableLoadingAnimation = () => {
 };
 
 const startAPIResponseBoxLoadingState = () => {
-	document.querySelector("#demoAPIResponse").classList.add("blur-content");
+	// Add placeholder class to the pre tag
+	document
+		.querySelector("#demoAPIResponse pre")
+		.classList.add("placeholder", "col-12");
+
+	// Start animating the placeholders
+	document
+		.querySelector("#demoAPIResponse")
+		.classList.add("placeholder-glow");
 };
 
 const endAPIResponseBoxLoadingState = () => {
-	document.querySelector("#demoAPIResponse").classList.remove("blur-content");
+	// Remove placeholder class to the pre tag
+	document
+		.querySelector("#demoAPIResponse pre")
+		.classList.remove("placeholder", "col-12");
+
+	// Stop animating the placeholders
+	document
+		.querySelector("#demoAPIResponse")
+		.classList.remove("placeholder-glow");
 };
 
 const requestValidation = (email) => {
