@@ -10,7 +10,7 @@ validationForm.addEventListener("submit", (event) => {
 	// Start the loading states
 	startButtonLoadingState(validationButton);
 	startTableLoadingState();
-	// TODO: Start and end API response box loading state
+	startAPIResponseBoxLoadingState();
 
 	// Scroll down to the demo-results section
 	document.querySelector("#demo-results").scrollIntoView({
@@ -24,7 +24,7 @@ validationForm.addEventListener("submit", (event) => {
 				// Show the rate limit error message
 				showAlert(
 					"Error",
-					"You have reached the usage limit for guest users. \n\n Please create an account and get 100 free validation credits.",
+					`You have reached the usage limit for guest users. <br /><br /> You can get <b class="text-primary">${freeCredits} free credits</b> by creating an account. <br /><br /> <a href="/login" class="btn btn-outline-primary">Login</a> <a href="/register" class="btn btn-outline-primary">Create an account</a>`,
 					"OK",
 					"danger"
 				);
@@ -32,7 +32,15 @@ validationForm.addEventListener("submit", (event) => {
 				// Show an error message
 				showAlert(
 					"Error",
-					"Your account does not have sufficient credits for this validation request.\n\nPlease purchase more credits to continue.",
+					"Your account does not have sufficient credits for this validation request.<br /><br />Please purchase more credits to continue.",
+					"OK",
+					"danger"
+				);
+			} else if (response.status === 403) {
+				// Show an error message
+				showAlert(
+					"Error",
+					"Please verify your email address to continue using the service.<br /><br />Check your email for the verification link.",
 					"OK",
 					"danger"
 				);
@@ -75,7 +83,7 @@ validationForm.addEventListener("submit", (event) => {
 					} else {
 						showAlert(
 							"Success",
-							`Request successful:\n\n${data.email}`,
+							`Request successful:<br /><br />${data.email}`,
 							"OK",
 							"success"
 						);
@@ -104,6 +112,7 @@ validationForm.addEventListener("submit", (event) => {
 			// End the loading states
 			endButtonLoadingState(validationButton);
 			endTableLoadingAnimation();
+			endAPIResponseBoxLoadingState();
 		});
 });
 
@@ -148,6 +157,14 @@ const endTableLoadingAnimation = () => {
 		.classList.remove("placeholder-glow");
 };
 
+const startAPIResponseBoxLoadingState = () => {
+	document.querySelector("#demoAPIResponse").classList.add("blur-content");
+};
+
+const endAPIResponseBoxLoadingState = () => {
+	document.querySelector("#demoAPIResponse").classList.remove("blur-content");
+};
+
 const requestValidation = (email) => {
 	// Read the CSRF token from the meta tag
 	const csrfToken = document
@@ -168,4 +185,5 @@ const requestValidation = (email) => {
 	});
 };
 
+// TODO:
 const populateResultsTable = (data) => {};

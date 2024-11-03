@@ -85,3 +85,6 @@ class Config:
     MLS_WORKERS = config("MLS_WORKERS", cast=Csv())
     MLS_WORKER_API_KEY = config("MLS_WORKER_API_KEY")
     MLS_MAX_ANONYMOUS_USAGE_PER_IP = config("MLS_MAX_ANONYMOUS_USAGE_PER_IP", cast=int)
+    MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS = config(
+        "MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS", cast=int
+    )

@@ -123,10 +123,13 @@ def validate():
         response = request_validation(email)
         if response:
             # If user is logged in, use their credits
-            # We waited until here to ensure we are delivering a result before deducting a credit
             if is_user_logged_in():
+                if current_user.email_confirmed != 1:
+                    return "", 403
+
+                # Deduct credits from the user
+                # We waited until here to ensure we are delivering a result before deducting a credit
                 if current_user.credits > 0:
-                    # Deduct credits from the user
                     current_user.deduct_credits(1)
                 else:
                     return "", 402
@@ -147,7 +150,14 @@ def validate():
 def index(path):
     try:
         # Serve the file (if exists) from app/templates/public/PATH.html
-        return render_template(f"public/{path}.html", path=path, user=current_user)
+        return render_template(
+            f"public/{path}.html",
+            path=path,
+            user=current_user,
+            MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS=app.config[
+                "MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS"
+            ],
+        )
 
     except TemplateNotFound:
         return error_page(404)

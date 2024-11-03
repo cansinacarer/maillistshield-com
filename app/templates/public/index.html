@@ -26,7 +26,7 @@
 							required=""
 							type="email"
 							autofocus
-							value="asddfasd@asdf"
+							value=""
 						/>
 						<button
 							type="submit"
@@ -126,6 +126,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
 
 <script>
+	// Free credits count
+	const freeCredits = "{{ MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS }}";
+
+	// Initialize Highlight.js
 	hljs.highlightAll();
 </script>
 {% endblock %}

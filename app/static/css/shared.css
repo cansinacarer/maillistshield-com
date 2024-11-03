@@ -1,1 +1,4 @@
 /* Shared Styles */
+.blur-content {
+	filter: blur(5px); /* Adjust the blur radius as needed */
+}

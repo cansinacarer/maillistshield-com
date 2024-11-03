@@ -11,7 +11,7 @@
 				} else {
 					showAlert(
 						"Error",
-						`Please select a square image.\n\nThe image you selected has an aspect ratio of ${aspectRatio.toFixed(
+						`Please select a square image.<br /><br />The image you selected has an aspect ratio of ${aspectRatio.toFixed(
 							2
 						)}.`,
 						"Try again",
