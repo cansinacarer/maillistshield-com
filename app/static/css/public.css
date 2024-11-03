@@ -43,3 +43,14 @@
 	background-clip: text;
 	-webkit-text-fill-color: rgba(0, 0, 0, 0);
 }
+
+#demoResultsTable td,
+#demoResultsTable th {
+	width: 50%;
+}
+
+#demoResultsTable,
+#demoAPIResponse {
+	width: 80%;
+	overflow: hidden;
+}

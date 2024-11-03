@@ -107,29 +107,38 @@ def test():
         return "unauthorized", 403
 
 
-@app.route("/validate")
-# @app.route("/validate", methods=["POST"])
+@app.route("/validate", methods=["POST"])
 @limiter.limit(
-    # TODO: Remove 999
-    f'{app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"] + 999} per day',
+    f'{app.config["MLS_MAX_ANONYMOUS_USAGE_PER_IP"]} per day',
     exempt_when=is_user_logged_in,
 )
 def validate():
-    # If user is logged in, use their credits
-    if is_user_logged_in() and current_user.credits > 0:
-        print(current_user.credits)
-        return "", 200
-    else:
-        try:
-            response = request_validation("m@cansin.net")
-            if response:
-                return response
-            else:
-                print("Validation response from the worker is None")
-                return "", 500
-        except Exception as e:
-            print(f"Validation request failed: {e}")
+    # Grab the email from the request
+    email = request.form.get("email")
+
+    # Process the validation request
+    # At this point, the user is either logged in and has credits,
+    # or is an anonymous user and can only do this until the limit is reached
+    try:
+        response = request_validation(email)
+        if response:
+            # If user is logged in, use their credits
+            # We waited until here to ensure we are delivering a result before deducting a credit
+            if is_user_logged_in():
+                if current_user.credits > 0:
+                    # Deduct credits from the user
+                    current_user.deduct_credits(1)
+                else:
+                    return "", 402
+
+            # Return the response from the worker
+            return response, 200
+        else:
+            print("Validation response from the worker is None")
             return "", 500
+    except Exception as e:
+        print(f"Validation request failed: {e}")
+        return "", 500
 
 
 # App main route + generic routing
