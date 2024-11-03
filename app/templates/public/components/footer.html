@@ -3,7 +3,7 @@
 		<div
 			class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top"
 		>
-			<div class="col mb-3">
+			<div class="col mb-3 text-center text-sm-start">
 				<a
 					href="/"
 					class="d-flex align-items-center fs-5 fw-semibold mb-3 text-decoration-none"
@@ -11,12 +11,17 @@
 					<img
 						src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
 						alt="Mail List Shield Email Validation Service"
-						id="footer-logo"
+						class="footer-logo logo-light mx-auto"
+					/>
+					<img
+						src="{{ url_for('static', filename='media/mail-list-shield-logo-dark-mode.png') }}"
+						alt="Mail List Shield Email Validation Service"
+						class="footer-logo logo-dark mx-auto"
 					/>
 				</a>
 			</div>
 			<div class="col mb-3"></div>
-			<div class="col mb-3">
+			<div class="col mb-3 text-center text-sm-start">
 				<h5>Company</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2">
@@ -41,7 +46,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col mb-3">
+			<div class="col mb-3 text-center text-sm-start">
 				<h5>Legal</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2">
@@ -72,7 +77,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col mb-3">
+			<div class="col mb-3 text-center text-sm-start">
 				<h5>Resources</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2">

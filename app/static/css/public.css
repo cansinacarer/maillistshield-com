@@ -18,12 +18,24 @@
 	border-bottom-color: var(--bs-body-color);
 }
 
-#header-logo {
+.header-logo {
 	width: 120px;
 	margin: 10px 0;
 }
 
-#footer-logo {
+/* Show the logo that matches the color mode */
+[data-bs-theme="dark"] .logo-dark,
+[data-bs-theme="light"] .logo-light {
+	display: block;
+}
+
+/* Hide alternative color logos */
+[data-bs-theme="light"] .logo-dark,
+[data-bs-theme="dark"] .logo-light {
+	display: none;
+}
+
+.footer-logo {
 	width: 100px;
 }
 
@@ -51,6 +63,6 @@
 
 #demoResultsTable,
 #demoAPIResponse {
-	width: 86%;
+	width: 80%;
 	overflow: hidden;
 }
