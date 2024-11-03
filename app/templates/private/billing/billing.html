@@ -17,8 +17,8 @@
     <input class="btn btn-primary" type="submit" value="Purchase Credits" />
 </form>
 
+{# 
 <h2 class="h4 border-bottom mt-5 my-3 pb-2">Subscription Details</h2>
-
 <p>You are currently on the {{ current_user.tier.label }} plan.</p>
 {% if current_user.tier.name != 'free'  %}
     <form method="post" action="{{ url_for("views_private.billing") }}/billing-portal">
@@ -42,6 +42,7 @@
         <input class="btn btn-primary" type="submit" value="Subscribe" />
     </form>
 {% endif %}
+#}
 
 <h2 class="h4 border-bottom mt-5 my-3 pb-2">Payment History</h2>
 {% if charges.data %}
