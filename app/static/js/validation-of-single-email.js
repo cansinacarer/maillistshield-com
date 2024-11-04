@@ -232,6 +232,18 @@ const populateResultsTable = (data) => {
 			// If we find an empty string, we set the td to False
 			td.innerHTML =
 				'<span class="fw-bold text-secondary">Unknown <i class="bi bi-dash-circle-fill"></i></span>';
+		} else if (data[tr.id] === "google") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="text-info"><i class="me-2 bi bi-google"></i>Google</span>';
+		} else if (data[tr.id] === "microsoft") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="text-info"><i class="me-2 bi bi-microsoft"></i>Microsoft</span>';
+		} else if (data[tr.id] === "apple") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="text-info"><i class="me-2 bi bi-apple"></i>Apple</span>';
 		} else if (data[tr.id]) {
 			// If we find a data with the same key as the tr id, we update the td
 			td.innerHTML = data[tr.id];
