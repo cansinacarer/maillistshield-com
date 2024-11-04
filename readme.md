@@ -37,6 +37,25 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
   - CSRF (Cross-Site Request Forgery) protection in all forms,
   - Rate limiting: App-wide and form specific limits.
 - 🐳 Dockerized for stateless continuous deployment,
+- 🔔 UI components ready to use:
+  - Toast notifications
+    ```javascript
+    showToast(
+        "This is a test toast notification!",
+        "Toast Title",
+        { autohide: false }
+    );
+    ```
+  - Modals
+    ```javascript
+    showAlert(
+        "Title",
+        "This is a test modal dialog!",
+        "Back",
+        "info"
+    );
+    ```
+  - `flash()` messages of Flask styled as Bootstrap 5 alerts,
 - 🌐 HTML templates:
   - Email templates for the email validation, password reset,
   - 2 sets of page templates,

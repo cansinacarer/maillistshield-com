@@ -97,6 +97,48 @@
 		</li>
 		<li class="mt-4">🐳 Dockerized for stateless continuous deployment,</li>
 		<li class="mt-4">
+			🔔 UI components ready to use:
+			<ul>
+				<li>
+					<button
+						class="btn btn-primary my-2"
+						onclick='showToast("This is a test toast notification!", "Toast Title", { autohide: false });'
+					>
+						Toast notifications
+					</button>
+					<pre><code>showToast(
+    "This is a test toast notification!",
+    "Toast Title",
+    { autohide: false }
+);</code></pre>
+				</li>
+				<li>
+					<button
+						class="btn btn-primary my-2"
+						onclick='
+                            showAlert(
+                                "Title",
+                                "This is a test modal dialog!",
+                                "Back",
+                                "info"
+                            );'
+					>
+						Modals
+					</button>
+					<pre><code>showAlert(
+    "Title",
+    "This is a test modal dialog!",
+    "Back",
+    "info"
+);</code></pre>
+				</li>
+				<li>
+					<code>flash()</code>
+					messages of Flask styled as Bootstrap 5 alerts,
+				</li>
+			</ul>
+		</li>
+		<li class="mt-4">
 			🌐 HTML templates:
 			<ul>
 				<li>
@@ -128,6 +170,7 @@
 			</ul>
 		</li>
 	</ul>
+	<hr />
 	<h3 class="mt-4">Components</h3>
 	<a
 		class="btn btn-primary mb-4"

@@ -1,4 +1,4 @@
-<!-- Modal HTML -->
+<!-- Modal HTML Template -->
 <div
 	class="modal fade"
 	id="alertModal"
@@ -39,7 +39,7 @@
 		document.getElementById("alertModalLabel").innerText = title;
 
 		// Set the alert message
-		document.querySelector("#alertModal .modal-body").innerText = message;
+		document.querySelector("#alertModal .modal-body").innerHTML = message;
 
 		// Set the button text
 		document.querySelector("#alertModal .buttonText").innerText =

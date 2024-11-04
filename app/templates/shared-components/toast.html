@@ -1,0 +1,51 @@
+<!-- Toast HTML Template -->
+<div
+	id="toast-template"
+	class="toast"
+	role="alert"
+	aria-live="assertive"
+	aria-atomic="true"
+>
+	<div class="toast-header">
+		<strong class="toast-title me-auto">Bootstrap</strong>
+		<small class="text-muted">just now</small>
+		<button
+			type="button"
+			class="btn-close"
+			data-bs-dismiss="toast"
+			aria-label="Close"
+		></button>
+	</div>
+	<div class="toast-body">Hello, world! This is a toast message.</div>
+</div>
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+	<div
+		id="toast-container"
+		class="toast-container position-fixed bottom-0 end-0 p-3"
+	></div>
+</div>
+
+<!-- Toast JS -->
+<script defer>
+	function showToast(message, title = "{{ APP_NAME }}", options = {}) {
+		const toastContainer = document.getElementById("toast-container");
+		const toastTemplate = document.getElementById("toast-template");
+
+		// Clone the toast template
+		const newToast = toastTemplate.cloneNode(true);
+		newToast.querySelector(".toast-body").innerHTML = message;
+		newToast.querySelector(".toast-title").innerHTML = title;
+
+		// Append the new toast to the container
+		toastContainer.appendChild(newToast);
+
+		// Initialize the toast
+		const toast = new bootstrap.Toast(newToast, options);
+		toast.show();
+
+		// Remove the toast from the DOM after it hides
+		newToast.addEventListener("hidden.bs.toast", () => {
+			newToast.remove();
+		});
+	}
+</script>
