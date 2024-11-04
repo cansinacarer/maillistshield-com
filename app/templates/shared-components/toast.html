@@ -16,7 +16,9 @@
 			aria-label="Close"
 		></button>
 	</div>
-	<div class="toast-body">Hello, world! This is a toast message.</div>
+	<div class="toast-body bg-body-tertiary">
+		Hello, world! This is a toast message.
+	</div>
 </div>
 <div aria-live="polite" aria-atomic="true" class="position-relative">
 	<div
@@ -27,7 +29,12 @@
 
 <!-- Toast JS -->
 <script defer>
-	function showToast(message, title = "{{ APP_NAME }}", options = {}) {
+	function showToast(
+		message,
+		title = "{{ APP_NAME }}",
+		type = "primary",
+		options = {}
+	) {
 		const toastContainer = document.getElementById("toast-container");
 		const toastTemplate = document.getElementById("toast-template");
 
@@ -35,6 +42,11 @@
 		const newToast = toastTemplate.cloneNode(true);
 		newToast.querySelector(".toast-body").innerHTML = message;
 		newToast.querySelector(".toast-title").innerHTML = title;
+
+		// Set the alert title background color
+		newToast.querySelector(
+			".toast-header"
+		).className = `toast-header bg-${type} text-white`;
 
 		// Append the new toast to the container
 		toastContainer.appendChild(newToast);
