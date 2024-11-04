@@ -61,23 +61,6 @@
 	</div>
 </div>
 <div class="container px-4 py-4">
-	<div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-		<div class="col d-flex flex-column align-items-start gap-2">
-			<h2 class="fw-bold text-body-emphasis">
-				Free implementation services
-			</h2>
-			<p class="text-body-secondary">
-                With a purchase of 100,000 credits or more, we offer free implementation services including:
-                <ul>
-                    <li>Extracting your email list from your software, validating, and importing the results.</li>
-                    <li>Connecting your campaign software with automated validation with our API.</li>
-                </ul>
-			</p>
-			<a href="#" class="btn btn-primary btn-lg">Let's talk!</a>
-		</div>
-    </div>
-</div>
-<div class="container px-4 py-4">
 	<h2 class="display-6 mt-5 fw-semibold text-center">
 		Insights to Improve Your Email Deliverability
 	</h2>
@@ -139,7 +122,9 @@
 <div class="container pt-4" id="demo-results">
 	<div class="row">
 		<div class="col-md-6 px-0 pb-4 pe-md-4">
-			<div class="pt-3 pb-5 text-center bg-mls-green bg-gradient me-md-auto">
+			<div
+				class="pt-3 pb-5 text-center bg-mls-green bg-gradient me-md-auto"
+			>
 				<div class="my-3 p-3">
 					<h2 class="display-5">Validation insights</h2>
 					<p class="lead">The insights you will get</p>
@@ -195,24 +180,26 @@
 	// Initialize Highlight.js
 	hljs.highlightAll();
 
-    // Show toast notification after 5 seconds
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            showToast(
-                `
+	// Show toast notification after 5 seconds
+	document.addEventListener("DOMContentLoaded", () => {
+		setTimeout(() => {
+			showToast(
+				`
                 <p class="text-body-secondary">
                     With a purchase of 100,000 credits or more, we offer free implementation services including:
                     <ul>
-                        <li>Extracting your email list from your software, validating, and importing the results.</li>
-                        <li>Connecting your campaign software with automated validation with our API.</li>
+                        <li><b>One-off validation solution:</b> We extract your email list from your software, validate the emails, and import the results.</li>
+                        <li><b>Turn-key automated validation*:</b> We connect your campaign software with our validation API.</li>
                     </ul>
+                    <small>*Only offered for email campaign softwares that support updating contacts using the data from API responses. If custom middleware development is needed, additional hourly fees apply.</small>
                 </p>
+			    <a href="#" class="btn btn-primary">Let's talk!</a>
                 `,
-                "Free implementation services",
-                "success",
-                { autohide: false }
-            );
-        }, 5000);
-    });
+				"Free implementation services",
+				"mls-green",
+				{ autohide: false }
+			);
+		}, 5000);
+	});
 </script>
 {% endblock %}
