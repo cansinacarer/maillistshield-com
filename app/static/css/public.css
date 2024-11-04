@@ -58,7 +58,7 @@
 .colorful-bg {
 	background-image: url(/static/media/header-bg.jpg);
 	background-repeat: no-repeat;
-	animation: rotateBackground 1s linear infinite;
+	animation: rotateBackground 10s linear infinite;
 	color: #fff;
 }
 
