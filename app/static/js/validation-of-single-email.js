@@ -12,6 +12,12 @@ validationForm.addEventListener("submit", (event) => {
 	startTableLoadingState();
 	startAPIResponseBoxLoadingState();
 
+	// Google Analytics tracking
+	gtag("event", "click", {
+		event_category: "button",
+		event_label: "Front Page Validation Button",
+	});
+
 	// Scroll down to the demo-results section
 	document.querySelector("#demo-results").scrollIntoView({
 		behavior: "smooth",
