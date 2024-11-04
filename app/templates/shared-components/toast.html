@@ -7,7 +7,7 @@
 	aria-atomic="true"
 >
 	<div class="toast-header">
-		<strong class="toast-title me-auto">Bootstrap</strong>
+		<strong class="toast-title me-auto">Title</strong>
 		<small>just now</small>
 		<button
 			type="button"
@@ -16,9 +16,7 @@
 			aria-label="Close"
 		></button>
 	</div>
-	<div class="toast-body bg-body-tertiary">
-		Hello, world! This is a toast message.
-	</div>
+	<div class="toast-body px-3 py-4 bg-body-tertiary">Toast message body</div>
 </div>
 <div aria-live="polite" aria-atomic="true" class="position-relative">
 	<div
@@ -46,7 +44,7 @@
 		// Set the alert title background color
 		newToast.querySelector(
 			".toast-header"
-		).className = `toast-header bg-${type} text-white`;
+		).className = `toast-header p-3 bg-${type} text-white`;
 
 		// Append the new toast to the container
 		toastContainer.appendChild(newToast);
