@@ -6,7 +6,7 @@
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-	border-bottom-color: var(--bs-body-color);
+	border-bottom-color: #5dbd7d;
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -15,7 +15,7 @@
 
 .nav-masthead .active {
 	color: var(--bs-body-color);
-	border-bottom-color: var(--bs-body-color);
+	border-bottom-color: #5dbd7d;
 }
 
 .header-logo {
@@ -27,9 +27,12 @@
 	width: 100px;
 }
 
-/* Home page */
-#jumbotron {
-	/* color: #505050; */
+#validationForm {
+	max-width: 600px;
+}
+
+#validationButton {
+	min-width: 120px;
 }
 
 #jumbotron #emailToValidate:focus {
@@ -62,16 +65,27 @@
 	color: #fff;
 }
 
+.bg-mls-green {
+	background-color: #5dbd7d;
+}
+
+#demo-results h2,
+#demo-results p {
+	color: #fff;
+}
+
+#demoResultsTable > div {
+	padding: 20px 0;
+}
+
+#demoResultsTable th {
+	font-weight: 500;
+}
 #demoResultsTable th {
 	font-weight: 500;
 }
 #demoResultsTable td {
 	font-weight: 400;
-}
-
-#demoResultsTable,
-#demoAPIResponse {
-	overflow: hidden;
 }
 
 .feature-icon-small {
