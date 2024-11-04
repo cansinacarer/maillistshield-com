@@ -194,5 +194,25 @@
 
 	// Initialize Highlight.js
 	hljs.highlightAll();
+
+    // Show toast notification after 5 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            showToast(
+                `
+                <p class="text-body-secondary">
+                    With a purchase of 100,000 credits or more, we offer free implementation services including:
+                    <ul>
+                        <li>Extracting your email list from your software, validating, and importing the results.</li>
+                        <li>Connecting your campaign software with automated validation with our API.</li>
+                    </ul>
+                </p>
+                `,
+                "Free implementation services",
+                "success",
+                { autohide: false }
+            );
+        }, 5000);
+    });
 </script>
 {% endblock %}
