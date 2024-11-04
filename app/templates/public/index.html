@@ -42,10 +42,12 @@
 					</form>
 				</div>
 				<div class="d-flex gap-3 justify-content-center lead fw-normal">
-					<a class="icon-link" href="#">Self service</a>
+					<a class="icon-link btn btn-outline-primary">
+						Start self-service
+					</a>
 					or
-					<a class="icon-link" href="#">
-						Our implementation services
+					<a class="icon-link btn btn-outline-primary">
+						Reach out for free implementation
 					</a>
 				</div>
 			</div>
@@ -56,16 +58,75 @@
 		</div>
 	</div>
 </div>
+<div class="container px-4 py-4">
+	<h2 class="display-6 mt-5 fw-semibold text-center">
+		Insights to Improve Your Email Deliverability
+	</h2>
+	<div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+		<div class="feature col text-center px-4">
+			<div
+				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 colorful-bg"
+			>
+				<i class="bi bi-check-circle-fill"></i>
+			</div>
+			<h3 class="fs-4 text-body-emphasis">Invalid Emails</h3>
+			<p>
+				Remove invalid emails from your list to improve your sender
+				reputation, opens, clicks, and conversions.
+			</p>
+			<a class="btn btn-outline-primary" href="#">Learn more</a>
+		</div>
+		<div class="feature col text-center px-4">
+			<div
+				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 colorful-bg"
+			>
+				<i class="bi bi-envelope-at-fill"></i>
+			</div>
+			<h3 class="fs-4 text-body-emphasis">Email Providers</h3>
+			<p>
+				Find the email providers serving the custom domains to control
+				your send volume to each provider.
+			</p>
+			<a class="btn btn-outline-primary" href="#">Learn more</a>
+		</div>
+		<div class="feature col text-center px-4">
+			<div
+				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 colorful-bg"
+			>
+				<i class="bi bi-trash3-fill"></i>
+			</div>
+			<h3 class="fs-4 text-body-emphasis">Disposable Emails</h3>
+			<p>
+				Identify the customers who gave you a throw-away email address.
+			</p>
+			<a class="btn btn-outline-primary" href="#">Learn more</a>
+		</div>
+		<div class="feature col text-center px-4">
+			<div
+				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 colorful-bg"
+			>
+				<i class="bi bi-exclamation-triangle-fill"></i>
+			</div>
+			<h3 class="fs-4 text-body-emphasis">Spam Traps</h3>
+			<p>
+				Avoid emailing to spam traps and damaging your sender
+				reputation.
+			</p>
+			<a class="btn btn-outline-primary" href="#">Learn more</a>
+		</div>
+	</div>
+</div>
+
 <div class="container pt-4" id="demo-results">
 	<div class="row">
 		<div class="col-md-6 px-0 pb-4 pe-md-4">
-			<div class="me-md-auto bg-body-tertiary py-3 py-md-5 text-center">
+			<div class="me-md-auto bg-body-tertiary pt-3 pb-5 text-center">
 				<div class="my-3 p-3">
-					<h2 class="display-5">Validation result</h2>
-					<p class="lead">Hover on the rows to see details</p>
+					<h2 class="display-5">Validation insights</h2>
+					<p class="lead">The insights you will get</p>
 				</div>
 				<div
-					class="bg-body rounded-3 shadow-sm mx-auto text-start"
+					class="col-md-10 bg-body rounded-3 shadow-sm mx-auto text-start"
 					id="demoResultsTable"
 				>
 					{% include 'public/demo/demo-results-table.html' %}
@@ -73,16 +134,15 @@
 			</div>
 		</div>
 		<div class="col-md-6 px-0 pb-4">
-			<div class="bg-body-tertiary py-3 py-md-5 text-center">
+			<div class="bg-body-tertiary pt-3 pb-5 text-center">
 				<div class="my-3 py-3">
 					<h2 class="display-5">API response</h2>
 					<p class="lead">
-						Single-level response for simpler use with no-code
-						tools.
+						What your software can expect from our API
 					</p>
 				</div>
 				<div
-					class="bg-dark rounded-3 shadow-sm mx-auto text-start"
+					class="col-md-10 bg-dark rounded-3 shadow-sm mx-auto text-start"
 					id="demoAPIResponse"
 				>
 					{% include 'public/demo/demo-api-response.html' %}
@@ -90,22 +150,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-<div class="container">
-	<p class="text-center">
-		<a href="https://getbootstrap.com/docs/5.3/examples/features/">
-			Add features like these
-		</a>
-	</p>
-	<p class="text-center">
-		If anonymous, they can try one, then need to give me their email for
-		more free credits.
-	</p>
-	<p class="text-center">
-		If they are logged in, we give them 20, then start deducting credits
-		immediately.
-	</p>
-	<p class="text-center">Show credits on the top right?</p>
 </div>
 <!--  -->
 {% endblock content %}

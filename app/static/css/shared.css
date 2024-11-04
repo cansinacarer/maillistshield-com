@@ -11,3 +11,16 @@
 [data-bs-theme="dark"] .logo-light {
 	display: none;
 }
+
+/* Sentence case */
+.text-sentence-case {
+	text-transform: lowercase;
+}
+
+.text-sentence-case:first-letter {
+	text-transform: capitalize;
+}
+
+.text-lowercase::first-letter {
+	text-transform: lowercase;
+}

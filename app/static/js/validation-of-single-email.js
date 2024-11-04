@@ -57,18 +57,7 @@ validationForm.addEventListener("submit", (event) => {
 				response.json().then((data) => {
 					if (data.email) {
 						// Update the results table
-						document
-							.querySelectorAll("#demoResultsTable tr")
-							.forEach((tr) => {
-								const td = tr.querySelector("td");
-								if (data[tr.id]) {
-									// If we find a data with the same key as the tr id, we update the td
-									td.innerHTML = data[tr.id];
-								} else {
-									// Otherwise, we set the td to None
-									td.innerHTML = "None";
-								}
-							});
+						populateResultsTable(data);
 
 						// Show the API response
 						document.querySelector(
@@ -81,11 +70,12 @@ validationForm.addEventListener("submit", (event) => {
 							.removeAttribute("data-highlighted");
 						hljs.highlightAll();
 					} else {
+						// Show an error message
 						showAlert(
-							"Success",
-							`Request successful:<br /><br />${data.email}`,
-							"OK",
-							"success"
+							"Error",
+							"There was an error when we tried processing your request.",
+							"Try again",
+							"danger"
 						);
 					}
 				});
@@ -201,5 +191,47 @@ const requestValidation = (email) => {
 	});
 };
 
-// TODO:
-const populateResultsTable = (data) => {};
+// Populate the results table with the data from the API response
+const populateResultsTable = (data) => {
+	document.querySelectorAll("#demoResultsTable tr").forEach((tr) => {
+		const td = tr.querySelector("td");
+		if (data[tr.id] === true) {
+			// If we find a True value, we set the td to True
+			td.innerHTML =
+				'<span class="text-success">True <i class="bi bi-check-lg"></i></span>';
+		} else if (data[tr.id] === false) {
+			// If we find a False value, we set the td to True
+			td.innerHTML =
+				'<span class="text-danger">False <i class="bi bi-x-lg"></i></span>';
+		} else if (data[tr.id] === "") {
+			// If we find an empty string, we set the td to lower case n/a
+			td.innerHTML = "n/a";
+		} else if (data[tr.id] === "valid") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="fw-bold text-success">Valid <i class="bi bi-check-circle-fill"></i></span>';
+		} else if (data[tr.id] === "invalid") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="fw-bold text-danger">Invalid <i class="bi bi-x-circle-fill"></i></span>';
+		} else if (data[tr.id] === "likely_invalid") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="fw-bold text-danger">Likely Invalid <i class="bi bi-x-circle-fill"></i></span>';
+		} else if (data[tr.id] === "disabled") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="fw-bold text-danger">Disabled <i class="bi bi-x-circle-fill"></i></span>';
+		} else if (data[tr.id] === "unknown") {
+			// If we find an empty string, we set the td to False
+			td.innerHTML =
+				'<span class="fw-bold text-secondary">Unknown <i class="bi bi-dash-circle-fill"></i></span>';
+		} else if (data[tr.id]) {
+			// If we find a data with the same key as the tr id, we update the td
+			td.innerHTML = data[tr.id];
+		} else {
+			// Otherwise, we set the td to None
+			td.innerHTML = "None";
+		}
+	});
+};
