@@ -102,13 +102,14 @@
 				<li>
 					<button
 						class="btn btn-primary my-2"
-						onclick='showToast("This is a test toast notification!", "Toast Title", { autohide: false });'
+						onclick='showToast("This is a test toast notification!");'
 					>
 						Toast notifications
 					</button>
 					<pre><code>showToast(
     "This is a test toast notification!",
     "Toast Title",
+    "success",
     { autohide: false }
 );</code></pre>
 				</li>
@@ -118,9 +119,7 @@
 						onclick='
                             showAlert(
                                 "Title",
-                                "This is a test modal dialog!",
-                                "Back",
-                                "info"
+                                "This is a test modal dialog!"
                             );'
 					>
 						Modals

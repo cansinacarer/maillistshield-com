@@ -43,6 +43,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
     showToast(
         "This is a test toast notification!",
         "Toast Title",
+        "success",
         { autohide: false }
     );
     ```
