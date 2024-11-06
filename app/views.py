@@ -6,7 +6,7 @@ from jinja2 import TemplateNotFound
 from datetime import datetime
 
 from app import app, lm, db
-from app.utilities.validation import request_validation
+from app.utilities.validation import validate_email
 from app.models import Users, BatchJobs
 from app.utilities.error_handlers import error_page
 
@@ -120,7 +120,7 @@ def validate():
     # At this point, the user is either logged in and has credits,
     # or is an anonymous user and can only do this until the limit is reached
     try:
-        response = request_validation(email)
+        response = validate_email(email)
         if response:
             # If user is logged in, use their credits
             if is_user_logged_in():

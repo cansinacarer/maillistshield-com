@@ -88,3 +88,6 @@ class Config:
     MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS = config(
         "MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS", cast=int
     )
+
+    # Worker to be used for the next validation
+    NEXT_WORKER = 0

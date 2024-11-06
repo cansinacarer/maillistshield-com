@@ -26,11 +26,11 @@ validationForm.addEventListener("submit", (event) => {
 	// Send the email to the backend
 	requestValidation(validationInput.value)
 		.then((response) => {
-			if (response.status === 429) {
-				// Show the rate limit error message
+			if (response.status === 400) {
+				// CSRF token expired
 				showAlert(
 					"Error",
-					`You have reached the usage limit for guest users. <br /><br /> You can get <b class="text-primary">${freeCredits} free credits</b> by creating an account. <br /><br /> <a href="/login" class="btn btn-outline-primary">Login</a> <a href="/register" class="btn btn-outline-primary">Create an account</a>`,
+					`Your session has expired.<br /><br />Please refresh the page and try again.`,
 					"OK",
 					"danger"
 				);
@@ -50,12 +50,20 @@ validationForm.addEventListener("submit", (event) => {
 					"OK",
 					"danger"
 				);
+			} else if (response.status === 429) {
+				// Show the rate limit error message
+				showAlert(
+					"Error",
+					`You have reached the usage limit for guest users. <br /><br /> You can get <b class="text-primary">${freeCredits} free credits</b> by creating an account. <br /><br /> <a href="/login" class="btn btn-outline-primary">Login</a> <a href="/register" class="btn btn-outline-primary">Create an account</a>`,
+					"OK",
+					"danger"
+				);
 			} else if (response.status === 500) {
 				// Show an error message
 				showAlert(
 					"Error",
 					"There was an error when we tried processing your request.",
-					"Try again",
+					"OK",
 					"danger"
 				);
 			} else if (response.ok) {
