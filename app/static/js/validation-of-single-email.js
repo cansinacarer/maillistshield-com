@@ -209,7 +209,50 @@ const requestValidation = (email) => {
 const populateResultsTable = (data) => {
 	document.querySelectorAll("#demoResultsTable tr").forEach((tr) => {
 		const td = tr.querySelector("td");
-		if (data[tr.id] === true) {
+		if (tr.id === "status") {
+			// Status field
+			if (data[tr.id] === "valid") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="fw-bold text-success">Valid <i class="bi bi-check-circle-fill"></i></span>';
+			} else if (data[tr.id] === "invalid") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="fw-bold text-danger">Invalid <i class="bi bi-x-circle-fill"></i></span>';
+			} else if (data[tr.id] === "likely_invalid") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="fw-bold text-danger">Likely Invalid <i class="bi bi-x-circle-fill"></i></span>';
+			} else if (data[tr.id] === "disabled") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="fw-bold text-danger">Disabled <i class="bi bi-x-circle-fill"></i></span>';
+			} else if (data[tr.id] === "unknown") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="fw-bold text-secondary">Unknown <i class="bi bi-dash-circle-fill"></i></span>';
+			}
+		} else if (tr.id === "email_provider") {
+			// Email provider field
+			if (data[tr.id] === "google") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="text-info"><i class="me-2 bi bi-google"></i>Google</span>';
+			} else if (data[tr.id] === "microsoft") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="text-info"><i class="me-2 bi bi-microsoft"></i>Microsoft</span>';
+			} else if (data[tr.id] === "apple") {
+				// If we find an empty string, we set the td to False
+				td.innerHTML =
+					'<span class="text-info"><i class="me-2 bi bi-apple"></i>Apple</span>';
+			}
+		} else if (tr.id === "email_security_gateway" && data[tr.id] !== "") {
+			// Security gateway field
+			td.innerHTML = `<span class="text-capitalize">${
+				data[tr.id]
+			}</span>`;
+		} else if (data[tr.id] === true) {
 			// If we find a True value, we set the td to True
 			td.innerHTML =
 				'<span class="text-success">True <i class="bi bi-check-lg"></i></span>';
@@ -218,41 +261,10 @@ const populateResultsTable = (data) => {
 			td.innerHTML =
 				'<span class="text-danger">False <i class="bi bi-x-lg"></i></span>';
 		} else if (data[tr.id] === "") {
-			// If we find an empty string, we set the td to lower case n/a
+			// If we find an empty string, we set the td to n/a
 			td.innerHTML = "n/a";
-		} else if (data[tr.id] === "valid") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="fw-bold text-success">Valid <i class="bi bi-check-circle-fill"></i></span>';
-		} else if (data[tr.id] === "invalid") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="fw-bold text-danger">Invalid <i class="bi bi-x-circle-fill"></i></span>';
-		} else if (data[tr.id] === "likely_invalid") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="fw-bold text-danger">Likely Invalid <i class="bi bi-x-circle-fill"></i></span>';
-		} else if (data[tr.id] === "disabled") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="fw-bold text-danger">Disabled <i class="bi bi-x-circle-fill"></i></span>';
-		} else if (data[tr.id] === "unknown") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="fw-bold text-secondary">Unknown <i class="bi bi-dash-circle-fill"></i></span>';
-		} else if (data[tr.id] === "google") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="text-info"><i class="me-2 bi bi-google"></i>Google</span>';
-		} else if (data[tr.id] === "microsoft") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="text-info"><i class="me-2 bi bi-microsoft"></i>Microsoft</span>';
-		} else if (data[tr.id] === "apple") {
-			// If we find an empty string, we set the td to False
-			td.innerHTML =
-				'<span class="text-info"><i class="me-2 bi bi-apple"></i>Apple</span>';
 		} else if (data[tr.id]) {
+			// Catch-all for other rows of the table
 			// If we find a data with the same key as the tr id, we update the td
 			td.innerHTML = data[tr.id];
 		} else {
