@@ -24,3 +24,12 @@
 .text-lowercase::first-letter {
 	text-transform: lowercase;
 }
+
+/* Brand green */
+.bg-mls-green {
+	background-color: #5dbd7d;
+}
+
+[data-bs-theme="dark"] .bg-mls-green {
+	background-color: #327655;
+}
