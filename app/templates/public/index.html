@@ -176,32 +176,56 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
 
-<script>
+<script defer>
 	// Free credits count
 	const freeCredits = "{{ MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS }}";
 
 	// Initialize Highlight.js
 	hljs.highlightAll();
 
-	// Show toast notification after 5 seconds
+	// Show toast notification with the promo a few seconds after the user scrolls to the results section
+	let promoShown = false;
 	document.addEventListener("DOMContentLoaded", () => {
-		setTimeout(() => {
-			showToast(
-				`
-                <p>Hello there! 👋</p>
-                <p>We offer implementation services including:</p>
-                <ul>
-                    <li><b>One-time validation:</b> We extract your email list from your software, validate the emails, and import the results.</li>
-                    <li><b>Continuous automated validation:</b> We connect your campaign software with our validation API to keep your list continuously cleaned.</li>
-                </ul>
-                <p>Would you like to hear more?</p>
-                <a href="#" class="btn btn-primary">Let's talk!</a>
-                `,
-				"Implementation services",
-				"mls-green",
-				{ autohide: false }
-			);
-		}, 5000);
+		// The element that triggers all this
+		triggerElement = document.querySelector("#demoResultsTable");
+
+		// Callback function
+		const offerCallback = (entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !promoShown) {
+					// Record that we did show the promo so that we don't trigger it with every scroll
+					promoShown = true;
+
+					// Start the counting down to promo trigger
+					setTimeout(() => {
+						showToast(
+							`
+                            <p>Hello there! 👋</p>
+                            <p>We offer implementation services including:</p>
+                            <ul>
+                                <li><b>One-time validation:</b> We extract your email list from your software, validate the emails, and import the results.</li>
+                                <li><b>Continuous automated validation:</b> We connect your campaign software with our validation API to keep your list continuously cleaned.</li>
+                            </ul>
+                            <p>Would you like to hear more?</p>
+                            <a href="#" class="btn btn-primary">Let's talk!</a>
+                            `,
+							"Implementation services",
+							"mls-green",
+							{ autohide: false }
+						);
+					}, 2000);
+				}
+			});
+		};
+
+		// Create an Intersection Observer instance
+		const observer = new IntersectionObserver(offerCallback, {
+			root: null, // Use the viewport as the root
+			threshold: 0.4, // Trigger callback when 40% of the target is visible
+		});
+
+		// Start observing the target element
+		observer.observe(triggerElement);
 	});
 </script>
 {% endblock %}
