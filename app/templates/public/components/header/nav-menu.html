@@ -1,7 +1,43 @@
 <div class="container">
-	<div class="row">
+    <div class="row">
+        <div class="d-md-none d-flex flex-wrap align-items-center justify-content-between py-3 border-bottom">
+            <a href="/" class="d-inline-flex fs-5 fw-semibold text-decoration-none">
+                <img src="/static/media/mail-list-shield-logo.png" alt="Mail List Shield Email Validation Service" class="mobile-logo header-logo logo-light">
+                <img src="/static/media/mail-list-shield-logo-dark-mode.png" alt="Mail List Shield Email Validation Service" class="mobile-logo header-logo logo-dark">
+            </a>
+            <div class="text-end">
+                <button class="btn dropdown dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-moon-stars-fill"></i>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-theme-value="auto">
+                                <i class="bi bi-circle-half"></i>
+                                System
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-theme-value="light">
+                                <i class="bi bi-sun-fill"></i>
+                                Light
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-theme-value="dark">
+                                <i class="bi bi-moon-stars-fill"></i>
+                                Dark
+                            </a>
+                        </li>
+                    </ul>
+                </button>
+                <a class="btn btn-outline-secondary d-md-none" data-bs-toggle="offcanvas" data-bs-target="#topnav" aria-controls="topnav" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                </a>
+            </div>
+        </div>
+    </div>
+	<div class="offcanvas-md offcanvas-end" id="topnav">
 		<header
-			class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+			class="d-flex flex-column-mobile flex-md-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom min-vh-100-mobile"
 		>
 			<div class="col-md-3 mb-2 mb-md-0">
 				<a
@@ -22,7 +58,7 @@
 			</div>
 
 			<ul
-				class="nav nav-masthead col-12 col-md-auto mb-2 justify-content-center mb-md-0"
+				class="nav nav-masthead col-12 col-md-auto mb-2 justify-content-center mb-md-0 d-block d-md-flex mb-auto mb-md-0"
 			>
 				<li class="nav-item px-2">
 					<a
@@ -35,10 +71,19 @@
 				</li>
 				<li class="nav-item px-2">
 					<a
-						class="nav-link {% if path == 'sample-page' %}active{% endif %}"
+						class="nav-link {% if path == 'pricing' %}active{% endif %}"
 						href="/pricing"
 					>
 						Pricing
+					</a>
+				</li>
+				</li>
+				<li class="nav-item px-2">
+					<a
+						class="nav-link {% if path == 'contact' %}active{% endif %}"
+						href="/contact"
+					>
+						Contact
 					</a>
 				</li>
 			</ul>

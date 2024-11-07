@@ -18,6 +18,18 @@
 	border-bottom-color: #5dbd7d;
 }
 
+@media (max-width: 767px) {
+	#topnav {
+		width: 280px;
+	}
+	.min-vh-100-mobile {
+		min-height: 100vh !important;
+	}
+	.flex-column-mobile {
+		flex-direction: column !important;
+	}
+}
+
 .header-logo {
 	width: 120px;
 	margin: 10px 0;
