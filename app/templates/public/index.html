@@ -16,7 +16,7 @@
 				<h3 class="fw-normal text-muted mb-3">
 					Upload your list or automate validation
 				</h3>
-				<div class="d-flex gap-3 justify-content-center fw-normal my-2">
+				<div class="d-flex gap-3 justify-content-center fw-normal">
 					<form class="input-group my-4" id="validationForm">
 						<input
 							class="form-control px-3 py-2"
@@ -41,22 +41,21 @@
 						</button>
 					</form>
 				</div>
+				{% if current_user.is_authenticated %}
+				<!--  -->
+				{% else %}
 				<div
-					class="d-flex gap-3 justify-content-center lead fw-normal mt-4"
+					class="d-flex gap-3 justify-content-center lead fw-normal mt-3"
 				>
-					<a class="icon-link btn btn-outline-primary">
-						Upload your list
-					</a>
-					or
-					<a class="icon-link btn btn-outline-primary">
-						Reach out for free implementation
-					</a>
+					<button
+						onclick="showAlert('Login required', `Create an account to get <b>100 free credits for </b> and try our email batch validation with up to a 100 contacts.<br /><br /><div class='d-flex justify-content-center'></button><a class='btn btn-primary' href='/register'>Register to claim your 100 free credits</a></div><br/ ><br/ > If you already have an account, please <a href='/login'>login</a> to upload a file.`, 'Go back', 'mls-green')"
+						class="icon-link btn btn-outline-primary"
+					>
+						Upload a CSV file
+					</button>
 				</div>
+				{% endif %}
 			</div>
-			<div class="product-device shadow-sm d-none d-md-block"></div>
-			<div
-				class="product-device product-device-2 shadow-sm d-none d-md-block"
-			></div>
 		</div>
 	</div>
 </div>
