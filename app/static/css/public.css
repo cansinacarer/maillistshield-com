@@ -96,6 +96,17 @@
 	font-weight: 400;
 }
 
+/* Make both sections the same height */
+#demo-results .table-responsive {
+	max-height: 660px;
+	overflow-y: scroll;
+}
+/* Make it as long as the table */
+#demoAPIResponse code {
+	height: 660px;
+	overflow-y: auto;
+}
+
 .feature-icon-small {
 	width: 3rem;
 	height: 3rem;
