@@ -17,7 +17,7 @@ class BatchJobs(db.Model):
     __tablename__ = "BatchJobs"
 
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.String(120), nullable=False, unique=True)
+    uid = db.Column(db.String(120), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
     user = db.relationship("Users", backref="batch_jobs")
     uploaded_file = db.Column(db.String(120), nullable=False)
