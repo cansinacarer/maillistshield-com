@@ -63,3 +63,11 @@ main {
 .scrollarea {
 	overflow-y: auto;
 }
+
+/* Ensure that the footers of the sidebar and the body have the same heights */
+#sidebarBottom,
+footer {
+	min-height: 90px;
+	display: flex;
+	align-items: center;
+}
