@@ -38,23 +38,6 @@ def timeformat(value, format="%I:%M %p"):
 app.jinja_env.filters["timeformat"] = timeformat
 
 
-# For testing the rendering of email templates
-@app_private.route("/admin/email-test/<email>")
-@login_required
-def email_test(email):
-    try:
-        return render_template(
-            f"emails/{email}.html",
-            user=current_user,
-            appName=app.config["APP_NAME"],
-            appHome=app.config["APP_ROOT_URL"],
-            resetLink=url_for("set_new_password", _external=True) + "/dummyToken",
-        )
-
-    except TemplateNotFound:
-        return "Email template not found.", 404
-
-
 # Webhook endpoints for external services to give us updates
 @app_private.route("/webhook/<path>", methods=["POST"])
 @csrf.exempt
@@ -418,6 +401,45 @@ def account(path):
                     form=form,
                     path=path,
                 )
+    except TemplateNotFound:
+        return error_page(404)
+    except Exception as e:
+        print(f"ERROR 500: {e}")
+        return error_page(500)
+
+
+# Admin pages routing
+@app_private.route("/admin", defaults={"path": "admin"}, methods=["GET", "POST"])
+# path:path is to catch all paths, including those with multiple slashes (/)
+@app_private.route("/admin/<path:path>", methods=["GET", "POST"])
+@login_required
+def admin(path):
+    # If this user is not admin, return 403
+    if current_user.role != "admin":
+        return error_page(403)
+
+    # If this is an email rendering path
+    if path[:6] == "email/":
+        # Try to render the email template
+        email_template = path[6:]
+        try:
+            return render_template(
+                f"emails/{email_template}.html",
+                user=current_user,
+                appName=app.config["APP_NAME"],
+                appHome=app.config["APP_ROOT_URL"],
+                resetLink=url_for("set_new_password", _external=True) + "/dummyToken",
+            )
+        except TemplateNotFound:
+            return "Email template not found.", 404
+
+    # Try to find the matching admin page template
+    try:
+        # If the path matches a template, return the template
+        return render_template(
+            f"private/admin/{path}.html", path=path, user=current_user
+        )
+
     except TemplateNotFound:
         return error_page(404)
     except Exception as e:
