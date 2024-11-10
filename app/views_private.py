@@ -38,23 +38,6 @@ def timeformat(value, format="%I:%M %p"):
 app.jinja_env.filters["timeformat"] = timeformat
 
 
-# For testing the rendering of email templates
-@app_private.route("/admin/email-test/<email>")
-@login_required
-def email_test(email):
-    try:
-        return render_template(
-            f"emails/{email}.html",
-            user=current_user,
-            appName=app.config["APP_NAME"],
-            appHome=app.config["APP_ROOT_URL"],
-            resetLink=url_for("set_new_password", _external=True) + "/dummyToken",
-        )
-
-    except TemplateNotFound:
-        return "Email template not found.", 404
-
-
 # Webhook endpoints for external services to give us updates
 @app_private.route("/webhook/<path>", methods=["POST"])
 @csrf.exempt
