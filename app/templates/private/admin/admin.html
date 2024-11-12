@@ -3,15 +3,7 @@
 {% extends "private/layouts/base.html" %}
 <!--  -->
 {% block content %}
-<div class="container ms-0">
-	<div class="row my-5">
-		<div class="col-md-3 p-md-0 pb-4">
-			<b>Dummy admin controls</b>
-		</div>
-		<div class="col-md-9">
-			<input type="text" placeholder="Dummy admin input" disabled />
-		</div>
-	</div>
-</div>
+<!--  -->
+{% include 'shared-components/email-csv-upload-form.html' %}
 <!--  -->
 {% endblock content %}
