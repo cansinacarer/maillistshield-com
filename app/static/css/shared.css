@@ -33,3 +33,12 @@
 [data-bs-theme="dark"] .bg-mls-green {
 	background-color: #327655;
 }
+
+/* Don't allow for label text to be selected */
+.form-check-label {
+	user-select: none;
+}
+
+.no-select {
+	user-select: none;
+}
