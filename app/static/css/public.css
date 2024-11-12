@@ -53,25 +53,25 @@
 
 @keyframes rotateBackground {
 	from {
-		background-position: 0% 100%;
+		background-position: 0% 0%;
 	}
 	50% {
-		background-position: 100% 0%;
+		background-position: 100% 100%;
 	}
 	to {
-		background-position: 0% 100%;
+		background-position: 0% 0%;
 	}
 }
 .colorful-text {
-	background-image: url(/static/media/header-bg.jpg);
+	background-image: url(/static/media/background/colorful.jpg);
 	background-repeat: no-repeat;
 	background-clip: text;
 	-webkit-text-fill-color: rgba(0, 0, 0, 0);
-	animation: rotateBackground 1s linear infinite;
+	animation: rotateBackground 3s linear infinite;
 }
 
 .colorful-bg {
-	background-image: url(/static/media/header-bg.jpg);
+	background-image: url(/static/media/background/colorful.jpg);
 	background-repeat: no-repeat;
 	animation: rotateBackground 10s linear infinite;
 	color: #fff;
