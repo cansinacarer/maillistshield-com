@@ -1,0 +1,111 @@
+<div class="container ms-0">
+	<div class="row">
+		<div class="col-md-12">
+			<form
+				id="csvUploadForm"
+				action="/validate-file/upload"
+				method="post"
+			>
+				<h5 class="border-bottom pb-2">Step 1/4: Select file</h5>
+				<div
+					id="dropzone"
+					class="border-dashed-thick rounded p-5 text-center"
+				>
+					<p class="no-select m-0">
+						Drag & drop a CSV file here or click to upload
+					</p>
+					<input
+						type="file"
+						id="csvFileInput"
+						name="csvFileInput"
+						class="d-none"
+						multiple="false"
+					/>
+				</div>
+				<p id="fileName" class="mt-2"></p>
+				<div id="fileDetails" class="d-none">
+					<h5 class="mt-5 border-bottom pb-2">Step 2/4: Preview</h5>
+					<p>
+						Please review the preview below to ensure that your file
+						is shown as expected:
+					</p>
+					<div id="filePreview" class="mt-4"></div>
+					<h5 class="mt-5 border-bottom pb-2">
+						Step 3/4: Data selection
+					</h5>
+					<div class="form-check form-switch mt-4">
+						<input
+							class="form-check-input"
+							type="checkbox"
+							role="switch"
+							id="tableHeadersToggleSwitch"
+							name="tableHeadersToggleSwitch"
+						/>
+						<label
+							class="form-check-label"
+							for="tableHeadersToggleSwitch"
+						>
+							My table has column labels on the first row
+						</label>
+						<br />
+						<small>
+							<i>
+								Enabling this option will exclude the first row
+								of your file from validation.
+							</i>
+						</small>
+					</div>
+					<div>
+						<p class="mb-2 mt-4">
+							Please select the column containing the email
+							addresses:
+						</p>
+						<div id="columnList"></div>
+					</div>
+					<h5 class="mt-5 border-bottom pb-2">
+						Step 4/4: Confirmation
+					</h5>
+					<p class="mt-4">
+						Estimated cost of validating the emails in this file is
+						<b>
+							<span id="fileValidationCost"></span>
+							credits
+						</b>
+						.
+					</p>
+					<div class="d-grid gap-2">
+						<button type="submit" class="btn btn-primary">
+							<span
+								class="loading spinner-border spinner-border-sm d-none"
+								aria-hidden="true"
+							></span>
+							<span class="text">Submit File for Validation</span>
+						</button>
+					</div>
+					<div class="mt-4">
+						<div id="progressContainer" style="display: none">
+							<div
+								id="progressBar"
+								style="
+									width: 0%;
+									height: 20px;
+									background-color: green;
+								"
+							></div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<style>
+	.border-dashed-thick {
+		border: 4px dashed var(--bs-border-color);
+		cursor: pointer;
+	}
+</style>
+<script
+	defer
+	src="{{ url_for('static', filename='js/validation-of-batch-file.js') }}"
+></script>
