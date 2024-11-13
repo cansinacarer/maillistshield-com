@@ -1,14 +1,15 @@
-from flask import render_template, request, redirect, Response
-from flask_login import current_user
+from flask import render_template, request, redirect, Response, jsonify
+from flask_login import login_required, current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from jinja2 import TemplateNotFound
 from datetime import datetime
 
 from app import app, lm, db
-from app.utilities.validation import validate_email
 from app.models import Users, BatchJobs
+from app.utilities.validation import validate_email
 from app.utilities.error_handlers import error_page
+from app.utilities.object_storage import generate_upload_link_validation_file
 
 
 # Variables available in all templates
@@ -92,19 +93,27 @@ def robots():
     )
 
 
-@app.route("/test")
-def test():
-    if current_user.email == "cansinacarer@gmail.com":
-        test_job = BatchJobs(
-            user=current_user,
-            uploaded_file="file_path",
-            file_length=100,
-        )
-        db.session.add(test_job)
-        db.session.commit()
-        return "done"
-    else:
-        return "unauthorized", 403
+@app.route("/validate-file", defaults={"path": "upload"}, methods=["GET", "POST"])
+@app.route("/validate-file/<path>", methods=["GET", "POST"])
+@login_required
+@limiter.limit("40 per day")
+def validate_file(path):
+    match path:
+        case "getSignedRequest":
+            return generate_upload_link_validation_file(
+                current_user, request.args.get("file_type"), request.args.get("file")
+            )
+        case "recordBatchFileDetails":
+            job = BatchJobs(
+                user=current_user,
+                uploaded_file=request.args.get("file"),
+                email_column=request.args.get("email-column"),
+                header_row=request.args.get("headers", type=bytes),
+            )
+            db.session.add(job)
+            db.session.commit()
+
+    return jsonify({"error": "File upload failed"}), 500
 
 
 @app.route("/validate", methods=["POST"])

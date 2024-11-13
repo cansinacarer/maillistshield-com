@@ -1,5 +1,6 @@
 import json
 from botocore.exceptions import ClientError
+from datetime import datetime
 
 from app import app
 from app.config import s3
@@ -137,6 +138,10 @@ def generate_remote_file(bucket_name, folder_path, file_name, s3, content):
 #
 
 
+def timestamp():
+    return datetime.now().strftime("%Y%m%d%H%M%S")
+
+
 def generate_upload_link_profile_picture(user, file_type):
     return generate_upload_link(
         app.config["S3_BUCKET_NAME"],
@@ -144,6 +149,16 @@ def generate_upload_link_profile_picture(user, file_type):
         file_type,
         s3,
         30,
+    )
+
+
+def generate_upload_link_validation_file(user, file_type, file):
+    return generate_upload_link(
+        app.config["S3_BUCKET_NAME"],
+        f"validation/uploaded/{user.id}-{timestamp()}-{file}",
+        file_type,
+        s3,
+        600,  # Longer expiration to allow for slower uploads of large csv files
     )
 
 
