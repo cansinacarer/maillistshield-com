@@ -8,7 +8,7 @@ validationForm.addEventListener("submit", (event) => {
 	event.preventDefault();
 
 	// Start the loading states
-	startButtonLoadingState(validationButton);
+	startButtonLoadingState(validationButton, "Validating");
 	startTableLoadingState();
 	startAPIResponseBoxLoadingState();
 
@@ -114,33 +114,11 @@ validationForm.addEventListener("submit", (event) => {
 		})
 		.then(() => {
 			// End the loading states
-			endButtonLoadingState(validationButton);
+			endButtonLoadingState(validationButton, "Validate");
 			endTableLoadingAnimation();
 			endAPIResponseBoxLoadingState();
 		});
 });
-
-const startButtonLoadingState = (button) => {
-	// Disable the submit button
-	button.disabled = true;
-
-	// Display the loading spinner
-	button.querySelector(".loading").classList.remove("d-none");
-
-	// Change the text of the button
-	button.querySelector(".text").textContent = "Validating";
-};
-
-const endButtonLoadingState = (button) => {
-	// Disable the submit button
-	button.disabled = false;
-
-	// Display the loading spinner
-	button.querySelector(".loading").classList.add("d-none");
-
-	// Change the text of the button
-	button.querySelector(".text").textContent = "Validate";
-};
 
 const startTableLoadingState = () => {
 	// Add placeholders to the table cells
