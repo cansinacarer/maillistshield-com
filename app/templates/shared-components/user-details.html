@@ -1,0 +1,8 @@
+{% if current_user.is_authenticated %}
+<script>
+	const user = {};
+	user.firstName = "{{ current_user.firstName }}";
+	user.lastName = "{{ current_user.lastName }}";
+	user.credits = {{ current_user.credits }};
+</script>
+{% endif %}
