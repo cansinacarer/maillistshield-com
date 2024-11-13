@@ -42,3 +42,7 @@
 .no-select {
 	user-select: none;
 }
+
+.progress {
+	height: 24px;
+}
