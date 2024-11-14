@@ -20,6 +20,7 @@ class BatchJobs(db.Model):
     uid = db.Column(db.String(120), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
     user = db.relationship("Users", backref="batch_jobs")
+    original_file_name = db.Column(db.String(120), nullable=False)
     uploaded_file = db.Column(db.String(120), nullable=False)
     results_file = db.Column(db.String(120), nullable=True)
     completed_length = db.Column(db.Integer, nullable=False, default=0)

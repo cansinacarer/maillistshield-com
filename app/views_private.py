@@ -12,6 +12,7 @@ import stripe
 
 # App modules
 from app import app, csrf
+from app.config import appTimezone
 from app.forms import ProfileDetailsForm
 from app.models import Users, Tiers
 from app.utilities.object_storage import generate_upload_link_profile_picture
@@ -28,14 +29,37 @@ def dateformat(value, format="%B %d, %Y"):
     return datetime.datetime.fromtimestamp(value).strftime(format)
 
 
-app.jinja_env.filters["dateformat"] = dateformat
+def dbDateformat(value, format="%B %d, %Y"):
+    return value.astimezone(appTimezone).strftime(format)
 
 
 def timeformat(value, format="%I:%M %p"):
     return datetime.datetime.fromtimestamp(value).strftime(format)
 
 
+def dbTimeformat(value, format="%I:%M %p"):
+    return value.astimezone(appTimezone).strftime(format)
+
+
+def thousandSeparator(value):
+    return "{:,}".format(value)
+
+
+def prettifyJobStatus(status):
+    match status:
+        case "pending_start":
+            return "Pending Start"
+
+        case _:
+            return status
+
+
+app.jinja_env.filters["dateformat"] = dateformat
+app.jinja_env.filters["dbDateformat"] = dbDateformat
 app.jinja_env.filters["timeformat"] = timeformat
+app.jinja_env.filters["dbTimeformat"] = dbTimeformat
+app.jinja_env.filters["thousandSeparator"] = thousandSeparator
+app.jinja_env.filters["prettifyJobStatus"] = prettifyJobStatus
 
 
 # Webhook endpoints for external services to give us updates
@@ -467,5 +491,6 @@ def private_index(path):
     except TemplateNotFound:
         return error_page(404)
 
-    except:
+    except Exception as e:
+        print(f"ERROR 500: {e}")
         return error_page(500)

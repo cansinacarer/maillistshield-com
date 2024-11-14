@@ -31,6 +31,15 @@
 		</li>
 		<li class="nav-item mb-1">
 			<a
+				href="/app/validate-new-list"
+				class="nav-link {% if path == 'validate-new-list' %}active{% endif %}"
+			>
+				<i class="bi bi-info-circle"></i>
+				Validate New List
+			</a>
+		</li>
+		<li class="nav-item mb-1">
+			<a
 				href="/app/account"
 				class="nav-link {% if path == 'account' %}active{% endif %}"
 			>
@@ -45,15 +54,6 @@
 			>
 				<i class="bi bi-wallet2"></i>
 				Billing
-			</a>
-		</li>
-		<li class="nav-item mb-1">
-			<a
-				href="/app/sample-page"
-				class="nav-link {% if path == 'sample-page' %}active{% endif %}"
-			>
-				<i class="bi bi-info-circle"></i>
-				Sample Page
 			</a>
 		</li>
 		{% if current_user.role == 'admin' %}

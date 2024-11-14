@@ -1,5 +1,9 @@
 /* Shared Styles */
 
+.hover-bg-secondary:hover {
+	background-color: var(--bs-secondary-bg);
+}
+
 /* Show the logo that matches the color mode */
 [data-bs-theme="dark"] .logo-dark,
 [data-bs-theme="light"] .logo-light {

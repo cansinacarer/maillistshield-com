@@ -370,7 +370,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				"&email-column=" +
 				emailColumnName +
 				"&headers=" +
-				tableHeadersToggleSwitch.checked
+				tableHeadersToggleSwitch.checked +
+				"&original-file-name=" +
+				localFileName
 		);
 
 		xhr.onreadystatechange = function () {

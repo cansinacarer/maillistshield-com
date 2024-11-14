@@ -106,13 +106,11 @@ def validate_file(path):
             )
         # Create a job record after file is uploaded
         case "recordBatchFileDetails":
-            print(request.args.get("file"))
-            print(request.args.get("email-column"))
-            print(request.args.get("headers"))
             job = BatchJobs(
                 user=current_user,
                 uploaded_file=request.args.get("file"),
                 email_column=request.args.get("email-column"),
+                original_file_name=request.args.get("original-file-name"),
                 header_row=1 if request.args.get("headers") == "true" else 0,
             )
             db.session.add(job)
