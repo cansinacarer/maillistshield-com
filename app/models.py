@@ -25,7 +25,7 @@ class BatchJobs(db.Model):
     completed_length = db.Column(db.Integer, nullable=False, default=0)
     file_length = db.Column(db.Integer)
     email_column = db.Column(db.String(120))
-    header_row = db.Column(db.String(120))
+    header_row = db.Column(db.Integer, nullable=False)
     source = db.Column(db.String(120), nullable=False, default="web")
     status = db.Column(db.String(120), nullable=False, default="pending_start")
     uploaded = db.Column(

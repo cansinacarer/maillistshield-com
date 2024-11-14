@@ -99,19 +99,25 @@ def robots():
 @limiter.limit("40 per day")
 def validate_file(path):
     match path:
+        # Authorize front end to upload to the bucket
         case "getSignedRequest":
             return generate_upload_link_validation_file(
                 current_user, request.args.get("file_type"), request.args.get("file")
             )
+        # Create a job record after file is uploaded
         case "recordBatchFileDetails":
+            print(request.args.get("file"))
+            print(request.args.get("email-column"))
+            print(request.args.get("headers"))
             job = BatchJobs(
                 user=current_user,
                 uploaded_file=request.args.get("file"),
                 email_column=request.args.get("email-column"),
-                header_row=request.args.get("headers", type=bytes),
+                header_row=1 if request.args.get("headers") == "true" else 0,
             )
             db.session.add(job)
             db.session.commit()
+            return jsonify({"success": "Job is recorded"})
 
     return jsonify({"error": "File upload failed"}), 500
 

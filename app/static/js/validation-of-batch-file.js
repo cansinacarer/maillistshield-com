@@ -208,18 +208,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		reader.readAsText(file);
 	}
 
-	// Add an event listener to each radio button
-	document
-		.querySelectorAll('input[name="columnWithEmails"]')
-		.forEach((radio) => {
-			radio.addEventListener("change", (event) => {
-				// Update the selected column
-				emailColumnName = document.querySelector(
-					"input[name=columnWithEmails]:checked"
-				).value;
-			});
-		});
-
 	// Toggle whether the table has headers
 	tableHeadersToggleSwitch.addEventListener("change", (event) => {
 		const table = filePreviewElement.querySelector("table");
@@ -250,10 +238,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Upload Step 0: Form submit handler
 	uploadButtonElement.addEventListener("click", (event) => {
-		event.preventDefault();
-
-		// TODO: Check if there are multiple radios, meaning multiple columns
-		// TODO: if yes, Check if the radio is selected
+		// Update the selected column
+		try {
+			emailColumnName = document.querySelector(
+				"input[name=columnWithEmails]:checked"
+			).value;
+		} catch {
+			emailColumnName = "";
+		}
+		console.log(`emailColumnName: ${emailColumnName}`);
 
 		// Start the loading state
 		startButtonLoadingState(uploadButtonElement, "Uploading");
@@ -309,6 +302,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						"Try again",
 						"danger"
 					);
+					endButtonLoadingState(
+						uploadButtonElement,
+						"Submit File for Validation"
+					);
+					progressContainerElement.classList.add("d-none");
 				}
 			}
 		};
@@ -318,13 +316,14 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Upload Step 2: Upload the file to the bucket with the signed request
 	const uploadFile = (file, s3Data) => {
 		let xhr = new XMLHttpRequest();
-		uploadedFileKey = s3Data.fields[key];
+		uploadedFileKey = s3Data.fields["key"];
 
 		xhr.open("POST", s3Data.url);
 
+		// Add the s3Data elements to the post request form data
 		let postData = new FormData();
 		for (key in s3Data.fields) {
-			postData.append(key, uploadedFileKey);
+			postData.append(key, s3Data.fields[key]);
 		}
 		postData.append("file", file);
 
@@ -349,6 +348,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						"Try again",
 						"danger"
 					);
+					endButtonLoadingState(
+						uploadButtonElement,
+						"Submit File for Validation"
+					);
+					progressContainerElement.classList.add("d-none");
 				}
 			}
 		};
@@ -366,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				"&email-column=" +
 				emailColumnName +
 				"&headers=" +
-				tableHeadersToggleSwitch
+				tableHeadersToggleSwitch.checked
 		);
 
 		xhr.onreadystatechange = function () {
@@ -376,15 +380,13 @@ document.addEventListener("DOMContentLoaded", function () {
 					// Confirm it is all good
 					showAlert(
 						"Success",
-						"Your file has been uploaded successfully.",
-						"Try again",
+						"Your file has been uploaded successfully.<br />Redirecting to the job list.",
+						"OK",
 						"success"
 					);
-					endButtonLoadingState(
-						uploadButtonElement,
-						"Submit File for Validation"
-					);
-					progressContainerElement.classList.add("d-none");
+					setTimeout(() => {
+						window.location.href = "/app";
+					}, 5000);
 				} else {
 					showAlert(
 						"Error",
@@ -392,6 +394,11 @@ document.addEventListener("DOMContentLoaded", function () {
 						"Try again",
 						"danger"
 					);
+					endButtonLoadingState(
+						uploadButtonElement,
+						"Submit File for Validation"
+					);
+					progressContainerElement.classList.add("d-none");
 				}
 			}
 		};
