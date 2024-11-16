@@ -32,4 +32,4 @@ jobs:
 
             # Try to deploy the app within 5 minutes, otherwise fail to avoid holding the queue
             - name: Deploy the tar file
-              run: timeout 300 caprover deploy -n my_machine -a "${{ secrets.CAPROVER_APP_NAME }}" -t  ${{ github.workspace }}/deploy.tar -p "${{ secrets.CAPROVER_PW }}"
+              run: timeout 600 caprover deploy -n my_machine -a "${{ secrets.CAPROVER_APP_NAME }}" -t  ${{ github.workspace }}/deploy.tar -p "${{ secrets.CAPROVER_PW }}"
