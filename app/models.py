@@ -17,18 +17,24 @@ class BatchJobs(db.Model):
     __tablename__ = "BatchJobs"
 
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.String(120), unique=True)
+    # uid = db.Column(db.String(120), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
     user = db.relationship("Users", backref="batch_jobs")
+    status = db.Column(db.String(120), nullable=False, default="pending_start")
     original_file_name = db.Column(db.String(120), nullable=False)
     uploaded_file = db.Column(db.String(120), nullable=False)
     results_file = db.Column(db.String(120), nullable=True)
-    completed_length = db.Column(db.Integer, nullable=False, default=0)
-    file_length = db.Column(db.Integer)
-    email_column = db.Column(db.String(120))
-    header_row = db.Column(db.Integer, nullable=False)
+    # completed_length = db.Column(db.Integer, nullable=False, default=0)
+    row_count = db.Column(db.Integer)
+    last_pick_row = db.Column(db.BigInteger, default=0)
+    last_pick_time = db.Column(
+        db.DateTime(),
+        nullable=False,
+        default=datetime.now(timezone.utc).astimezone(appTimezone),
+    )
     source = db.Column(db.String(120), nullable=False, default="web")
-    status = db.Column(db.String(120), nullable=False, default="pending_start")
+    header_row = db.Column(db.Integer, nullable=False)
+    email_column = db.Column(db.String(120))
     uploaded = db.Column(
         db.DateTime(),
         nullable=False,

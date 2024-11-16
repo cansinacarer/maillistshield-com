@@ -55,8 +55,8 @@
 									<td>{{ job.uploaded | dbDateformat }}</td>
 									<td>{{ job.uploaded | dbTimeformat }}</td>
 									<td>{{ job.original_file_name }}</td>
-									{% if job.file_length %}
-									<td>{{ job.file_length }} credits</td>
+									{% if job.row_count %}
+									<td>{{ job.row_count }} credits</td>
 									{% else %}
 									<td>TBD</td>
 									{% endif %}
