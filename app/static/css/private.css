@@ -92,8 +92,3 @@ footer {
 	display: flex;
 	align-items: center;
 }
-
-/* Give the navigation item icons some space */
-.nav-item i.bi {
-	margin-right: 10px;
-}
