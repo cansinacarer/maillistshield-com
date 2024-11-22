@@ -17,13 +17,14 @@ class BatchJobs(db.Model):
     __tablename__ = "BatchJobs"
 
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.String(120), unique=True)
+    uid = db.Column(db.String(), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
     user = db.relationship("Users", backref="batch_jobs")
-    status = db.Column(db.String(120), nullable=False, default="pending_start")
-    original_file_name = db.Column(db.String(120), nullable=False)
-    uploaded_file = db.Column(db.String(120), nullable=False)
-    results_file = db.Column(db.String(120), nullable=True)
+    status = db.Column(db.String(), nullable=False, default="pending_start")
+    original_file_name = db.Column(db.String(), nullable=False)
+    uploaded_file = db.Column(db.String(), nullable=False)
+    accepted_file = db.Column(db.String(), nullable=True)
+    results_file = db.Column(db.String(), nullable=True)
     row_count = db.Column(db.Integer)
     last_pick_row = db.Column(db.BigInteger, default=0)
     last_pick_time = db.Column(
@@ -31,9 +32,9 @@ class BatchJobs(db.Model):
         nullable=False,
         default=datetime.now(timezone.utc).astimezone(appTimezone),
     )
-    source = db.Column(db.String(120), nullable=False, default="web")
+    source = db.Column(db.String(), nullable=False, default="web")
     header_row = db.Column(db.Integer, nullable=False)
-    email_column = db.Column(db.String(120))
+    email_column = db.Column(db.String())
     uploaded = db.Column(
         db.DateTime(),
         nullable=False,
@@ -44,7 +45,7 @@ class BatchJobs(db.Model):
         nullable=True,
     )
     finished = db.Column(db.DateTime(), nullable=True)
-    result = db.Column(db.String(120), nullable=True)
+    result = db.Column(db.String(), nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -82,7 +83,7 @@ class Users(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(500))
+    password = db.Column(db.String(255))
     role = db.Column(db.String(50), default="user")
 
     stripe_customer_id = db.Column(db.String(50))
@@ -99,8 +100,8 @@ class Users(db.Model, UserMixin):
     tier = db.relationship("Tiers", back_populates="users")
     cancel_at = db.Column(db.DateTime())
 
-    firstName = db.Column(db.String(120))
-    lastName = db.Column(db.String(120))
+    firstName = db.Column(db.String())
+    lastName = db.Column(db.String())
 
     newsletter = db.Column(db.Integer)
 
@@ -115,7 +116,7 @@ class Users(db.Model, UserMixin):
     number_of_email_confirmation_codes_sent = db.Column(db.Integer, default=0)
     email_confirmed = db.Column(db.Integer, default=0)
 
-    google_avatar_url = db.Column(db.String(500))
+    google_avatar_url = db.Column(db.String())
     avatar_uploaded = db.Column(db.Boolean(), default=False)
 
     totp_secret = db.Column(db.String(32), default=pyotp.random_base32())
