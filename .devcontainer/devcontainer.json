@@ -31,7 +31,7 @@
 			]
 		}
 	},
-	"postCreateCommand": ".devcontainer/postCreateCommands.sh",
+	"postCreateCommand": "/bin/bash .devcontainer/postCreateCommands.sh",
 	"overrideCommand": true,
 	"postStartCommand": "flask run --debugger --host=0.0.0.0",
 	"remoteUser": "vscode",
