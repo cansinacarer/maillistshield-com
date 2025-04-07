@@ -38,7 +38,3 @@ services:
             - database
         volumes:
             - ./pgadmin-server-config.json:/pgadmin4/servers.json
-        networks:
-            default:
-                aliases:
-                    - pgadmin
