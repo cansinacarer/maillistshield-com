@@ -93,7 +93,6 @@ def send_email_with_code(user):
 
 # Sends an email with the password reset link
 def send_email_about_subscription_confirmation(user, tier_name):
-
     # Email with this information:
     msg = Message("Subscription Confirmed")
     msg.add_recipient(user.email)
@@ -117,7 +116,6 @@ def send_email_about_subscription_confirmation(user, tier_name):
 
 # Sends an email with the password reset link
 def send_email_about_subscription_cancellation(user, tier_name, cancellation_date):
-
     # Email with this information:
     msg = Message("Subscription Canceled")
     msg.add_recipient(user.email)
@@ -143,7 +141,6 @@ def send_email_about_subscription_cancellation(user, tier_name, cancellation_dat
 
 # Sends an email with the password reset link
 def send_email_about_subscription_deletion(user, tier_name):
-
     # Email with this information:
     msg = Message("Subscription Ended")
     msg.add_recipient(user.email)

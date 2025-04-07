@@ -21,7 +21,6 @@ s3 = boto3.resource(
 
 # Flask app configuration
 class Config:
-
     # Grabs the folder where the script runs
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
 

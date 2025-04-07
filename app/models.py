@@ -95,7 +95,6 @@ class Users(db.Model, UserMixin):
         return str(self.id) + " - " + str(self.user)
 
     def save(self):
-
         # inject self into db session
         db.session.add(self)
 
@@ -127,7 +126,6 @@ class Users(db.Model, UserMixin):
         return self.google_avatar_url != None
 
     def totp(self):
-
         secret = self.totp_secret
         totp = pyotp.TOTP(secret)
 
