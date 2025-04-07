@@ -1,5 +1,9 @@
 #! /bin/bash
 
+pip install black
+pip install pre-commit
+pre-commit install --install-hooks
+
 echo -e "\n--------------------------------\n"
 echo -e "You can view the local test database with pgAdmin at \e[1;31mhttp://localhost:5050/\e[0m"
 echo -e "The local test database is automatically added as a server in pgAdmin.\n"
