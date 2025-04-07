@@ -1,0 +1,40 @@
+// This file configures the development container and specifies the Flask app and PostgreSQL database services.
+
+{
+	"name": "flask",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "flask",
+	"workspaceFolder": "/workspaces/base-saas",
+	"runServices": ["database", "pgadmin"],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"aaron-bond.better-comments",
+				"anbuselvanrocky.bootstrap5-vscode",
+				"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+				"davidanson.vscode-markdownlint",
+				"dbaeumer.vscode-eslint",
+				"eamodio.gitlens",
+				"github.copilot",
+				"github.copilot-chat",
+				"github.vscode-github-actions",
+				"github.vscode-pull-request-github",
+				"gruntfuggly.todo-tree",
+				"hossaini.bootstrap-intellisense",
+				"ms-python.python",
+				"ms-python.black-formatter",
+				"ms-python.vscode-pylance",
+				"esbenp.prettier-vscode",
+				"rangav.vscode-thunder-client",
+				"zignd.html-css-class-completion"
+			]
+		}
+	},
+	"postCreateCommand": ".devcontainer/postCreateCommands.sh",
+	"overrideCommand": true,
+	"postStartCommand": "flask run --debugger --host=0.0.0.0",
+	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	}
+}

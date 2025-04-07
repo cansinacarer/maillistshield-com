@@ -1,0 +1,44 @@
+# This file defines the Flask app and PostgreSQL database services.
+version: "3.8"
+services:
+    flask:
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        volumes:
+            - ..:/workspaces/base-saas
+        ports:
+            - "5000:5000"
+        environment:
+            - FLASK_APP=run.py
+            - DATABASE_CONNECTION_STRING=postgresql://postgres:password@database:5432/postgres
+        depends_on:
+            - database
+
+    database:
+        image: postgres:14
+        restart: always
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: postgres
+        ports:
+            - "5432:5432"
+
+    pgadmin:
+        image: dpage/pgadmin4:9.2
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@admin.com
+            PGADMIN_DEFAULT_PASSWORD: admin
+            PGADMIN_CONFIG_SERVER_JSON_FILE: "'/pgadmin4/servers.json'"
+        ports:
+            - "5050:80"
+        depends_on:
+            - database
+        volumes:
+            - ./pgadmin-server-config.json:/pgadmin4/servers.json
+        networks:
+            default:
+                aliases:
+                    - pgadmin

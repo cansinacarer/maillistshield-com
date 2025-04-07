@@ -4,10 +4,6 @@
 # Local test database
 database.db
 
-# Local SSL certificates
-cert.pem
-key.pem
-
 flask/
 *.pyc
 dev
