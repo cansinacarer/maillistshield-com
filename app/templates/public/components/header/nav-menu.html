@@ -34,62 +34,66 @@
 		</ul>
 		<!-- If logged in -->
 		{% if current_user.is_authenticated %}
-		<div class="text-end">
-			<ul class="nav align-items-center">
-				{% include
-				'shared-components/dark-mode-selector-nav-list-item.html' %}
-				<li class="nav-item pe-4">
-					Hello, {{ current_user.firstName }}!
-				</li>
-				<li class="nav-item">
-					<a
-						href="#"
-						class="d-block link-body-emphasis text-decoration-none"
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					>
-						<img
-							src="{{ current_user.avatar() }}"
-							alt="avatar"
-							width="32"
-							height="32"
-							class="rounded-circle me-2"
-						/>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end text-small">
-						<li>
-							<a class="dropdown-item" href="/app">
-								Launch the App
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="/app/account">
-								My Account
-							</a>
-						</li>
-						<li><hr class="dropdown-divider" /></li>
-						<li>
-							<a class="dropdown-item" href="/logout">Log out</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		<!-- If anonymous user -->
+			<div class="text-end">
+				<ul class="nav align-items-center">
+					{%
+						include
+						'shared-components/dark-mode-selector-nav-list-item.html'
+					%}
+					<li class="nav-item pe-4">
+						Hello, {{ current_user.firstName }}!
+					</li>
+					<li class="nav-item">
+						<a
+							href="#"
+							class="d-block link-body-emphasis text-decoration-none"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<img
+								src="{{ current_user.avatar() }}"
+								alt="avatar"
+								width="32"
+								height="32"
+								class="rounded-circle me-2"
+							/>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end text-small">
+							<li>
+								<a class="dropdown-item" href="/app">
+									Launch the App
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="/app/account">
+									My Account
+								</a>
+							</li>
+							<li><hr class="dropdown-divider" /></li>
+							<li>
+								<a class="dropdown-item" href="/logout"
+									>Log out</a
+								>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!-- If anonymous user -->
 		{% else %}
-		<div class="col-md-3 text-end">
-			{% include 'shared-components/dark-mode-selector-button.html' %}
-			<a
-				href="/login"
-				role="button"
-				class="btn btn-outline-primary me-2 m-sm-2"
-			>
-				Login
-			</a>
-			<a href="/register" role="button" class="btn btn-primary">
-				Register
-			</a>
-		</div>
+			<div class="col-md-3 text-end">
+				{% include 'shared-components/dark-mode-selector-button.html' %}
+				<a
+					href="/login"
+					role="button"
+					class="btn btn-outline-primary me-2 m-sm-2"
+				>
+					Login
+				</a>
+				<a href="/register" role="button" class="btn btn-primary">
+					Register
+				</a>
+			</div>
 		{% endif %}
 	</header>
 </div>

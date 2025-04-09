@@ -1,30 +1,39 @@
 {{ form.hidden_tag() }}
-<!--  -->
 <div class="input-group">
 	<div class="form-floating">
-		{{ form.firstName(class="form-control", type="text", id="firstName",
-		placeholder="First name") }}
+		{{
+			form.firstName(class="form-control", type="text", id="firstName",
+			placeholder="First name")
+		}}
 		<label for="firstName">First name</label>
 	</div>
 	<div class="form-floating">
-		{{ form.lastName(class="form-control", type="text", id="lastName",
-		placeholder="Last name") }}
+		{{
+			form.lastName(class="form-control", type="text", id="lastName",
+			placeholder="Last name")
+		}}
 		<label for="lastName">Last name</label>
 	</div>
 </div>
 <div class="form-floating">
-	{{ form.email(class="form-control", type="email", id="email",
-	placeholder="Email address") }}
+	{{
+		form.email(class="form-control", type="email", id="email",
+		placeholder="Email address")
+	}}
 	<label for="email">Email address</label>
 </div>
 <div class="form-floating">
-	{{ form.password(class="form-control", type="password",
-	id="floatingPassword", placeholder="Password") }}
+	{{
+		form.password(class="form-control", type="password",
+		id="floatingPassword", placeholder="Password")
+	}}
 	<label for="floatingPassword">Password</label>
 </div>
 <div class="form-check text-start my-3">
-	{{ form.newsletter(class="form-check-input", type="checkbox",
-	id="newsletter", checked="checked") }}
+	{{
+		form.newsletter(class="form-check-input", type="checkbox",
+		id="newsletter", checked="checked")
+	}}
 	<label class="form-check-label" for="newsletter">
 		I agree to receive occasional marketing communications.
 	</label>

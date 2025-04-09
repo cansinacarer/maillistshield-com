@@ -48,26 +48,25 @@
 			</a>
 		</li>
 		{% if current_user.role == 'admin' %}
-		<hr />
-		<li class="nav-item mb-1">
-			<a
-				href="/app/admin"
-				class="nav-link {% if path == 'admin' %}active{% endif %}"
-			>
-				<i class="bi bi-person"></i>
-				Admin
-			</a>
-		</li>
-		<li class="nav-item mb-1">
-			<a
-				href="/app/admin/email"
-				class="nav-link {% if path == 'email' %}active{% endif %}"
-			>
-				<i class="bi bi-person"></i>
-				View Email Templates
-			</a>
-		</li>
-
+			<hr />
+			<li class="nav-item mb-1">
+				<a
+					href="/app/admin"
+					class="nav-link {% if path == 'admin' %}active{% endif %}"
+				>
+					<i class="bi bi-person"></i>
+					Admin
+				</a>
+			</li>
+			<li class="nav-item mb-1">
+				<a
+					href="/app/admin/email"
+					class="nav-link {% if path == 'email' %}active{% endif %}"
+				>
+					<i class="bi bi-person"></i>
+					View Email Templates
+				</a>
+			</li>
 		{% endif %}
 	</ul>
 	<hr class="mb-0" />

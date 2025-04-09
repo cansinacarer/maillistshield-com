@@ -1,71 +1,68 @@
 {% set page_title = "Email Viewer" %}
-<!--  -->
 {% extends "private/layouts/base.html" %}
-<!--  -->
 {% block content %}
-<div class="container ms-0">
-	<div class="row my-5">
-		<div class="col-md-3 p-md-0 pb-4">
-			<div class="list-group">
-				<ul class="px-0">
-					<li class="list-group mb-2">
-						<a
-							href="/app/admin/email/email-subscription-canceled"
-							target="emailViewer"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-						>
-							Subscription Cancelled
-						</a>
-					</li>
-					<li class="list-group mb-2">
-						<a
-							href="/app/admin/email/email-subscription-confirmed"
-							target="emailViewer"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-						>
-							Subscription Confirmed
-						</a>
-					</li>
-					<li class="list-group mb-2">
-						<a
-							href="/app/admin/email/email-subscription-deleted"
-							target="emailViewer"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-						>
-							Subscription Deleted
-						</a>
-					</li>
-					<li class="list-group mb-2">
-						<a
-							href="/app/admin/email/email-verification-code"
-							target="emailViewer"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-						>
-							Email Verification Code
-						</a>
-					</li>
-					<li class="list-group mb-2">
-						<a
-							href="/app/admin/email/password-reset"
-							target="emailViewer"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-						>
-							Password Reset
-						</a>
-					</li>
-				</ul>
+	<div class="container ms-0">
+		<div class="row my-5">
+			<div class="col-md-3 p-md-0 pb-4">
+				<div class="list-group">
+					<ul class="px-0">
+						<li class="list-group mb-2">
+							<a
+								href="/app/admin/email/email-subscription-canceled"
+								target="emailViewer"
+								class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							>
+								Subscription Cancelled
+							</a>
+						</li>
+						<li class="list-group mb-2">
+							<a
+								href="/app/admin/email/email-subscription-confirmed"
+								target="emailViewer"
+								class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							>
+								Subscription Confirmed
+							</a>
+						</li>
+						<li class="list-group mb-2">
+							<a
+								href="/app/admin/email/email-subscription-deleted"
+								target="emailViewer"
+								class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							>
+								Subscription Deleted
+							</a>
+						</li>
+						<li class="list-group mb-2">
+							<a
+								href="/app/admin/email/email-verification-code"
+								target="emailViewer"
+								class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							>
+								Email Verification Code
+							</a>
+						</li>
+						<li class="list-group mb-2">
+							<a
+								href="/app/admin/email/password-reset"
+								target="emailViewer"
+								class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							>
+								Password Reset
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<iframe
+					src="/app/admin/email/email-subscription-canceled"
+					class="w-100"
+					style="height: 800px"
+					name="emailViewer"
+					frameborder="0"
+				></iframe>
 			</div>
 		</div>
-		<div class="col-md-9">
-			<iframe
-				src="/app/admin/email/email-subscription-canceled"
-				class="w-100"
-				style="height: 800px"
-				name="emailViewer"
-				frameborder="0"
-			></iframe>
-		</div>
 	</div>
-</div>
-<!--  -->
 {% endblock content %}

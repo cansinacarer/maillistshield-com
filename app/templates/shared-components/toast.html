@@ -42,9 +42,8 @@
 		newToast.querySelector(".toast-title").innerHTML = title;
 
 		// Set the alert title background color
-		newToast.querySelector(
-			".toast-header"
-		).className = `toast-header p-3 bg-${type} text-white`;
+		newToast.querySelector(".toast-header").className =
+			`toast-header p-3 bg-${type} text-white`;
 
 		// Append the new toast to the container
 		toastContainer.appendChild(newToast);
