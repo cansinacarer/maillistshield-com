@@ -1,6 +1,8 @@
 #! /bin/bash
 
 pip install black
+npm install --save-dev prettier prettier-plugin-jinja-template
+
 pip install pre-commit
 pre-commit install --install-hooks
 
