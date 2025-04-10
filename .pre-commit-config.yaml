@@ -6,6 +6,7 @@ repos:
       rev: 23.9.1
       hooks:
           - id: black
+
     # Prettier for HTML, CSS, JS formatting
     - repo: https://github.com/pre-commit/mirrors-prettier
       rev: v3.0.0
@@ -14,6 +15,8 @@ repos:
             types_or: [javascript, css, html]
             additional_dependencies:
                 - prettier@3.0.0
+
+    # Commitlint for commit message linting
     - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
       rev: v9.22.0
       hooks:
