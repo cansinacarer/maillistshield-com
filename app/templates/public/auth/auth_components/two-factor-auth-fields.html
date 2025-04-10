@@ -1,23 +1,29 @@
 {{ form.hidden_tag() }}
-<!--  -->
 <div class="input-group mb-3">
-	{{ form.code0(autofocus="true", class="form-control text-center",
-	maxlength="1", autocomplete="off", value="") }}
-	<!--  -->
-	{{ form.code1(class="form-control text-center", maxlength="1",
-	autocomplete="off", value="") }}
-	<!--  -->
-	{{ form.code2(class="form-control text-center", maxlength="1",
-	autocomplete="off", value="") }}
-	<!--  -->
-	{{ form.code3(class="form-control text-center", maxlength="1",
-	autocomplete="off", value="") }}
-	<!--  -->
-	{{ form.code4(class="form-control text-center", maxlength="1",
-	autocomplete="off", value="") }}
-	<!--  -->
-	{{ form.code5(class="form-control text-center", maxlength="1",
-	autocomplete="off", value="") }}
+	{{
+		form.code0(autofocus="true", class="form-control text-center",
+		maxlength="1", autocomplete="off", value="")
+	}}
+	{{
+		form.code1(class="form-control text-center", maxlength="1",
+		autocomplete="off", value="")
+	}}
+	{{
+		form.code2(class="form-control text-center", maxlength="1",
+		autocomplete="off", value="")
+	}}
+	{{
+		form.code3(class="form-control text-center", maxlength="1",
+		autocomplete="off", value="")
+	}}
+	{{
+		form.code4(class="form-control text-center", maxlength="1",
+		autocomplete="off", value="")
+	}}
+	{{
+		form.code5(class="form-control text-center", maxlength="1",
+		autocomplete="off", value="")
+	}}
 </div>
 <button class="btn btn-primary w-100 mb-3" type="submit">Submit</button>
 <script

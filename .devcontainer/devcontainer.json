@@ -31,11 +31,14 @@
 			]
 		}
 	},
-	"postCreateCommand": ".devcontainer/postCreateCommands.sh",
+	"postCreateCommand": "/bin/bash .devcontainer/postCreateCommands.sh",
 	"overrideCommand": true,
 	"postStartCommand": "flask run --debugger --host=0.0.0.0",
 	"remoteUser": "vscode",
 	"features": {
-		"ghcr.io/devcontainers/features/git:1": {}
+		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {
+			"package": "prettier"
+		}
 	}
 }

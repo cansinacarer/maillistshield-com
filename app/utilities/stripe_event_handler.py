@@ -36,7 +36,6 @@ def tier_from_stripe_price_id(price_id):
 
 
 def handle_stripe_event(event):
-
     # If it is a credit purchase event, try to parse user and update credits
     if is_checkout_completed_event(event):
         # Get the Stripe customer and find the matching user

@@ -1,318 +1,335 @@
 {% set page_title = "My Account" %}
-<!--  -->
 {% extends "private/layouts/base.html" %}
-<!--  -->
 {% block content %}
-<div class="container ms-0">
-	<div class="row">
-		<div class="col-md-12 px-0">
-			<h2 class="h4 border-bottom mt-5 mb-3 pb-2">Account Details</h2>
-		</div>
-	</div>
-	<div class="row my-5">
-		<div class="col-md-2 p-md-0 pb-4">
-			<b>Profile picture</b>
-		</div>
-		<div class="col-md-5">
-			<img
-				class="rounded-circle"
-				src="{{ current_user.avatar() }}"
-				height="140"
-				width="140"
-				alt="avatar"
-			/>
-			<label
-				class="btn bg-body shadow ms-4"
-				data-bs-toggle="tooltip"
-				for="profile_picture"
-				aria-label="Change avatar"
-				data-bs-original-title="Change avatar"
-			>
-				<i class="bi bi-pencil-fill"></i>
-				<span class="ms-2">Change</span>
-				<form method="post">
-					<input
-						type="file"
-						id="profile_picture"
-						name="profile_picture"
-						accept=".png, .jpg, .jpeg"
-						style="display: none"
-					/>
-					<input
-						type="hidden"
-						id="profile_picture_url"
-						name="profile_picture_url"
-						value="{{ user.avatar() }}"
-					/>
-				</form>
-			</label>
-		</div>
-	</div>
-	<form method="post">
-		{{ form.hidden_tag() }}
-		<div class="row my-5">
-			<div class="col-md-2 p-md-0 pb-4">
-				<b>Personal details</b>
-			</div>
-			<div class="col-md-5">
-				<div class="form-floating mb-3">
-					{{ form.firstName(class="form-control", id="firstName",
-					placeholder="First Name", value=current_user.firstName) }}
-					<label for="firstName">First Name</label>
-				</div>
-			</div>
-			<div class="col-md-5">
-				<div class="form-floating mb-3">
-					{{ form.lastName(class="form-control", id="lastName",
-					placeholder="Last Name", value=current_user.lastName) }}
-					<label for="lastName">Last Name</label>
-				</div>
+	<div class="container ms-0">
+		<div class="row">
+			<div class="col-md-12 px-0">
+				<h2 class="h4 border-bottom mt-5 mb-3 pb-2">Account Details</h2>
 			</div>
 		</div>
 		<div class="row my-5">
 			<div class="col-md-2 p-md-0 pb-4">
-				<b>Account information</b>
+				<b>Profile picture</b>
 			</div>
-			<div class="col-md-10">
-				<div class="form-floating mb-3">
-					<input
-						type="email"
-						class="form-control"
-						id="email"
-						placeholder="Email address"
-						disabled
-						value="{{ current_user.email }}"
-					/>
-					<label for="email">Email address</label>
-					<em>
-						If you need to change your email address, please contact
-						support.
-					</em>
-				</div>
-				<div class="form-floating mb-3">
-					<input
-						class="form-control"
-						type="password"
-						value="**********"
-						id="dummyPw"
-						disabled
-					/>
-					<label for="dummyPw">Password</label>
-				</div>
-				<a
-					href="/forgot-password"
-					class="btn btn-light btn-outline-secondary"
-				>
-					Reset Password
-				</a>
-				<div class="form-check form-switch text-start my-3">
-					{% if current_user.newsletter == 1 %}
-					<!--  -->
-					{{ form.newsletter(class="form-check-input",
-					type="checkbox", role="switch", id="newsletter",
-					checked="checked") }}
-					<!--  -->
-					{% else %}
-					<!--  -->
-					{{ form.newsletter(class="form-check-input",
-					type="checkbox", role="switch", id="newsletter") }}
-					<!--  -->
-					{% endif %}
-					<label class="form-check-label" for="newsletter">
-						I agree to receive occasional marketing communications.
-					</label>
-				</div>
-				<input
-					class="btn btn-primary mt-1 mb-3"
-					type="submit"
-					value="Save Account Details"
+			<div class="col-md-5">
+				<img
+					class="rounded-circle"
+					src="{{ current_user.avatar() }}"
+					height="140"
+					width="140"
+					alt="avatar"
 				/>
+				<label
+					class="btn bg-body shadow ms-4"
+					data-bs-toggle="tooltip"
+					for="profile_picture"
+					aria-label="Change avatar"
+					data-bs-original-title="Change avatar"
+				>
+					<i class="bi bi-pencil-fill"></i>
+					<span class="ms-2">Change</span>
+					<form method="post">
+						<input
+							type="file"
+							id="profile_picture"
+							name="profile_picture"
+							accept=".png, .jpg, .jpeg"
+							style="display: none"
+						/>
+						<input
+							type="hidden"
+							id="profile_picture_url"
+							name="profile_picture_url"
+							value="{{ user.avatar() }}"
+						/>
+					</form>
+				</label>
 			</div>
 		</div>
-	</form>
-
-	<div class="row">
-		<div class="col-md-12 px-0">
-			<h2 class="h4 border-bottom mt-5 my-3 pb-2">
-				Two-Factor Authentication
-			</h2>
-		</div>
-	</div>
-	<div class="row mb-5">
-		<div class="col-md-12 px-0">
-			{% if current_user.totp_enabled != 1 %}
-			<!--  -->
-			<p>
-				Two-factor authentication adds an extra layer of security to
-				your account. Once enabled, you can use an authenticator app on
-				your mobile phone such as
-				<a
-					href="https://support.google.com/accounts/answer/1066447?hl=en"
-					target="_blank"
-				>
-					Google Authenticator
-				</a>
-				to generate a one-time password each time you login.
-			</p>
-			<a
-				href="#"
-				class="btn btn-light btn-active-light-primary btn-outline-secondary"
-				data-bs-toggle="modal"
-				data-bs-target="#totpModal"
-			>
-				Enable Two-Factor Authentication
-			</a>
-			<!--  -->
-			{% else %}
-			<p>You have Two-Factor Authentication enabled.</p>
-			<form action="/app/account/disable_totp" method="post">
-				{{ form.hidden_tag() }}
-				<input
-					id="disable_totp"
-					class="btn btn-light btn-active-light-primary btn-outline-secondary"
-					type="submit"
-					value="Disable Two-Factor Authentication"
-				/>
-			</form>
-			<!--  -->
-			{% endif %}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12 px-0">
-			<h2 class="h4 border-bottom mt-5 my-3 pb-2">Connected Accounts</h2>
-		</div>
-	</div>
-	<div class="row mb-5">
-		<div class="col-md-12 px-0">
-			{% if current_user.is_connected_google() %}
-			<a
-				class="btn btn-light btn-lg disabled btn-outline-secondary"
-				disabled
-			>
-				<img
-					alt="Logo"
-					src="/static/media/svg/brand-logos/google-icon.svg"
-					class="h-20px me-3"
-				/>
-				Google account is connected
-			</a>
-			{% else %}
-			<a
-				href="/login?sso=google"
-				class="btn btn-light btn-lg btn-outline-secondary"
-			>
-				<img
-					alt="Logo"
-					src="/static/media/svg/brand-logos/google-icon.svg"
-					class="h-20px me-3"
-				/>
-				Connect your Google account
-			</a>
-			{% endif %} {% if current_user.totp_enabled != 1 %}
-			<div
-				class="modal fade"
-				id="totpModal"
-				tabindex="-1"
-				aria-labelledby="totpLabel"
-				aria-hidden="true"
-			>
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<form action="/app/account/enable_totp" method="post">
-							{{ form.hidden_tag() }}
-							<div class="modal-header">
-								<h3 class="modal-title fs-5" id="totpLabel">
-									Enable Two-Factor Authentication
-								</h3>
-								<button
-									type="button"
-									class="btn-close"
-									data-bs-dismiss="modal"
-									aria-label="Close"
-								></button>
-							</div>
-							<div class="modal-body text-center">
-								<div>
-									Please use an authenticator app on your
-									mobile phone such as
-									<a
-										href="https://support.google.com/accounts/answer/1066447?hl=en"
-										target="_blank"
-									>
-										Google Authenticator
-									</a>
-									to scan the QR code. Then type the one-time
-									password generated in your app into the box
-									below.
-								</div>
-								<!-- Deconstructing the result of totp() method -->
-								{% with totp_secret, totp_qr_src =
-								current_user.totp() %}
-								<!--  -->
-								<div class="py-4 text-center">
-									<img
-										src="{{totp_qr_src}}"
-										alt=""
-										class="mw-150px w-50"
-									/>
-								</div>
-								<div class="form-floating w-75 mx-auto">
-									<input
-										placeholder="One-time password from your app"
-										type="number"
-										class="form-control"
-										autocomplete="off"
-										id="otp"
-										name="otp"
-									/>
-									<label for="otp" class="text-left">
-										One-time password from your app
-									</label>
-								</div>
-								<div class="fs-6 text-gray-700 mt-5">
-									If you having trouble using the QR code,
-									select manual entry on your app, then enter
-									your this code:
-									<span
-										class="badge text-bg-secondary fs-5 mt-3"
-									>
-										{{ totp_secret }}
-									</span>
-								</div>
-								<!--  -->
-								{% endwith %}
-								<!--  -->
-							</div>
-							<div class="modal-footer">
-								<button
-									type="reset"
-									class="btn btn-secondary"
-									data-bs-dismiss="modal"
-								>
-									Cancel
-								</button>
-								<button type="submit" class="btn btn-primary">
-									Enable Two-Factor Authentication
-								</button>
-							</div>
-						</form>
+		<form method="post">
+			{{ form.hidden_tag() }}
+			<div class="row my-5">
+				<div class="col-md-2 p-md-0 pb-4">
+					<b>Personal details</b>
+				</div>
+				<div class="col-md-5">
+					<div class="form-floating mb-3">
+						{{
+							form.firstName(class="form-control", id="firstName",
+							placeholder="First Name", value=current_user.firstName)
+						}}
+						<label for="firstName">First Name</label>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-floating mb-3">
+						{{
+							form.lastName(class="form-control", id="lastName",
+							placeholder="Last Name", value=current_user.lastName)
+						}}
+						<label for="lastName">Last Name</label>
 					</div>
 				</div>
 			</div>
-			{% endif %}
+			<div class="row my-5">
+				<div class="col-md-2 p-md-0 pb-4">
+					<b>Account information</b>
+				</div>
+				<div class="col-md-10">
+					<div class="form-floating mb-3">
+						<input
+							type="email"
+							class="form-control"
+							id="email"
+							placeholder="Email address"
+							disabled
+							value="{{ current_user.email }}"
+						/>
+						<label for="email">Email address</label>
+						<em>
+							If you need to change your email address, please
+							contact support.
+						</em>
+					</div>
+					<div class="form-floating mb-3">
+						<input
+							class="form-control"
+							type="password"
+							value="**********"
+							id="dummyPw"
+							disabled
+						/>
+						<label for="dummyPw">Password</label>
+					</div>
+					<a
+						href="/forgot-password"
+						class="btn btn-light btn-outline-secondary"
+					>
+						Reset Password
+					</a>
+					<div class="form-check form-switch text-start my-3">
+						{% if current_user.newsletter == 1 %}
+							{{
+								form.newsletter(class="form-check-input",
+								type="checkbox", role="switch", id="newsletter",
+								checked="checked")
+							}}
+						{% else %}
+							{{
+								form.newsletter(class="form-check-input",
+								type="checkbox", role="switch", id="newsletter")
+							}}
+						{% endif %}
+						<label class="form-check-label" for="newsletter">
+							I agree to receive occasional marketing
+							communications.
+						</label>
+					</div>
+					<input
+						class="btn btn-primary mt-1 mb-3"
+						type="submit"
+						value="Save Account Details"
+					/>
+				</div>
+			</div>
+		</form>
+
+		<div class="row">
+			<div class="col-md-12 px-0">
+				<h2 class="h4 border-bottom mt-5 my-3 pb-2">
+					Two-Factor Authentication
+				</h2>
+			</div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-md-12 px-0">
+				{% if current_user.totp_enabled != 1 %}
+					<p>
+						Two-factor authentication adds an extra layer of
+						security to your account. Once enabled, you can use an
+						authenticator app on your mobile phone such as
+						<a
+							href="https://support.google.com/accounts/answer/1066447?hl=en"
+							target="_blank"
+						>
+							Google Authenticator
+						</a>
+						to generate a one-time password each time you login.
+					</p>
+					<a
+						href="#"
+						class="btn btn-light btn-active-light-primary btn-outline-secondary"
+						data-bs-toggle="modal"
+						data-bs-target="#totpModal"
+					>
+						Enable Two-Factor Authentication
+					</a>
+				{% else %}
+					<p>You have Two-Factor Authentication enabled.</p>
+					<form action="/app/account/disable_totp" method="post">
+						{{ form.hidden_tag() }}
+						<input
+							id="disable_totp"
+							class="btn btn-light btn-active-light-primary btn-outline-secondary"
+							type="submit"
+							value="Disable Two-Factor Authentication"
+						/>
+					</form>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 px-0">
+				<h2 class="h4 border-bottom mt-5 my-3 pb-2">
+					Connected Accounts
+				</h2>
+			</div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-md-12 px-0">
+				{% if current_user.is_connected_google() %}
+					<a
+						class="btn btn-light btn-lg disabled btn-outline-secondary"
+						disabled
+					>
+						<img
+							alt="Logo"
+							src="/static/media/svg/brand-logos/google-icon.svg"
+							class="h-20px me-3"
+						/>
+						Google account is connected
+					</a>
+				{% else %}
+					<a
+						href="/login?sso=google"
+						class="btn btn-light btn-lg btn-outline-secondary"
+					>
+						<img
+							alt="Logo"
+							src="/static/media/svg/brand-logos/google-icon.svg"
+							class="h-20px me-3"
+						/>
+						Connect your Google account
+					</a>
+				{% endif %}
+				{% if current_user.totp_enabled != 1 %}
+					<div
+						class="modal fade"
+						id="totpModal"
+						tabindex="-1"
+						aria-labelledby="totpLabel"
+						aria-hidden="true"
+					>
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<form
+									action="/app/account/enable_totp"
+									method="post"
+								>
+									{{ form.hidden_tag() }}
+									<div class="modal-header">
+										<h3
+											class="modal-title fs-5"
+											id="totpLabel"
+										>
+											Enable Two-Factor Authentication
+										</h3>
+										<button
+											type="button"
+											class="btn-close"
+											data-bs-dismiss="modal"
+											aria-label="Close"
+										></button>
+									</div>
+									<div class="modal-body text-center">
+										<div>
+											Please use an authenticator app on
+											your mobile phone such as
+											<a
+												href="https://support.google.com/accounts/answer/1066447?hl=en"
+												target="_blank"
+											>
+												Google Authenticator
+											</a>
+											to scan the QR code. Then type the
+											one-time password generated in your
+											app into the box below.
+										</div>
+										<!-- Deconstructing the result of totp() method -->
+										{%
+											with totp_secret, totp_qr_src =
+											current_user.totp()
+										%}
+											<div class="py-4 text-center">
+												<img
+													src="{{ totp_qr_src }}"
+													alt=""
+													class="mw-150px w-50"
+												/>
+											</div>
+											<div
+												class="form-floating w-75 mx-auto"
+											>
+												<input
+													placeholder="One-time password from your app"
+													type="number"
+													class="form-control"
+													autocomplete="off"
+													id="otp"
+													name="otp"
+												/>
+												<label
+													for="otp"
+													class="text-left"
+												>
+													One-time password from your
+													app
+												</label>
+											</div>
+											<div
+												class="fs-6 text-gray-700 mt-5"
+											>
+												If you having trouble using the
+												QR code, select manual entry on
+												your app, then enter your this
+												code:
+												<span
+													class="badge text-bg-secondary fs-5 mt-3"
+												>
+													{{ totp_secret }}
+												</span>
+											</div>
+										{% endwith %}
+									</div>
+									<div class="modal-footer">
+										<button
+											type="reset"
+											class="btn btn-secondary"
+											data-bs-dismiss="modal"
+										>
+											Cancel
+										</button>
+										<button
+											type="submit"
+											class="btn btn-primary"
+										>
+											Enable Two-Factor Authentication
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
 		</div>
 	</div>
-
-	<!--  -->
-</div>
 {% endblock content %}
-
-<!--  -->
-{% block scripts %} {{ super() }}
-<script
-	defer
-	src="{{ url_for('static', filename='js/profile-picture-uploader.js') }}"
-></script>
+{% block scripts %}
+	{{ super() }}
+	<script
+		defer
+		src="{{ url_for('static', filename='js/profile-picture-uploader.js') }}"
+	></script>
 {% endblock %}

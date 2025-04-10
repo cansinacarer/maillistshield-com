@@ -1,18 +1,18 @@
 {% extends "emails/base.html" %}
-<!--  -->
 {% block content %}
-<p>Your email verification code is:</p>
-<div style="text-align: center">
-	<span class="code">
-		{{ current_user.email_confirmation_code | default("000000") if
-		current_user.email_confirmation_code else "000000" }}
-	</span>
-</div>
-<p>Please enter this code when prompted to verify your email address.</p>
-<div style="text-align: center">
-	<a href="{{ appHome }}/email-confirmation" target="_blank" class="cta">
-		Enter code
-	</a>
-</div>
-
+	<p>Your email verification code is:</p>
+	<div style="text-align: center">
+		<span class="code">
+			{{
+				current_user.email_confirmation_code | default("000000") if
+				current_user.email_confirmation_code else "000000"
+			}}
+		</span>
+	</div>
+	<p>Please enter this code when prompted to verify your email address.</p>
+	<div style="text-align: center">
+		<a href="{{ appHome }}/email-confirmation" target="_blank" class="cta">
+			Enter code
+		</a>
+	</div>
 {% endblock content %}

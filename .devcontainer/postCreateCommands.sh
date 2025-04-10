@@ -1,5 +1,21 @@
 #! /bin/bash
 
+# Install black for formatting Python code
+pip install black
+
+# Install prettier with the Jinja2 plugin for formatting HTML, CSS, and JS
+npm install --save-dev prettier prettier-plugin-jinja-template
+
+# Install commitlint for commit message linting
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
+
+# Install pre-commit
+pip install pre-commit
+pre-commit install --install-hooks
+
+# Install pre-commit hooks for the commit-msg stage e.g. for commitlint
+pre-commit install --hook-type commit-msg
+
 echo -e "\n--------------------------------\n"
 echo -e "You can view the local test database with pgAdmin at \e[1;31mhttp://localhost:5050/\e[0m"
 echo -e "The local test database is automatically added as a server in pgAdmin.\n"
