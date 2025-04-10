@@ -3,8 +3,11 @@
 pip install black
 npm install --save-dev prettier prettier-plugin-jinja-template
 
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
+
 pip install pre-commit
 pre-commit install --install-hooks
+pre-commit install --hook-type commit-msg
 
 echo -e "\n--------------------------------\n"
 echo -e "You can view the local test database with pgAdmin at \e[1;31mhttp://localhost:5050/\e[0m"
