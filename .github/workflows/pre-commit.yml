@@ -33,6 +33,7 @@ jobs:
               run: |
                   npm install prettier prettier-plugin-jinja-template
                   npm install --save-dev @commitlint/cli @commitlint/config-conventional
+                  npm install --save-dev markdownlint-cli
 
             - name: Run pre-commit hooks
               run: pre-commit run --all-files
