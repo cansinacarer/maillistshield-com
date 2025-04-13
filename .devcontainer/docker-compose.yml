@@ -7,8 +7,6 @@ services:
             dockerfile: .devcontainer/Dockerfile
         volumes:
             - ..:/workspaces/base-saas
-        ports:
-            - "5000:5000"
         environment:
             - FLASK_APP=run.py
             - DATABASE_CONNECTION_STRING=postgresql://postgres:password@database:5432/postgres
@@ -33,7 +31,7 @@ services:
             PGADMIN_DEFAULT_PASSWORD: admin
             PGADMIN_CONFIG_SERVER_JSON_FILE: "'/pgadmin4/servers.json'"
         ports:
-            - "5050:80"
+            - "5002:80"
         depends_on:
             - database
         volumes:

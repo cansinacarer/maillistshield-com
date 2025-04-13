@@ -33,7 +33,7 @@
 	},
 	"postCreateCommand": "/bin/bash .devcontainer/postCreateCommands.sh",
 	"overrideCommand": true,
-	"postStartCommand": "flask run --debugger --host=0.0.0.0",
+	"postStartCommand": "flask run --debugger",
 	"remoteUser": "vscode",
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},

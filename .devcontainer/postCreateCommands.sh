@@ -9,6 +9,9 @@ npm install --save-dev prettier prettier-plugin-jinja-template
 # Install commitlint for commit message linting
 npm install --save-dev @commitlint/cli @commitlint/config-conventional
 
+# Install markdownlint for linting Markdown files
+npm install --save-dev markdownlint-cli
+
 # Install pre-commit
 pip install pre-commit
 pre-commit install --install-hooks

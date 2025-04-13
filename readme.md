@@ -39,6 +39,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
 - 🐳 Dockerized for stateless continuous deployment,
 - 🔔 UI components ready to use:
   - Toast notifications
+
     ```javascript
     showToast(
         "This is a test toast notification!",
@@ -47,7 +48,9 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
         { autohide: false }
     );
     ```
+
   - Modals
+
     ```javascript
     showAlert(
         "Title",
@@ -56,6 +59,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
         "info"
     );
     ```
+
   - `flash()` messages of Flask styled as Bootstrap 5 alerts,
 - 🌐 HTML templates:
   - Email templates for the email validation, password reset,
@@ -68,7 +72,7 @@ This repository contains my 'Base SaaS', the starter SaaS framework I built for 
 
 ## Demo
 
-### See my [Live Demo](https://base-saas-flask.apps.cansin.net/) with Stripe (in test mode) and Google OAuth connected.
+### See my [Live Demo](https://base-saas-flask.apps.cansin.net/) with Stripe (in test mode) and Google OAuth connected
 
 ## Screenshots
 
