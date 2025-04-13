@@ -21,13 +21,13 @@
 				"github.vscode-pull-request-github",
 				"gruntfuggly.todo-tree",
 				"hossaini.bootstrap-intellisense",
-				"ms-azuretools.vscode-docker"
+				"ms-azuretools.vscode-docker",
 				"ms-python.python",
 				"ms-python.black-formatter",
 				"ms-python.vscode-pylance",
 				"esbenp.prettier-vscode",
 				"rangav.vscode-thunder-client",
-				"zignd.html-css-class-completion",
+				"zignd.html-css-class-completion"
 			]
 		}
 	},
