@@ -1,14 +1,16 @@
 name: Build & Deploy
 
 on:
-    push:
-        branches: ["main"]
-
-    pull_request:
-        branches: ["main"]
+    workflow_run:
+        workflows:
+            - Run Tests # Name of the test workflow in test.yml
+        types:
+            - completed
 
 jobs:
     build-and-deploy:
+        # Ensure tests passed
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
         runs-on: ubuntu-latest
         environment: Demo
 
