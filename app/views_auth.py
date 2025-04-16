@@ -1,6 +1,4 @@
 # Python modules
-from cgi import test
-from imghdr import tests
 from datetime import datetime, timezone
 from oauthlib.oauth2 import WebApplicationClient
 import requests
