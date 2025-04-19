@@ -82,6 +82,8 @@ jobs:
 
             # Step 7: Commit and push the badge
             - name: Commit and push badge
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   git config --local user.name "github-actions[bot]"
                   git config --local user.email "github-actions[bot]@users.noreply.github.com"
