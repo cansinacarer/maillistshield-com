@@ -85,6 +85,6 @@ jobs:
               run: |
                   git config --local user.name "github-actions[bot]"
                   git config --local user.email "github-actions[bot]@users.noreply.github.com"
-                  git add coverage-badge.svg
+                  git add tests/coverage-badge.svg
                   git commit -m "update coverage badge" || echo "No changes to commit"
                   git push
