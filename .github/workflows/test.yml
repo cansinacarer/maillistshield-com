@@ -77,10 +77,10 @@ jobs:
 
             # Step 6: Generate coverage badge
             - name: Generate the coverage badge
-              run: python tests/generate_coverage_badge.py
+              run: python generate_coverage_badge.py
               working-directory: tests
 
-            # Step 6: Commit and push the badge
+            # Step 7: Commit and push the badge
             - name: Commit and push badge
               run: |
                   git config --local user.name "github-actions[bot]"
