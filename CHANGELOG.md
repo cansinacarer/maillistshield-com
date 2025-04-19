@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.0...v1.0.1) (2025-04-19)
+
+
+### Bug Fixes
+
+* **github-actions:** resolve conflict between actions that simultaneously try to pull/push this repo ([b5c75e1](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/b5c75e1db641cb0be386b6c534504cb098b3e3be))
+
 # 1.0.0 (2025-04-19)
 
 
