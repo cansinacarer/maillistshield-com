@@ -1,0 +1,35 @@
+name: Semantic Release
+
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "tests/coverage-badge.svg"
+    pull_request:
+        branches:
+            - main
+        paths-ignore:
+            - "tests/coverage-badge.svg"
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install semantic-release and plugins
+              run: |
+                  npm install semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
+
+            - name: Run semantic-release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx semantic-release
