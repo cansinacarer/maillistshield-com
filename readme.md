@@ -4,7 +4,7 @@
 [![Tests](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml)
 [![Build & Deploy](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml)
 [![Uptime](https://uptime.apps.cansin.net/api/badge/5/uptime)](https://uptime.apps.cansin.net/status/base-saas-flask-demo)
-![Coverage](tests/coverage-badge.svg)
+![Coverage](tests/coverage/coverage-badge.svg)
 ![Last commit](https://img.shields.io/github/last-commit/cansinacarer/My-Base-SaaS-Flask?color=blue)
 
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
