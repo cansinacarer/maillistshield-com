@@ -18,7 +18,9 @@ with open("../../coverage.txt", "r") as file:
 thresholds = {20: "red", 50: "yellow", 75: "yellowgreen", 90: "brightgreen"}
 
 # Create the badge
-badge = anybadge.Badge("Test Coverage", f"{coverage}%", thresholds=thresholds)
+badge = anybadge.Badge(
+    "Test Coverage", coverage, thresholds=thresholds, value_suffix="%"
+)
 
 # Delete coverage-badge.svg if it exists
 os.remove("coverage-badge.svg") if os.path.exists("coverage-badge.svg") else None
