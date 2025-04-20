@@ -1,0 +1,179 @@
+app.forms
+=========
+
+.. py:module:: app.forms
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   app.forms.LoginForm
+   app.forms.RegisterForm
+   app.forms.EmailConfirmationForm
+   app.forms.ResetPassword
+   app.forms.SetNewPassword
+   app.forms.ProfileDetailsForm
+   app.forms.TwoFactorAuthenticationForm
+
+
+Module Contents
+---------------
+
+.. py:class:: LoginForm(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: email
+
+
+   .. py:attribute:: password
+
+
+.. py:class:: RegisterForm(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: email
+
+
+   .. py:attribute:: password
+
+
+   .. py:attribute:: firstName
+
+
+   .. py:attribute:: lastName
+
+
+   .. py:attribute:: newsletter
+
+
+.. py:class:: EmailConfirmationForm(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: code0
+
+
+   .. py:attribute:: code1
+
+
+   .. py:attribute:: code2
+
+
+   .. py:attribute:: code3
+
+
+   .. py:attribute:: code4
+
+
+   .. py:attribute:: code5
+
+
+.. py:class:: ResetPassword(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: email
+
+
+.. py:class:: SetNewPassword(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: password
+
+
+.. py:class:: ProfileDetailsForm(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: firstName
+
+
+   .. py:attribute:: lastName
+
+
+   .. py:attribute:: newsletter
+
+
+.. py:class:: TwoFactorAuthenticationForm(formdata=_Auto, **kwargs)
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Flask-specific subclass of WTForms :class:`~wtforms.form.Form`.
+
+   If ``formdata`` is not specified, this will use :attr:`flask.request.form`
+   and :attr:`flask.request.files`.  Explicitly pass ``formdata=None`` to
+   prevent this.
+
+
+   .. py:attribute:: code0
+
+
+   .. py:attribute:: code1
+
+
+   .. py:attribute:: code2
+
+
+   .. py:attribute:: code3
+
+
+   .. py:attribute:: code4
+
+
+   .. py:attribute:: code5
+
+
