@@ -1,11 +1,15 @@
-# Base SaaS
+# Cansin's Base SaaS (Flask)
+
+[![Docs](https://img.shields.io/badge/Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
+[![Uptime](https://uptime.apps.cansin.net/api/badge/5/uptime)](https://uptime.apps.cansin.net/status/base-saas-flask-demo)
+![Test Coverage](tests/coverage/coverage-badge.svg)
+![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/My-Base-SaaS-Flask?color=blue)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
 
 [![Pre-Commit Hooks](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/pre-commit.yml)
 [![Tests](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml)
 [![Build & Deploy](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml)
-[![Uptime](https://uptime.apps.cansin.net/api/badge/5/uptime)](https://uptime.apps.cansin.net/status/base-saas-flask-demo)
-![Coverage](tests/coverage/coverage-badge.svg)
-![Last commit](https://img.shields.io/github/last-commit/cansinacarer/My-Base-SaaS-Flask?color=blue)
+[![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml)
 
 This repository contains my 'Base SaaS', the starter SaaS framework I built for my side projects with paid subscriptions.
 
