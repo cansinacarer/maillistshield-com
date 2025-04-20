@@ -1,7 +1,15 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20">
-  <rect width="90" height="20" fill="#555"/>
-  <rect x="90" width="40" height="20" fill="red"/>
-  <text x="45" y="14" fill="#fff" font-family="Verdana" font-size="11" text-anchor="middle">Test Coverage</text>
-  <text x="110" y="14" fill="#fff" font-family="Verdana" font-size="11" text-anchor="middle">35%</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" style="&#10;    background: #ddd;&#10;">
+    <g>
+        <g>
+            <path d="M0,3 C0,1.3431 1.3552,0 3.02702703,0 L91,0 L91,20 L3.02702703,20 C1.3552,20 0,18.6569 0,17 L0,3 Z" fill="#555"/>
+            <text x="45" y="14" fill="#fff" font-family="Verdana" font-size="11" text-anchor="middle">Test Coverage</text>
+            </g>
+            <g xmlns="http://www.w3.org/2000/svg" transform="translate(90)">
+                <path xmlns="http://www.w3.org/2000/svg" d="M0 0h37C40 0 40 1.343 40 3v14c0 1.657-1.37 3-3.061 3H0V0z" fill="red"/>
+                <text xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" font-family="Verdana" font-size="11">
+                    <tspan x="4" y="14">35%</tspan>
+                </text>
+        </g>
+    </g>    
 </svg>
