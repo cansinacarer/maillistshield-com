@@ -19,7 +19,7 @@ thresholds = {20: "red", 50: "yellow", 75: "yellowgreen", 90: "brightgreen"}
 
 # Create the badge
 badge = anybadge.Badge(
-    "Test Coverage", coverage, thresholds=thresholds, value_suffix="%"
+    label="Test Coverage", value=coverage, thresholds=thresholds, value_suffix="%"
 )
 
 # Delete coverage-badge.svg if it exists
