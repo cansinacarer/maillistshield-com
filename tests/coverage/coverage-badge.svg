@@ -1,5 +1,5 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" style="&#10;    background: #ddd;&#10;">
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20">
     <g>
         <g>
             <path d="M0,3 C0,1.3431 1.3552,0 3.02702703,0 L91,0 L91,20 L3.02702703,20 C1.3552,20 0,18.6569 0,17 L0,3 Z" fill="#555"/>
