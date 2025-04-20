@@ -22,6 +22,9 @@ pip install pytest
 # Install pre-commit hooks for the commit-msg stage e.g. for commitlint
 pre-commit install --hook-type commit-msg
 
+# Esbonio language server for working with Sphinx rst files
+pip install esbonio
+
 echo -e "\n--------------------------------\n"
 echo -e "You can view the local test database with pgAdmin at \e[1;31mhttp://localhost:5002/\e[0m"
 echo -e "The local test database is automatically added as a server in pgAdmin.\n"

@@ -27,7 +27,9 @@
 				"ms-python.vscode-pylance",
 				"esbenp.prettier-vscode",
 				"rangav.vscode-thunder-client",
-				"zignd.html-css-class-completion"
+				"zignd.html-css-class-completion",
+				"lextudio.restructuredtext",
+				"swyddfa.esbonio"
 			]
 		}
 	},
