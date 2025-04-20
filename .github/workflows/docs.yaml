@@ -1,4 +1,4 @@
-name: Build and Deploy Sphinx Docs
+name: Build & Deploy Sphinx Docs
 
 on:
     workflow_run:
