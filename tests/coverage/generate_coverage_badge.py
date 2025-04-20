@@ -1,7 +1,7 @@
 import re
 
 # Read coverage percentage from coverage.txt
-with open("../coverage.txt", "r") as file:
+with open("../../coverage.txt", "r") as file:
     for line in file:
         if line.startswith("TOTAL"):
             match = re.search(r"(\d+)%$", line)
