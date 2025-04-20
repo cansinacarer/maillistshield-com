@@ -22,6 +22,9 @@ pip install pytest
 # Install pre-commit hooks for the commit-msg stage e.g. for commitlint
 pre-commit install --hook-type commit-msg
 
+# Install sphinx for documentation generation
+pip install sphinx sphinx-rtd-theme sphinx-autoapi
+
 # Esbonio language server for working with Sphinx rst files
 pip install esbonio
 
