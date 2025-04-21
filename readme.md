@@ -103,7 +103,7 @@ The starter SaaS framework I built with Flask for my side projects with paid sub
   - Utilizes the new ootb Bootstrap 5 components like floating form labels,
   - Last, but not least: User configurable dark mode. 😎
 
-## Screenshots
+## 📷 Screenshots
 
 <table>
     <tr>
