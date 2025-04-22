@@ -1,0 +1,33 @@
+name: Semantic Release
+
+on:
+    workflow_run:
+        workflows:
+            - Run Tests # Name of the test workflow in test.yml
+        types:
+            - completed
+
+jobs:
+    release:
+        # Ensure tests passed
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Install semantic-release and plugins
+              run: |
+                  npm install semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
+
+            - name: Run semantic-release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx semantic-release

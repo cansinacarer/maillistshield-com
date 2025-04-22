@@ -70,7 +70,6 @@ def webhook(path):
         match path:
             # The endpoint where stripe sends the webhook events
             case "stripe":
-
                 # Verify that the incoming request is from Stripe
                 try:
                     event = stripe.webhook.Webhook.construct_event(
@@ -387,7 +386,6 @@ def account(path):
 
             case "" | "account":
                 if request.method == "POST":
-
                     # If bucket upload request returns 200, JS calls this endpoint
                     # Then we set the avatar_uploaded flag to True,
                     # so that user.avatar() serves the image from the bucket

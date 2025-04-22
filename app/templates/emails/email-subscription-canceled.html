@@ -1,19 +1,17 @@
 {% extends "emails/base.html" %}
-<!--  -->
 {% block content %}
-<p>
-	Your subscription of the {{ tier_name }} plan has been cancelled. You will
-	continue to have access to your subscription benefits until {{
-	cancellation_date }} ET.
-</p>
-<p>
-	You can find your receipts and update your subscription status on our
-	billing page.
-</p>
-<div style="text-align: center">
-	<a href="{{ appHome }}/app/billing" target="_blank" class="cta">
-		Go to Billing
-	</a>
-</div>
-
+	<p>
+		Your subscription of the {{ tier_name }} plan has been cancelled. You
+		will continue to have access to your subscription benefits until
+		{{ cancellation_date }} ET.
+	</p>
+	<p>
+		You can find your receipts and update your subscription status on our
+		billing page.
+	</p>
+	<div style="text-align: center">
+		<a href="{{ appHome }}/app/billing" target="_blank" class="cta">
+			Go to Billing
+		</a>
+	</div>
 {% endblock content %}

@@ -1,6 +1,4 @@
 # Python modules
-from cgi import test
-from imghdr import tests
 from datetime import datetime, timezone
 from oauthlib.oauth2 import WebApplicationClient
 import requests
@@ -94,7 +92,6 @@ def register():
 
     # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
-
         # assign form data to variables
         email = request.form.get("email", "", type=str)
         password = request.form.get("password", "", type=str)
@@ -149,7 +146,6 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def login():
-
     # Don't allow logged in users here
     if current_user.is_authenticated:
         flash("You are already logged in.", "info")
@@ -158,7 +154,6 @@ def login():
     if request.method == "GET":
         # If user came here with the login with Google button
         if request.args.get("sso") == "google":
-
             # Single Sign On requests with Google
             google_config = get_google_sso_config()
             endpoint = google_config["authorization_endpoint"]
@@ -178,7 +173,6 @@ def login():
 
     # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
-
         # Assign form data to variables
         email = request.form.get("email", "", type=str)
         password = request.form.get("password", "", type=str)
@@ -186,7 +180,6 @@ def login():
         # Filter User out of database through username
         user = Users.query.filter_by(email=email).first()
         if user and bc.check_password_hash(user.password, password):
-
             # If the user have two factor auth enabled, redirect for that
             if user.totp_enabled == 1:
                 session["email"] = user.email
@@ -222,7 +215,6 @@ def login():
 @app_auth.route("/two-factor", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def two_factor():
-
     # Don't allow logged in users here
     if current_user.is_authenticated:
         flash("You are already logged in.", "info")
@@ -343,7 +335,6 @@ def email_confirmation_by_code():
 @app.route("/forgot-password", methods=["GET", "POST"])
 @limiter.limit("1 per day", methods=["POST"])
 def password_reset():
-
     # Declare the form
     form = ResetPassword(request.form)
 

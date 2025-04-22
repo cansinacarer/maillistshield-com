@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -32,20 +32,13 @@
 	<body class="d-flex flex-column min-vh-100">
 		<main class="flex-grow-1">
 			{% include 'public/components/header/nav-menu.html' %}
-			<!--  -->
 			{% block content %}
-			<!--  -->
 			{% endblock content %}
-			<!--  -->
 		</main>
 		{% include 'shared-components/modal.html' %}
-		<!--  -->
 		{% include 'shared-components/toast.html' %}
-		<!--  -->
 		{% include 'shared-components/google-analytics-tracker.html' %}
-		<!--  -->
 		{% include 'shared-components/user-details.html' %}
-		<!--  -->
 		{% include 'public/components/footer.html' %}
 	</body>
 </html>

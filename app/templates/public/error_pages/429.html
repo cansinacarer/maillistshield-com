@@ -1,19 +1,18 @@
 {% set page_title = "429: Too Many Requests" %}
-<!--  -->
 {% extends "public/layouts/base.html" %}
-<!--  -->
 {% block content %}
-<!--  -->
-<div class="container my-5">
-	<h1>
-		<i class="bi bi-ban text-danger"></i>
-		429: Too Many Requests
-	</h1>
-	<div class="col-lg-8 py-4">
-        <p class="fs-5">You have reached the limit for number of requests you can make.</p>
-		<p class="fs-5">Please contact us if you think this was not supposed to happen.</p>
+	<div class="container my-5">
+		<h1>
+			<i class="bi bi-ban text-danger"></i>
+			429: Too Many Requests
+		</h1>
+		<div class="col-lg-8 py-4">
+			<p class="fs-5">
+				You have reached the limit for number of requests you can make.
+			</p>
+			<p class="fs-5">
+				Please contact us if you think this was not supposed to happen.
+			</p>
+		</div>
 	</div>
-</div>
-	<!--  -->
-	{% endblock content %}
-</div>
+{% endblock content %}

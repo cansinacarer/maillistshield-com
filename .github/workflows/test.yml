@@ -1,0 +1,92 @@
+name: Run Tests
+
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "tests/coverage/coverage-badge.svg"
+    pull_request:
+        branches:
+            - main
+        paths-ignore:
+            - "tests/coverage/coverage-badge.svg"
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        environment: Test
+
+        steps:
+            # Step 1: Checkout the repository
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            # Step 2: Set up Python
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+
+            # Step 3: Install dependencies
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+                  pip install pytest coverage anybadge
+
+            # Step 4: Run tests and collect coverage
+            - name: Run tests and collect coverage
+              env:
+                  APP_NAME: Base SaaS
+                  TIMEZONE: US/Eastern
+                  FLASK_DEBUG: True
+                  DATABASE_SECRET_KEY: 12345678901234567
+                  S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+                  S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+                  S3_KEY: ${{ secrets.S3_KEY }}
+                  S3_SECRET: ${{ secrets.S3_SECRET }}
+                  MAIL_FROM: webmaster@cansin.net
+                  MAIL_SERVER: smtp.yandex.com
+                  MAIL_PORT: 465
+                  MAIL_USE_TLS: False
+                  MAIL_USE_SSL: True
+                  MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+                  MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+                  MAIL_DEBUG: False
+                  STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+                  STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+                  STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+                  STRIPE_PRODUCT_ID_FOR_CREDITS: ${{ secrets.STRIPE_PRODUCT_ID_FOR_CREDITS }}
+                  STRIPE_CREDIT_UNIT_COST: ${{ secrets.STRIPE_CREDIT_UNIT_COST }}
+                  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+                  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+                  FLASK_RUN_CERT: .devcontainer/ssl/cert.pem
+                  FLASK_RUN_KEY: .devcontainer/ssl/key.pem
+
+              run: |
+                  coverage run -m pytest
+                  coverage report > coverage.txt
+
+            # Step 5: Ensure tests passed
+            - name: Verify tests passed
+              if: ${{ failure() }}
+              run: |
+                  echo "Tests failed. Stopping workflow."
+                  exit 1
+
+            # Step 6: Generate coverage badge
+            - name: Generate the coverage badge
+              run: python generate_coverage_badge.py
+              working-directory: tests/coverage
+
+            # Step 7: Commit and push the badge
+            - name: Commit and push badge
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config --local user.name "github-actions[bot]"
+                  git config --local user.email "github-actions[bot]@users.noreply.github.com"
+                  git add tests/coverage/coverage-badge.svg
+                  git commit -m "chore: update coverage badge" || echo "No changes to commit"
+                  git push

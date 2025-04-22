@@ -1,17 +1,24 @@
+# Ignore the coverage artifacts
+.coverage
+coverage.txt
+
+# Pytest cache
+.pytest_cache
+
 # Environment variables
 .env
 
 # Local test database
 database.db
 
-# Local SSL certificates
-cert.pem
-key.pem
+# Node from the dev environment
+node_modules*
+package.json
+package-lock.json
 
 flask/
 *.pyc
 dev
-node_modules
 app/database.db
 app/build
 yarn.lock

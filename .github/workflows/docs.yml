@@ -1,0 +1,44 @@
+name: Build & Deploy Sphinx Docs
+
+on:
+    workflow_run:
+        workflows:
+            - Run Tests # Name of the test workflow in test.yml
+        types:
+            - completed
+
+jobs:
+    build-docs:
+        # Ensure tests passed
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+        runs-on: ubuntu-latest
+
+        steps:
+            # Checkout the repository
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            # Set up Python
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+
+            # Install dependencies
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install sphinx sphinx-rtd-theme sphinx-autoapi
+
+            # Build the documentation
+            - name: Build Sphinx documentation
+              run: |
+                  cd docs
+                  make html
+
+            # Deploy to GitHub Pages
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: docs/build/html
