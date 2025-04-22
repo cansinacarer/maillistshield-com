@@ -1,5 +1,5 @@
-Cansin's Base SaaS (Flask)
-========================================
+Mail List Shield
+================
 
 |Uptime| |Test Coverage| |Last Commit| |Code Style|
 

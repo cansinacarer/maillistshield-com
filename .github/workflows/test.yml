@@ -38,7 +38,7 @@ jobs:
             # Step 4: Run tests and collect coverage
             - name: Run tests and collect coverage
               env:
-                  APP_NAME: Base SaaS
+                  APP_NAME: Mail List Shield
                   TIMEZONE: US/Eastern
                   FLASK_DEBUG: True
                   DATABASE_SECRET_KEY: 12345678901234567
