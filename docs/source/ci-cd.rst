@@ -39,13 +39,13 @@ Build & Deploy Sphinx Docs
 If the tests are successful, this documentation is built with Sphinx and its autoapi extension, then prepared for deployment to GitHub Pages with ``.github/workflows/docs.yml``.
 
 
-.. |Pre-Commit Hooks| image:: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/pre-commit.yml/badge.svg
-   :target: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/pre-commit.yml
-.. |Tests| image:: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml/badge.svg
-   :target: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/test.yml
-.. |Semantic Release| image:: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/semantic-release.yml/badge.svg
-   :target: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/semantic-release.yml
-.. |Build & Deploy| image:: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml/badge.svg
-   :target: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml
-.. |Build & Deploy Sphinx Docs| image:: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml/badge.svg
-   :target: https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml
+.. |Pre-Commit Hooks| image:: https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml/badge.svg
+   :target: https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml
+.. |Tests| image:: https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml
+.. |Semantic Release| image:: https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg
+   :target: https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml
+.. |Build & Deploy| image:: https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml/badge.svg
+   :target: https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml
+.. |Build & Deploy Sphinx Docs| image:: https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg
+   :target: https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml

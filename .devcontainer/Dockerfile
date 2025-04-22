@@ -2,8 +2,8 @@
 
 FROM mcr.microsoft.com/devcontainers/python:3.11
 LABEL maintainer="Cansin Acarer https://cacarer.com"
-ADD .. /workspaces/base-saas
-WORKDIR /workspaces/base-saas
+ADD .. /workspaces/mail-list-shield
+WORKDIR /workspaces/mail-list-shield
 
 # Install dependencies
 RUN pip install -r requirements.txt
