@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Python Debugger: Base SaaS",
+			"name": "Python Debugger: Mail List Shield",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "flask",
