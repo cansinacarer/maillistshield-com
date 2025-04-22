@@ -3,10 +3,9 @@
 {% extends "private/layouts/base.html" %}
 <!--  -->
 {% block content %}
+	<p class="mb-4">Start by uploading your list below.</p>
 
-<p class="mb-4">Start by uploading your list below.</p>
+	{% include 'shared-components/email-csv-upload-form.html' %}
 
-{% include 'shared-components/email-csv-upload-form.html' %}
-
-<!--  -->
+	<!--  -->
 {% endblock content %}

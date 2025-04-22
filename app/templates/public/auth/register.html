@@ -1,31 +1,31 @@
 {% set page_title = "Create an account" %}
 {% extends "public/layouts/auth.html" %}
 {% block content %}
-<!--  -->
-<form method="post">
-	<a
-		href="/"
-		class="d-block w-100 mb-4 col-md-4 text-center fs-3 fw-semibold text-decoration-none"
-		tabindex="-1"
-	>
-		<img
-			src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
-			alt="Mail List Shield Email Validation Service"
-			class="mobile-logo header-logo logo-light mx-auto"
-		/>
-		<img
-			src="{{ url_for('static', filename='media/mail-list-shield-logo-dark-mode.png') }}"
-			alt="Mail List Shield Email Validation Service"
-			class="mobile-logo header-logo logo-dark mx-auto"
-		/>
-	</a>
-	<h2 class="h4 mb-3 fw-normal text-center">Let's create an account!</h2>
-	{% include 'shared-components/flash-alerts.html' %}
 	<!--  -->
-	{% include 'public/auth/auth_components/oauth-login.html' %}
-	<!--  -->
-	{% include 'public/auth/auth_components/oauth-horizontal-separator.html' %}
-	<!--  -->
-	{% include 'public/auth/auth_components/register-fields.html' %}
-</form>
+	<form method="post">
+		<a
+			href="/"
+			class="d-block w-100 mb-4 col-md-4 text-center fs-3 fw-semibold text-decoration-none"
+			tabindex="-1"
+		>
+			<img
+				src="{{ url_for('static', filename='media/mail-list-shield-logo.png') }}"
+				alt="Mail List Shield Email Validation Service"
+				class="mobile-logo header-logo logo-light mx-auto"
+			/>
+			<img
+				src="{{ url_for('static', filename='media/mail-list-shield-logo-dark-mode.png') }}"
+				alt="Mail List Shield Email Validation Service"
+				class="mobile-logo header-logo logo-dark mx-auto"
+			/>
+		</a>
+		<h2 class="h4 mb-3 fw-normal text-center">Let's create an account!</h2>
+		{% include 'shared-components/flash-alerts.html' %}
+		<!--  -->
+		{% include 'public/auth/auth_components/oauth-login.html' %}
+		<!--  -->
+		{% include 'public/auth/auth_components/oauth-horizontal-separator.html' %}
+		<!--  -->
+		{% include 'public/auth/auth_components/register-fields.html' %}
+	</form>
 {% endblock content %}

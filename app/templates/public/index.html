@@ -1,205 +1,212 @@
 {% set page_title = "Home" %}
 {% extends "public/layouts/base.html" %}
 {% block content %}
-<div class="container" id="jumbotron">
-	<div class="row">
-		<div class="p-3 p-md-5 text-center bg-body-tertiary">
-			<div class="col-md-9 p-lg-5 mx-auto my-3">
-				<h1 class="display-3 fw-bold">
-					Email validation
-					<span class="colorful-text">simplified</span>
-				</h1>
-				<h3 class="fw-normal text-muted mb-3">
-					Upload your list or automate validation
-				</h3>
-				<div class="d-flex gap-3 justify-content-center fw-normal">
-					<form class="input-group my-4" id="validationForm">
-						<input
-							class="form-control px-3 py-2"
-							id="emailToValidate"
-							name="emailToValidate"
-							placeholder="or validate an email here!"
-							required=""
-							type="email"
-							autofocus
-							value=""
-						/>
-						<button
-							type="submit"
-							class="btn btn-primary"
-							id="validationButton"
+	<div class="container" id="jumbotron">
+		<div class="row">
+			<div class="p-3 p-md-5 text-center bg-body-tertiary">
+				<div class="col-md-9 p-lg-5 mx-auto my-3">
+					<h1 class="display-3 fw-bold">
+						Email validation
+						<span class="colorful-text">simplified</span>
+					</h1>
+					<h3 class="fw-normal text-muted mb-3">
+						Upload your list or automate validation
+					</h3>
+					<div class="d-flex gap-3 justify-content-center fw-normal">
+						<form class="input-group my-4" id="validationForm">
+							<input
+								class="form-control px-3 py-2"
+								id="emailToValidate"
+								name="emailToValidate"
+								placeholder="or validate an email here!"
+								required=""
+								type="email"
+								autofocus
+								value=""
+							/>
+							<button
+								type="submit"
+								class="btn btn-primary"
+								id="validationButton"
+							>
+								<span
+									class="loading spinner-border spinner-border-sm d-none"
+									aria-hidden="true"
+								></span>
+								<span class="text">Validate</span>
+							</button>
+						</form>
+					</div>
+					{% if current_user.is_authenticated %}
+						<div
+							class="d-flex gap-3 justify-content-center lead fw-normal mt-3"
 						>
-							<span
-								class="loading spinner-border spinner-border-sm d-none"
-								aria-hidden="true"
-							></span>
-							<span class="text">Validate</span>
-						</button>
-					</form>
+							<a
+								href="/app/"
+								class="icon-link btn btn-outline-primary"
+							>
+								Upload a CSV file
+							</a>
+						</div>
+						<!--  -->
+					{% else %}
+						<div
+							class="d-flex gap-3 justify-content-center lead fw-normal mt-3"
+						>
+							<button
+								onclick="showAlert('Login required', `Create an account to get <b>100 free credits for </b> and try our email batch validation with up to a 100 contacts.<br /><br /><div class='d-flex justify-content-center'></button><a class='btn btn-primary' href='/register'>Register to claim your 100 free credits</a></div><br/ >If you already have an account, please <a href='/login'>login</a> to upload a file.`, 'Go back', 'mls-green')"
+								class="icon-link btn btn-outline-primary"
+							>
+								Upload a CSV file
+							</button>
+						</div>
+					{% endif %}
 				</div>
-				{% if current_user.is_authenticated %}
-				<div
-					class="d-flex gap-3 justify-content-center lead fw-normal mt-3"
-				>
-					<a href="/app/" class="icon-link btn btn-outline-primary">
-						Upload a CSV file
-					</a>
-				</div>
-				<!--  -->
-				{% else %}
-				<div
-					class="d-flex gap-3 justify-content-center lead fw-normal mt-3"
-				>
-					<button
-						onclick="showAlert('Login required', `Create an account to get <b>100 free credits for </b> and try our email batch validation with up to a 100 contacts.<br /><br /><div class='d-flex justify-content-center'></button><a class='btn btn-primary' href='/register'>Register to claim your 100 free credits</a></div><br/ >If you already have an account, please <a href='/login'>login</a> to upload a file.`, 'Go back', 'mls-green')"
-						class="icon-link btn btn-outline-primary"
-					>
-						Upload a CSV file
-					</button>
-				</div>
-				{% endif %}
 			</div>
 		</div>
 	</div>
-</div>
-<div class="container px-4 py-4">
-	<h2 class="display-6 mt-5 fw-semibold text-center">
-		Insights to Improve Your Email Deliverability
-	</h2>
-	<div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
-		<div class="feature col text-center px-4">
-			<div
-				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
-			>
-				<i class="bi bi-check-circle-fill"></i>
+	<div class="container px-4 py-4">
+		<h2 class="display-6 mt-5 fw-semibold text-center">
+			Insights to Improve Your Email Deliverability
+		</h2>
+		<div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+			<div class="feature col text-center px-4">
+				<div
+					class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
+				>
+					<i class="bi bi-check-circle-fill"></i>
+				</div>
+				<h3 class="fs-4 text-body-emphasis">Invalid Emails</h3>
+				<p>
+					Remove invalid emails from your list to improve your sender
+					reputation, opens, clicks, and conversions.
+				</p>
+				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
-			<h3 class="fs-4 text-body-emphasis">Invalid Emails</h3>
-			<p>
-				Remove invalid emails from your list to improve your sender
-				reputation, opens, clicks, and conversions.
-			</p>
-			<a class="btn btn-outline-primary" href="#">Learn more</a>
-		</div>
-		<div class="feature col text-center px-4">
-			<div
-				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
-			>
-				<i class="bi bi-envelope-at-fill"></i>
+			<div class="feature col text-center px-4">
+				<div
+					class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
+				>
+					<i class="bi bi-envelope-at-fill"></i>
+				</div>
+				<h3 class="fs-4 text-body-emphasis">Email Providers</h3>
+				<p>
+					Find the email providers serving the custom domains to
+					control your send volume to each provider.
+				</p>
+				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
-			<h3 class="fs-4 text-body-emphasis">Email Providers</h3>
-			<p>
-				Find the email providers serving the custom domains to control
-				your send volume to each provider.
-			</p>
-			<a class="btn btn-outline-primary" href="#">Learn more</a>
-		</div>
-		<div class="feature col text-center px-4">
-			<div
-				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
-			>
-				<i class="bi bi-trash3-fill"></i>
+			<div class="feature col text-center px-4">
+				<div
+					class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
+				>
+					<i class="bi bi-trash3-fill"></i>
+				</div>
+				<h3 class="fs-4 text-body-emphasis">Disposable Emails</h3>
+				<p>
+					Identify the customers who gave you a throw-away email
+					address.
+				</p>
+				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
-			<h3 class="fs-4 text-body-emphasis">Disposable Emails</h3>
-			<p>
-				Identify the customers who gave you a throw-away email address.
-			</p>
-			<a class="btn btn-outline-primary" href="#">Learn more</a>
-		</div>
-		<div class="feature col text-center px-4">
-			<div
-				class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
-			>
-				<i class="bi bi-exclamation-triangle-fill"></i>
+			<div class="feature col text-center px-4">
+				<div
+					class="mb-2 feature-icon-small d-inline-flex align-items-center justify-content-center fs-4 rounded-3 bg-mls-green bg-gradient text-white"
+				>
+					<i class="bi bi-exclamation-triangle-fill"></i>
+				</div>
+				<h3 class="fs-4 text-body-emphasis">Spam Traps</h3>
+				<p>
+					Avoid emailing to spam traps and damaging your sender
+					reputation.
+				</p>
+				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
-			<h3 class="fs-4 text-body-emphasis">Spam Traps</h3>
-			<p>
-				Avoid emailing to spam traps and damaging your sender
-				reputation.
-			</p>
-			<a class="btn btn-outline-primary" href="#">Learn more</a>
 		</div>
 	</div>
-</div>
 
-<div class="container pt-4" id="demo-results">
-	<div class="row">
-		<div class="col-md-6 px-0 pb-4 pe-md-4">
-			<div
-				class="pt-3 pb-5 text-center bg-mls-green bg-gradient me-md-auto"
-			>
-				<div class="my-3 p-3">
-					<h2 class="display-5">Validation insights</h2>
-					<p class="lead">
-						The data points to
-						<b>clean your list</b>
-						and
-						<b>inform your targeting</b>
-					</p>
-				</div>
+	<div class="container pt-4" id="demo-results">
+		<div class="row">
+			<div class="col-md-6 px-0 pb-4 pe-md-4">
 				<div
-					class="col-md-10 bg-body rounded-3 overflow-hidden shadow-sm mx-auto text-start"
-					id="demoResultsTable"
+					class="pt-3 pb-5 text-center bg-mls-green bg-gradient me-md-auto"
 				>
-					{% include 'public/demo/demo-results-table.html' %}
+					<div class="my-3 p-3">
+						<h2 class="display-5">Validation insights</h2>
+						<p class="lead">
+							The data points to
+							<b>clean your list</b>
+							and
+							<b>inform your targeting</b>
+						</p>
+					</div>
+					<div
+						class="col-md-10 bg-body rounded-3 overflow-hidden shadow-sm mx-auto text-start"
+						id="demoResultsTable"
+					>
+						{% include 'public/demo/demo-results-table.html' %}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-6 px-0 pb-4">
-			<div class="pt-3 pb-5 text-center bg-mls-green bg-gradient">
-				<div class="my-3 py-3">
-					<h2 class="display-5">API response</h2>
-					<p class="lead">What your software will see from our API</p>
-				</div>
-				<div
-					class="col-md-10 bg-dark rounded-3 overflow-hidden shadow-sm mx-auto text-start"
-					id="demoAPIResponse"
-				>
-					{% include 'public/demo/demo-api-response.html' %}
+			<div class="col-md-6 px-0 pb-4">
+				<div class="pt-3 pb-5 text-center bg-mls-green bg-gradient">
+					<div class="my-3 py-3">
+						<h2 class="display-5">API response</h2>
+						<p class="lead">
+							What your software will see from our API
+						</p>
+					</div>
+					<div
+						class="col-md-10 bg-dark rounded-3 overflow-hidden shadow-sm mx-auto text-start"
+						id="demoAPIResponse"
+					>
+						{% include 'public/demo/demo-api-response.html' %}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 {% endblock content %}
 
-{% block scripts %} {{ super() }}
-<script
-	defer
-	src="{{ url_for('static', filename='js/validation-of-single-email.js') }}"
-></script>
+{% block scripts %}
+	{{ super() }}
+	<script
+		defer
+		src="{{ url_for('static', filename='js/validation-of-single-email.js') }}"
+	></script>
 
-<link
-	rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+	<link
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css"
+	/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
 
-<script defer>
-	// Free credits count
-	const freeCredits = "{{ MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS }}";
+	<script defer>
+		// Free credits count
+		const freeCredits = "{{ MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS }}";
 
-	// Initialize Highlight.js
-	hljs.highlightAll();
+		// Initialize Highlight.js
+		hljs.highlightAll();
 
-	// Show toast notification with the promo a few seconds after the user scrolls to the results section
-	let promoShown = false;
-	document.addEventListener("DOMContentLoaded", () => {
-		// The element that triggers all this
-		triggerElement = document.querySelector("#demoResultsTable");
+		// Show toast notification with the promo a few seconds after the user scrolls to the results section
+		let promoShown = false;
+		document.addEventListener("DOMContentLoaded", () => {
+			// The element that triggers all this
+			triggerElement = document.querySelector("#demoResultsTable");
 
-		// Callback function
-		const offerCallback = (entries, observer) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting && !promoShown) {
-					// Record that we did show the promo so that we don't trigger it with every scroll
-					promoShown = true;
+			// Callback function
+			const offerCallback = (entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !promoShown) {
+						// Record that we did show the promo so that we don't trigger it with every scroll
+						promoShown = true;
 
-					// Start the counting down to promo trigger
-					setTimeout(() => {
-						showToast(
-							`
+						// Start the counting down to promo trigger
+						setTimeout(() => {
+							showToast(
+								`
                             <p>Hello there! 👋</p>
                             <p>We offer implementation services including:</p>
                             <ul>
@@ -209,23 +216,23 @@
                             <p>Would you like to hear more?</p>
                             <a href="#" class="btn btn-primary">Let's talk!</a>
                             `,
-							"Implementation services",
-							"mls-green",
-							{ autohide: false }
-						);
-					}, 2000);
-				}
+								"Implementation services",
+								"mls-green",
+								{ autohide: false }
+							);
+						}, 2000);
+					}
+				});
+			};
+
+			// Create an Intersection Observer instance
+			const observer = new IntersectionObserver(offerCallback, {
+				root: null, // Use the viewport as the root
+				threshold: 0.4 // Trigger callback when 40% of the target is visible
 			});
-		};
 
-		// Create an Intersection Observer instance
-		const observer = new IntersectionObserver(offerCallback, {
-			root: null, // Use the viewport as the root
-			threshold: 0.4, // Trigger callback when 40% of the target is visible
+			// Start observing the target element
+			observer.observe(triggerElement);
 		});
-
-		// Start observing the target element
-		observer.observe(triggerElement);
-	});
-</script>
+	</script>
 {% endblock %}
