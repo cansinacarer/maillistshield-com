@@ -7,7 +7,7 @@
 
 	<form
 		method="post"
-		action="{{ url_for("views_private.billing") }}/purchase-credits"
+		action="{{ url_for("private_bp.billing") }}/purchase-credits"
 	>
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<div class="form-floating mb-3">
@@ -30,7 +30,7 @@
 	{% if current_user.tier.name != 'free' %}
 		<form
 			method="post"
-			action="{{ url_for("views_private.billing") }}/billing-portal"
+			action="{{ url_for("private_bp.billing") }}/billing-portal"
 		>
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input
@@ -43,7 +43,7 @@
 		<p>Upgrade to:</p>
 		<form
 			method="post"
-			action="{{ url_for("views_private.billing") }}/checkout"
+			action="{{ url_for("private_bp.billing") }}/checkout"
 		>
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			{% for tier in tiers %}

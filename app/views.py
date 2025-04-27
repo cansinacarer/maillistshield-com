@@ -1,30 +1,15 @@
-from flask import render_template, request, redirect
+from flask import render_template, Blueprint, current_app
 from flask_login import current_user
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from jinja2 import TemplateNotFound
-from datetime import datetime
 
-from app import app, lm
+from app import lm
 from app.models import Users
 from app.utilities.error_handlers import error_page
 
-
-# Variables available in all templates
-@app.context_processor
-def inject_globals():
-    return {
-        "APP_NAME": app.config["APP_NAME"],
-        "COPYRIGHT": f"2021–{datetime.now().year} - {app.config['APP_NAME']}",
-    }
-
-
-# Redirect pages with trailing slashes to versions without
-# Applies to other Blueprints like app_private as well
-@app.before_request
-def remove_trailing_slash():
-    if request.path != "/" and request.path != "/app/" and request.path.endswith("/"):
-        return redirect(request.path[:-1])
+# Create a Blueprint
+public_bp = Blueprint("public_bp", __name__)
 
 
 # provide login manager with load_user callback
@@ -34,31 +19,31 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 
-@app.errorhandler(403)
+@public_bp.errorhandler(403)
 def page_not_found(e):
     print(f"ERROR 403: {e}")
     return error_page(403)
 
 
-@app.errorhandler(404)
+@public_bp.errorhandler(404)
 def page_not_found(e):
     print(f"ERROR 404: {e}")
     return error_page(404)
 
 
-@app.errorhandler(405)
+@public_bp.errorhandler(405)
 def page_not_found(e):
     print(f"ERROR 405: {e}")
     return error_page(405)
 
 
-@app.errorhandler(429)
+@public_bp.errorhandler(429)
 def rate_limited(e):
     print(f"ERROR 429: {e}")
     return error_page(429)
 
 
-@app.errorhandler(500)
+@public_bp.errorhandler(500)
 def server_error(e):
     print(f"ERROR 500: {e}")
     return error_page(500)
@@ -67,21 +52,21 @@ def server_error(e):
 # Configure rate limiting
 limiter = Limiter(
     get_remote_address,
-    app=app,
+    app=current_app,
     default_limits=["200 per minute", "400 per hour"],
     on_breach=rate_limited,
 )
 
 
 # Serve favicon in the default route some clients expect
-@app.route("/favicon.ico")
+@public_bp.route("/favicon.ico")
 def favicon():
-    return app.send_static_file("media/favicon.ico")
+    return current_app.send_static_file("media/favicon.ico")
 
 
 # App main route + generic routing
-@app.route("/", defaults={"path": "index"})
-@app.route("/<path>")
+@public_bp.route("/", defaults={"path": "index"})
+@public_bp.route("/<path>")
 def index(path):
     try:
         # Serve the file (if exists) from app/templates/public/PATH.html
