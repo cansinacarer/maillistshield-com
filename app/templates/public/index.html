@@ -10,174 +10,371 @@
 			application templates.
 		</p>
 		<hr />
-		<h2 class="mt-4">Features of my Base SaaS</h2>
-		<ul class="mt-4">
-			<li class="mt-4">
-				💳 Stripe checkout flows:
-				<ul>
+		<h2 class="mt-4">Features of Cansin's Base SaaS (Flask)</h2>
+		<section id="features">
+			<section id="developer-experience">
+				<h3 class="my-4">💻 Developer Experience</h3>
+				<ul class="my-2">
 					<li>
-						Subscriptions,
-						<ul>
-							<li>Different subscription tiers,</li>
-							<li>Billing page with Invoices,</li>
+						<p>Dev containers:</p>
+						<ul class="my-2">
 							<li>
-								Integration mechanism:
-								<ul>
+								<p>
+									<strong>Flask</strong> container with
+									pre-configured with:
+								</p>
+								<ul class="my-2">
 									<li>
-										To begin a subscription, we send the
-										user to Stripe with a checkout session,
+										<p>
+											VSCode launch.json for debugging the
+											Flask app,
+										</p>
 									</li>
 									<li>
-										Then listen to Stripe webhook events to
-										process the results,
+										<p>
+											Prettier for HTML, CSS, and JS
+											formatting,
+										</p>
 									</li>
 									<li>
-										We set the Products in Stripe, then
-										insert their prices into the Tiers
-										table.
+										<p>
+											Pre-commit hooks for code quality
+											checks,
+										</p>
+									</li>
+									<li>
+										<p>
+											Markdownlint for Markdown
+											formatting,
+										</p>
+									</li>
+									<li>
+										<p>Black for Python code formatting,</p>
+									</li>
+									<li>
+										<p>
+											Commitlint for commit message
+											linting.
+										</p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<p>
+									<strong>Postgres</strong> as a development
+									database,
+								</p>
+							</li>
+							<li>
+								<p>
+									<strong>pgAdmin</strong> pre-connected to
+									the development.
+								</p>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<p>CI/CD pipelines with GitHub Actions to:</p>
+						<ul class="my-2">
+							<li><p>Run pre-commit hooks,</p></li>
+							<li><p>Run tests,</p></li>
+							<li>
+								<p>
+									Automate semantic release for versioning and
+									changelog generation,
+								</p>
+							</li>
+							<li><p>Build and deploy the documentation,</p></li>
+							<li>
+								<p>Build and deploy the app to production.</p>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section id="deployment">
+				<h3 class="my-4">☁️ Deployment</h3>
+				<ul class="my-2">
+					<li>
+						<p>
+							🐳 Dockerized Flask for stateless continuous
+							deployment for scalability,
+						</p>
+					</li>
+					<li><p>🗄️ Database model abstracted with ORM,</p></li>
+					<li><p>📦 S3 object storage with pre-signed URLs.</p></li>
+				</ul>
+			</section>
+			<section id="stripe-integrations">
+				<h3 class="my-4">💳 Stripe Integrations</h3>
+				<blockquote>
+					<div>
+						<ul class="my-2">
+							<li>
+								<p>Subscriptions,</p>
+								<ul class="my-2">
+									<li>
+										<p>Different subscription tiers,</p>
+									</li>
+									<li><p>Billing page with Invoices,</p></li>
+									<li>
+										<p>Integration mechanism:</p>
+										<ul class="my-2">
+											<li>
+												<p>
+													To begin a subscription, we
+													send the user to Stripe with
+													a checkout session,
+												</p>
+											</li>
+											<li>
+												<p>
+													Then listen to Stripe
+													webhook events to process
+													the results,
+												</p>
+											</li>
+											<li>
+												<p>
+													We set the Products in
+													Stripe, then insert their
+													prices into the Tiers table.
+												</p>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<p>
+									One-off credit purchases for pre-paid
+									metered usage.
+								</p>
+							</li>
+						</ul>
+					</div>
+				</blockquote>
+			</section>
+			<section id="authentication">
+				<h3 class="my-4">🔒 Authentication</h3>
+				<blockquote>
+					<div>
+						<ul class="my-2">
+							<li>
+								<p>Sign up flow,</p>
+								<ul class="my-2">
+									<li><p>Sign up with Google option,</p></li>
+									<li>
+										<p>Email validation requirement,</p>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<p>Two factor authentication (TOTP only),</p>
+							</li>
+							<li><p>Forgot password flow,</p></li>
+							<li>
+								<p>Account details page where the user can:</p>
+								<ul class="my-2">
+									<li>
+										<p>
+											Upload a profile picture (stored in
+											S3),
+										</p>
+									</li>
+									<li>
+										<p>
+											Change profile details like first
+											&amp; last name.
+										</p>
 									</li>
 								</ul>
 							</li>
 						</ul>
-					</li>
-					<li>
-						One-off credit purchases for pre-paid metered usage.
-					</li>
-				</ul>
-			</li>
-			<li class="mt-4">
-				🔒 Authentication,
-				<ul>
-					<li>
-						Sign up flow,
-						<ul>
-							<li>Sign up with Google option,</li>
-							<li>Email validation requirement,</li>
-						</ul>
-					</li>
-					<li>Two factor authentication (TOTP only),</li>
-					<li>Forgot password flow,</li>
-					<li>
-						Account details page where the user can:
-						<ul>
-							<li>Upload a profile picture (stored in S3)</li>
+					</div>
+				</blockquote>
+			</section>
+			<section id="transactional-emails-with-smtp">
+				<h3 class="my-4">📧 Transactional Emails with SMTP</h3>
+				<blockquote>
+					<div>
+						<ul class="my-2">
 							<li>
-								Change profile details like first & last name.
+								<p>About Stripe subscription changes:</p>
+								<ul class="my-2">
+									<li><p>Confirmation,</p></li>
+									<li><p>Cancellation,</p></li>
+									<li><p>Expiration.</p></li>
+								</ul>
+							</li>
+							<li><p>Email verification on registration,</p></li>
+							<li><p>Forgot password.</p></li>
+						</ul>
+					</div>
+				</blockquote>
+			</section>
+			<section id="security">
+				<h3 class="my-4">🚨 Security</h3>
+				<blockquote>
+					<div>
+						<ul class="my-2">
+							<li>
+								<p>
+									Cross-Site Request Forgery (CSRF) protection
+									in all forms,
+								</p>
+							</li>
+							<li>
+								<p>
+									Rate limiting: App-wide and form specific
+									limits,
+								</p>
+							</li>
+							<li>
+								<p>Cross-Site Scripting (XSS) protection,</p>
+							</li>
+							<li>
+								<p>
+									Cross-Origin Resource Sharing (CORS)
+									protection.
+								</p>
 							</li>
 						</ul>
-					</li>
-				</ul>
-			</li>
-			<li class="mt-4">
-				📧 Transactional emails sent over SMTP:
-				<ul>
-					<li>
-						About Stripe subscription changes:
-						<ul>
-							<li>Confirmation,</li>
-							<li>Cancellation,</li>
-							<li>Expiration.</li>
-						</ul>
-					</li>
-					<li>Email verification on registration,</li>
-					<li>Forgot password,</li>
-				</ul>
-			</li>
-			<li class="mt-4">
-				🗄️ Database model with ORM, automatically created on first run
-				to accommodate the features above,
-			</li>
-			<li class="mt-4">
-				🚨 Security measures:
-				<ul>
-					<li>
-						CSRF (Cross-Site Request Forgery) protection in all
-						forms,
-					</li>
-					<li>Rate limiting: App-wide and form specific limits.</li>
-				</ul>
-			</li>
-			<li class="mt-4">
-				🐳 Dockerized for stateless continuous deployment,
-			</li>
-			<li class="mt-4">
-				🔔 UI components ready to use:
-				<ul>
-					<li>
-						<button
-							class="btn btn-primary my-2"
-							onclick='showToast("This is a test toast notification!");'
-						>
-							Toast notifications
-						</button>
-						<pre><code>showToast(
+					</div>
+				</blockquote>
+			</section>
+			<section id="ui">
+				<h3 class="my-4">🎨 UI</h3>
+				<section id="notifications">
+					<h4 class="mt-4">🔔 Notifications</h4>
+					<ul class="my-2">
+						<li>
+							<p>
+								Toast notifications
+								<button
+									class="btn btn-primary my-2"
+									onclick='showToast("This is a test toast notification!");'
+								>
+									Test it
+								</button>
+							</p>
+							<div class="highlight-javascript notranslate">
+								<div class="highlight">
+									<pre><code>showToast(
     "This is a test toast notification!",
     "Toast Title",
     "success",
     { autohide: false }
 );</code></pre>
-					</li>
-					<li>
-						<button
-							class="btn btn-primary my-2"
-							onclick='
-                            showAlert(
-                                "Title",
-                                "This is a test modal dialog!"
-                            );'
-						>
-							Modals
-						</button>
-						<pre><code>showAlert(
+								</div>
+							</div>
+						</li>
+						<li>
+							<p>
+								Modals
+								<button
+									class="btn btn-primary my-2"
+									onclick='
+                                        showAlert(
+                                            "Title",
+                                            "This is a test modal dialog!"
+                                        );'
+								>
+									Test it
+								</button>
+							</p>
+							<div class="highlight-javascript notranslate">
+								<div class="highlight">
+									<pre><code>showAlert(
     "Title",
     "This is a test modal dialog!",
     "Back",
     "info"
 );</code></pre>
-					</li>
-					<li>
-						<code>flash()</code>
-						messages of Flask styled as Bootstrap 5 alerts,
-					</li>
-				</ul>
-			</li>
-			<li class="mt-4">
-				🌐 HTML templates:
-				<ul>
-					<li>
-						Email templates for the email validation, password
-						reset.
-					</li>
-					<li>
-						2 sets of page templates,
-						<ul>
-							<li>
-								Public pages (
-								<code>templates/public</code>
-								),
-								<ul>
-									<li>Login/sign up pages,</li>
-								</ul>
-							</li>
-							<li>
-								Backend (auth required) pages (
-								<code>templates/private</code>
-								),
-							</li>
-						</ul>
-					</li>
-					<li>
-						Utilizes the new ootb Bootstrap 5 components like
-						floating form labels,
-					</li>
-					<li>
-						Last, but not least: User configurable dark mode. 😎
-					</li>
-				</ul>
-			</li>
-		</ul>
+								</div>
+							</div>
+						</li>
+						<li>
+							<p>
+								<code class="docutils literal notranslate"
+									><span class="pre">flash()</span></code
+								>
+								messages from Flask styled as Bootstrap 5
+								alerts,
+							</p>
+						</li>
+					</ul>
+				</section>
+				<section id="bootstrap-html-templates">
+					<h4 class="mt-4">🌐 Bootstrap HTML templates</h4>
+					<ul class="my-2">
+						<li>
+							<p>
+								Email templates for the email validation,
+								password reset,
+							</p>
+						</li>
+						<li>
+							<p>
+								2 sets of page templates and Flask Blueprints:
+							</p>
+							<blockquote>
+								<div>
+									<ul class="my-2">
+										<li>
+											<p>
+												Public pages (<code
+													class="docutils literal notranslate"
+													><span class="pre"
+														>templates/public/</span
+													></code
+												>),
+											</p>
+										</li>
+										<li>
+											<p>
+												Auth pages for login, sign up,
+												and password reset, 2FA (<code
+													class="docutils literal notranslate"
+													><span class="pre"
+														>templates/auth/</span
+													></code
+												>),
+											</p>
+										</li>
+										<li>
+											<p>
+												Backend (auth required) pages
+												(<code
+													class="docutils literal notranslate"
+													><span class="pre"
+														>templates/private/</span
+													></code
+												>).
+											</p>
+										</li>
+									</ul>
+								</div>
+							</blockquote>
+						</li>
+						<li>
+							<p>
+								Utilizes the new ootb Bootstrap 5 components
+								like floating form labels,
+							</p>
+						</li>
+						<li>
+							<p>
+								Last, but not least: User configurable dark
+								mode. 😎
+							</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</section>
 		<hr />
-		<h3 class="mt-4">Components</h3>
+		<h3 class="my-4">Components</h3>
 		<a
 			class="btn btn-primary mb-4"
 			href="https://getbootstrap.com/docs/5.3/examples/#snippets"
@@ -185,7 +382,7 @@
 		>
 			Snippets and components from the Bootstrap docs
 		</a>
-		<h3 class="mt-4">Icons</h3>
+		<h3 class="my-4">Icons</h3>
 		<p>Bootstrap icons is included.</p>
 		<a
 			class="btn btn-primary mb-4"
@@ -194,7 +391,7 @@
 		>
 			See the list of available icons here.
 		</a>
-		<h3 class="mt-4">Dark mode</h3>
+		<h3 class="my-4">Dark mode</h3>
 		<p>
 			Color mode toggler from the Bootstrap docs is included. A dropdown
 			for mode selector is included in the
