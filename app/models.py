@@ -4,9 +4,10 @@ from hashlib import md5
 import pyotp
 import uuid
 
+from flask import current_app
 from flask_login import UserMixin
 
-from app import app, db
+from app import db
 from app.config import s3, appTimezone
 from app.utilities.object_storage import generate_download_link, user_folder_size
 from app.utilities.qr import qrcode_img_src
@@ -92,7 +93,7 @@ class Users(db.Model, UserMixin):
     tier_id = db.Column(db.Integer, db.ForeignKey("Tiers.id"))
 
     credits = db.Column(
-        db.BigInteger, default=app.config["MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS"]
+        db.BigInteger, default=current_app.config["MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS"]
     )
 
     # We use this to access the tier object from the user object
@@ -160,7 +161,7 @@ class Users(db.Model, UserMixin):
         # If the user has uploaded an avatar, we return the s3 link
         if self.avatar_uploaded:
             url = generate_download_link(
-                bucket_name=app.config["S3_BUCKET_NAME"],
+                bucket_name=current_app.config["S3_BUCKET_NAME"],
                 key=f"profile-pictures/{self.id}.png",
                 s3=s3,
             )
@@ -184,7 +185,7 @@ class Users(db.Model, UserMixin):
 
         # The provisioning url
         provisioning_url = totp.provisioning_uri(
-            name=self.email, issuer_name=app.config["APP_NAME"]
+            name=self.email, issuer_name=current_app.config["APP_NAME"]
         )
 
         # Return the secret and the qr code url:

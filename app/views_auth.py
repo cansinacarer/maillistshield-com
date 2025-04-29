@@ -1,10 +1,10 @@
 # Python modules
 from datetime import datetime, timezone
-from oauthlib.oauth2 import WebApplicationClient
 import requests
 import json
 import random
 import string
+from itsdangerous import URLSafeTimedSerializer
 
 # Flask modules
 from flask import (
@@ -16,6 +16,7 @@ from flask import (
     flash,
     abort,
     session,
+    current_app,
 )
 from flask_login import (
     login_user,
@@ -27,7 +28,7 @@ from jinja2 import TemplateNotFound
 
 
 # App modules
-from app import app, lm, db, bc, csrf
+from app import lm, db, bc, csrf
 from app.models import Users
 from app.forms import (
     LoginForm,
@@ -39,12 +40,12 @@ from app.forms import (
 )
 from app.views import limiter
 from app.config import appTimezone
-from app.emails import send_email_with_code, send_email_to_reset_password, ts
+from app.emails import send_email_with_code, send_email_to_reset_password
 from app.utilities.user_registration_actions import new_user_actions_for_email_confirmed
 from app.utilities.helpers import generate_n_digit_code
 from app.utilities.error_handlers import error_page
 
-app_auth = Blueprint("views_auth", __name__)
+auth_bp = Blueprint("auth_bp", __name__)
 
 
 # provide login manager with load_user callback
@@ -54,10 +55,6 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 
-# Google OAuth 2 client configuration
-google_client = WebApplicationClient(app.config["GOOGLE_CLIENT_ID"])
-
-
 # 403 cases will be redirected to login
 @lm.unauthorized_handler
 def unauthorized_callback():
@@ -65,14 +62,14 @@ def unauthorized_callback():
 
 
 # Logout user
-@app.route("/logout")
+@auth_bp.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("login"))
+    return redirect(url_for("auth_bp.login"))
 
 
 # Register a new user
-@app.route("/register", methods=["GET", "POST"])
+@auth_bp.route("/register", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def register():
     # Don't allow logged in users here
@@ -135,7 +132,7 @@ def register():
     if success:
         login_user(user, remember=True)
         send_email_with_code(current_user)
-        return redirect(url_for("email_confirmation_by_code"))
+        return redirect(url_for("auth_bp.email_confirmation_by_code"))
     else:
         return render_template(
             "public/auth/register.html", form=form, success=success, user=current_user
@@ -143,7 +140,7 @@ def register():
 
 
 # Authenticate user
-@app.route("/login", methods=["GET", "POST"])
+@auth_bp.route("/login", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def login():
     # Don't allow logged in users here
@@ -159,7 +156,7 @@ def login():
             endpoint = google_config["authorization_endpoint"]
 
             # Preserve next url if it exists
-            request_uri = google_client.prepare_request_uri(
+            request_uri = current_app.google_client.prepare_request_uri(
                 endpoint,
                 redirect_uri="https://" + request.host + "/login/callback/google",
                 scope=["openid", "email", "profile"],
@@ -199,7 +196,7 @@ def login():
                 if "next" in request.args:
                     return redirect(request.args["next"])
                 else:
-                    return redirect(url_for("views_private.private_index"))
+                    return redirect(url_for("private_bp.private_index"))
         else:
             flash("Incorrect username or password. Please try again.", "danger")
 
@@ -212,7 +209,7 @@ def login():
 
 
 # Authenticate user with the second factor
-@app_auth.route("/two-factor", methods=["GET", "POST"])
+@auth_bp.route("/two-factor", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def two_factor():
     # Don't allow logged in users here
@@ -222,14 +219,14 @@ def two_factor():
 
     # If the user isn't redirected with a successful login
     if "email" not in session:
-        return redirect(url_for("views_auth.login"))
+        return redirect(url_for("auth_bp.login"))
 
     user = Users.query.filter_by(email=session["email"]).first()
 
     # This shouldn't happen but if it does:
     if user is None:
         flash("Something went wrong during two factor authentication.", "danger")
-        return redirect(url_for("views_auth.login"))
+        return redirect(url_for("auth_bp.login"))
 
     # Declare the form
     form = TwoFactorAuthenticationForm(request.form)
@@ -260,7 +257,7 @@ def two_factor():
             if "next" in request.args:
                 return redirect(request.args["next"])
             else:
-                return redirect(url_for("views_private.private_index"))
+                return redirect(url_for("private_bp.private_index"))
         else:
             flash("This code was not correct.", "danger")
             return render_template(
@@ -274,14 +271,16 @@ def two_factor():
 
 
 # Email verification by sending the user an email with a code
-@app.route("/email-confirmation", methods=["GET", "POST"])
+@auth_bp.route("/email-confirmation", methods=["GET", "POST"])
 def email_confirmation_by_code():
     codeMatched = True
 
     if not current_user.is_authenticated:
         flash("Please login before verifying your email address.", "info")
         return redirect(
-            url_for("login") + "?next=" + url_for("email_confirmation_by_code")
+            url_for("auth_bp.login")
+            + "?next="
+            + url_for("auth_bp.email_confirmation_by_code")
         )
     elif current_user.email_confirmed == 0:
         # Verification code
@@ -315,7 +314,7 @@ def email_confirmation_by_code():
                     "Thank you for confirming your email address!", category="success"
                 )
 
-                return redirect(url_for("views_private.private_index"))
+                return redirect(url_for("private_bp.private_index"))
             else:
                 flash("This code was not correct.", "danger")
                 return render_template(
@@ -328,11 +327,11 @@ def email_confirmation_by_code():
             )
     else:
         flash("Your email address is already confirmed.", "info")
-        return redirect(url_for("views_private.private_index"))
+        return redirect(url_for("private_bp.private_index"))
 
 
 # Password Reset
-@app.route("/forgot-password", methods=["GET", "POST"])
+@auth_bp.route("/forgot-password", methods=["GET", "POST"])
 @limiter.limit("1 per day", methods=["POST"])
 def password_reset():
     # Declare the form
@@ -352,11 +351,11 @@ def password_reset():
             send_email_to_reset_password(email)
 
     #  Whatever happens, redirect to the information page without telling what happened
-    return redirect(url_for("password_reset_requested"))
+    return redirect(url_for("auth_bp.password_reset_requested"))
 
 
 # password reset requested
-@app.route("/password-reset-requested")
+@auth_bp.route("/password-reset-requested")
 def password_reset_requested():
     return render_template(
         "public/auth/password-reset-requested.html", user=current_user
@@ -364,10 +363,11 @@ def password_reset_requested():
 
 
 # Set new password
-@app.route("/set-new-password", methods=["GET", "POST"], defaults={"token": ""})
-@app.route("/set-new-password/<token>", methods=["GET", "POST"])
+@auth_bp.route("/set-new-password", methods=["GET", "POST"], defaults={"token": ""})
+@auth_bp.route("/set-new-password/<token>", methods=["GET", "POST"])
 def set_new_password(token):
     try:
+        ts = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
         email = ts.loads(token, salt="recover-key", max_age=86400)
     except:
         abort(404)
@@ -388,7 +388,7 @@ def set_new_password(token):
             "Your password has been reset successfully. Please login with your new password.",
             "info",
         )
-        return redirect(url_for("login"))
+        return redirect(url_for("auth_bp.login"))
 
     return render_template(
         "public/auth/new-password.html", form=form, user=current_user
@@ -401,7 +401,7 @@ def get_google_sso_config():
     ).json()
 
 
-@app_auth.route("/login/callback/google", methods=["GET", "POST"])
+@auth_bp.route("/login/callback/google", methods=["GET", "POST"])
 @csrf.exempt
 def login_callback_google():
     # Don't allow logged in users here
@@ -424,7 +424,7 @@ def login_callback_google():
     token_endpoint = google_config["token_endpoint"]
 
     # Prepare and send a request to get tokens!
-    token_url, headers, body = google_client.prepare_token_request(
+    token_url, headers, body = current_app.google_client.prepare_token_request(
         token_endpoint,
         authorization_response="https://" + request.host + request.full_path,
         redirect_url="https://" + request.host + request.path,
@@ -434,14 +434,19 @@ def login_callback_google():
         token_url,
         headers=headers,
         data=body,
-        auth=(app.config["GOOGLE_CLIENT_ID"], app.config["GOOGLE_CLIENT_SECRET"]),
+        auth=(
+            current_app.config["GOOGLE_CLIENT_ID"],
+            current_app.config["GOOGLE_CLIENT_SECRET"],
+        ),
     )
 
     # Parse the tokens
-    google_client.parse_request_body_response(json.dumps(token_response.json()))
+    current_app.google_client.parse_request_body_response(
+        json.dumps(token_response.json())
+    )
 
     userinfo_endpoint = google_config["userinfo_endpoint"]
-    uri, headers, body = google_client.add_token(userinfo_endpoint)
+    uri, headers, body = current_app.google_client.add_token(userinfo_endpoint)
     userinfo_response = requests.get(uri, headers=headers, data=body)
 
     # You want to make sure their email is verified.
@@ -530,4 +535,4 @@ def login_callback_google():
             "Your Google email not available or not verified by Google. Please set up your Google email first or try using a different email address.",
             "danger",
         )
-        return redirect(url_for("login"))
+        return redirect(url_for("auth_bp.login"))

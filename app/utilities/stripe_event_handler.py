@@ -44,8 +44,7 @@ def handle_stripe_event(event):
 
         # Update the user's credits
         quantity = event.data.object.metadata.quantity
-        user_matched.credits = user_matched.credits + int(quantity)
-        user_matched.save()
+        user_matched.add_credits(int(quantity))
 
     # If it is a subscription event, try to parse user and tier
     if is_subscription_event(event):

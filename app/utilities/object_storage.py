@@ -2,7 +2,7 @@ import json
 from botocore.exceptions import ClientError
 from datetime import datetime
 
-from app import app
+from flask import current_app
 from app.config import s3
 
 
@@ -144,7 +144,7 @@ def timestamp():
 
 def generate_upload_link_profile_picture(user, file_type):
     return generate_upload_link(
-        app.config["S3_BUCKET_NAME"],
+        current_app.config["S3_BUCKET_NAME"],
         f"profile-pictures/{user.id}.png",
         file_type,
         s3,
@@ -164,9 +164,15 @@ def generate_upload_link_validation_file(user, file_type, file):
 
 def generate_user_folder(user):
     generate_remote_file(
-        app.config["S3_BUCKET_NAME"], f"user-files/user-{user.id}", ".tmp", s3, "tmp"
+        current_app.config["S3_BUCKET_NAME"],
+        f"user-files/user-{user.id}",
+        ".tmp",
+        s3,
+        "tmp",
     )
 
 
 def user_folder_size(user):
-    return folder_size(app.config["S3_BUCKET_NAME"], f"user-files/user-{user.id}", s3)
+    return folder_size(
+        current_app.config["S3_BUCKET_NAME"], f"user-files/user-{user.id}", s3
+    )

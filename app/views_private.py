@@ -1,18 +1,25 @@
 # Flask modules
-from flask import Blueprint, render_template, request, url_for, redirect, flash, jsonify
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    url_for,
+    redirect,
+    flash,
+    jsonify,
+    current_app,
+)
 from flask_login import (
     login_required,
     current_user,
 )
 from jinja2 import TemplateNotFound
-import datetime
 
 # Stripe
 import stripe
 
 # App modules
-from app import app, csrf
-from app.config import appTimezone
+from app import csrf
 from app.forms import ProfileDetailsForm
 from app.models import Users, Tiers
 from app.utilities.object_storage import generate_upload_link_profile_picture
@@ -20,50 +27,11 @@ from app.utilities.error_handlers import error_page
 from app.utilities.stripe_event_handler import handle_stripe_event
 
 # Instantiate the Blueprint
-app_private = Blueprint("views_private", __name__)
-
-
-# Custom date format filter
-# In Jinja, we can use this filter like: {{ charge.created | dateformat }}
-def dateformat(value, format="%B %d, %Y"):
-    return datetime.datetime.fromtimestamp(value).strftime(format)
-
-
-def dbDateformat(value, format="%B %d, %Y"):
-    return value.astimezone(appTimezone).strftime(format)
-
-
-def timeformat(value, format="%I:%M %p"):
-    return datetime.datetime.fromtimestamp(value).strftime(format)
-
-
-def dbTimeformat(value, format="%I:%M %p"):
-    return value.astimezone(appTimezone).strftime(format)
-
-
-def thousandSeparator(value):
-    return "{:,}".format(value)
-
-
-def prettifyJobStatus(status):
-    match status:
-        case "pending_start":
-            return "Pending Start"
-
-        case _:
-            return status
-
-
-app.jinja_env.filters["dateformat"] = dateformat
-app.jinja_env.filters["dbDateformat"] = dbDateformat
-app.jinja_env.filters["timeformat"] = timeformat
-app.jinja_env.filters["dbTimeformat"] = dbTimeformat
-app.jinja_env.filters["thousandSeparator"] = thousandSeparator
-app.jinja_env.filters["prettifyJobStatus"] = prettifyJobStatus
+private_bp = Blueprint("private_bp", __name__)
 
 
 # Webhook endpoints for external services to give us updates
-@app_private.route("/webhook/<path>", methods=["POST"])
+@private_bp.route("/webhook/<path>", methods=["POST"])
 @csrf.exempt
 def webhook(path):
     try:
@@ -75,7 +43,7 @@ def webhook(path):
                     event = stripe.webhook.Webhook.construct_event(
                         request.data.decode("utf-8"),
                         request.headers.get("Stripe-Signature", None),
-                        app.config["STRIPE_WEBHOOK_SECRET"],
+                        current_app.config["STRIPE_WEBHOOK_SECRET"],
                     )
                     handle_stripe_event(event)
 
@@ -108,8 +76,8 @@ def webhook(path):
 
 
 # Billing pages routing
-@app_private.route("/billing", defaults={"path": "billing"}, methods=["GET", "POST"])
-@app_private.route("/billing/<path>", methods=["GET", "POST"])
+@private_bp.route("/billing", defaults={"path": "billing"}, methods=["GET", "POST"])
+@private_bp.route("/billing/<path>", methods=["GET", "POST"])
 @login_required
 def billing(path):
     # Redirect to email confirmation
@@ -118,7 +86,7 @@ def billing(path):
             "Please confirm your email address first by entering the confirmation code we have emailed you.",
             "error",
         )
-        return redirect(url_for("email_confirmation_by_code"))
+        return redirect(url_for("auth_bp.email_confirmation_by_code"))
 
     try:
         match path:
@@ -127,7 +95,7 @@ def billing(path):
                 flash("Your payment has been successful.", "success")
                 return redirect(
                     url_for(
-                        "views_private.billing",
+                        "private_bp.billing",
                     )
                 )
 
@@ -136,7 +104,7 @@ def billing(path):
                 flash("Your payment has been canceled.", "danger")
                 return redirect(
                     url_for(
-                        "views_private.billing",
+                        "private_bp.billing",
                     )
                 )
 
@@ -162,7 +130,7 @@ def billing(path):
                         # Validate the number of credits
                         if not creditsRequested.isdigit():
                             flash("Invalid number of credits selected.", "danger")
-                            return redirect(url_for("views_private.billing"))
+                            return redirect(url_for("private_bp.billing"))
 
                     except Exception as e:
                         print(f"Error while parsing the numberOfCredits requested: {e}")
@@ -174,11 +142,11 @@ def billing(path):
                         line_items=[
                             {
                                 "price_data": {
-                                    "unit_amount": app.config[
+                                    "unit_amount": current_app.config[
                                         "STRIPE_CREDIT_UNIT_COST"
                                     ],
                                     "currency": "usd",
-                                    "product": app.config[
+                                    "product": current_app.config[
                                         "STRIPE_PRODUCT_ID_FOR_CREDITS"
                                     ],
                                 },
@@ -197,11 +165,11 @@ def billing(path):
                         },
                         mode="payment",
                         payment_method_types=["card"],
-                        success_url=app.config["APP_ROOT_URL"]
-                        + url_for("views_private.billing")
+                        success_url=current_app.config["APP_ROOT_URL"]
+                        + url_for("private_bp.billing")
                         + "/success",
-                        cancel_url=app.config["APP_ROOT_URL"]
-                        + url_for("views_private.billing")
+                        cancel_url=current_app.config["APP_ROOT_URL"]
+                        + url_for("private_bp.billing")
                         + "/cancel",
                         automatic_tax={"enabled": True},
                         customer_update={
@@ -218,7 +186,7 @@ def billing(path):
                     )
                     return redirect(
                         url_for(
-                            "views_private.billing",
+                            "private_bp.billing",
                         )
                     )
 
@@ -243,7 +211,7 @@ def billing(path):
                     )
                     return redirect(
                         url_for(
-                            "views_private.billing",
+                            "private_bp.billing",
                         )
                     )
 
@@ -284,11 +252,11 @@ def billing(path):
                         ],
                         mode="subscription",
                         payment_method_types=["card"],
-                        success_url=app.config["APP_ROOT_URL"]
-                        + url_for("views_private.billing")
+                        success_url=current_app.config["APP_ROOT_URL"]
+                        + url_for("private_bp.billing")
                         + "/success",
-                        cancel_url=app.config["APP_ROOT_URL"]
-                        + url_for("views_private.billing")
+                        cancel_url=current_app.config["APP_ROOT_URL"]
+                        + url_for("private_bp.billing")
                         + "/cancel",
                         automatic_tax={"enabled": True},
                         customer_update={
@@ -305,7 +273,7 @@ def billing(path):
                     )
                     return redirect(
                         url_for(
-                            "views_private.billing",
+                            "private_bp.billing",
                         )
                     )
 
@@ -334,8 +302,8 @@ def billing(path):
 
 
 # Account pages routing
-@app_private.route("/account", defaults={"path": "account"}, methods=["GET", "POST"])
-@app_private.route("/account/<path>", methods=["GET", "POST"])
+@private_bp.route("/account", defaults={"path": "account"}, methods=["GET", "POST"])
+@private_bp.route("/account/<path>", methods=["GET", "POST"])
 @login_required
 def account(path):
     # Redirect to email confirmation
@@ -344,7 +312,7 @@ def account(path):
             "Please confirm your email address first by entering the confirmation code we have emailed you.",
             "error",
         )
-        return redirect(url_for("email_confirmation_by_code"))
+        return redirect(url_for("auth_bp.email_confirmation_by_code"))
     try:
         # Declare the registration form
         form = ProfileDetailsForm()
@@ -431,9 +399,9 @@ def account(path):
 
 
 # Admin pages routing
-@app_private.route("/admin", defaults={"path": "admin"}, methods=["GET", "POST"])
+@private_bp.route("/admin", defaults={"path": "admin"}, methods=["GET", "POST"])
 # path:path is to catch all paths, including those with multiple slashes (/)
-@app_private.route("/admin/<path:path>", methods=["GET", "POST"])
+@private_bp.route("/admin/<path:path>", methods=["GET", "POST"])
 @login_required
 def admin(path):
     # If this user is not admin, return 403
@@ -448,9 +416,10 @@ def admin(path):
             return render_template(
                 f"emails/{email_template}.html",
                 user=current_user,
-                appName=app.config["APP_NAME"],
-                appHome=app.config["APP_ROOT_URL"],
-                resetLink=url_for("set_new_password", _external=True) + "/dummyToken",
+                appName=current_app.config["APP_NAME"],
+                appHome=current_app.config["APP_ROOT_URL"],
+                resetLink=url_for("auth_bp.set_new_password", _external=True)
+                + "/dummyToken",
             )
         except TemplateNotFound:
             return "Email template not found.", 404
@@ -470,8 +439,8 @@ def admin(path):
 
 
 # Generic private pages routing
-@app_private.route("/", defaults={"path": "index"})
-@app_private.route("/<path>")
+@private_bp.route("/", defaults={"path": "index"})
+@private_bp.route("/<path>")
 @login_required
 def private_index(path):
     # Redirect to email confirmation
@@ -480,7 +449,7 @@ def private_index(path):
             "Please confirm your email address first by entering the confirmation code we have emailed you.",
             "error",
         )
-        return redirect(url_for("email_confirmation_by_code"))
+        return redirect(url_for("auth_bp.email_confirmation_by_code"))
 
     try:
         # Serve the file (if exists) from app/templates/private/PATH.html

@@ -41,6 +41,7 @@ jobs:
                   APP_NAME: Mail List Shield
                   TIMEZONE: US/Eastern
                   FLASK_DEBUG: True
+                  DATABASE_CONNECTION_STRING: "sqlite:///test_database.db"
                   DATABASE_SECRET_KEY: 12345678901234567
                   S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
                   S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
@@ -63,6 +64,9 @@ jobs:
                   GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
                   FLASK_RUN_CERT: .devcontainer/ssl/cert.pem
                   FLASK_RUN_KEY: .devcontainer/ssl/key.pem
+                  MLS_WORKERS: ${{ secrets.MLS_WORKERS }}
+                  MLS_WORKER_API_KEY: ${{ secrets.MLS_WORKER_API_KEY }}
+                  MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS: 100
 
               run: |
                   coverage run -m pytest

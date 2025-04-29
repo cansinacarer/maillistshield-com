@@ -1,12 +1,12 @@
 import requests
 
-from app import app
+from flask import current_app
 
 
 # Distribute traffic to workers with round robin
 def validate_email(email):
-    workers = app.config["MLS_WORKERS"]
-    first_worker_index = app.config["NEXT_WORKER"]
+    workers = current_app.config["MLS_WORKERS"]
+    first_worker_index = current_app.config["NEXT_WORKER"]
     best_result_so_far = {}
 
     # Until we find a server that doesn't return status = unknown
@@ -17,8 +17,8 @@ def validate_email(email):
         print(f"We are using worker #{worker_index}, which is {workers[worker_index]}")
 
         # Increment the next worker global variable
-        app.config["NEXT_WORKER"] = (worker_index + 1) % len(workers)
-        print(f'Next time we will use the worker #{app.config["NEXT_WORKER"]}')
+        current_app.config["NEXT_WORKER"] = (worker_index + 1) % len(workers)
+        print(f'Next time we will use the worker #{current_app.config["NEXT_WORKER"]}')
 
         # Request the result from the worker
         new_result = request_validation(email, workers[worker_index])
@@ -51,7 +51,7 @@ def validate_email(email):
 def request_validation(email, worker):
     data = {
         "email": email,
-        "api_key": app.config["MLS_WORKER_API_KEY"],
+        "api_key": current_app.config["MLS_WORKER_API_KEY"],
     }
 
     try:
