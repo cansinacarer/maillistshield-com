@@ -37,8 +37,8 @@ def create_app(config_class="app.config.Config", test_config=False):
 
     # If specified, load the test configuration to override the Config object
     if test_config:
-        # Use an in-memory SQLite database for testing
-        app.config["DATABASE_CONNECTION_STRING"] = "sqlite:///:memory:"
+        # Disable Postgres pooling when SQLite is used
+        app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {}
 
     # Initialize the Flask extensions for the app instance
     mail.init_app(app)
@@ -58,10 +58,11 @@ def create_app(config_class="app.config.Config", test_config=False):
     # Set up the database tables if they don't exist
     try:
         with app.app_context():
-            db.create_all()
+            # Import the table models
+            from app.models import Users, Tiers
 
-            # Create the default tier for all users
-            from app.models import Tiers
+            # Create the database tables if they don't exist
+            db.create_all()
 
             # If there are no tiers in the database, create the default tiers
             if Tiers.query.count() == 0:
