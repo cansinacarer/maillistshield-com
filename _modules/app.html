@@ -203,7 +203,6 @@
     <span class="k">if</span> <span class="n">test_config</span><span class="p">:</span>
         <span class="c1"># Disable Postgres pooling when SQLite is used</span>
         <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SQLALCHEMY_ENGINE_OPTIONS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQLALCHEMY_DATABASE_URI: </span><span class="si">{</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Initialize the Flask extensions for the app instance</span>
     <span class="n">mail</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
