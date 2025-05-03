@@ -5,7 +5,7 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "flask",
 	"workspaceFolder": "/workspaces/base-saas",
-	"runServices": ["database", "pgadmin"],
+	"runServices": ["database", "pgadmin", "docs"],
 	"customizations": {
 		"vscode": {
 			"extensions": [

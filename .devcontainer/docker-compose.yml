@@ -36,3 +36,11 @@ services:
             - database
         volumes:
             - ./pgadmin-server-config.json:/pgadmin4/servers.json
+
+    docs:
+        image: python:3
+        command: python3 -m http.server --directory /docs/html 5003
+        volumes:
+            - ../docs/build/html:/docs/html
+        ports:
+            - "5003:5003"
