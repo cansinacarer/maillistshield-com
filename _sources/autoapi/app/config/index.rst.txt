@@ -135,9 +135,6 @@ Module Contents
    .. py:attribute:: MLS_WORKER_API_KEY
 
 
-   .. py:attribute:: MLS_MAX_ANONYMOUS_USAGE_PER_IP
-
-
    .. py:attribute:: MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS
 
 

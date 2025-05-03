@@ -42,7 +42,20 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#developer-experience">🧑‍💻 Developer Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#deployment">☁️ Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#stripe-integrations">💳 Stripe Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#authentication">🔒 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#transactional-emails-with-smtp">📧 Transactional Emails with SMTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#security">🚨 Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#ui">🎨 UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#notifications">🔔 Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#bootstrap-html-templates">🌐 Bootstrap HTML templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
@@ -86,15 +99,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/app/index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/app/index.html#functions">Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/app/index.html#package-contents">Package Contents</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.app"><code class="docutils literal notranslate"><span class="pre">app</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.mail"><code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.bc"><code class="docutils literal notranslate"><span class="pre">bc</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.lm"><code class="docutils literal notranslate"><span class="pre">lm</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.csrf"><code class="docutils literal notranslate"><span class="pre">csrf</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.sslify"><code class="docutils literal notranslate"><span class="pre">sslify</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.default_tier"><code class="docutils literal notranslate"><span class="pre">default_tier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../autoapi/app/index.html#app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -135,15 +147,15 @@
   <h1>Source code for app.utilities.validation</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">current_app</span>
 
 
 <span class="c1"># Distribute traffic to workers with round robin</span>
 <div class="viewcode-block" id="validate_email">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/validation/index.html#app.utilities.validation.validate_email">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
-    <span class="n">workers</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKERS&quot;</span><span class="p">]</span>
-    <span class="n">first_worker_index</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span>
+    <span class="n">workers</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKERS&quot;</span><span class="p">]</span>
+    <span class="n">first_worker_index</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span>
     <span class="n">best_result_so_far</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># Until we find a server that doesn&#39;t return status = unknown</span>
@@ -154,8 +166,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We are using worker #</span><span class="si">{</span><span class="n">worker_index</span><span class="si">}</span><span class="s2">, which is </span><span class="si">{</span><span class="n">workers</span><span class="p">[</span><span class="n">worker_index</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Increment the next worker global variable</span>
-        <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">worker_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Next time we will use the worker #</span><span class="si">{</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">worker_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">workers</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Next time we will use the worker #</span><span class="si">{</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="c1"># Request the result from the worker</span>
         <span class="n">new_result</span> <span class="o">=</span> <span class="n">request_validation</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">workers</span><span class="p">[</span><span class="n">worker_index</span><span class="p">])</span>
@@ -191,7 +203,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">request_validation</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">worker</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
-        <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKER_API_KEY&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKER_API_KEY&quot;</span><span class="p">],</span>
     <span class="p">}</span>
 
     <span class="k">try</span><span class="p">:</span>

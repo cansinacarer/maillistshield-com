@@ -9,7 +9,7 @@ Attributes
 
 .. autoapisummary::
 
-   app.views_private.app_private
+   app.views_private.private_bp
 
 
 Functions
@@ -17,12 +17,6 @@ Functions
 
 .. autoapisummary::
 
-   app.views_private.dateformat
-   app.views_private.dbDateformat
-   app.views_private.timeformat
-   app.views_private.dbTimeformat
-   app.views_private.thousandSeparator
-   app.views_private.prettifyJobStatus
    app.views_private.webhook
    app.views_private.billing
    app.views_private.account
@@ -33,19 +27,7 @@ Functions
 Module Contents
 ---------------
 
-.. py:data:: app_private
-
-.. py:function:: dateformat(value, format='%B %d, %Y')
-
-.. py:function:: dbDateformat(value, format='%B %d, %Y')
-
-.. py:function:: timeformat(value, format='%I:%M %p')
-
-.. py:function:: dbTimeformat(value, format='%I:%M %p')
-
-.. py:function:: thousandSeparator(value)
-
-.. py:function:: prettifyJobStatus(status)
+.. py:data:: private_bp
 
 .. py:function:: webhook(path)
 
