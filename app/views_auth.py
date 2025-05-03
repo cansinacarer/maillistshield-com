@@ -48,30 +48,40 @@ from app.utilities.error_handlers import error_page
 auth_bp = Blueprint("auth_bp", __name__)
 
 
-# provide login manager with load_user callback
-# This callback is used to reload the user object from the user ID stored in the session.
 @lm.user_loader
 def load_user(user_id):
+    """This function is used to load the user object from the user ID stored in the session.
+
+    Args:
+        user_id (str): The ID of the user to load.
+
+    Returns:
+        Users: The user object from the db corresponding to the user ID.
+    """
     return Users.query.get(int(user_id))
 
 
-# 403 cases will be redirected to login
 @lm.unauthorized_handler
 def unauthorized_callback():
+    """This function is used to handle unauthorized access to protected routes.
+
+    403 cases will be redirected to login
+    """
     return redirect("/login?next=" + request.path)
 
 
-# Logout user
 @auth_bp.route("/logout")
 def logout():
+    """This function is used to log out the user and redirect them to the login page."""
     logout_user()
     return redirect(url_for("auth_bp.login"))
 
 
-# Register a new user
 @auth_bp.route("/register", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def register():
+    """The view function for the registration page."""
+
     # Don't allow logged in users here
     if current_user.is_authenticated:
         flash("You are already registered.", "info")
@@ -139,10 +149,11 @@ def register():
         )
 
 
-# Authenticate user
 @auth_bp.route("/login", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def login():
+    """The view function for the login page."""
+
     # Don't allow logged in users here
     if current_user.is_authenticated:
         flash("You are already logged in.", "info")
@@ -208,10 +219,11 @@ def login():
     )
 
 
-# Authenticate user with the second factor
 @auth_bp.route("/two-factor", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def two_factor():
+    """The view function for the two factor authentication page."""
+
     # Don't allow logged in users here
     if current_user.is_authenticated:
         flash("You are already logged in.", "info")
@@ -270,9 +282,10 @@ def two_factor():
         )
 
 
-# Email verification by sending the user an email with a code
 @auth_bp.route("/email-confirmation", methods=["GET", "POST"])
 def email_confirmation_by_code():
+    """The view function for the email verification page."""
+
     codeMatched = True
 
     if not current_user.is_authenticated:
@@ -330,10 +343,11 @@ def email_confirmation_by_code():
         return redirect(url_for("private_bp.private_index"))
 
 
-# Password Reset
 @auth_bp.route("/forgot-password", methods=["GET", "POST"])
 @limiter.limit("1 per day", methods=["POST"])
 def password_reset():
+    """The view function for the password reset page."""
+
     # Declare the form
     form = ResetPassword(request.form)
 
@@ -354,18 +368,24 @@ def password_reset():
     return redirect(url_for("auth_bp.password_reset_requested"))
 
 
-# password reset requested
 @auth_bp.route("/password-reset-requested")
 def password_reset_requested():
+    """The view function for the password reset requested page."""
+
     return render_template(
         "public/auth/password-reset-requested.html", user=current_user
     )
 
 
-# Set new password
 @auth_bp.route("/set-new-password", methods=["GET", "POST"], defaults={"token": ""})
 @auth_bp.route("/set-new-password/<token>", methods=["GET", "POST"])
 def set_new_password(token):
+    """The view function for the set new password page.
+
+    Args:
+        token (str): The token from the forgot password email, used to verify the user.
+    """
+
     try:
         ts = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
         email = ts.loads(token, salt="recover-key", max_age=86400)
@@ -396,6 +416,11 @@ def set_new_password(token):
 
 
 def get_google_sso_config():
+    """Get the Google SSO configuration.
+
+    Returns:
+        dict: The Google SSO configuration.
+    """
     return requests.get(
         "https://accounts.google.com/.well-known/openid-configuration"
     ).json()
@@ -404,6 +429,11 @@ def get_google_sso_config():
 @auth_bp.route("/login/callback/google", methods=["GET", "POST"])
 @csrf.exempt
 def login_callback_google():
+    """The view function for the Google login callback.
+
+    This is the page that Google redirects to after the Google authentication attempt.
+    """
+
     # Don't allow logged in users here
     if current_user.is_authenticated and current_user.is_connected_google():
         flash("You are already logged in.", "info")

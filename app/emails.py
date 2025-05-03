@@ -10,8 +10,14 @@ from app.decorators import asyncr
 from app.models import Users
 
 
-# Sends an email with the password reset link
 def send_email_to_reset_password(email):
+    """Send an email with the password reset link.
+
+    Args:
+        email (str): The email address of the user.
+
+    """
+
     # Tokenize the email address
     ts = URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
     token = ts.dumps(email, salt="recover-key")
@@ -40,8 +46,13 @@ def send_email_to_reset_password(email):
     send_async_email(msg, current_app._get_current_object())
 
 
-# Send the email for user the verify their email address
 def send_email_with_code(user):
+    """Send an email with the verification code.
+
+    Args:
+        user (Users): The user object.
+    """
+
     # If last confirmation email was sent more than 60 seconds ago
     now = datetime.now(timezone.utc).replace(tzinfo=None)
     last_sent = user.last_confirmation_codes_sent
@@ -90,8 +101,14 @@ def send_email_with_code(user):
         )
 
 
-# Sends an email with the password reset link
 def send_email_about_subscription_confirmation(user, tier_name):
+    """Send an email with the paid subscription confirmation.
+
+    Args:
+        user (Users): The user object.
+        tier_name (str): The name of the subscription tier.
+    """
+
     # Email with this information:
     msg = Message("Subscription Confirmed")
     msg.add_recipient(user.email)
@@ -113,8 +130,17 @@ def send_email_about_subscription_confirmation(user, tier_name):
     send_async_email(msg, current_app._get_current_object())
 
 
-# Sends an email with the password reset link
 def send_email_about_subscription_cancellation(user, tier_name, cancellation_date):
+    """Send an email with the subscription cancellation information.
+
+    This is the email sent when the user cancels their subscription but the subscription
+    is still active until the end of the billing period.
+
+    Args:
+        user (Users): The user object.
+        tier_name (str): The name of the subscription tier.
+        cancellation_date (datetime): The date of cancellation.
+    """
     # Email with this information:
     msg = Message("Subscription Canceled")
     msg.add_recipient(user.email)
@@ -138,8 +164,16 @@ def send_email_about_subscription_cancellation(user, tier_name, cancellation_dat
     send_async_email(msg, current_app._get_current_object())
 
 
-# Sends an email with the password reset link
 def send_email_about_subscription_deletion(user, tier_name):
+    """Send an email with the subscription deletion information.
+
+    This is the email sent when the subscription has ended.
+
+    Args:
+        user (Users): The user object.
+        tier_name (str): The name of the subscription tier.
+    """
+
     # Email with this information:
     msg = Message("Subscription Ended")
     msg.add_recipient(user.email)
@@ -164,5 +198,11 @@ def send_email_about_subscription_deletion(user, tier_name):
 # Async emailing - all information is passed in an instance of the Message object
 @asyncr
 def send_async_email(msg, app):
+    """Send an email asynchronously.
+
+    Args:
+        msg (Message): The Message object containing email details.
+        app (Flask): The Flask application instance.
+    """
     with app.app_context():
         mail.send(msg)

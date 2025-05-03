@@ -3,8 +3,10 @@
 {% block content %}
 	<div class="container my-5">
 		<h1>Home</h1>
-		<p>This is the public home page where the anonymous visitors land.</p>
-		<p>
+		<p class="my-1">
+			This is the public home page where the anonymous visitors land.
+		</p>
+		<p class="my-1">
 			<a href="/register">Create an account</a>
 			to see the authentication and payment process through the login and
 			application templates.
@@ -16,43 +18,45 @@
 				<h3 class="my-4">💻 Developer Experience</h3>
 				<ul class="my-2">
 					<li>
-						<p>Dev containers:</p>
+						<p class="my-1">Dev containers:</p>
 						<ul class="my-2">
 							<li>
-								<p>
+								<p class="my-1">
 									<strong>Flask</strong> container with
 									pre-configured with:
 								</p>
 								<ul class="my-2">
 									<li>
-										<p>
+										<p class="my-1">
 											VSCode launch.json for debugging the
 											Flask app,
 										</p>
 									</li>
 									<li>
-										<p>
+										<p class="my-1">
 											Prettier for HTML, CSS, and JS
 											formatting,
 										</p>
 									</li>
 									<li>
-										<p>
+										<p class="my-1">
 											Pre-commit hooks for code quality
 											checks,
 										</p>
 									</li>
 									<li>
-										<p>
+										<p class="my-1">
 											Markdownlint for Markdown
 											formatting,
 										</p>
 									</li>
 									<li>
-										<p>Black for Python code formatting,</p>
+										<p class="my-1">
+											Black for Python code formatting,
+										</p>
 									</li>
 									<li>
-										<p>
+										<p class="my-1">
 											Commitlint for commit message
 											linting.
 										</p>
@@ -60,13 +64,13 @@
 								</ul>
 							</li>
 							<li>
-								<p>
+								<p class="my-1">
 									<strong>Postgres</strong> as a development
 									database,
 								</p>
 							</li>
 							<li>
-								<p>
+								<p class="my-1">
 									<strong>pgAdmin</strong> pre-connected to
 									the development.
 								</p>
@@ -74,19 +78,27 @@
 						</ul>
 					</li>
 					<li>
-						<p>CI/CD pipelines with GitHub Actions to:</p>
+						<p class="my-1">
+							CI/CD pipelines with GitHub Actions to:
+						</p>
 						<ul class="my-2">
-							<li><p>Run pre-commit hooks,</p></li>
-							<li><p>Run tests,</p></li>
+							<li><p class="my-1">Run pre-commit hooks,</p></li>
+							<li><p class="my-1">Run tests,</p></li>
 							<li>
-								<p>
+								<p class="my-1">
 									Automate semantic release for versioning and
 									changelog generation,
 								</p>
 							</li>
-							<li><p>Build and deploy the documentation,</p></li>
 							<li>
-								<p>Build and deploy the app to production.</p>
+								<p class="my-1">
+									Build and deploy the documentation,
+								</p>
+							</li>
+							<li>
+								<p class="my-1">
+									Build and deploy the app to production.
+								</p>
 							</li>
 						</ul>
 					</li>
@@ -96,13 +108,21 @@
 				<h3 class="my-4">☁️ Deployment</h3>
 				<ul class="my-2">
 					<li>
-						<p>
+						<p class="my-1">
 							🐳 Dockerized Flask for stateless continuous
 							deployment for scalability,
 						</p>
 					</li>
-					<li><p>🗄️ Database model abstracted with ORM,</p></li>
-					<li><p>📦 S3 object storage with pre-signed URLs.</p></li>
+					<li>
+						<p class="my-1">
+							🗄️ Database model abstracted with ORM,
+						</p>
+					</li>
+					<li>
+						<p class="my-1">
+							📦 S3 object storage with pre-signed URLs.
+						</p>
+					</li>
 				</ul>
 			</section>
 			<section id="stripe-integrations">
@@ -111,31 +131,39 @@
 					<div>
 						<ul class="my-2">
 							<li>
-								<p>Subscriptions,</p>
+								<p class="my-1">Subscriptions,</p>
 								<ul class="my-2">
 									<li>
-										<p>Different subscription tiers,</p>
+										<p class="my-1">
+											Different subscription tiers,
+										</p>
 									</li>
-									<li><p>Billing page with Invoices,</p></li>
 									<li>
-										<p>Integration mechanism:</p>
+										<p class="my-1">
+											Billing page with Invoices,
+										</p>
+									</li>
+									<li>
+										<p class="my-1">
+											Integration mechanism:
+										</p>
 										<ul class="my-2">
 											<li>
-												<p>
+												<p class="my-1">
 													To begin a subscription, we
 													send the user to Stripe with
 													a checkout session,
 												</p>
 											</li>
 											<li>
-												<p>
+												<p class="my-1">
 													Then listen to Stripe
 													webhook events to process
 													the results,
 												</p>
 											</li>
 											<li>
-												<p>
+												<p class="my-1">
 													We set the Products in
 													Stripe, then insert their
 													prices into the Tiers table.
@@ -146,7 +174,7 @@
 								</ul>
 							</li>
 							<li>
-								<p>
+								<p class="my-1">
 									One-off credit purchases for pre-paid
 									metered usage.
 								</p>
@@ -161,29 +189,39 @@
 					<div>
 						<ul class="my-2">
 							<li>
-								<p>Sign up flow,</p>
+								<p class="my-1">Sign up flow,</p>
 								<ul class="my-2">
-									<li><p>Sign up with Google option,</p></li>
 									<li>
-										<p>Email validation requirement,</p>
+										<p class="my-1">
+											Sign up with Google option,
+										</p>
+									</li>
+									<li>
+										<p class="my-1">
+											Email validation requirement,
+										</p>
 									</li>
 								</ul>
 							</li>
 							<li>
-								<p>Two factor authentication (TOTP only),</p>
+								<p class="my-1">
+									Two factor authentication (TOTP only),
+								</p>
 							</li>
-							<li><p>Forgot password flow,</p></li>
+							<li><p class="my-1">Forgot password flow,</p></li>
 							<li>
-								<p>Account details page where the user can:</p>
+								<p class="my-1">
+									Account details page where the user can:
+								</p>
 								<ul class="my-2">
 									<li>
-										<p>
+										<p class="my-1">
 											Upload a profile picture (stored in
 											S3),
 										</p>
 									</li>
 									<li>
-										<p>
+										<p class="my-1">
 											Change profile details like first
 											&amp; last name.
 										</p>
@@ -200,15 +238,21 @@
 					<div>
 						<ul class="my-2">
 							<li>
-								<p>About Stripe subscription changes:</p>
+								<p class="my-1">
+									About Stripe subscription changes:
+								</p>
 								<ul class="my-2">
-									<li><p>Confirmation,</p></li>
-									<li><p>Cancellation,</p></li>
-									<li><p>Expiration.</p></li>
+									<li><p class="my-1">Confirmation,</p></li>
+									<li><p class="my-1">Cancellation,</p></li>
+									<li><p class="my-1">Expiration.</p></li>
 								</ul>
 							</li>
-							<li><p>Email verification on registration,</p></li>
-							<li><p>Forgot password.</p></li>
+							<li>
+								<p class="my-1">
+									Email verification on registration,
+								</p>
+							</li>
+							<li><p class="my-1">Forgot password.</p></li>
 						</ul>
 					</div>
 				</blockquote>
@@ -219,22 +263,24 @@
 					<div>
 						<ul class="my-2">
 							<li>
-								<p>
+								<p class="my-1">
 									Cross-Site Request Forgery (CSRF) protection
 									in all forms,
 								</p>
 							</li>
 							<li>
-								<p>
+								<p class="my-1">
 									Rate limiting: App-wide and form specific
 									limits,
 								</p>
 							</li>
 							<li>
-								<p>Cross-Site Scripting (XSS) protection,</p>
+								<p class="my-1">
+									Cross-Site Scripting (XSS) protection,
+								</p>
 							</li>
 							<li>
-								<p>
+								<p class="my-1">
 									Cross-Origin Resource Sharing (CORS)
 									protection.
 								</p>
@@ -249,7 +295,7 @@
 					<h4 class="mt-4">🔔 Notifications</h4>
 					<ul class="my-2">
 						<li>
-							<p>
+							<p class="my-1">
 								Toast notifications
 								<button
 									class="btn btn-primary my-2"
@@ -270,7 +316,7 @@
 							</div>
 						</li>
 						<li>
-							<p>
+							<p class="my-1">
 								Modals
 								<button
 									class="btn btn-primary my-2"
@@ -295,7 +341,7 @@
 							</div>
 						</li>
 						<li>
-							<p>
+							<p class="my-1">
 								<code class="docutils literal notranslate"
 									><span class="pre">flash()</span></code
 								>
@@ -309,20 +355,20 @@
 					<h4 class="mt-4">🌐 Bootstrap HTML templates</h4>
 					<ul class="my-2">
 						<li>
-							<p>
+							<p class="my-1">
 								Email templates for the email validation,
 								password reset,
 							</p>
 						</li>
 						<li>
-							<p>
+							<p class="my-1">
 								2 sets of page templates and Flask Blueprints:
 							</p>
 							<blockquote>
 								<div>
 									<ul class="my-2">
 										<li>
-											<p>
+											<p class="my-1">
 												Public pages (<code
 													class="docutils literal notranslate"
 													><span class="pre"
@@ -332,7 +378,7 @@
 											</p>
 										</li>
 										<li>
-											<p>
+											<p class="my-1">
 												Auth pages for login, sign up,
 												and password reset, 2FA (<code
 													class="docutils literal notranslate"
@@ -343,7 +389,7 @@
 											</p>
 										</li>
 										<li>
-											<p>
+											<p class="my-1">
 												Backend (auth required) pages
 												(<code
 													class="docutils literal notranslate"
@@ -358,13 +404,13 @@
 							</blockquote>
 						</li>
 						<li>
-							<p>
+							<p class="my-1">
 								Utilizes the new ootb Bootstrap 5 components
 								like floating form labels,
 							</p>
 						</li>
 						<li>
-							<p>
+							<p class="my-1">
 								Last, but not least: User configurable dark
 								mode. 😎
 							</p>
@@ -373,8 +419,7 @@
 				</section>
 			</section>
 		</section>
-		<hr />
-		<h3 class="my-4">Components</h3>
+		<h4 class="my-4">🧩 Components</h4>
 		<a
 			class="btn btn-primary mb-4"
 			href="https://getbootstrap.com/docs/5.3/examples/#snippets"
@@ -382,8 +427,8 @@
 		>
 			Snippets and components from the Bootstrap docs
 		</a>
-		<h3 class="my-4">Icons</h3>
-		<p>Bootstrap icons is included.</p>
+		<h4 class="my-4">🖼️ Icons</h4>
+		<p class="my-1">Bootstrap icons is included.</p>
 		<a
 			class="btn btn-primary mb-4"
 			href="https://icons.getbootstrap.com/"
@@ -391,8 +436,8 @@
 		>
 			See the list of available icons here.
 		</a>
-		<h3 class="my-4">Dark mode</h3>
-		<p>
+		<h4 class="my-4">🌙 Dark mode</h4>
+		<p class="my-1">
 			Color mode toggler from the Bootstrap docs is included. A dropdown
 			for mode selector is included in the
 			<code>templates/shared-components</code>

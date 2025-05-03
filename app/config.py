@@ -21,6 +21,13 @@ s3 = boto3.resource(
 
 # Flask app configuration
 class Config:
+    """Configuration class for the Flask application.
+
+    This class contains the configuration for the Flask application,
+    including database connection, email settings. Most of these are
+    read from environment variables using the `decouple` library.
+    """
+
     # Grabs the folder where the script runs
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
