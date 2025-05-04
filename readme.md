@@ -90,6 +90,7 @@ The starter SaaS framework I built with Flask for my side projects with paid sub
 
 - Two factor authentication (TOTP only),
 - Forgot password flow,
+- reCAPTCHA v2 for sign up and login forms,
 - Account details page where the user can:
   - Upload a profile picture (stored in S3),
   - Change profile details like first & last name.
