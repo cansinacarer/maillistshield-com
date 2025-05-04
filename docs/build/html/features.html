@@ -67,7 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="development.html#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -165,7 +165,12 @@
 </ul>
 </li>
 <li><p><strong>Postgres</strong> as a development database,</p></li>
+<<<<<<< HEAD
 <li><p><strong>pgAdmin</strong> pre-connected to the development.</p></li>
+=======
+<li><p><strong>pgAdmin</strong> pre-connected to the development,</p></li>
+<li><p><strong>docs</strong> serving the built html files of the Sphinx documentation.</p></li>
+>>>>>>> upstream/main
 </ul>
 </li>
 <li><p>CI/CD pipelines with GitHub Actions to:</p>
@@ -222,6 +227,7 @@ the Tiers table.</p></li>
 </li>
 <li><p>Two factor authentication (TOTP only),</p></li>
 <li><p>Forgot password flow,</p></li>
+<li><p>reCAPTCHA v2 for sign up and login forms,</p></li>
 <li><p>Account details page where the user can:</p>
 <ul>
 <li><p>Upload a profile picture (stored in S3),</p></li>

@@ -16,6 +16,14 @@
       <script src="_static/documentation_options.js?v=d29a5c0e"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -64,7 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="development.html#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -258,6 +266,13 @@
 
       <ul>
         <li><a href="autoapi/app/utilities/qr/index.html#module-app.utilities.qr">module</a>
+</li>
+      </ul></li>
+      <li>
+    app.utilities.recaptcha
+
+      <ul>
+        <li><a href="autoapi/app/utilities/recaptcha/index.html#module-app.utilities.recaptcha">module</a>
 </li>
       </ul></li>
       <li>
@@ -648,6 +663,8 @@
 </li>
         <li><a href="autoapi/app/utilities/qr/index.html#module-app.utilities.qr">app.utilities.qr</a>
 </li>
+        <li><a href="autoapi/app/utilities/recaptcha/index.html#module-app.utilities.recaptcha">app.utilities.recaptcha</a>
+</li>
         <li><a href="autoapi/app/utilities/stripe_event_handler/index.html#module-app.utilities.stripe_event_handler">app.utilities.stripe_event_handler</a>
 </li>
         <li><a href="autoapi/app/utilities/user_registration_actions/index.html#module-app.utilities.user_registration_actions">app.utilities.user_registration_actions</a>
@@ -745,11 +762,21 @@
 </li>
       <li><a href="autoapi/app/utilities/helpers/index.html#app.utilities.helpers.readable_file_size">readable_file_size() (in module app.utilities.helpers)</a>
 </li>
-      <li><a href="autoapi/app/views_auth/index.html#app.views_auth.register">register() (in module app.views_auth)</a>
+      <li><a href="autoapi/app/config/index.html#app.config.Config.RECAPTCHA_SECRET_KEY">RECAPTCHA_SECRET_KEY (app.config.Config attribute)</a>
 </li>
+      <li><a href="autoapi/app/config/index.html#app.config.Config.RECAPTCHA_SITE_KEY">RECAPTCHA_SITE_KEY (app.config.Config attribute)</a>
+</li>
+<<<<<<< HEAD
       <li><a href="autoapi/app/forms/index.html#app.forms.RegisterForm">RegisterForm (class in app.forms)</a>
 </li>
       <li><a href="autoapi/app/utilities/validation/index.html#app.utilities.validation.request_validation">request_validation() (in module app.utilities.validation)</a>
+=======
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/app/views_auth/index.html#app.views_auth.register">register() (in module app.views_auth)</a>
+</li>
+      <li><a href="autoapi/app/forms/index.html#app.forms.RegisterForm">RegisterForm (class in app.forms)</a>
+>>>>>>> upstream/main
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -813,10 +840,13 @@
 </li>
       <li><a href="autoapi/app/config/index.html#app.config.Config.SQLALCHEMY_TRACK_MODIFICATIONS">SQLALCHEMY_TRACK_MODIFICATIONS (app.config.Config attribute)</a>
 </li>
+<<<<<<< HEAD
       <li><a href="autoapi/app/models/index.html#app.models.BatchJobs.started">started (app.models.BatchJobs attribute)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.BatchJobs.status">status (app.models.BatchJobs attribute)</a>
 </li>
+=======
+>>>>>>> upstream/main
       <li><a href="autoapi/app/config/index.html#app.config.Config.STRIPE_CREDIT_UNIT_COST">STRIPE_CREDIT_UNIT_COST (app.config.Config attribute)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.Users.stripe_customer_id">stripe_customer_id (app.models.Users attribute)</a>
@@ -845,8 +875,11 @@
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.Tiers">Tiers (class in app.models)</a>
 </li>
+<<<<<<< HEAD
       <li><a href="autoapi/app/utilities/object_storage/index.html#app.utilities.object_storage.timestamp">timestamp() (in module app.utilities.object_storage)</a>
 </li>
+=======
+>>>>>>> upstream/main
       <li><a href="autoapi/app/config/index.html#app.config.Config.TIMEZONE">TIMEZONE (app.config.Config attribute)</a>
 </li>
   </ul></td>
@@ -901,6 +934,7 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+<<<<<<< HEAD
       <li><a href="autoapi/app/views/index.html#app.views.validate">validate() (in module app.views)</a>
 </li>
   </ul></td>
@@ -908,6 +942,9 @@
       <li><a href="autoapi/app/utilities/validation/index.html#app.utilities.validation.validate_email">validate_email() (in module app.utilities.validation)</a>
 </li>
       <li><a href="autoapi/app/views/index.html#app.views.validate_file">validate_file() (in module app.views)</a>
+=======
+      <li><a href="autoapi/app/utilities/recaptcha/index.html#app.utilities.recaptcha.verify_recaptcha">verify_recaptcha() (in module app.utilities.recaptcha)</a>
+>>>>>>> upstream/main
 </li>
   </ul></td>
 </tr></table>

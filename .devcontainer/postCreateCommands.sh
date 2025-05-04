@@ -23,7 +23,7 @@ pip install pytest
 pre-commit install --hook-type commit-msg
 
 # Install sphinx for documentation generation
-pip install sphinx sphinx-rtd-theme sphinx-autoapi
+pip install sphinx sphinx-rtd-theme sphinx-autoapi sphinxcontrib-mermaid
 
 # Esbonio language server for working with Sphinx rst files
 pip install esbonio

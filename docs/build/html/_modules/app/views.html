@@ -16,6 +16,14 @@
       <script src="../../_static/documentation_options.js?v=d29a5c0e"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -64,7 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../development.html#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -146,15 +154,25 @@
            <div itemprop="articleBody">
              
   <h1>Source code for app.views</h1><div class="highlight"><pre>
+<<<<<<< HEAD
 <span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">jsonify</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">current_user</span>
+=======
+<span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">current_app</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span>
+>>>>>>> upstream/main
 <span class="kn">from</span> <span class="nn">flask_limiter</span> <span class="kn">import</span> <span class="n">Limiter</span>
 <span class="kn">from</span> <span class="nn">flask_limiter.util</span> <span class="kn">import</span> <span class="n">get_remote_address</span>
 <span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">TemplateNotFound</span>
 
+<<<<<<< HEAD
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">lm</span><span class="p">,</span> <span class="n">db</span>
 <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Users</span><span class="p">,</span> <span class="n">BatchJobs</span>
 <span class="kn">from</span> <span class="nn">app.utilities.validation</span> <span class="kn">import</span> <span class="n">validate_email</span>
+=======
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">lm</span>
+<span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Users</span>
+>>>>>>> upstream/main
 <span class="kn">from</span> <span class="nn">app.utilities.error_handlers</span> <span class="kn">import</span> <span class="n">error_page</span>
 <span class="kn">from</span> <span class="nn">app.utilities.object_storage</span> <span class="kn">import</span> <span class="n">generate_upload_link_validation_file</span>
 
@@ -244,6 +262,7 @@
 
 
 
+<<<<<<< HEAD
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/robots.txt&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="robots">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.robots">[docs]</a>
@@ -325,6 +344,8 @@
 
 
 
+=======
+>>>>>>> upstream/main
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;index&quot;</span><span class="p">})</span>
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&lt;path&gt;&quot;</span><span class="p">)</span>
 <div class="viewcode-block" id="index">

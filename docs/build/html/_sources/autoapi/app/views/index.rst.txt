@@ -58,12 +58,15 @@ Module Contents
    Serve the favicon.ico file.
 
 
+<<<<<<< HEAD
 .. py:function:: robots()
 
 .. py:function:: validate_file(path)
 
 .. py:function:: validate()
 
+=======
+>>>>>>> upstream/main
 .. py:function:: index(path)
 
    Serve the index page or dynamically route for other pages with existing templates.

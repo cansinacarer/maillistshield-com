@@ -16,6 +16,14 @@
       <script src="../_static/documentation_options.js?v=d29a5c0e"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -64,7 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development.html#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../development.html#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -234,7 +242,11 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
             <span class="c1"># Import the table models</span>
+<<<<<<< HEAD
             <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Users</span><span class="p">,</span> <span class="n">Tiers</span><span class="p">,</span> <span class="n">BatchJobs</span>
+=======
+            <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Users</span><span class="p">,</span> <span class="n">Tiers</span>
+>>>>>>> upstream/main
 
             <span class="c1"># Create the database tables if they don&#39;t exist</span>
             <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
@@ -290,6 +302,7 @@
     <span class="k">def</span> <span class="nf">timeformat_filter</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%I:%M %p&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="nb">format</span><span class="p">)</span>
 
+<<<<<<< HEAD
     <span class="c1"># Register a Jinja2 filter for date formatting for database dates</span>
     <span class="nd">@app</span><span class="o">.</span><span class="n">template_filter</span><span class="p">(</span><span class="s2">&quot;dbDateformat&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">dbDateformat_filter</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%B </span><span class="si">%d</span><span class="s2">, %Y&quot;</span><span class="p">):</span>
@@ -315,6 +328,8 @@
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">status</span>
 
+=======
+>>>>>>> upstream/main
     <span class="c1"># Google OAuth 2 client configuration</span>
     <span class="n">app</span><span class="o">.</span><span class="n">google_client</span> <span class="o">=</span> <span class="n">WebApplicationClient</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;GOOGLE_CLIENT_ID&quot;</span><span class="p">])</span>
 

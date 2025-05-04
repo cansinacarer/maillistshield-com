@@ -21,7 +21,12 @@ release = "v1.0.1"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 # Extensions
-extensions = ["sphinx.ext.viewcode", "sphinx.ext.napoleon", "autoapi.extension"]
+extensions = [
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
+    "autoapi.extension",
+    "sphinxcontrib.mermaid",
+]
 # AutoAPI settings
 autoapi_type = "python"
 autoapi_dirs = ["../../app"]

@@ -67,7 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -243,32 +243,25 @@ the <code class="docutils literal notranslate"><span class="pre">.env</span></co
 </div>
 </section>
 </section>
-<section id="developing-in-a-virtual-environment">
-<h2>Developing in a Virtual Environment<a class="headerlink" href="#developing-in-a-virtual-environment" title="Link to this heading"></a></h2>
-<p>I do not recommend using a virtual environment for development, but here is the legacy documentation I had for it before I switched to devcontainers.</p>
-<ol class="arabic">
-<li><p>Clone the repo, navigate to the repo directory,</p></li>
-<li><p>Create a virtual environment: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">env</span></code></p></li>
-<li><p>Activate the virtual environment:</p>
-<ul>
-<li><p>For Windows:</p>
-<p><code class="docutils literal notranslate"><span class="pre">env\Scripts\activate</span></code></p>
-</li>
-<li><p>For macOS/Linux:</p>
-<p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">env/bin/activate</span></code></p>
-</li>
-</ul>
-</li>
-<li><p>Install the dependencies inside the virtual environment:</p>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p>
-</li>
-<li><p>Set the environment variables listed in the <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> file</p></li>
-<li><p>Generate a self signed SSL certificate for using https locally. On
-Linux or with WSL in the root path:</p>
-<p><code class="docutils literal notranslate"><span class="pre">openssl</span> <span class="pre">req</span> <span class="pre">-x509</span> <span class="pre">-newkey</span> <span class="pre">rsa:4096</span> <span class="pre">-keyout</span> <span class="pre">key.pem</span> <span class="pre">-out</span> <span class="pre">cert.pem</span> <span class="pre">-days</span> <span class="pre">365</span> <span class="pre">-nodes</span></code></p>
-</li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code></p></li>
-</ol>
+<section id="database">
+<h2>Database<a class="headerlink" href="#database" title="Link to this heading"></a></h2>
+<p>We use Object Relational Mapping (ORM) with SQLAlchemy to interact with the
+Postgres database. The database is created automatically when the app is
+started. The tables are created based on the models defined in
+<code class="docutils literal notranslate"><span class="pre">app/models.py</span></code>. In the dev environment, the database is created in a container
+and it is accessible at <code class="docutils literal notranslate"><span class="pre">localhost:5432</span></code>. You can use pgAdmin to manage the
+database. pgAdmin is already configured to connect to the Postgres container. When
+prompted for the database password, use <code class="docutils literal notranslate"><span class="pre">password</span></code>.</p>
+<dl class="simple">
+<dt>sequenceDiagram</dt><dd><p>participant User
+participant API
+participant Database
+User-&gt;&gt;API: Request data
+API-&gt;&gt;Database: Query
+Database–&gt;&gt;API: Return results
+API–&gt;&gt;User: Display data</p>
+</dd>
+</dl>
 </section>
 <section id="how-to-build-on-top-of-this-app">
 <h2>How to Build On Top of This App<a class="headerlink" href="#how-to-build-on-top-of-this-app" title="Link to this heading"></a></h2>
@@ -295,12 +288,22 @@ the alternatives without one (e.g. <code class="docutils literal notranslate"><
 <p>If you need to have more config variables (e.g. credentials for a new
 OAuth provider):</p>
 <ol class="arabic simple">
-<li><p>Define environment variables for them both in your local <code class="docutils literal notranslate"><span class="pre">.env</span></code>
-file and in prod,</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">app/config.py</span></code>, add a new attribute for the <code class="docutils literal notranslate"><span class="pre">Config</span></code> class.
-Use the <code class="docutils literal notranslate"><span class="pre">config</span></code> method from decouple.</p></li>
-<li><p>You can then call the config value anywhere in the app as
-<code class="docutils literal notranslate"><span class="pre">app.config[&quot;&quot;]</span></code>.</p></li>
+<li><p>Set environment variable in:</p>
+<ul class="simple">
+<li><p>your local <code class="docutils literal notranslate"><span class="pre">.env</span></code>  file in the dev environment,</p></li>
+<li><p>in the <code class="docutils literal notranslate"><span class="pre">.env.template</span></code> file as a template for other developers and future use,</p></li>
+<li><p>the production environment,</p></li>
+<li><p>in <code class="docutils literal notranslate"><span class="pre">github/workflows/test.yml</span></code> for the testing pipeline,</p></li>
+<li><p>in the secrets of the repository on GitHub.</p></li>
+</ul>
+</li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">app/config.py</span></code>, add a new attribute for the <code class="docutils literal notranslate"><span class="pre">Config</span></code> class.</p>
+<ul class="simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">config</span></code> method from decouple to pull your environment variable.</p></li>
+</ul>
+</li>
+<li><p>You can then call the config value anywhere in the app with
+<code class="docutils literal notranslate"><span class="pre">app.config[&quot;YOUR_CONFIG_VARIABLE&quot;]</span></code>.</p></li>
 </ol>
 </section>
 <section id="updating-dependencies">
