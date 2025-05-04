@@ -1,0 +1,22 @@
+app.utilities.validation
+========================
+
+.. py:module:: app.utilities.validation
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   app.utilities.validation.validate_email
+   app.utilities.validation.request_validation
+
+
+Module Contents
+---------------
+
+.. py:function:: validate_email(email)
+
+.. py:function:: request_validation(email, worker)
+

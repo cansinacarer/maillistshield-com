@@ -1,0 +1,77 @@
+app.views
+=========
+
+.. py:module:: app.views
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   app.views.public_bp
+   app.views.limiter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   app.views.load_user
+   app.views.page_not_found
+   app.views.page_not_found
+   app.views.page_not_found
+   app.views.rate_limited
+   app.views.server_error
+   app.views.is_user_logged_in
+   app.views.favicon
+   app.views.robots
+   app.views.validate_file
+   app.views.validate
+   app.views.index
+
+
+Module Contents
+---------------
+
+.. py:data:: public_bp
+
+.. py:function:: load_user(user_id)
+
+.. py:function:: page_not_found(e)
+
+.. py:function:: page_not_found(e)
+
+.. py:function:: page_not_found(e)
+
+.. py:function:: rate_limited(e)
+
+.. py:function:: server_error(e)
+
+.. py:data:: limiter
+
+.. py:function:: is_user_logged_in()
+
+.. py:function:: favicon()
+
+   Serve the favicon.ico file.
+
+
+.. py:function:: robots()
+
+.. py:function:: validate_file(path)
+
+.. py:function:: validate()
+
+.. py:function:: index(path)
+
+   Serve the index page or dynamically route for other pages with existing templates.
+
+   :param path: The path to the requested page.
+   :type path: str
+
+   :returns: The rendered HTML template for the requested page.
+   :rtype: Response
+
+

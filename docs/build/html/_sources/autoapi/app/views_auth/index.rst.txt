@@ -1,0 +1,114 @@
+app.views_auth
+==============
+
+.. py:module:: app.views_auth
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   app.views_auth.auth_bp
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   app.views_auth.load_user
+   app.views_auth.unauthorized_callback
+   app.views_auth.logout
+   app.views_auth.register
+   app.views_auth.login
+   app.views_auth.two_factor
+   app.views_auth.email_confirmation_by_code
+   app.views_auth.password_reset
+   app.views_auth.password_reset_requested
+   app.views_auth.set_new_password
+   app.views_auth.get_google_sso_config
+   app.views_auth.login_callback_google
+
+
+Module Contents
+---------------
+
+.. py:data:: auth_bp
+
+.. py:function:: load_user(user_id)
+
+   This function is used to load the user object from the user ID stored in the session.
+
+   :param user_id: The ID of the user to load.
+   :type user_id: str
+
+   :returns: The user object from the db corresponding to the user ID.
+   :rtype: Users
+
+
+.. py:function:: unauthorized_callback()
+
+   This function is used to handle unauthorized access to protected routes.
+
+   403 cases will be redirected to login
+
+
+.. py:function:: logout()
+
+   This function is used to log out the user and redirect them to the login page.
+
+
+.. py:function:: register()
+
+   The view function for the registration page.
+
+
+.. py:function:: login()
+
+   The view function for the login page.
+
+
+.. py:function:: two_factor()
+
+   The view function for the two factor authentication page.
+
+
+.. py:function:: email_confirmation_by_code()
+
+   The view function for the email verification page.
+
+
+.. py:function:: password_reset()
+
+   The view function for the password reset page.
+
+
+.. py:function:: password_reset_requested()
+
+   The view function for the password reset requested page.
+
+
+.. py:function:: set_new_password(token)
+
+   The view function for the set new password page.
+
+   :param token: The token from the forgot password email, used to verify the user.
+   :type token: str
+
+
+.. py:function:: get_google_sso_config()
+
+   Get the Google SSO configuration.
+
+   :returns: The Google SSO configuration.
+   :rtype: dict
+
+
+.. py:function:: login_callback_google()
+
+   The view function for the Google login callback.
+
+   This is the page that Google redirects to after the Google authentication attempt.
+
+

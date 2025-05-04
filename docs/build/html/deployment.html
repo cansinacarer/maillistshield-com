@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deployment to Production &mdash; Mail List Shield v1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=d29a5c0e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Auto Generated Documentation" href="autoapi/index.html" />
+    <link rel="prev" title="Continuous Integration and Continuous Deployment" href="ci-cd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mail List Shield
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="features.html#developer-experience">🧑‍💻 Developer Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#deployment">☁️ Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#stripe-integrations">💳 Stripe Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#authentication">🔒 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#transactional-emails-with-smtp">📧 Transactional Emails with SMTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#security">🚨 Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features.html#ui">🎨 UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="features.html#notifications">🔔 Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features.html#bootstrap-html-templates">🌐 Bootstrap HTML templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development.html#adding-new-pages">Adding New Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#updating-dependencies">Updating Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ci-cd.html">Continuous Integration and Continuous Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ci-cd.html#pre-commit-hooks">Pre-Commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci-cd.html#run-tests">Run Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci-cd.html#semantic-release">Semantic Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci-cd.html#build-deploy">Build &amp; Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci-cd.html#build-deploy-sphinx-docs">Build &amp; Deploy Sphinx Docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deployment to Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-pitfall-for-cloudflare-proxy">A Pitfall for Cloudflare Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">Auto Generated Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/app/index.html">app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/app/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/config/index.html">app.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/decorators/index.html">app.decorators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/emails/index.html">app.emails</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/forms/index.html">app.forms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/models/index.html">app.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/utilities/index.html">app.utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/views/index.html">app.views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/views_auth/index.html">app.views_auth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/views_private/index.html">app.views_private</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/app/index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/app/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/app/index.html#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.mail"><code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.bc"><code class="docutils literal notranslate"><span class="pre">bc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.lm"><code class="docutils literal notranslate"><span class="pre">lm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.csrf"><code class="docutils literal notranslate"><span class="pre">csrf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/index.html#app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Resources:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact the Developer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mail List Shield</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Deployment to Production</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/deployment.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="deployment-to-production">
+<h1>Deployment to Production<a class="headerlink" href="#deployment-to-production" title="Link to this heading"></a></h1>
+<p>This app is containerized and intended to be deployed in a Docker. This means you can deploy it anywhere from fully managed PaaS services to container hosting services and custom self-hosted solutions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> will install the dependencies from the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the container and will run Flask with Gunicorn. Depending on your traffic and server resources, you will want to adjust the number of workers in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p>
+<p>For reference, the live demo website is running on a cheap VPS with <a class="reference external" href="https://caprover.com/">CapRover</a> installed. CapRover is a self-hosted PaaS built as a layer on Docker. It simplifies
+setting environment variables, routing traffic to containers nginx
+reverse proxy, and SSL set up. I use <a class="reference external" href="https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml">this GitHub Actions
+workflow</a> for continuous deployment.</p>
+<p>Here is a Medium article I wrote about <a class="reference external" href="https://betterprogramming.pub/migrate-from-heroku-to-aws-ec2-756328d8e58a">configuring a server instance with CapRover</a>.</p>
+<section id="a-pitfall-for-cloudflare-proxy">
+<h2>A Pitfall for Cloudflare Proxy<a class="headerlink" href="#a-pitfall-for-cloudflare-proxy" title="Link to this heading"></a></h2>
+<p>If the domain is proxied over Cloudflare, set SSL to Full (strict) to prevent ERR_TOO_MANY_REDIRECTS error.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ci-cd.html" class="btn btn-neutral float-left" title="Continuous Integration and Continuous Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="autoapi/index.html" class="btn btn-neutral float-right" title="Auto Generated Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Cansin Acarer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
