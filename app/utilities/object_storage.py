@@ -132,11 +132,6 @@ def generate_remote_file(bucket_name, folder_path, file_name, s3, content):
     )
 
 
-#
-# End of generic s3 functions
-#
-
-
 def generate_upload_link_profile_picture(user, file_type):
     return generate_upload_link(
         current_app.config["S3_BUCKET_NAME"],
