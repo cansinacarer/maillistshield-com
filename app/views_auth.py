@@ -44,6 +44,7 @@ from app.emails import send_email_with_code, send_email_to_reset_password
 from app.utilities.user_registration_actions import new_user_actions_for_email_confirmed
 from app.utilities.helpers import generate_n_digit_code
 from app.utilities.error_handlers import error_page
+from app.utilities.recaptcha import verify_recaptcha
 
 auth_bp = Blueprint("auth_bp", __name__)
 
@@ -99,6 +100,18 @@ def register():
 
     # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
+        # Verify reCAPTCHA
+        recaptcha_response = request.form.get("g-recaptcha-response")
+        recaptcha_verified = verify_recaptcha(recaptcha_response, request.remote_addr)
+
+        if not recaptcha_verified:
+            flash(
+                'Please check the box next to the phrase "I\'m not a robot".', "danger"
+            )
+            return render_template(
+                "public/auth/register.html", form=form, success=False, user=current_user
+            )
+
         # assign form data to variables
         email = request.form.get("email", "", type=str)
         password = request.form.get("password", "", type=str)
@@ -181,6 +194,18 @@ def login():
 
     # Check if both http method is POST, form is valid, and csrf token is valid
     if form.validate_on_submit():
+        # Verify reCAPTCHA
+        recaptcha_response = request.form.get("g-recaptcha-response")
+        recaptcha_verified = verify_recaptcha(recaptcha_response, request.remote_addr)
+
+        if not recaptcha_verified:
+            flash(
+                'Please check the box next to the phrase "I\'m not a robot".', "danger"
+            )
+            return render_template(
+                "public/auth/login.html", form=form, success=False, user=current_user
+            )
+
         # Assign form data to variables
         email = request.form.get("email", "", type=str)
         password = request.form.get("password", "", type=str)

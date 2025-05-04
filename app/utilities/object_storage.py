@@ -133,11 +133,6 @@ def generate_remote_file(bucket_name, folder_path, file_name, s3, content):
     )
 
 
-#
-# End of generic s3 functions
-#
-
-
 def timestamp():
     return datetime.now().strftime("%Y%m%d%H%M%S")
 

@@ -13,6 +13,14 @@
 	}}
 	<label for="password">Password</label>
 </div>
+{% if config.RECAPTCHA_SITE_KEY %}
+	<div class="my-3 overflow-hidden">
+		<div
+			class="g-recaptcha"
+			data-sitekey="{{ config.RECAPTCHA_SITE_KEY }}"
+		></div>
+	</div>
+{% endif %}
 <button class="btn btn-primary w-100 mt-1 mb-3" type="submit">Login</button>
 <a href="/register" class="btn btn-outline-primary w-100">
 	New here? Create an account

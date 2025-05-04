@@ -1,5 +1,12 @@
 # 1.0.0 (2025-04-22)
 
+# [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
+
+### Features
+
+* add reCAPTCHA v2 support ([5a33a5d](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/5a33a5d88253dc9143225e665797c21c9dd34821))
+
+## [1.0.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.0...v1.0.1) (2025-04-19)
 
 ### Bug Fixes
 
@@ -17,6 +24,23 @@
 * placeholders too short ([aa5bce0](https://github.com/cansinacarer/maillistshield-com/commit/aa5bce0210e2d0886b44f3b61c6d533e173b21fd))
 * use /bin/bash to match shebang ([b0ca7c4](https://github.com/cansinacarer/maillistshield-com/commit/b0ca7c49eef7d477e89bd75a4b27e6669984e151))
 
+* **github-actions:** resolve conflict between actions that simultaneously try to pull/push this repo ([b5c75e1](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/b5c75e1db641cb0be386b6c534504cb098b3e3be))
+
+# 1.0.0 (2025-04-19)
+
+### Bug Fixes
+
+* add access to the github token in gh action ([1c79add](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/1c79add433f55437020818a6c237de3131fa35a6))
+* add env variables in test environment ([15294b9](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/15294b9f0d9097ae8fc788d9582103400103fd18))
+* add missing comma ([afeab32](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/afeab32be16dc88381bd4f16d255fb8d84f7fb68))
+* add vscode docker extension ([ad2c930](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/ad2c930c36ab8656c40379c5d8d911466af5a6fe))
+* correct the python version ([46d51c0](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/46d51c07c742984d6ab7024bf24866d8fcb37f95))
+* correct the reference to generate_coverage_badge.py in gh action ([fd5b889](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/fd5b889734a20da94e2693354c3a32aa7c4c602b))
+* correct the reference to the coverage svg ([eacf821](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/eacf821db3b860bb2456c797b945c422cd6ba80b))
+* fix the html problems prettier found ([7219722](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/72197221b647af48c8618e98c20529f0224957c4))
+* ignore node modules and package files used ([f857153](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/f8571531ea294b7d9ea7f0a328084b5578b219c6))
+* make the automatic coverage badge use conventional commit msg ([51b147f](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/51b147f06069a1923a152770a07e03f5a46e8f89))
+* use /bin/bash to match shebang ([b0ca7c4](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/b0ca7c49eef7d477e89bd75a4b27e6669984e151))
 
 ### Features
 

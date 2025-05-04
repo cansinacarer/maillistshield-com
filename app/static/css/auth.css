@@ -30,3 +30,9 @@ body {
 .form-floating > .form-select ~ label::after {
 	background: none !important;
 }
+
+.g-recaptcha {
+	/* Resize it to be the same size as the rest of the form */
+	transform: scale(0.988);
+	transform-origin: 0 0;
+}

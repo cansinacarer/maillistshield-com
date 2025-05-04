@@ -62,6 +62,8 @@ jobs:
                   STRIPE_CREDIT_UNIT_COST: ${{ secrets.STRIPE_CREDIT_UNIT_COST }}
                   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
                   GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+                  RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+                  RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
                   FLASK_RUN_CERT: .devcontainer/ssl/cert.pem
                   FLASK_RUN_KEY: .devcontainer/ssl/key.pem
                   MLS_WORKERS: ${{ secrets.MLS_WORKERS }}
