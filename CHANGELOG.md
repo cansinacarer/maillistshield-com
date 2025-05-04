@@ -1,33 +1,10 @@
-# [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
-
-
-### Features
-
-* add reCAPTCHA v2 support ([5a33a5d](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/5a33a5d88253dc9143225e665797c21c9dd34821))
-
-# [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
-
-
-### Features
-
-* add reCAPTCHA v2 support ([5a33a5d](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/5a33a5d88253dc9143225e665797c21c9dd34821))
-
-# [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
-
-
-### Features
-
-* add reCAPTCHA v2 support ([5a33a5d](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/5a33a5d88253dc9143225e665797c21c9dd34821))
-
 ## [1.0.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.0...v1.0.1) (2025-04-19)
-
 
 ### Bug Fixes
 
 * **github-actions:** resolve conflict between actions that simultaneously try to pull/push this repo ([b5c75e1](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/b5c75e1db641cb0be386b6c534504cb098b3e3be))
 
 # 1.0.0 (2025-04-19)
-
 
 ### Bug Fixes
 
@@ -42,7 +19,6 @@
 * ignore node modules and package files used ([f857153](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/f8571531ea294b7d9ea7f0a328084b5578b219c6))
 * make the automatic coverage badge use conventional commit msg ([51b147f](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/51b147f06069a1923a152770a07e03f5a46e8f89))
 * use /bin/bash to match shebang ([b0ca7c4](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/b0ca7c49eef7d477e89bd75a4b27e6669984e151))
-
 
 ### Features
 
