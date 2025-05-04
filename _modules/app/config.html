@@ -59,6 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../development.html#debugging">Debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
@@ -179,6 +180,13 @@
 <div class="viewcode-block" id="Config">
 <a class="viewcode-back" href="../../autoapi/app/config/index.html#app.config.Config">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration class for the Flask application.</span>
+
+<span class="sd">    This class contains the configuration for the Flask application,</span>
+<span class="sd">    including database connection, email settings. Most of these are</span>
+<span class="sd">    read from environment variables using the `decouple` library.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># Grabs the folder where the script runs</span>
 <div class="viewcode-block" id="Config.BASEDIR">
 <a class="viewcode-back" href="../../autoapi/app/config/index.html#app.config.Config.BASEDIR">[docs]</a>

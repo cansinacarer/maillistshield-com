@@ -59,6 +59,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development.html#debugging">Debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
@@ -187,6 +188,16 @@
 <div class="viewcode-block" id="create_app">
 <a class="viewcode-back" href="../autoapi/app/index.html#app.create_app">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">(</span><span class="n">config_class</span><span class="o">=</span><span class="s2">&quot;app.config.Config&quot;</span><span class="p">,</span> <span class="n">test_config</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Application factory to create a Flask application instance</span>
+<span class="sd">    with the specified configuration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config_class (str): Reference to the configuration object to use.</span>
+<span class="sd">        test_config (bool): If True, apply the test configuration.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        app (Flask): The Flask application instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># Initialize the flask app</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 

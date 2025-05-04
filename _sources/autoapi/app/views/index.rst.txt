@@ -55,6 +55,9 @@ Module Contents
 
 .. py:function:: favicon()
 
+   Serve the favicon.ico file.
+
+
 .. py:function:: robots()
 
 .. py:function:: validate_file(path)
@@ -62,4 +65,13 @@ Module Contents
 .. py:function:: validate()
 
 .. py:function:: index(path)
+
+   Serve the index page or dynamically route for other pages with existing templates.
+
+   :param path: The path to the requested page.
+   :type path: str
+
+   :returns: The rendered HTML template for the requested page.
+   :rtype: Response
+
 
