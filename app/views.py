@@ -67,6 +67,8 @@ def is_user_logged_in():
 # Serve favicon in the default route some clients expect
 @public_bp.route("/favicon.ico")
 def favicon():
+    """Serve the favicon.ico file."""
+
     return current_app.send_static_file("media/favicon.ico")
 
 
@@ -142,10 +144,17 @@ def validate():
         return "", 500
 
 
-# App main route + generic routing
 @public_bp.route("/", defaults={"path": "index"})
 @public_bp.route("/<path>")
 def index(path):
+    """Serve the index page or dynamically route for other pages with existing templates.
+
+    Args:
+        path (str): The path to the requested page.
+
+    Returns:
+        Response: The rendered HTML template for the requested page.
+    """
     try:
         # Serve the file (if exists) from app/templates/public/PATH.html
         return render_template(

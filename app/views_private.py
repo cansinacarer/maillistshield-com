@@ -30,10 +30,20 @@ from app.utilities.stripe_event_handler import handle_stripe_event
 private_bp = Blueprint("private_bp", __name__)
 
 
-# Webhook endpoints for external services to give us updates
 @private_bp.route("/webhook/<path>", methods=["POST"])
 @csrf.exempt
 def webhook(path):
+    """The view function for the webhook endpoint.
+
+    Args:
+        path (str): The part of the requested endpoint after /webhook/.
+
+    Returns:
+        Response: A JSON response indicating success or failure.
+
+    Webhook endpoints for external services to give us updates.
+    Currently, this endpoint is used to receive webhook events from Stripe.
+    """
     try:
         match path:
             # The endpoint where stripe sends the webhook events
@@ -75,11 +85,19 @@ def webhook(path):
         return error_page(500)
 
 
-# Billing pages routing
 @private_bp.route("/billing", defaults={"path": "billing"}, methods=["GET", "POST"])
 @private_bp.route("/billing/<path>", methods=["GET", "POST"])
 @login_required
 def billing(path):
+    """The view function for the billing pages' routing.
+
+    Args:
+        path (str): The part of the requested endpoint after /billing/.
+
+    Returns:
+        Response: The rendered template for the requested billing page.
+    """
+
     # Redirect to email confirmation
     if current_user.email_confirmed != 1:
         flash(
@@ -301,11 +319,19 @@ def billing(path):
         return error_page(500)
 
 
-# Account pages routing
 @private_bp.route("/account", defaults={"path": "account"}, methods=["GET", "POST"])
 @private_bp.route("/account/<path>", methods=["GET", "POST"])
 @login_required
 def account(path):
+    """The view function for the account pages routing.
+
+    Args:
+        path (str): The part of the requested endpoint after /account/.
+
+    Returns:
+        Response: The rendered template for the requested account page.
+    """
+
     # Redirect to email confirmation
     if current_user.email_confirmed != 1:
         flash(
@@ -398,12 +424,21 @@ def account(path):
         return error_page(500)
 
 
-# Admin pages routing
 @private_bp.route("/admin", defaults={"path": "admin"}, methods=["GET", "POST"])
-# path:path is to catch all paths, including those with multiple slashes (/)
 @private_bp.route("/admin/<path:path>", methods=["GET", "POST"])
 @login_required
 def admin(path):
+    """The view function for the admin privilaged pages' routing.
+
+    path:path is used to catch all paths, including those with multiple slashes (/)
+
+    Args:
+        path (str): The part of the requested endpoint after /admin/.
+
+    Returns:
+        Response: The rendered template for the requested admin page.
+    """
+
     # If this user is not admin, return 403
     if current_user.role != "admin":
         return error_page(403)
@@ -443,6 +478,17 @@ def admin(path):
 @private_bp.route("/<path>")
 @login_required
 def private_index(path):
+    """The view function for the private pages routing.
+
+    This is the fallback view function for all private pages at /app/.
+
+    Args:
+        path (str): The part of the requested endpoint after /app/.
+
+    Returns:
+        Response: The rendered template for the requested private page.
+    """
+
     # Redirect to email confirmation
     if current_user.email_confirmed != 1:
         flash(

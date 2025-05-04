@@ -24,6 +24,16 @@ csrf = CSRFProtect()
 
 
 def create_app(config_class="app.config.Config", test_config=False):
+    """Application factory to create a Flask application instance
+    with the specified configuration.
+
+    Args:
+        config_class (str): Reference to the configuration object to use.
+        test_config (bool): If True, apply the test configuration.
+    Returns:
+        app (Flask): The Flask application instance.
+    """
+
     # Initialize the flask app
     app = Flask(__name__)
 
