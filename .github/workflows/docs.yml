@@ -36,6 +36,10 @@ jobs:
                   cd docs
                   make html
 
+            # Add a CNAME file to preserve the custom domain configuration
+            - name: Add CNAME file
+              run: echo "docs.maillistshield.com" > docs/build/html/CNAME
+
             # Deploy to GitHub Pages
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v4
