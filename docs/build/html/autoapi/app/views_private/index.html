@@ -45,15 +45,29 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#developer-experience">🧑‍💻 Developer Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#deployment">☁️ Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#stripe-integrations">💳 Stripe Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#authentication">🔒 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#transactional-emails-with-smtp">📧 Transactional Emails with SMTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#security">🚨 Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#ui">🎨 UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#notifications">🔔 Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#bootstrap-html-templates">🌐 Bootstrap HTML templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../development.html#debugging">Debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../development.html#developing-in-a-virtual-environment">Developing in a Virtual Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development.html#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../development.html#adding-new-pages">Adding New Pages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
@@ -89,15 +103,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#functions">Functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../index.html#app.app"><code class="docutils literal notranslate"><span class="pre">app</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../index.html#app.mail"><code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../index.html#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../index.html#app.bc"><code class="docutils literal notranslate"><span class="pre">bc</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../index.html#app.lm"><code class="docutils literal notranslate"><span class="pre">lm</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../index.html#app.csrf"><code class="docutils literal notranslate"><span class="pre">csrf</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../index.html#app.sslify"><code class="docutils literal notranslate"><span class="pre">sslify</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="../index.html#app.default_tier"><code class="docutils literal notranslate"><span class="pre">default_tier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -142,7 +155,7 @@
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.app_private" title="app.views_private.app_private"><code class="xref py py-obj docutils literal notranslate"><span class="pre">app_private</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.private_bp" title="app.views_private.private_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">private_bp</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -152,26 +165,20 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.dateformat" title="app.views_private.dateformat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dateformat</span></code></a>(value[, format])</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.timeformat" title="app.views_private.timeformat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timeformat</span></code></a>(value[, format])</p></td>
-<td><p></p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.webhook" title="app.views_private.webhook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">webhook</span></code></a>(path)</p></td>
-<td><p></p></td>
+<td><p>The view function for the webhook endpoint.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.billing" title="app.views_private.billing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">billing</span></code></a>(path)</p></td>
-<td><p></p></td>
+<td><p>The view function for the billing pages' routing.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.account" title="app.views_private.account"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account</span></code></a>(path)</p></td>
-<td><p></p></td>
+<td><p>The view function for the account pages routing.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.admin" title="app.views_private.admin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">admin</span></code></a>(path)</p></td>
-<td><p></p></td>
+<td><p>The view function for the admin privilaged pages' routing.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.private_index" title="app.views_private.private_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">private_index</span></code></a>(path)</p></td>
-<td><p></p></td>
+<td><p>The view function for the private pages routing.</p></td>
 </tr>
 </tbody>
 </table>
@@ -179,44 +186,98 @@
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py data">
-<dt class="sig sig-object py" id="app.views_private.app_private">
-<span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">app_private</span></span><a class="reference internal" href="../../../_modules/app/views_private.html#app_private"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.app_private" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="app.views_private.dateformat">
-<span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">dateformat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%B</span> <span class="pre">%d,</span> <span class="pre">%Y'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#dateformat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.dateformat" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="app.views_private.timeformat">
-<span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">timeformat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%I:%M</span> <span class="pre">%p'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#timeformat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.timeformat" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="app.views_private.private_bp">
+<span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">private_bp</span></span><a class="reference internal" href="../../../_modules/app/views_private.html#private_bp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.private_bp" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.webhook">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">webhook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#webhook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.webhook" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The view function for the webhook endpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The part of the requested endpoint after /webhook/.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A JSON response indicating success or failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+<p>Webhook endpoints for external services to give us updates.
+Currently, this endpoint is used to receive webhook events from Stripe.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.billing">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">billing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#billing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.billing" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The view function for the billing pages’ routing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The part of the requested endpoint after /billing/.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The rendered template for the requested billing page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.account">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#account"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.account" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The view function for the account pages routing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The part of the requested endpoint after /account/.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The rendered template for the requested account page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.admin">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">admin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#admin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.admin" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The view function for the admin privilaged pages’ routing.</p>
+<p>path:path is used to catch all paths, including those with multiple slashes (/)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The part of the requested endpoint after /admin/.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The rendered template for the requested admin page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.private_index">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">private_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#private_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.private_index" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>The view function for the private pages routing.</p>
+<p>This is the fallback view function for all private pages at /app/.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The part of the requested endpoint after /app/.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The rendered template for the requested private page.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

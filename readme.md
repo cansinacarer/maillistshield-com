@@ -25,6 +25,7 @@ The starter SaaS framework I built with Flask for my side projects with paid sub
     - [Debugging](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#debugging)
     - [Testing Stripe Webhooks](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#testing-stripe-webhooks)
   - [Developing in a Virtual Environment](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#developing-in-a-virtual-environment)
+  - [Database Model](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#database-model)
   - [How to Build On Top of This App](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#how-to-build-on-top-of-this-app)
     - [Adding New Pages](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#adding-new-pages)
     - [Defining More Configuration Variables](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#defining-more-configuration-variables)
