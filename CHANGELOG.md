@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.0.0...v1.1.0) (2025-05-04)
+
+
+### Features
+
+* add reCAPTCHA v2 support ([5a33a5d](https://github.com/cansinacarer/maillistshield-com/commit/5a33a5d88253dc9143225e665797c21c9dd34821))
+
 # 1.0.0 (2025-04-22)
 
 # [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
