@@ -33,7 +33,7 @@ If the tests are successful, the app is built and deployed to CapRover with ``.g
 
 
 Build & Deploy Sphinx Docs
------------------
+--------------------------
 |Build & Deploy Sphinx Docs|
 
 If the tests are successful, this documentation is built with Sphinx and its autoapi extension, then prepared for deployment to GitHub Pages with ``.github/workflows/docs.yml``.
