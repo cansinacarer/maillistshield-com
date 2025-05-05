@@ -35,4 +35,7 @@ body {
 	/* Resize it to be the same size as the rest of the form */
 	transform: scale(0.988);
 	transform-origin: 0 0;
+	border-radius: 3px;
+	height: 75px;
+	overflow: hidden;
 }
