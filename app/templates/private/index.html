@@ -42,9 +42,9 @@
 								<table class="table table-striped table-hover">
 									<thead>
 										<tr>
+											<th>File</th>
 											<th>Date</th>
 											<th>Time</th>
-											<th>File</th>
 											<th>Cost</th>
 											<th>Status</th>
 										</tr>
@@ -53,13 +53,13 @@
 										{% for job in current_user.batch_jobs %}
 											<tr>
 												<td>
+													{{ job.original_file_name }}
+												</td>
+												<td>
 													{{ job.uploaded | dbDateformat }}
 												</td>
 												<td>
 													{{ job.uploaded | dbTimeformat }}
-												</td>
-												<td>
-													{{ job.original_file_name }}
 												</td>
 												{% if job.row_count %}
 													<td>
