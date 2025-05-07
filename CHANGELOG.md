@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.1...v1.1.2) (2025-05-07)
+
+
+### Bug Fixes
+
+* update app reference to be compatible with the application factory pattern ([82ede00](https://github.com/cansinacarer/maillistshield-com/commit/82ede00fe239c44319a04b039db13685fef71ca6))
+
 ## [1.1.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.0...v1.1.1) (2025-05-05)
 
 
