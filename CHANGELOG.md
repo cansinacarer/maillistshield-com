@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.0...v1.2.1) (2025-05-09)
+
+
+### Bug Fixes
+
+* push to dataLayer directly instead of using gtag() ([89bfdc2](https://github.com/cansinacarer/maillistshield-com/commit/89bfdc2cd2ceb18d9c93e4738ab824e6c9ffd236))
+
 # [1.2.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.2...v1.2.0) (2025-05-09)
 
 
