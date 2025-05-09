@@ -27,9 +27,11 @@
 			></script>
 			<script defer src="/static/js/color-toggler.js"></script>
 			<script defer src="/static/js/main.js"></script>
+			{% include 'shared-components/google-tag-manager-head.html' %}
 		{% endblock %}
 	</head>
 	<body class="">
+		{% include 'shared-components/google-tag-manager-body.html' %}
 		<main class="d-flex flex-nowrap">
 			{% include 'private/components/header/sidebar.html' %}
 			<div class="container-fluid overflow-y-auto bg-body-tertiary">

@@ -27,9 +27,11 @@
 			></script>
 			<script defer src="/static/js/color-toggler.js"></script>
 			<script defer src="/static/js/main.js"></script>
+			{% include 'shared-components/google-tag-manager-head.html' %}
 		{% endblock %}
 	</head>
 	<body class="d-flex flex-column min-vh-100">
+		{% include 'shared-components/google-tag-manager-body.html' %}
 		<main class="flex-grow-1">
 			{% include 'public/components/header/nav-menu.html' %}
 			{% block content %}
@@ -37,7 +39,6 @@
 		</main>
 		{% include 'shared-components/modal.html' %}
 		{% include 'shared-components/toast.html' %}
-		{% include 'shared-components/google-analytics-tracker.html' %}
 		{% include 'shared-components/user-details.html' %}
 		{% include 'public/components/footer.html' %}
 	</body>
