@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.2...v1.2.0) (2025-05-09)
+
+
+### Features
+
+* install Google Tag Manager to templates ([d87b4f0](https://github.com/cansinacarer/maillistshield-com/commit/d87b4f0271646887c835dacffeb35581eb36715c))
+
 ## [1.1.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.1...v1.1.2) (2025-05-07)
 
 
