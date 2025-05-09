@@ -12,7 +12,7 @@ validationForm.addEventListener("submit", (event) => {
 	startTableLoadingState();
 	startAPIResponseBoxLoadingState();
 
-	// Push the event to the dataLayer for Google Tag Manager
+	// Push the event to the dataLayer for tracking
 	window.dataLayer.push({
 		event: "click",
 		event_category: "button",
