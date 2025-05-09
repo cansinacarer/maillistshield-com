@@ -12,10 +12,11 @@ validationForm.addEventListener("submit", (event) => {
 	startTableLoadingState();
 	startAPIResponseBoxLoadingState();
 
-	// Google Analytics tracking
-	gtag("event", "click", {
+	// Push the event to the dataLayer for Google Tag Manager
+	window.dataLayer.push({
+		event: "click",
 		event_category: "button",
-		event_label: "Front Page Validation Button"
+		event_label: "Front Page Validation Button Click"
 	});
 
 	// Scroll down to the demo-results section
