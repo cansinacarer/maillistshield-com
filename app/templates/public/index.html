@@ -221,9 +221,8 @@
 								{ autohide: false }
 							);
 
-							// Push the showToast event to the dataLayer for Google Tag Manager
-							window.dataLayer.push({
-								event: "showToast",
+							// Google Analytics event tracking
+							gtag("event", "showToast", {
 								event_category: "button",
 								event_label:
 									"Show toast with implementation services"
