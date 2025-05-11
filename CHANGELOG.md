@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.1...v1.3.0) (2025-05-09)
+
+
+### Features
+
+* **analytics:** add a dataLayer event for implementation services notice ([7821cdc](https://github.com/cansinacarer/maillistshield-com/commit/7821cdca4b0c0071b69241e53f0488db0ba6370c))
+
 ## [1.2.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.0...v1.2.1) (2025-05-09)
 
 
