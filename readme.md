@@ -12,6 +12,9 @@
 [![Build & Deploy](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/deploy.yml)
 [![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/My-Base-SaaS-Flask/actions/workflows/docs.yml)
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/cansinacarer/My-Base-SaaS-Flask?devcontainer_path=.devcontainer/devcontainer.json)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/cansinacarer/My-Base-SaaS-Flask)
+
 The starter SaaS framework I built with Flask for my side projects with paid subscriptions.
 
 [Live Demo](https://base-saas-flask.apps.cansin.net/) → use with [Stripe test card numbers](https://docs.stripe.com/testing?testing-method=card-numbers#cards)
