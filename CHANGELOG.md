@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.1.0...v1.1.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* adjust recaptcha height and border radius ([387c6ed](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/387c6ede12c0dc1add1457f428681ad936ab36e0))
+
 # [1.1.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.0.1...v1.1.0) (2025-05-04)
 
 
