@@ -23,7 +23,7 @@ git merge upstream/main
 
 The customer facing web application built with Flask. This has my [my base saas](https://github.com/cansinacarer/my-base-saas-flask) as an upstream repository. When I build a feature that is generally applicable and not specific to MailListShield, I build it in my base saas and pull them into this repository.
 
-### 2. [File Processor Service](https://github.com/cansinacarer/maillistshield-file-processor)
+### 2. [File Intake Service](https://github.com/cansinacarer/maillistshield-file-intake-service)
 
 This microservice runs a monitoring loop to check the `/validation/uploaded` directory on the S3 bucket and the `Jobs` table in the database for matching job records.
 
