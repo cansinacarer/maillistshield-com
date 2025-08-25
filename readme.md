@@ -54,7 +54,7 @@ __Job States:__
 
 If a file is found but a corresponding job is not found, there is a retention period to allow for delays in database update. This retention period is declared in seconds with the environment variable `RETENTION_PERIOD_FOR_ORPHAN_FILES`. If there is no job record found in the database for a file found on the S3 bucket at the end of the retention period, the file is deleted.
 
-### 3. [Email Validation Queue Producer](https://github.com/cansinacarer/maillistshield-file-validator)
+### 3. [Validation Queue Loader](https://github.com/cansinacarer/maillistshield-file-validator)
 
 This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in the RabbitMQ Queue #1.
 
