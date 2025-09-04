@@ -84,7 +84,7 @@ __Job States:__
 
 This service does not change the job state, because it only works with individual email addresses and is unaware of files.
 
-### 5. [In progress] Results File Generator
+### 5. [Results File Generator](https://github.com/cansinacarer/maillistshield-result-file-generator)
 
 This service orchestrates email validation with the following tasks:
 

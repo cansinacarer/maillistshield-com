@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
-        <mxGraphModel dx="1467" dy="670" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1913" dy="973" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -139,7 +139,7 @@
                         <mxPoint x="2" y="-83" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-76" value="File Processor Service&lt;div&gt;&lt;u style=&quot;color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right; text-wrap-mode: nowrap;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-processor&quot;&gt;https://github.com/cansinacarer/maillistshield-file-processor&lt;/a&gt;&lt;/u&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-76" value="File Intake Service&lt;div&gt;&lt;u style=&quot;color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right; text-wrap-mode: nowrap;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-processor&quot;&gt;https://github.com/cansinacarer/maillistshield-file-intake-service&lt;/a&gt;&lt;/u&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
                     <mxGeometry x="758" y="960" width="962" height="310" as="geometry">
                         <mxRectangle x="920" y="990" width="350" height="40" as="alternateBounds"/>
                     </mxGeometry>
@@ -205,7 +205,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-120" value="Email Validation Queue Producer&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-validator&quot;&gt;https://github.com/cansinacarer/maillistshield-file-validator&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-120" value="File to Validation Queue Publisher&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-validator&quot;&gt;https://github.com/cansinacarer/maillistshield-file-validator&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
                     <mxGeometry x="1120" y="1500" width="560" height="350" as="geometry">
                         <mxRectangle x="920" y="990" width="350" height="40" as="alternateBounds"/>
                     </mxGeometry>
@@ -397,6 +397,9 @@
                 </mxCell>
                 <mxCell id="lze-oq_klvgf3IBoq4th-2" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;SaaS does not talk to the File Processor.&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;File Processor listens for changes in the S3 bucket, looks for a matching DB record.&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;If a job record for a file is found, only then pulls the file for processing.&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFF33);" parent="1" vertex="1">
                     <mxGeometry x="1670" y="787" width="250" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;a href=&quot;https://status.maillistshield.com/status/maillistshield&quot;&gt;Status Monitor&lt;/a&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#3A54FF);" vertex="1" parent="1">
+                    <mxGeometry x="1670" y="640" width="120" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
