@@ -70,18 +70,7 @@ __Job States:__
 - Success state:
   - `file_queued`
 
-### 4. [In progress] Results Queue Producer
-
-This service consumes the individual validation tasks from the RabbitMQ Queue #1 and orchestrates email validation with the following tasks:
-
-- Send the email to a worker, if the result is invalid, send it to the next worker.
-- Queue the best result in RabbitMQ Queue #2.
-
-__Job States:__
-
-This service does not change the job state, because it only works with individual email addresses and is unaware of files.
-
-### 5. [Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
+### 4. [Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
 
 This service performs the email validation.
 
@@ -95,9 +84,18 @@ __Job States:__
 
 This service does not change the job state, because it only works with individual email addresses and is unaware of files.
 
-### 6. [In progress] Results File Generator
+### 5. [In progress] Results File Generator
 
-This service consumes the RabbitMQ Queue #2 and bundles the email validation results into a results file when all email addresses in a job (i.e. file uploaded) are validated.
+This service orchestrates email validation with the following tasks:
+
+- Consumes the individual validation tasks from the RabbitMQ queues,
+- Send the email to a worker, if the result is invalid, send it to the next worker,
+- Use the best results to build the results files,
+- Update the file progress by writing to the `last_pick_row` field of the `Batch Jobs` table.
+
+__Job States:__
+
+the email validation results into a results file when all email addresses in a job (i.e. file uploaded) are validated.
 
 __Job States:__
 
