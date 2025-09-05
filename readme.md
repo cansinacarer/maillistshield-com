@@ -56,7 +56,7 @@ If a file is found but a corresponding job is not found, there is a retention pe
 
 ### 3. [File to Validation Queue Publisher](https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher)
 
-This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in the RabbitMQ Queue #1.
+This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in the RabbitMQ Queue. The queued files are moved to `validation/queued`.
 
 __Job States:__
 
