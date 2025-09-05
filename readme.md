@@ -63,7 +63,6 @@ __Job States:__
 - Expected before:
   - `file_accepted`
 - Interim states
-  - `queued`
   - `in_progress`
 - Error states
   - `error_?`
