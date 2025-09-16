@@ -56,7 +56,7 @@ If a file is found but a corresponding job is not found, there is a retention pe
 
 ### 3. [File to Validation Queue Publisher](https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher)
 
-This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in the RabbitMQ Queue. The queued files are moved to `validation/queued`.
+This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in a RabbitMQ Queue at `RABBITMQ_DEFAULT_VHOSTS[0]`. The queued files are moved to `validation/queued`.
 
 __Job States:__
 
@@ -71,7 +71,7 @@ __Job States:__
 
 ### 4. [Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
 
-This service performs the email validation.
+This service performs the email validation. It takes API requests with an API key and responds with the validation result JSON shown on the SaaS home page.
 
 #### Deployment note for the validation worker
 
@@ -83,18 +83,17 @@ __Job States:__
 
 This service does not change the job state, because it only works with individual email addresses and is unaware of files.
 
-### 5. [Results File Generator](https://github.com/cansinacarer/maillistshield-result-file-generator)
+### 5. [Validation Orchestrator](https://github.com/cansinacarer/maillistshield-validation-orchestrator)
 
-This service orchestrates email validation with the following tasks:
-
-- Consumes the individual validation tasks from the RabbitMQ queues,
-- Send the email to a worker, if the result is invalid, send it to the next worker,
-- Use the best results to build the results files,
-- Update the file progress by writing to the `last_pick_row` field of the `Batch Jobs` table.
+This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]` and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are consumed and bundled into a final results file.
 
 __Job States:__
 
-the email validation results into a results file when all email addresses in a job (i.e. file uploaded) are validated.
+This service does not change the job state in the database. The progress of a file is tracked using the number of messages in the queue for that file at vhost `RABBITMQ_DEFAULT_VHOSTS[1]`.
+
+### 6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
+
+This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]`, and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are bundled into the final results file.
 
 __Job States:__
 

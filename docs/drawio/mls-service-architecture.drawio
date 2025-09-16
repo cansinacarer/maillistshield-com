@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Ht1M8jgEwFfnCIfOTk4-" name="Page-1">
-        <mxGraphModel dx="1913" dy="973" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="763" dy="1103" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -205,7 +205,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-120" value="File to Validation Queue Publisher&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-validator&quot;&gt;https://github.com/cansinacarer/maillistshield-file-validator&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-120" value="File to Validation Queue Publisher&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher&quot;&gt;https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
                     <mxGeometry x="1120" y="1500" width="560" height="350" as="geometry">
                         <mxRectangle x="920" y="990" width="350" height="40" as="alternateBounds"/>
                     </mxGeometry>
@@ -251,8 +251,8 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-150" value="Results Queue Producer&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-validator&quot;&gt;https://github.com/cansinacarer/?&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
-                    <mxGeometry x="270" y="1618" width="369.5" height="402" as="geometry">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-150" value="Validation Orchestrator&lt;br&gt;&lt;div style=&quot;text-align: right;&quot;&gt;&lt;span style=&quot;font-size: 11px; font-weight: 400; text-wrap-mode: nowrap;&quot;&gt;&lt;u&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-validation-orchestrator&quot;&gt;https://github.com/cansinacarer/maillistshield-validation-orchestrator&lt;/a&gt;&lt;/u&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="1618" width="450" height="402" as="geometry">
                         <mxRectangle x="920" y="990" width="350" height="40" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -284,11 +284,11 @@
                 <mxCell id="_tGrXpRGsigZLB4k0Vc1-175" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_tGrXpRGsigZLB4k0Vc1-146" target="_tGrXpRGsigZLB4k0Vc1-170" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-146" value="" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
-                    <mxGeometry x="800" y="1659" width="220" height="100" as="geometry"/>
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-146" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;color: rgb(204, 204, 204); background-color: rgb(31, 31, 31); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-weight: normal; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: #ce9178;&quot;&gt;RABBITMQ_DEFAULT_VHOSTS[0]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=70;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="1639.5" width="220" height="139" as="geometry"/>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-147" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Queue of emails to be validated&lt;/span&gt;&lt;br style=&quot;padding: 0px; margin: 0px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;[{job_id, email}, ...]&lt;/font&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="_tGrXpRGsigZLB4k0Vc1-146" vertex="1">
-                    <mxGeometry x="15" y="50" width="190" height="40" as="geometry"/>
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-147" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Queue of emails to be validated&lt;/span&gt;&lt;br style=&quot;padding: 0px; margin: 0px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;[{job_id, email}, ...]&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="_tGrXpRGsigZLB4k0Vc1-146" vertex="1">
+                    <mxGeometry x="15" y="80" width="190" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="_tGrXpRGsigZLB4k0Vc1-141" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.rabbitmq.com/img/rabbitmq-logo-with-name.svg;" parent="_tGrXpRGsigZLB4k0Vc1-146" vertex="1">
                     <mxGeometry x="47.5" y="12" width="125" height="20" as="geometry"/>
@@ -305,24 +305,18 @@
                 <mxCell id="_tGrXpRGsigZLB4k0Vc1-174" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="_tGrXpRGsigZLB4k0Vc1-126" target="_tGrXpRGsigZLB4k0Vc1-146" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_tGrXpRGsigZLB4k0Vc1-188" target="_tGrXpRGsigZLB4k0Vc1-196" edge="1">
-                    <mxGeometry relative="1" as="geometry"/>
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5" target="_tGrXpRGsigZLB4k0Vc1-196" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="620" y="2160" as="sourcePoint"/>
+                        <mxPoint x="570" y="2250" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-188" value="" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
-                    <mxGeometry x="386" y="2110" width="230" height="100" as="geometry"/>
-                </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-189" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Queue of emails to be bundled&lt;/span&gt;&lt;div&gt;into a results file&lt;br style=&quot;padding: 0px; margin: 0px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;[{job_id, email, result}, ...]&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="_tGrXpRGsigZLB4k0Vc1-188" vertex="1">
-                    <mxGeometry x="-5" y="40" width="240" height="60" as="geometry"/>
-                </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-190" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.rabbitmq.com/img/rabbitmq-logo-with-name.svg;" parent="_tGrXpRGsigZLB4k0Vc1-188" vertex="1">
-                    <mxGeometry x="47.5" y="12" width="125" height="20" as="geometry"/>
-                </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-191" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.472;entryY=-0.007;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="_tGrXpRGsigZLB4k0Vc1-183" target="_tGrXpRGsigZLB4k0Vc1-188" edge="1">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-191" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="_tGrXpRGsigZLB4k0Vc1-183" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="560" y="2070" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="_tGrXpRGsigZLB4k0Vc1-192" value="Results File Generator&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-file-validator&quot;&gt;https://github.com/cansinacarer/?&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
+                <mxCell id="_tGrXpRGsigZLB4k0Vc1-192" value="Results File Generator&lt;br&gt;&lt;u style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgb(0, 0, 238); font-size: 11px; font-weight: 400; text-align: right;&quot;&gt;&lt;a href=&quot;https://github.com/cansinacarer/maillistshield-results-file-generator&quot;&gt;https://github.com/cansinacarer/maillistshield-results-file-generator&lt;/a&gt;&lt;/u&gt;&lt;div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=40;dashed=1;dashPattern=8 8;" parent="1" vertex="1">
                     <mxGeometry x="316.25" y="2310" width="793.75" height="430" as="geometry">
                         <mxRectangle x="920" y="990" width="350" height="40" as="alternateBounds"/>
                     </mxGeometry>
@@ -334,7 +328,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="_tGrXpRGsigZLB4k0Vc1-196" value="&lt;div style=&quot;text-wrap-mode: nowrap;&quot;&gt;Monitor the queue length&lt;/div&gt;&lt;div style=&quot;text-wrap-mode: nowrap;&quot;&gt;for each incomplete job&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;align=center;fontStyle=0" parent="_tGrXpRGsigZLB4k0Vc1-192" vertex="1">
-                    <mxGeometry x="109.75" y="80" width="150" height="50" as="geometry"/>
+                    <mxGeometry x="103.75" y="80" width="150" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="_tGrXpRGsigZLB4k0Vc1-216" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="_tGrXpRGsigZLB4k0Vc1-192" source="_tGrXpRGsigZLB4k0Vc1-198" target="_tGrXpRGsigZLB4k0Vc1-215" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -398,8 +392,17 @@
                 <mxCell id="lze-oq_klvgf3IBoq4th-2" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;SaaS does not talk to the File Processor.&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;File Processor listens for changes in the S3 bucket, looks for a matching DB record.&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;If a job record for a file is found, only then pulls the file for processing.&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#FFFF33);" parent="1" vertex="1">
                     <mxGeometry x="1670" y="787" width="250" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="&lt;a href=&quot;https://status.maillistshield.com/status/maillistshield&quot;&gt;Status Monitor&lt;/a&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#3A54FF);" vertex="1" parent="1">
+                <mxCell id="4" value="&lt;a href=&quot;https://status.maillistshield.com/status/maillistshield&quot;&gt;Status Monitor&lt;/a&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=light-dark(#FFFFFF,#3A54FF);" parent="1" vertex="1">
                     <mxGeometry x="1670" y="640" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;color: rgb(204, 204, 204); background-color: rgb(31, 31, 31); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-weight: normal; line-height: 18px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(206, 145, 120);&quot;&gt;RABBITMQ_DEFAULT_VHOSTS[1]&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="swimlane;whiteSpace=wrap;html=1;startSize=70;" vertex="1" parent="1">
+                    <mxGeometry x="385" y="2080" width="220" height="145" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Queue of results to be bundled&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;into a results file&lt;/span&gt;&lt;br style=&quot;padding: 0px; margin: 0px;&quot;&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;font face=&quot;Courier New&quot;&gt;[{job_id, email}, ...]&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="5">
+                    <mxGeometry x="15" y="80" width="190" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.rabbitmq.com/img/rabbitmq-logo-with-name.svg;" vertex="1" parent="5">
+                    <mxGeometry x="47.5" y="12" width="125" height="20" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
