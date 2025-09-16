@@ -347,7 +347,7 @@ window.addEventListener("load", () => mermaid.run());
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_upload_link_validation_file</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">file_type</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">generate_upload_link</span><span class="p">(</span>
         <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;S3_BUCKET_NAME&quot;</span><span class="p">],</span>
-        <span class="sa">f</span><span class="s2">&quot;validation/uploaded/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">timestamp</span><span class="p">()</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;validation/uploaded/</span><span class="si">{</span><span class="n">timestamp</span><span class="p">()</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">file_type</span><span class="p">,</span>
         <span class="n">s3</span><span class="p">,</span>
         <span class="mi">600</span><span class="p">,</span>  <span class="c1"># Longer expiration to allow for slower uploads of large csv files</span>
