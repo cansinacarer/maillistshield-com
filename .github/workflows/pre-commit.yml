@@ -37,7 +37,7 @@ jobs:
 
             - name: Install Node.js dependencies
               run: |
-                  npm install prettier prettier-plugin-jinja-template
+                  npm install --save-dev prettier prettier-plugin-jinja-template
                   npm install --save-dev @commitlint/cli @commitlint/config-conventional
                   npm install --save-dev markdownlint-cli
 
