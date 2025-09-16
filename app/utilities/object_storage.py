@@ -150,7 +150,7 @@ def generate_upload_link_profile_picture(user, file_type):
 def generate_upload_link_validation_file(user, file_type, file):
     return generate_upload_link(
         current_app.config["S3_BUCKET_NAME"],
-        f"validation/uploaded/{user.id}-{timestamp()}-{file}",
+        f"validation/uploaded/{timestamp()}-{file}",
         file_type,
         s3,
         600,  # Longer expiration to allow for slower uploads of large csv files
