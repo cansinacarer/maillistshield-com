@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.3.0...v1.4.0) (2025-09-16)
+
+
+### Features
+
+* add system status link to private page footers ([e84a4a8](https://github.com/cansinacarer/maillistshield-com/commit/e84a4a828c5a158247e20199535edf1d99ef4cf5))
+
 # [1.3.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.1...v1.3.0) (2025-05-09)
 
 
