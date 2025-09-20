@@ -320,6 +320,18 @@ window.addEventListener("load", () => mermaid.run());
             <span class="k">case</span> <span class="s2">&quot;pending_start&quot;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="s2">&quot;Pending Start&quot;</span>
 
+            <span class="k">case</span> <span class="s2">&quot;file_accepted&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;File Accepted&quot;</span>
+
+            <span class="k">case</span> <span class="s2">&quot;file_queued&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;File Queued&quot;</span>
+
+            <span class="k">case</span> <span class="s2">&quot;file_validation_in_progress&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;Processing&quot;</span>
+
+            <span class="k">case</span> <span class="n">s</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s2">&quot;Failed&quot;</span>
+
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">status</span>
 
