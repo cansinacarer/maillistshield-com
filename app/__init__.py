@@ -148,6 +148,18 @@ def create_app(config_class="app.config.Config", test_config=False):
             case "pending_start":
                 return "Pending Start"
 
+            case "file_accepted":
+                return "File Accepted"
+
+            case "file_queued":
+                return "File Queued"
+
+            case "file_validation_in_progress":
+                return "Processing"
+
+            case s if s.startswith("error"):
+                return "Failed"
+
             case _:
                 return status
 
