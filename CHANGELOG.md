@@ -1,3 +1,10 @@
+## [1.4.5](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.4...v1.4.5) (2025-09-20)
+
+
+### Bug Fixes
+
+* sort batch jobs in the ui by order of creation ([58521cc](https://github.com/cansinacarer/maillistshield-com/commit/58521cc4ec0dad5b3b2ad4aae7131ecd569c71af))
+
 ## [1.4.4](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.3...v1.4.4) (2025-09-20)
 
 
