@@ -89,7 +89,7 @@
 														{% if job.row_count %}
 															<span
 																class="text-body-secondary"
-																>{{ job.last_pick_row / job.row_count * 100 | round(2) }}%
+																>{{ (job.last_pick_row / job.row_count * 100) | round(2) }}%
 																completed</span
 															>
 														{% else %}
