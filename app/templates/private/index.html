@@ -51,7 +51,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										{% for job in current_user.batch_jobs %}
+										{% for job in current_user.batch_jobs|sort(attribute='id', reverse=True) %}
 											<tr>
 												<td>
 													{{ job.original_file_name }}
