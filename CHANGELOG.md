@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.0...v1.4.1) (2025-09-20)
+
+
+### Bug Fixes
+
+* complete the batch job state -> label mapping ([3ff549b](https://github.com/cansinacarer/maillistshield-com/commit/3ff549b3c9b6ad342574551cf7e39571417ff726))
+
 # [1.4.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.3.0...v1.4.0) (2025-09-16)
 
 
