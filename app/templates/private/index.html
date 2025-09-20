@@ -47,6 +47,7 @@
 											<th>Time</th>
 											<th>Cost</th>
 											<th>Status</th>
+											<th>Results</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -67,10 +68,37 @@
 														credits
 													</td>
 												{% else %}
-													<td>TBD</td>
+													<td>
+														<span
+															class="text-body-secondary"
+															>Calculating</span
+														>
+													</td>
 												{% endif %}
 												<td>
-													{{ job.status | prettifyJobStatus }}
+													{{ job | prettifyJobStatus }}
+												</td>
+												<td>
+													{% if job.status == "file_completed" %}
+														<a
+															href="/app/download/{{ job.id }}"
+															class="btn btn-sm btn-outline-primary"
+															>Download</a
+														>
+													{% else %}
+														{% if job.row_count %}
+															<span
+																class="text-body-secondary"
+																>{{ job.last_pick_row / job.row_count * 100 | round(2) }}%
+																completed</span
+															>
+														{% else %}
+															<span
+																class="text-body-secondary"
+																>Processing</span
+															>
+														{% endif %}
+													{% endif %}
 												</td>
 											</tr>
 										{% endfor %}

@@ -143,8 +143,8 @@ def create_app(config_class="app.config.Config", test_config=False):
 
     # Prettify batch validation job status
     @app.template_filter("prettifyJobStatus")
-    def prettifyJobStatus_filter(status):
-        match status:
+    def prettifyJobStatus_filter(job):
+        match job.status:
             case "pending_start":
                 return "Pending Start"
 
@@ -157,11 +157,14 @@ def create_app(config_class="app.config.Config", test_config=False):
             case "file_validation_in_progress":
                 return "Processing"
 
+            case "file_completed":
+                return "Completed"
+
             case s if s.startswith("error"):
                 return "Failed"
 
             case _:
-                return status
+                return job.status
 
     # Google OAuth 2 client configuration
     app.google_client = WebApplicationClient(app.config["GOOGLE_CLIENT_ID"])
