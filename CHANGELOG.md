@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.2...v1.4.3) (2025-09-20)
+
+
+### Bug Fixes
+
+* correctly round file progress to 2 digits ([47f13d4](https://github.com/cansinacarer/maillistshield-com/commit/47f13d45f077f2b5206b33d710aff6b0f98b1001))
+
 ## [1.4.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.1...v1.4.2) (2025-09-20)
 
 
