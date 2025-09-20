@@ -91,12 +91,25 @@ This service does not change the job state in the database. The progress of a fi
 
 ### 6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
 
-This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]`, and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are bundled into the final results file.
+This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]` and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are consumed and bundled into a final results file.
+
+Tasks of this service include the following:
+
+- List all the queues and their message
+  - If a queue has as many messages as its row_count, process it:
+    - Create the output file,
+    - Update in database:
+      - Status
+      - Results file
+    - Delete the queue
+  - Else, update `last_pick_row` in the `BatchJobs` table with message count.
 
 __Job States:__
 
 - Expected before:
   - `file_queued`
+- Progress while the file rows have begun being processed
+  - `file_validation_in_progress`
 - Error states
   - `error_?`
 - Success state:
