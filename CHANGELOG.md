@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.1...v1.4.2) (2025-09-20)
+
+
+### Bug Fixes
+
+* improvements on status tracking ([6188765](https://github.com/cansinacarer/maillistshield-com/commit/6188765621e8c5ed1850b03046a5411e64bd6a2f))
+
 ## [1.4.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.0...v1.4.1) (2025-09-20)
 
 
