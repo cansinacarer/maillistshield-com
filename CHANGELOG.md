@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.3...v1.6.0) (2025-09-21)
+
+
+### Bug Fixes
+
+* upload file now sends the user directly to the upload page instead of `/app` ([b359fb7](https://github.com/cansinacarer/maillistshield-com/commit/b359fb7ef02ac65cd2555c24c9dbd0839952187a))
+
+
+### Features
+
+* implement single email validation form on the private side ([5582363](https://github.com/cansinacarer/maillistshield-com/commit/5582363aa5807990db0d114d9e91e7a12d3a56b1))
+
 ## [1.5.3](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.2...v1.5.3) (2025-09-21)
 
 
