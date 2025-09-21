@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.2...v1.5.3) (2025-09-21)
+
+
+### Bug Fixes
+
+* handle the error case when anonymous user tries downloading a results file ([8cc9765](https://github.com/cansinacarer/maillistshield-com/commit/8cc97655965cb1d65a39583852def8a9f9736cd9))
+
 ## [1.5.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.1...v1.5.2) (2025-09-21)
 
 
