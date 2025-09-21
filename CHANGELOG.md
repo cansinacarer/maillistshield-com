@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.0...v1.5.1) (2025-09-21)
+
+
+### Bug Fixes
+
+* complete the missing parts of file download ([c1155c8](https://github.com/cansinacarer/maillistshield-com/commit/c1155c86ab971d0cad8f9c05c811cd9d403b4c83))
+
 # [1.5.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.5...v1.5.0) (2025-09-21)
 
 
