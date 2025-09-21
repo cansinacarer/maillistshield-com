@@ -224,6 +224,8 @@ const populateResultsTable = (data) => {
 				// If we find an empty string, we set the td to False
 				td.innerHTML =
 					'<span class="text-info"><i class="me-2 bi bi-apple"></i>Apple</span>';
+			} else {
+				td.innerHTML = data[tr.id];
 			}
 		} else if (tr.id === "email_security_gateway" && data[tr.id] !== "") {
 			// Security gateway field
