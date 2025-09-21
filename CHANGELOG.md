@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.2.0...v1.2.1) (2025-09-21)
+
+
+### Bug Fixes
+
+* resolve the flickering before dark mode is applied ([e4c505a](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/e4c505a74cecd8d38bfe10d74214759f782618f8))
+
 # [1.2.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.1.1...v1.2.0) (2025-05-31)
 
 
