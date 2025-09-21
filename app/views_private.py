@@ -19,9 +19,9 @@ from jinja2 import TemplateNotFound
 import stripe
 
 # App modules
-from app import csrf
+from app import csrf, db
 from app.forms import ProfileDetailsForm
-from app.models import Users, Tiers
+from app.models import Users, Tiers, BatchJobs
 from app.utilities.object_storage import generate_upload_link_profile_picture
 from app.utilities.error_handlers import error_page
 from app.utilities.stripe_event_handler import handle_stripe_event
@@ -31,21 +31,26 @@ private_bp = Blueprint("private_bp", __name__)
 
 
 @private_bp.route("/download-results/<jobuid>", methods=["GET"])
-@csrf.exempt
 def download_results(jobuid):
     """The view function that serves the batch validation result files.
 
     Args:
-        jobuid (str): The part of the requested endpoint after /jobuid/.
+        jobuid (str): The part of the requested endpoint after /download-results/.
     """
+
     # If no jobuid is provided, return 404
     if not jobuid:
         return error_page(404)
 
+    # Get the job with the provided jobuid that belongs to the current user
+    job = (
+        db.session.query(BatchJobs)
+        .filter_by(user_id=current_user.id, uid=jobuid)
+        .first()
+    )
+
     # If the jobuid provided doesn't belong to the current user,
     # return 404, not 403 because I don't want to let them know of a match
-    job = current_user.batch_jobs.filter_by(uid=jobuid).first()
-
     if not job:
         return error_page(404)
 
@@ -55,49 +60,14 @@ def download_results(jobuid):
 
     # Generate a pre-signed download link for the results file
     try:
-        download_link = job.generate_download_link("results_file")
+        download_link = job.generate_results_download_link()
+        if download_link:
+            return redirect(download_link)
+        else:
+            print(f"Job with id {job.id} doesn't have a results file to download.")
+            return error_page(500)
     except Exception as e:
         print(f"Error generating the download link for job with id {job.id}: {e}")
-        return error_page(500)
-
-    try:
-        match path:
-            # The endpoint where stripe sends the webhook events
-            case "stripe":
-                # Verify that the incoming request is from Stripe
-                try:
-                    event = stripe.webhook.Webhook.construct_event(
-                        request.data.decode("utf-8"),
-                        request.headers.get("Stripe-Signature", None),
-                        current_app.config["STRIPE_WEBHOOK_SECRET"],
-                    )
-                    handle_stripe_event(event)
-
-                except ValueError:
-                    return error_page(400)
-
-                except stripe.error.SignatureVerificationError:
-                    print(
-                        "Requests with invalid signature are hitting the stripe webhook!"
-                    )
-                    return error_page(400)
-
-                except Exception as e:
-                    print(
-                        f"Unhandled error while processing Stripe webhook request: {e}"
-                    )
-                    return error_page(500)
-
-                # Return a response to acknowledge the receipt of the event
-                finally:
-                    return jsonify("success=True"), 200
-
-            # Non-existent webhook path
-            case _:
-                return error_page(404)
-
-    except Exception as e:
-        print(f"Error when processing a webhook request: {e}")
         return error_page(500)
 
 

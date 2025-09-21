@@ -60,7 +60,7 @@ class BatchJobs(db.Model):
                 self.uid = new_uid
                 break
 
-    def generate_download_link(self):
+    def generate_results_download_link(self):
         if self.results_file:
             return generate_download_link(
                 bucket_name=current_app.config["S3_BUCKET_NAME"],
