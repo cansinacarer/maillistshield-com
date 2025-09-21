@@ -1,3 +1,11 @@
+## [1.5.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.1...v1.5.2) (2025-09-21)
+
+
+### Bug Fixes
+
+* make the homepage validator catch the case of less common email providers ([1cdb34a](https://github.com/cansinacarer/maillistshield-com/commit/1cdb34a9126d554a18c21163159f75883e1632c4))
+* resolve flickering in dark mode on page load ([887f5b9](https://github.com/cansinacarer/maillistshield-com/commit/887f5b9fed130653fca70e4fc2df008d022a9ab0))
+
 ## [1.5.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.0...v1.5.1) (2025-09-21)
 
 
