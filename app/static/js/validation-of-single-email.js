@@ -253,3 +253,16 @@ const populateResultsTable = (data) => {
 		}
 	});
 };
+
+// Check if the URL has a query parameter "validate"
+// If the "validate" parameter is present, pre-fill the email input and trigger validation
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("validate")) {
+	const emailToValidate = urlParams.get("validate");
+	if (emailToValidate) {
+		// Set the email input value
+		validationInput.value = emailToValidate;
+		// Trigger the form submission
+		validationForm.dispatchEvent(new Event("submit"));
+	}
+}

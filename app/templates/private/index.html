@@ -132,21 +132,21 @@
 						<div
 							class="d-flex gap-3 justify-content-center fw-normal"
 						>
-							<form class="input-group my-4" id="validationForm">
+							<form
+								class="input-group my-4"
+								action="/"
+								method="GET"
+							>
 								<input
 									class="form-control px-3 py-2"
-									id="emailToValidate"
-									name="emailToValidate"
+									id="validate"
+									name="validate"
 									placeholder="Validate an email"
 									required=""
 									type="email"
 									value=""
 								/>
-								<button
-									type="submit"
-									class="btn btn-primary"
-									id="validationButton"
-								>
+								<button type="submit" class="btn btn-primary">
 									<span
 										class="loading spinner-border spinner-border-sm d-none"
 										aria-hidden="true"
