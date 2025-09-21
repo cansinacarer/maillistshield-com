@@ -81,7 +81,7 @@
 												<td>
 													{% if job.status == "file_completed" %}
 														<a
-															href="/app/download/{{ job.id }}"
+															href="/app/download-results/{{ job.uid }}"
 															class="btn btn-sm btn-outline-primary"
 															>Download</a
 														>
@@ -89,7 +89,7 @@
 														{% if job.row_count %}
 															<span
 																class="text-body-secondary"
-																>{{ (job.last_pick_row / job.row_count * 100) | round(2) }}%
+																>{{ (job.last_pick_row / job.row_count * 100) | round(0) }}%
 																completed</span
 															>
 														{% else %}
