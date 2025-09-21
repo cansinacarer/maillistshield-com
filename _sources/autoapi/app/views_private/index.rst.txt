@@ -17,6 +17,7 @@ Functions
 
 .. autoapisummary::
 
+   app.views_private.download_results
    app.views_private.webhook
    app.views_private.billing
    app.views_private.account
@@ -28,6 +29,14 @@ Module Contents
 ---------------
 
 .. py:data:: private_bp
+
+.. py:function:: download_results(jobuid)
+
+   The view function that serves the batch validation result files.
+
+   :param jobuid: The part of the requested endpoint after /jobuid/.
+   :type jobuid: str
+
 
 .. py:function:: webhook(path)
 

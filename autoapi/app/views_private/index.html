@@ -165,19 +165,22 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.webhook" title="app.views_private.webhook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">webhook</span></code></a>(path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.download_results" title="app.views_private.download_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">download_results</span></code></a>(jobuid)</p></td>
+<td><p>The view function that serves the batch validation result files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.webhook" title="app.views_private.webhook"><code class="xref py py-obj docutils literal notranslate"><span class="pre">webhook</span></code></a>(path)</p></td>
 <td><p>The view function for the webhook endpoint.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.billing" title="app.views_private.billing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">billing</span></code></a>(path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.billing" title="app.views_private.billing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">billing</span></code></a>(path)</p></td>
 <td><p>The view function for the billing pages' routing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.account" title="app.views_private.account"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account</span></code></a>(path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.account" title="app.views_private.account"><code class="xref py py-obj docutils literal notranslate"><span class="pre">account</span></code></a>(path)</p></td>
 <td><p>The view function for the account pages routing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.admin" title="app.views_private.admin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">admin</span></code></a>(path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.admin" title="app.views_private.admin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">admin</span></code></a>(path)</p></td>
 <td><p>The view function for the admin privilaged pages' routing.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_private.private_index" title="app.views_private.private_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">private_index</span></code></a>(path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_private.private_index" title="app.views_private.private_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">private_index</span></code></a>(path)</p></td>
 <td><p>The view function for the private pages routing.</p></td>
 </tr>
 </tbody>
@@ -189,6 +192,17 @@
 <dt class="sig sig-object py" id="app.views_private.private_bp">
 <span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">private_bp</span></span><a class="reference internal" href="../../../_modules/app/views_private.html#private_bp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.private_bp" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_private.download_results">
+<span class="sig-prename descclassname"><span class="pre">app.views_private.</span></span><span class="sig-name descname"><span class="pre">download_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jobuid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_private.html#download_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_private.download_results" title="Link to this definition"></a></dt>
+<dd><p>The view function that serves the batch validation result files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>jobuid</strong> (<em>str</em>) – The part of the requested endpoint after /jobuid/.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_private.webhook">

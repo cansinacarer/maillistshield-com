@@ -82,6 +82,9 @@ Module Contents
    .. py:method:: generate_job_uid()
 
 
+   .. py:method:: generate_download_link()
+
+
 .. py:class:: Tiers
 
    Bases: :py:obj:`app.db.Model`

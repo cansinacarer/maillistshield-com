@@ -189,6 +189,80 @@ window.addEventListener("load", () => mermaid.run());
 
 
 
+<span class="nd">@private_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/download-results/&lt;jobuid&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">])</span>
+<span class="nd">@csrf</span><span class="o">.</span><span class="n">exempt</span>
+<div class="viewcode-block" id="download_results">
+<a class="viewcode-back" href="../../autoapi/app/views_private/index.html#app.views_private.download_results">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">download_results</span><span class="p">(</span><span class="n">jobuid</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function that serves the batch validation result files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        jobuid (str): The part of the requested endpoint after /jobuid/.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If no jobuid is provided, return 404</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">jobuid</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="c1"># If the jobuid provided doesn&#39;t belong to the current user,</span>
+    <span class="c1"># return 404, not 403 because I don&#39;t want to let them know of a match</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">batch_jobs</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uid</span><span class="o">=</span><span class="n">jobuid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">job</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="c1"># If the job is not completed or doesn&#39;t have a results file, return 404</span>
+    <span class="k">if</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;file_completed&quot;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">job</span><span class="o">.</span><span class="n">results_file</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="c1"># Generate a pre-signed download link for the results file</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">download_link</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">generate_download_link</span><span class="p">(</span><span class="s2">&quot;results_file&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error generating the download link for job with id </span><span class="si">{</span><span class="n">job</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
+            <span class="c1"># The endpoint where stripe sends the webhook events</span>
+            <span class="k">case</span> <span class="s2">&quot;stripe&quot;</span><span class="p">:</span>
+                <span class="c1"># Verify that the incoming request is from Stripe</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">event</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">webhook</span><span class="o">.</span><span class="n">Webhook</span><span class="o">.</span><span class="n">construct_event</span><span class="p">(</span>
+                        <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span>
+                        <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Stripe-Signature&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                        <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;STRIPE_WEBHOOK_SECRET&quot;</span><span class="p">],</span>
+                    <span class="p">)</span>
+                    <span class="n">handle_stripe_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="n">stripe</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">SignatureVerificationError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;Requests with invalid signature are hitting the stripe webhook!&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Unhandled error while processing Stripe webhook request: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+
+                <span class="c1"># Return a response to acknowledge the receipt of the event</span>
+                <span class="k">finally</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="s2">&quot;success=True&quot;</span><span class="p">),</span> <span class="mi">200</span>
+
+            <span class="c1"># Non-existent webhook path</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error when processing a webhook request: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span></div>
+
+
+
 <span class="nd">@private_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/webhook/&lt;path&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="nd">@csrf</span><span class="o">.</span><span class="n">exempt</span>
 <div class="viewcode-block" id="webhook">
