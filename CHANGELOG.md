@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.5...v1.5.0) (2025-09-21)
+
+
+### Features
+
+* download results endpoint ([73ba860](https://github.com/cansinacarer/maillistshield-com/commit/73ba8605927b0e5a61b30b8ce3eff32dfcf85050))
+
 ## [1.4.5](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.4...v1.4.5) (2025-09-20)
 
 
