@@ -203,6 +203,10 @@ window.addEventListener("load", () => mermaid.run());
     <span class="k">if</span> <span class="ow">not</span> <span class="n">jobuid</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
 
+    <span class="c1"># If anonymous user, return 404</span>
+    <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+
     <span class="c1"># Get the job with the provided jobuid that belongs to the current user</span>
     <span class="n">job</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">BatchJobs</span><span class="p">)</span>
