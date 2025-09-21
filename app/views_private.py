@@ -42,6 +42,10 @@ def download_results(jobuid):
     if not jobuid:
         return error_page(404)
 
+    # If anonymous user, return 404
+    if current_user.is_anonymous:
+        return error_page(404)
+
     # Get the job with the provided jobuid that belongs to the current user
     job = (
         db.session.query(BatchJobs)
