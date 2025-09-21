@@ -34,7 +34,7 @@ Module Contents
 
    The view function that serves the batch validation result files.
 
-   :param jobuid: The part of the requested endpoint after /jobuid/.
+   :param jobuid: The part of the requested endpoint after /download-results/.
    :type jobuid: str
 
 

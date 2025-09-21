@@ -82,7 +82,7 @@ Module Contents
    .. py:method:: generate_job_uid()
 
 
-   .. py:method:: generate_download_link()
+   .. py:method:: generate_results_download_link()
 
 
 .. py:class:: Tiers
