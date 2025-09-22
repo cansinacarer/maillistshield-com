@@ -1,10 +1,156 @@
 # MailListShield.com SaaS
 
+[![Docs](https://img.shields.io/badge/Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
+![Test Coverage](tests/coverage/coverage-badge.svg)
+[![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
+![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
+
 [![Build & Deploy](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml)
+[![Pre-Commit Hooks](https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml)
+[![Run Tests](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml)
+[![Semantic Release](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml)
+[![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml)
 
-This repo contains the SaaS at [maillistshield.com](https://maillistshield.com/). It is built on top of [my Flask base saas](https://github.com/cansinacarer/my-base-saas-flask).
+## Architecture
 
-To pull updates from the base saas, connect it as an upstream:
+```mermaid
+sequenceDiagram
+  participant flask as 1. Flask Application
+  participant db as Postgres Database
+  participant s3 as S3 Bucket
+  participant fis as 2. File Intake Service
+  participant f2vqp as 3. File to Validation Queue Publisher
+  participant rabbit as RabbitMQ
+  participant vo as 5. Validation Orchestrator
+  participant evw as 4. Email Validation Worker
+  participant rfg as 6. Results File Generator
+
+  flask ->> s3: Uploads a batch validation job to validation/uploaded/
+  flask ->> db: Records the job as pending_start
+  s3 ->> fis: Validate and clean up the file, calculate cost
+  fis ->> db: Deduct  credits from user, update status to file_accepted
+  fis ->> s3: Upload cleaned file to validation/in-progress/
+  s3 ->> f2vqp: Parse the cleaned file
+  f2vqp ->> rabbit: Create a queue per file, publish each row as a message
+  f2vqp ->> db: Update status to file_queued
+  rabbit ->> vo: Consume N message per queue with Round-Robin
+  vo ->> evw: API call to send each message, retrieve result
+  vo ->> db: Update progress
+  db ->> flask: Update progress in the UI
+  vo ->> rabbit: Enqueue the results in each files' queue
+  rabbit ->> rfg: Drain results queue of the file when expected message count is reached, build result file
+  rfg ->> s3: Upload the result file to /validation/completed
+  rfg ->> db: Set status to file_validation_in_progress or file_completed, save the name of the results file
+  db ->> flask: Generate download link for results file
+```
+
+This application consists of 6 event driven services:
+
+1. [Flask SaaS](https://github.com/cansinacarer/maillistshield-com) (this repository)
+2. [File Intake Service](https://github.com/cansinacarer/maillistshield-file-intake-service)
+3. [File to Validation Queue Publisher](https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher)
+4. [Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
+5. [Validation Orchestrator](https://github.com/cansinacarer/maillistshield-validation-orchestrator)
+6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
+
+### Tech Stack
+
+The services are triggered by:
+
+- Messages on a __RabbitMQ__ server on designated vhosts,
+- Files created at an __AWS S3__ compatible object storage service, at designated directories.
+
+All services share a common __Postgres__ database, and configured to send logs to a __Loki__ server.
+
+See [this drawio diagram](docs/drawio/mls-service-architecture.drawio) for a more detailed description of the interactions between these services.
+
+## Service Descriptions
+
+### 1. [Flask SaaS](https://github.com/cansinacarer/maillistshield-com)
+
+This is the Flask application served at [maillistshield.com](https://maillistshield.com/).
+
+#### Features
+
+##### 🧑‍💻 Developer Experience
+
+- Dev containers:
+
+  - __Flask__ container with pre-configured with:
+    - VSCode launch.json for debugging the Flask app,
+    - Prettier for HTML, CSS, and JS formatting,
+    - Pre-commit hooks for code quality checks,
+    - Markdownlint for Markdown formatting,
+    - Black for Python code formatting,
+    - Commitlint for commit message linting.
+
+  - __Postgres__ as a development database,
+
+  - __pgAdmin__ pre-connected to the development,
+
+  - __docs__ serving the built html files of the Sphinx documentation..
+
+- CI/CD pipelines with GitHub Actions to:
+  - Run pre-commit hooks,
+  - Run tests,
+  - Automate semantic release for versioning and changelog generation,
+  - Build and deploy the documentation,
+  - Build and deploy the app to production.
+
+##### ☁️ Deployment
+
+- 🐳 Dockerized Flask for stateless continuous deployment for scalability,
+- 🗄️ Database model abstracted with ORM,
+- 📦 S3 object storage with pre-signed URLs.
+
+##### 💳 Stripe Integrations
+
+- Subscriptions,
+  - Different subscription tiers,
+  - Billing page with Invoices,
+  - Integration mechanism:
+    - To begin a subscription, we send the user to Stripe with a checkout session,
+    - Then listen to Stripe webhook events to process the results,
+    - We set the Products in Stripe, then insert their prices into the Tiers table.
+
+- One-off credit purchases for pre-paid metered usage.
+
+##### 🔒 Authentication
+
+- Sign up flow,
+  - Sign up with Google option,
+  - Email validation requirement,
+
+- Two factor authentication (TOTP only),
+- Forgot password flow,
+- reCAPTCHA v2 for sign up and login forms,
+- Account details page where the user can:
+  - Upload a profile picture (stored in S3),
+  - Change profile details like first & last name.
+
+##### 📧 Transactional Emails with SMTP
+
+- About Stripe subscription changes:
+  - Confirmation,
+  - Cancellation,
+  - Expiration.
+
+- Email verification on registration,
+- Forgot password.
+
+##### 🚨 Security
+
+- Cross-Site Request Forgery (CSRF) protection in all forms,
+- Rate limiting: App-wide and form specific limits,
+- Cross-Site Scripting (XSS) protection,
+- Cross-Origin Resource Sharing (CORS) protection.
+
+#### My Base SaaS
+
+This project uses my [my base saas](https://github.com/cansinacarer/my-base-saas-flask) as an upstream repository. When I build a feature that is generally applicable and not specific to MailListShield, I build it in my base saas and pull them into this repository.
+
+To pull updates from my base saas, connect it as an upstream:
 
 ```sh
 git remote add upstream https://github.com/cansinacarer/my-base-saas-flask
@@ -17,11 +163,29 @@ git fetch upstream
 git merge upstream/main
 ```
 
-## Services
+#### 📄 Developer Documentation
 
-### 1. [Flask SaaS](https://github.com/cansinacarer/maillistshield-com)
-
-The customer facing web application built with Flask. This has my [my base saas](https://github.com/cansinacarer/my-base-saas-flask) as an upstream repository. When I build a feature that is generally applicable and not specific to MailListShield, I build it in my base saas and pull them into this repository.
+- [Development](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html)
+  - [Code Quality, Conventional Commits, and Releases](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#code-quality-conventional-commits-and-releases)
+  - [Developing in Dev Containers](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#developing-in-dev-containers)
+    - [Local Endpoints Served by the Dev Containers](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#local-endpoints-served-by-the-dev-containers)
+    - [Debugging](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#debugging)
+    - [Testing Stripe Webhooks](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#testing-stripe-webhooks)
+  - [Developing in a Virtual Environment](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#developing-in-a-virtual-environment)
+  - [Database Model](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#database-model)
+  - [How to Build On Top of This App](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#how-to-build-on-top-of-this-app)
+    - [Adding New Pages](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#adding-new-pages)
+    - [Defining More Configuration Variables](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#defining-more-configuration-variables)
+    - [Updating Dependencies](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#updating-dependencies)
+- [Continuous Integration and Continuous Deployment](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html)
+  - [Pre-Commit Hooks](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#pre-commit-hooks)
+  - [Run Tests](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#run-tests)
+  - [Semantic Release](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#semantic-release)
+  - [Build & Deploy](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#build-deploy)
+  - [Build & Deploy Sphinx Docs](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#build-deploy-sphinx-docs)
+- [Deployment to Production](https://cansinacarer.github.io/My-Base-SaaS-Flask/deployment.html)
+  - [A Pitfall for Cloudflare Proxy](https://cansinacarer.github.io/My-Base-SaaS-Flask/deployment.html#a-pitfall-for-cloudflare-proxy)
+- [Auto Generated Documentation](https://cansinacarer.github.io/My-Base-SaaS-Flask/autoapi/index.html)
 
 ### 2. [File Intake Service](https://github.com/cansinacarer/maillistshield-file-intake-service)
 
