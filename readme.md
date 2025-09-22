@@ -16,20 +16,20 @@
 
 ```mermaid
 sequenceDiagram
-  participant flask as 1. Flask Application
-  participant db as Postgres Database
-  participant s3 as S3 Bucket
-  participant fis as 2. File Intake Service
-  participant f2vqp as 3. File to Validation Queue Publisher
-  participant rabbit as RabbitMQ
-  participant vo as 5. Validation Orchestrator
-  participant evw as 4. Email Validation Worker
-  participant rfg as 6. Results File Generator
+  participant flask as 🌶️ 1. Flask Application
+  participant db as 🐘 Postgres Database
+  participant s3 as ☁️ S3 Bucket
+  participant fis as 📁 2. File Intake Service
+  participant f2vqp as 📤 3. File to Validation Queue Publisher
+  participant rabbit as 🐰 RabbitMQ
+  participant vo as ⚙️ 5. Validation Orchestrator
+  participant evw as ✉️ 4. Email Validation Worker
+  participant rfg as 📊 6. Results File Generator
 
   flask ->> s3: Uploads a batch validation job to validation/uploaded/
   flask ->> db: Records the job as pending_start
-  s3 ->> fis: Validate and clean up the file, calculate cost
-  fis ->> db: Deduct  credits from user, update status to file_accepted
+  s3 ->> fis: Clean up the file, calculate cost
+  fis ->> db: Deduct credits from user, update status to file_accepted
   fis ->> s3: Upload cleaned file to validation/in-progress/
   s3 ->> f2vqp: Parse the cleaned file
   f2vqp ->> rabbit: Create a queue per file, publish each row as a message
