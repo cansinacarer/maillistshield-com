@@ -7,11 +7,47 @@ import uuid
 from flask import current_app
 from flask_login import UserMixin
 
-from app import db
+from app import db, bc
 from app.config import s3, appTimezone
 from app.utilities.object_storage import generate_download_link, user_folder_size
 from app.utilities.qr import qrcode_img_src
 from app.utilities.helpers import readable_file_size
+
+
+class APIKeys(db.Model):
+    __tablename__ = "APIKeys"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
+    key_hash = db.Column(db.String(64), nullable=False)
+    label = db.Column(db.String())
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    expires_at = db.Column(db.DateTime)
+    last_used = db.Column(db.DateTime)
+    is_active = db.Column(db.Boolean, default=True)
+
+    def __init__(self, user, key_hash, label=None, expires_at=None):
+        self.user_id = user.id
+        self.key_hash = key_hash
+        self.label = label
+        self.expires_at = expires_at
+
+    def check_key(self, key_plain):
+        return bc.check_password_hash(self.key_hash, key_plain)
+
+    def delete_key(self):
+        db.session.delete(self)
+        db.session.commit()
+        return True
+
+    def save(self):
+        # inject self into db session
+        db.session.add(self)
+
+        # commit change and save the object
+        db.session.commit()
+
+        return self
 
 
 class BatchJobs(db.Model):
@@ -132,6 +168,10 @@ class Users(db.Model, UserMixin):
 
     totp_secret = db.Column(db.String(32), default=pyotp.random_base32())
     totp_enabled = db.Column(db.Integer, default=0)
+
+    api_keys = db.relationship(
+        "APIKeys", backref="user", lazy=True, cascade="all, delete-orphan"
+    )
 
     def __init__(
         self,

@@ -2,160 +2,252 @@
 {% extends "private/layouts/base.html" %}
 {% block content %}
 	<h5 class="mb-4">Hello, {{ current_user.firstName }}!</h5>
-	<div class="container-fluid px-0">
-		<div class="row" data-masonry='{"percentPosition": true }'>
-			<div class="col-sm-12 col-lg-4 mb-4">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Credits</h5>
-						<p class="card-text">
-							You have
-							<span class="fw-bold">
-								{{ current_user.credits | thousandSeparator }}
-							</span>
-							credits.
-						</p>
-						<p class="card-text">
-							<small class="text-body-secondary">
-								1 credit = 1 email validation
-							</small>
-						</p>
-						<a href="/app/billing" class="btn btn-primary">
-							Purchase Credits
-						</a>
-						<a
-							href="/app/billing"
-							class="btn btn-outline-primary ms-2"
-						>
-							Billing History
-						</a>
+	<div class="row" data-masonry='{"percentPosition": true }'>
+		<div class="col-md-4 mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Single Email Validation</h5>
+					<p class="card-text">Validate an email address</p>
+					<div class="d-flex gap-3 justify-content-center fw-normal">
+						<form class="input-group my-2" action="/" method="GET">
+							<input
+								class="form-control px-3 py-2"
+								id="validate"
+								name="validate"
+								placeholder="Validate an email"
+								required=""
+								type="email"
+								value=""
+							/>
+							<button type="submit" class="btn btn-primary">
+								<span
+									class="loading spinner-border spinner-border-sm d-none"
+									aria-hidden="true"
+								></span>
+								<span class="text">Validate</span>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12 col-lg-8 mb-4">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">List Validation</h5>
-						<p class="cart-text">Upload History</p>
-						{% if current_user.batch_jobs %}
-							<div
-								class="table-responsive mb-4"
-								style="max-height: 400px;"
-							>
-								<table class="table table-striped table-hover">
-									<thead>
+		</div>
+		<div class="col-md-8 mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">List Validation</h5>
+					<p class="cart-text">Upload History</p>
+					{% if current_user.batch_jobs %}
+						<div
+							class="table-responsive mb-4"
+							style="max-height: 220px;"
+						>
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>File</th>
+										<th>Date</th>
+										<th>Time</th>
+										<th>Cost</th>
+										<th>Status</th>
+										<th>Results</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for job in current_user.batch_jobs|sort(attribute='id', reverse=True) %}
 										<tr>
-											<th>File</th>
-											<th>Date</th>
-											<th>Time</th>
-											<th>Cost</th>
-											<th>Status</th>
-											<th>Results</th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for job in current_user.batch_jobs|sort(attribute='id', reverse=True) %}
-											<tr>
+											<td>
+												{{ job.original_file_name }}
+											</td>
+											<td>
+												{{ job.uploaded | dbDateformat }}
+											</td>
+											<td>
+												{{ job.uploaded | dbTimeformat }}
+											</td>
+											{% if job.row_count %}
 												<td>
-													{{ job.original_file_name }}
+													{{ job.row_count }} credits
 												</td>
+											{% else %}
 												<td>
-													{{ job.uploaded | dbDateformat }}
+													<span
+														class="text-body-secondary"
+														>Calculating</span
+													>
 												</td>
-												<td>
-													{{ job.uploaded | dbTimeformat }}
-												</td>
-												{% if job.row_count %}
-													<td>
-														{{ job.row_count }}
-														credits
-													</td>
+											{% endif %}
+											<td>
+												{{ job | prettifyJobStatus }}
+											</td>
+											<td>
+												{% if job.status == "file_completed" %}
+													<a
+														href="/app/download-results/{{ job.uid }}"
+														class="btn btn-sm btn-success"
+														>Download</a
+													>
 												{% else %}
-													<td>
+													{% if job.row_count %}
 														<span
 															class="text-body-secondary"
-															>Calculating</span
-														>
-													</td>
-												{% endif %}
-												<td>
-													{{ job | prettifyJobStatus }}
-												</td>
-												<td>
-													{% if job.status == "file_completed" %}
-														<a
-															href="/app/download-results/{{ job.uid }}"
-															class="btn btn-sm btn-success"
-															>Download</a
+															>{{ (job.last_pick_row / job.row_count * 100) | round(0) }}%
+															completed</span
 														>
 													{% else %}
-														{% if job.row_count %}
-															<span
-																class="text-body-secondary"
-																>{{ (job.last_pick_row / job.row_count * 100) | round(0) }}%
-																completed</span
-															>
-														{% else %}
-															<span
-																class="text-body-secondary"
-																>Processing</span
-															>
-														{% endif %}
+														<span
+															class="text-body-secondary"
+															>Processing</span
+														>
 													{% endif %}
-												</td>
-											</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div>
-						{% else %}
-							<p class="card-text">
-								<small class="text-body-secondary">
-									You have not uploaded any files yet.
-								</small>
-							</p>
-						{% endif %}
-						<a
-							href="/app/validate-new-list"
-							class="btn btn-primary"
-						>
-							Upload a New List for Validation
-						</a>
-					</div>
+												{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					{% else %}
+						<p class="card-text">
+							<small class="text-body-secondary">
+								You have not uploaded any files yet.
+							</small>
+						</p>
+					{% endif %}
+					<a href="/app/validate-new-list" class="btn btn-primary">
+						Upload a New List for Validation
+					</a>
 				</div>
 			</div>
-			<div class="col-sm-12 col-lg-4 mb-4">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">Single Email Validation</h5>
-						<p class="card-text">Validate an email address</p>
+		</div>
+		<div class="col-md-4 mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Credits</h5>
+					<p class="card-text">
+						You have
+						<span class="fw-bold">
+							{{ current_user.credits | thousandSeparator }}
+						</span>
+						credits.
+					</p>
+					<p class="card-text">
+						<small class="text-body-secondary">
+							1 credit = 1 email validation
+						</small>
+					</p>
+					<a href="/app/billing" class="btn btn-primary">
+						Purchase Credits
+					</a>
+					<a
+						href="/app/billing"
+						class="btn btn-outline-primary my-md-2"
+					>
+						Billing History
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8 mb-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Active API Keys</h5>
+					{% set active_keys = current_user.api_keys | selectattr("is_active", "equalto", true) | list %}
+					{% if active_keys %}
 						<div
-							class="d-flex gap-3 justify-content-center fw-normal"
+							class="table-responsive mb-4"
+							style="max-height: 220px;"
 						>
-							<form
-								class="input-group my-4"
-								action="/"
-								method="GET"
-							>
-								<input
-									class="form-control px-3 py-2"
-									id="validate"
-									name="validate"
-									placeholder="Validate an email"
-									required=""
-									type="email"
-									value=""
-								/>
-								<button type="submit" class="btn btn-primary">
-									<span
-										class="loading spinner-border spinner-border-sm d-none"
-										aria-hidden="true"
-									></span>
-									<span class="text">Validate</span>
-								</button>
-							</form>
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>Label</th>
+										<th>Creation Date</th>
+										<th>Expiration Date</th>
+										<th>Last Used Date</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for key in active_keys|sort(attribute='id', reverse=True) %}
+										<tr>
+											{% if key.label %}
+												<td>{{ key.label }}</td>
+											{% else %}
+												<td>
+													<span
+														class="text-body-secondary"
+														>No label</span
+													>
+												</td>
+											{% endif %}
+											<td>
+												{{ key.created_at | dbDateformat }}
+											</td>
+											{% if key.expires_at %}
+												<td>
+													{{ key.expires_at | dbDateformat }}
+												</td>
+											{% else %}
+												<td>
+													<span
+														class="text-body-secondary"
+														>Never</span
+													>
+												</td>
+											{% endif %}
+											{% if key.last_used %}
+												<td>
+													{{ key.last_used | dbDateformat }}
+												</td>
+											{% else %}
+												<td>
+													<span
+														class="text-body-secondary"
+														>Not used</span
+													>
+												</td>
+											{% endif %}
+											{% if key.is_active %}
+												<td>
+													<span
+														class="badge text-bg-success"
+														>Active</span
+													>
+												</td>
+											{% else %}
+												<td>
+													<span
+														class="badge text-bg-danger"
+														>Revoked</span
+													>
+												</td>
+											{% endif %}
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
 						</div>
-					</div>
+					{% else %}
+						<p class="card-text">
+							<small class="text-body-secondary">
+								You have not created any API keys yet.
+							</small>
+						</p>
+					{% endif %}
+					<p class="card-text">
+						<small class="text-body-secondary">
+							See our
+							<a
+								href="https://www.postman.com/maillistshield-team/mail-list-shield-email-validation-api/"
+								target="_blank"
+								>API documentation</a
+							>
+							for examples.
+						</small>
+					</p>
+					<a href="/app/api-keys" class="btn btn-primary">
+						Manage API Keys
+					</a>
 				</div>
 			</div>
 		</div>

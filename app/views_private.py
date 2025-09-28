@@ -20,11 +20,12 @@ import stripe
 
 # App modules
 from app import csrf, db
-from app.forms import ProfileDetailsForm
-from app.models import Users, Tiers, BatchJobs
+from app.forms import ProfileDetailsForm, CreateAPIKeyForm
+from app.models import Users, Tiers, BatchJobs, APIKeys
 from app.utilities.object_storage import generate_upload_link_profile_picture
 from app.utilities.error_handlers import error_page
 from app.utilities.stripe_event_handler import handle_stripe_event
+from app.utilities.helpers import generate_api_key_and_hash
 
 # Instantiate the Blueprint
 private_bp = Blueprint("private_bp", __name__)
@@ -128,6 +129,119 @@ def webhook(path):
     except Exception as e:
         print(f"Error when processing a webhook request: {e}")
         return error_page(500)
+
+
+@private_bp.route("/api-keys", defaults={"path": "api-keys"}, methods=["GET", "POST"])
+@private_bp.route("/api-keys/<path>", methods=["GET", "POST"])
+@login_required
+def api_keys(path):
+    """The view function for the page for managing API keys."""
+
+    # Redirect to email confirmation
+    if current_user.email_confirmed != 1:
+        flash(
+            "Please confirm your email address first by entering the confirmation code we have emailed you.",
+            "error",
+        )
+        return redirect(url_for("auth_bp.email_confirmation_by_code"))
+
+    # Declare the API key creation form
+    form = CreateAPIKeyForm()
+
+    if path == "api-keys" and request.method == "GET":
+        return render_template(
+            "private/api_keys/api_keys.html",
+            user=current_user,
+            form=form,
+            path=path,
+            new_key=None,
+        )
+
+    if request.method == "POST":
+        # Handle the POST requests to create or revoke endpoints
+        match path:
+            case "revoke":
+                # Check if request has JSON data
+                if not request.is_json:
+                    return (
+                        jsonify(
+                            {
+                                "success": False,
+                                "message": "Content-Type must be application/json",
+                            }
+                        ),
+                        400,
+                    )
+
+                try:
+                    key_id = request.json.get("key_id", None)
+                    if not key_id:
+                        return (
+                            jsonify({"success": False, "error": "Invalid key ID"}),
+                            400,
+                        )
+
+                    api_key = APIKeys.query.filter_by(
+                        id=key_id, user_id=current_user.id
+                    ).first()
+
+                    if not api_key or not api_key.is_active:
+                        return (
+                            jsonify(
+                                {
+                                    "success": False,
+                                    "error": "API key not found or already revoked",
+                                }
+                            ),
+                            404,
+                        )
+
+                    api_key.is_active = False
+                    api_key.save()
+
+                    return jsonify({"success": True}), 200
+                except Exception as e:
+                    print(f"Error revoking API key: {e}")
+                    return (
+                        jsonify({"success": False, "error": "Internal server error"}),
+                        500,
+                    )
+
+            case "create":
+                try:
+                    # Generate a new API key and its hash
+                    new_key, key_hash = generate_api_key_and_hash()
+
+                    # Prepare expiration date
+                    expires_at = form.expires_at.data if form.expires_at.data else None
+
+                    api_key = APIKeys(
+                        user=current_user,
+                        key_hash=key_hash,
+                        label=request.form.get("label", None, type=str),
+                        expires_at=expires_at,
+                    )
+                    api_key.save()
+                    flash(
+                        f"New API key created successfully. Please save the API key now, as it won't be shown again: {new_key}",
+                        "success",
+                    )
+                    flash(
+                        "If you lose your API key, please revoke it below and create a new one.",
+                        "info",
+                    )
+                    return redirect(url_for("private_bp.api_keys"))
+                except Exception as e:
+                    print(f"Error creating a new API key: {e}")
+                    flash(
+                        "An error occurred while creating a new API key. Please try again later.",
+                        "danger",
+                    )
+                    return redirect(url_for("private_bp.api_keys"))
+
+    # If the path doesn't match any known routes, return 404
+    # This catches both GET and POST requests with unknown paths
+    return error_page(404)
 
 
 @private_bp.route("/billing", defaults={"path": "billing"}, methods=["GET", "POST"])

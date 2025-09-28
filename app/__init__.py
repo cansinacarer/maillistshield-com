@@ -71,7 +71,7 @@ def create_app(config_class="app.config.Config", test_config=False):
     try:
         with app.app_context():
             # Import the table models
-            from app.models import Users, Tiers, BatchJobs
+            from app.models import Users, Tiers, BatchJobs, APIKeys
 
             # Create the database tables if they don't exist
             db.create_all()
