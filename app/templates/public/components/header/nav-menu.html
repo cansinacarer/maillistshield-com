@@ -40,24 +40,30 @@
 						include
 						'shared-components/dark-mode-selector-nav-list-item.html'
 					%}
+					<li class="nav-item">
+						<img
+							src="{{ current_user.avatar() }}"
+							alt="avatar"
+							width="24"
+							height="24"
+							class="rounded-circle me-2"
+						/>
+					</li>
 					<li class="nav-item pe-4">
 						Hello, {{ current_user.firstName }}!
 					</li>
-					<li class="nav-item">
-						<a
-							href="#"
-							class="d-block link-body-emphasis text-decoration-none"
-							data-bs-toggle="dropdown"
-							aria-expanded="false"
+					<li class="nav-item btn-group">
+						<a href="/app" class="btn btn-primary btn-sm"
+							><i class="bi bi-box-arrow-in-right"></i>
+							Dashboard</a
 						>
-							<img
-								src="{{ current_user.avatar() }}"
-								alt="avatar"
-								width="32"
-								height="32"
-								class="rounded-circle me-2"
-							/>
-						</a>
+						<button
+							type="button"
+							class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split"
+							aria-haspopup="true"
+							aria-expanded="false"
+							data-bs-toggle="dropdown"
+						></button>
 						<ul class="dropdown-menu dropdown-menu-end text-small">
 							<li>
 								<a class="dropdown-item" href="/app">
