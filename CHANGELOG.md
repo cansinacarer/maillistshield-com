@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.6.0...v1.6.1) (2025-09-28)
+
+
+### Bug Fixes
+
+* **ci:** correct the workspace path in the devcontainer ([8cf6fb7](https://github.com/cansinacarer/maillistshield-com/commit/8cf6fb790e741923fc947c39b34bb7a77c23e1aa))
+
 # [1.6.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.3...v1.6.0) (2025-09-21)
 
 
