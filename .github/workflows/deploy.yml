@@ -29,7 +29,33 @@ jobs:
             - name: Apply database migrations
               env:
                   DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
+                  APP_NAME: Base SaaS
                   TIMEZONE: US/Eastern
+                  FLASK_DEBUG: True
+                  DATABASE_SECRET_KEY: 12345678901234567
+                  S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+                  S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+                  S3_KEY: ${{ secrets.S3_KEY }}
+                  S3_SECRET: ${{ secrets.S3_SECRET }}
+                  MAIL_FROM: webmaster@cansin.net
+                  MAIL_SERVER: smtp.yandex.com
+                  MAIL_PORT: 465
+                  MAIL_USE_TLS: False
+                  MAIL_USE_SSL: True
+                  MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+                  MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+                  MAIL_DEBUG: False
+                  STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+                  STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+                  STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+                  STRIPE_PRODUCT_ID_FOR_CREDITS: ${{ secrets.STRIPE_PRODUCT_ID_FOR_CREDITS }}
+                  STRIPE_CREDIT_UNIT_COST: ${{ secrets.STRIPE_CREDIT_UNIT_COST }}
+                  GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+                  GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+                  RECAPTCHA_SITE_KEY: ${{ secrets.RECAPTCHA_SITE_KEY }}
+                  RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+                  FLASK_RUN_CERT: .devcontainer/ssl/cert.pem
+                  FLASK_RUN_KEY: .devcontainer/ssl/key.pem
               run: flask db upgrade
 
     build-and-deploy:
