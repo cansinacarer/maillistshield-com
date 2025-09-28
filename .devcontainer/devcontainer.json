@@ -4,7 +4,7 @@
 	"name": "flask",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "flask",
-	"workspaceFolder": "/mail-list-shield",
+	"workspaceFolder": "/workspaces/mail-list-shield",
 	"runServices": ["database", "pgadmin", "docs"],
 	"customizations": {
 		"vscode": {
