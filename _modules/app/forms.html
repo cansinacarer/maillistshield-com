@@ -308,6 +308,26 @@ window.addEventListener("load", () => mermaid.run());
     <span class="n">code5</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;code5&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">InputRequired</span><span class="p">()])</span></div>
 </div>
 
+
+
+<div class="viewcode-block" id="CreateAPIKeyForm">
+<a class="viewcode-back" href="../../autoapi/app/forms/index.html#app.forms.CreateAPIKeyForm">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CreateAPIKeyForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateAPIKeyForm.label">
+<a class="viewcode-back" href="../../autoapi/app/forms/index.html#app.forms.CreateAPIKeyForm.label">[docs]</a>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s2">&quot;Label&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">Length</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">120</span><span class="p">)])</span></div>
+
+<div class="viewcode-block" id="CreateAPIKeyForm.expires_at">
+<a class="viewcode-back" href="../../autoapi/app/forms/index.html#app.forms.CreateAPIKeyForm.expires_at">[docs]</a>
+    <span class="n">expires_at</span> <span class="o">=</span> <span class="n">DateField</span><span class="p">(</span>
+        <span class="s2">&quot;Expiration Date (optional)&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[]</span>
+    <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CreateAPIKeyForm.submit">
+<a class="viewcode-back" href="../../autoapi/app/forms/index.html#app.forms.CreateAPIKeyForm.submit">[docs]</a>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s2">&quot;Create API Key&quot;</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
            </div>

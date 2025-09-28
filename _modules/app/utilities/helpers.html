@@ -158,6 +158,9 @@ window.addEventListener("load", () => mermaid.run());
              
   <h1>Source code for app.utilities.helpers</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randrange</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">bc</span>
 
 
 <span class="c1"># Returns the file/folder size given in bytes in the appropriate units as text</span>
@@ -195,6 +198,20 @@ window.addEventListener("load", () => mermaid.run());
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">code</span> <span class="o">=</span> <span class="n">code</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">code</span></div>
+
+
+
+<div class="viewcode-block" id="generate_api_key_and_hash">
+<a class="viewcode-back" href="../../../autoapi/app/utilities/helpers/index.html#app.utilities.helpers.generate_api_key_and_hash">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_api_key_and_hash</span><span class="p">():</span>
+    <span class="c1"># Generate a new random key</span>
+    <span class="n">new_key</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="o">+</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>  <span class="c1"># 64 characters</span>
+
+    <span class="c1"># Hash the key to be stored in the database</span>
+    <span class="n">key_hash</span> <span class="o">=</span> <span class="n">bc</span><span class="o">.</span><span class="n">generate_password_hash</span><span class="p">(</span><span class="n">new_key</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Return the new plain key to be shown to the user once</span>
+    <span class="k">return</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">key_hash</span></div>
 
 </pre></div>
 

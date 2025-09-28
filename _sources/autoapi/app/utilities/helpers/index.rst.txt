@@ -11,6 +11,7 @@ Functions
 
    app.utilities.helpers.readable_file_size
    app.utilities.helpers.generate_n_digit_code
+   app.utilities.helpers.generate_api_key_and_hash
 
 
 Module Contents
@@ -19,4 +20,6 @@ Module Contents
 .. py:function:: readable_file_size(size_in_bytes, significant_digits=0)
 
 .. py:function:: generate_n_digit_code(n)
+
+.. py:function:: generate_api_key_and_hash()
 

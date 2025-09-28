@@ -16,6 +16,7 @@ Classes
    app.forms.SetNewPassword
    app.forms.ProfileDetailsForm
    app.forms.TwoFactorAuthenticationForm
+   app.forms.CreateAPIKeyForm
 
 
 Module Contents
@@ -126,5 +127,19 @@ Module Contents
 
 
    .. py:attribute:: code5
+
+
+.. py:class:: CreateAPIKeyForm
+
+   Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   .. py:attribute:: label
+
+
+   .. py:attribute:: expires_at
+
+
+   .. py:attribute:: submit
 
 

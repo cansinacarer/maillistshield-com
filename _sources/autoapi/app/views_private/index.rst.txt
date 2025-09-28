@@ -19,6 +19,7 @@ Functions
 
    app.views_private.download_results
    app.views_private.webhook
+   app.views_private.api_keys
    app.views_private.billing
    app.views_private.account
    app.views_private.admin
@@ -50,6 +51,11 @@ Module Contents
 
    Webhook endpoints for external services to give us updates.
    Currently, this endpoint is used to receive webhook events from Stripe.
+
+
+.. py:function:: api_keys(path)
+
+   The view function for the page for managing API keys.
 
 
 .. py:function:: billing(path)

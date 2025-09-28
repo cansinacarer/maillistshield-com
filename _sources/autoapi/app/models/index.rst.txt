@@ -9,6 +9,7 @@ Classes
 
 .. autoapisummary::
 
+   app.models.APIKeys
    app.models.BatchJobs
    app.models.Tiers
    app.models.Users
@@ -16,6 +17,44 @@ Classes
 
 Module Contents
 ---------------
+
+.. py:class:: APIKeys(user, key_hash, label=None, expires_at=None)
+
+   Bases: :py:obj:`app.db.Model`
+
+
+   .. py:attribute:: id
+
+
+   .. py:attribute:: user_id
+
+
+   .. py:attribute:: key_hash
+
+
+   .. py:attribute:: label
+
+
+   .. py:attribute:: created_at
+
+
+   .. py:attribute:: expires_at
+
+
+   .. py:attribute:: last_used
+
+
+   .. py:attribute:: is_active
+
+
+   .. py:method:: check_key(key_plain)
+
+
+   .. py:method:: delete_key()
+
+
+   .. py:method:: save()
+
 
 .. py:class:: BatchJobs(*args, **kwargs)
 
@@ -174,6 +213,9 @@ Module Contents
 
 
    .. py:attribute:: totp_enabled
+
+
+   .. py:attribute:: api_keys
 
 
    .. py:method:: save()

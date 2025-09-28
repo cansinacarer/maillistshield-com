@@ -158,13 +158,16 @@
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.models.BatchJobs" title="app.models.BatchJobs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatchJobs</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.models.APIKeys" title="app.models.APIKeys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">APIKeys</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#app.models.Tiers" title="app.models.Tiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tiers</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.models.BatchJobs" title="app.models.BatchJobs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BatchJobs</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#app.models.Users" title="app.models.Users"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Users</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.models.Tiers" title="app.models.Tiers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Tiers</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.models.Users" title="app.models.Users"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Users</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -172,6 +175,67 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.models.APIKeys">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.models.</span></span><span class="sig-name descname"><span class="pre">APIKeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_hash</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">app.db.Model</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.key_hash">
+<span class="sig-name descname"><span class="pre">key_hash</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.key_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.key_hash" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.label">
+<span class="sig-name descname"><span class="pre">label</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.label" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.created_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.expires_at">
+<span class="sig-name descname"><span class="pre">expires_at</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.expires_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.expires_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.last_used">
+<span class="sig-name descname"><span class="pre">last_used</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.last_used"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.last_used" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.APIKeys.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.is_active"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.is_active" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.models.APIKeys.check_key">
+<span class="sig-name descname"><span class="pre">check_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_plain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.check_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.check_key" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.models.APIKeys.delete_key">
+<span class="sig-name descname"><span class="pre">delete_key</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.delete_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.delete_key" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.models.APIKeys.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/models.html#APIKeys.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.APIKeys.save" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="app.models.BatchJobs">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.models.</span></span><span class="sig-name descname"><span class="pre">BatchJobs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/models.html#BatchJobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.BatchJobs" title="Link to this definition"></a></dt>
@@ -426,6 +490,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.models.Users.totp_enabled">
 <span class="sig-name descname"><span class="pre">totp_enabled</span></span><a class="reference internal" href="../../../_modules/app/models.html#Users.totp_enabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.Users.totp_enabled" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="app.models.Users.api_keys">
+<span class="sig-name descname"><span class="pre">api_keys</span></span><a class="reference internal" href="../../../_modules/app/models.html#Users.api_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.models.Users.api_keys" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
