@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.7.0...v1.8.0) (2025-09-28)
+
+
+### Features
+
+* ability to create/revoke API keys ([a1a4428](https://github.com/cansinacarer/maillistshield-com/commit/a1a4428ba6a228beedcd0132500709f0f88941ee))
+
 # [1.7.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.6.1...v1.7.0) (2025-09-28)
 
 
