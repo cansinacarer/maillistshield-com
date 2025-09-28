@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.6.1...v1.7.0) (2025-09-28)
+
+
+### Bug Fixes
+
+* **ci:** add the same set of env variables as those in test ([9704fc0](https://github.com/cansinacarer/maillistshield-com/commit/9704fc0fa5c4e9799d2d9bee25b67b0aa23ed95c))
+* **ci:** we are not doing db migrations on ci ([6bdc9e7](https://github.com/cansinacarer/maillistshield-com/commit/6bdc9e7176ae9727985cac222684373dbd1bb1c9))
+* resolve the flickering before dark mode is applied ([e4c505a](https://github.com/cansinacarer/maillistshield-com/commit/e4c505a74cecd8d38bfe10d74214759f782618f8))
+
+
+### Features
+
+* add readme buttons for one-click dev environment providers ([7722849](https://github.com/cansinacarer/maillistshield-com/commit/7722849afda450f031f973b9425ae5383ec52f75))
+* add schema versioning with Flask-Migrate ([00f72f4](https://github.com/cansinacarer/maillistshield-com/commit/00f72f47ac9eee48fa1ea8fadb9977e022b615e2))
+* better navigation on homepage when logged in ([e9c42b4](https://github.com/cansinacarer/maillistshield-com/commit/e9c42b49aadf57dfd3eec47628835e2372c3d059))
+
 ## [1.6.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.6.0...v1.6.1) (2025-09-28)
 
 ### Bug Fixes
