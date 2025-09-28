@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.2.1...v1.3.0) (2025-09-28)
+
+
+### Features
+
+* add schema versioning with Flask-Migrate ([00f72f4](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/00f72f47ac9eee48fa1ea8fadb9977e022b615e2))
+* better navigation on homepage when logged in ([e9c42b4](https://github.com/cansinacarer/My-Base-SaaS-Flask/commit/e9c42b49aadf57dfd3eec47628835e2372c3d059))
+
 ## [1.2.1](https://github.com/cansinacarer/My-Base-SaaS-Flask/compare/v1.2.0...v1.2.1) (2025-09-21)
 
 
