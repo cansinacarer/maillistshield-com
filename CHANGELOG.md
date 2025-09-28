@@ -1,17 +1,14 @@
 ## [1.6.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.6.0...v1.6.1) (2025-09-28)
 
-
 ### Bug Fixes
 
 * **ci:** correct the workspace path in the devcontainer ([8cf6fb7](https://github.com/cansinacarer/maillistshield-com/commit/8cf6fb790e741923fc947c39b34bb7a77c23e1aa))
 
 # [1.6.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.3...v1.6.0) (2025-09-21)
 
-
 ### Bug Fixes
 
 * upload file now sends the user directly to the upload page instead of `/app` ([b359fb7](https://github.com/cansinacarer/maillistshield-com/commit/b359fb7ef02ac65cd2555c24c9dbd0839952187a))
-
 
 ### Features
 
@@ -19,13 +16,11 @@
 
 ## [1.5.3](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.2...v1.5.3) (2025-09-21)
 
-
 ### Bug Fixes
 
 * handle the error case when anonymous user tries downloading a results file ([8cc9765](https://github.com/cansinacarer/maillistshield-com/commit/8cc97655965cb1d65a39583852def8a9f9736cd9))
 
 ## [1.5.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.1...v1.5.2) (2025-09-21)
-
 
 ### Bug Fixes
 
@@ -34,13 +29,11 @@
 
 ## [1.5.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.5.0...v1.5.1) (2025-09-21)
 
-
 ### Bug Fixes
 
 * complete the missing parts of file download ([c1155c8](https://github.com/cansinacarer/maillistshield-com/commit/c1155c86ab971d0cad8f9c05c811cd9d403b4c83))
 
 # [1.5.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.5...v1.5.0) (2025-09-21)
-
 
 ### Features
 
@@ -48,13 +41,11 @@
 
 ## [1.4.5](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.4...v1.4.5) (2025-09-20)
 
-
 ### Bug Fixes
 
 * sort batch jobs in the ui by order of creation ([58521cc](https://github.com/cansinacarer/maillistshield-com/commit/58521cc4ec0dad5b3b2ad4aae7131ecd569c71af))
 
 ## [1.4.4](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.3...v1.4.4) (2025-09-20)
-
 
 ### Bug Fixes
 
@@ -62,13 +53,11 @@
 
 ## [1.4.3](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.2...v1.4.3) (2025-09-20)
 
-
 ### Bug Fixes
 
 * correctly round file progress to 2 digits ([47f13d4](https://github.com/cansinacarer/maillistshield-com/commit/47f13d45f077f2b5206b33d710aff6b0f98b1001))
 
 ## [1.4.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.1...v1.4.2) (2025-09-20)
-
 
 ### Bug Fixes
 
@@ -76,13 +65,11 @@
 
 ## [1.4.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.4.0...v1.4.1) (2025-09-20)
 
-
 ### Bug Fixes
 
 * complete the batch job state -> label mapping ([3ff549b](https://github.com/cansinacarer/maillistshield-com/commit/3ff549b3c9b6ad342574551cf7e39571417ff726))
 
 # [1.4.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.3.0...v1.4.0) (2025-09-16)
-
 
 ### Features
 
@@ -90,13 +77,11 @@
 
 # [1.3.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.1...v1.3.0) (2025-05-09)
 
-
 ### Features
 
 * **analytics:** add a dataLayer event for implementation services notice ([7821cdc](https://github.com/cansinacarer/maillistshield-com/commit/7821cdca4b0c0071b69241e53f0488db0ba6370c))
 
 ## [1.2.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.2.0...v1.2.1) (2025-05-09)
-
 
 ### Bug Fixes
 
@@ -104,20 +89,17 @@
 
 # [1.2.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.2...v1.2.0) (2025-05-09)
 
-
 ### Features
 
 * install Google Tag Manager to templates ([d87b4f0](https://github.com/cansinacarer/maillistshield-com/commit/d87b4f0271646887c835dacffeb35581eb36715c))
 
 ## [1.1.2](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.1...v1.1.2) (2025-05-07)
 
-
 ### Bug Fixes
 
 * update app reference to be compatible with the application factory pattern ([82ede00](https://github.com/cansinacarer/maillistshield-com/commit/82ede00fe239c44319a04b039db13685fef71ca6))
 
 ## [1.1.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.1.0...v1.1.1) (2025-05-05)
-
 
 ### Bug Fixes
 
