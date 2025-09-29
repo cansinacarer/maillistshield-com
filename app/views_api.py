@@ -234,8 +234,8 @@ def get_credit_balance():
     }
 
 
-@api_bp.route("/validate-single", methods=["POST"])
-@limiter.limit("50 per hour", methods=["POST"])
+@api_bp.route("/validate-email", methods=["POST"])
+@limiter.limit("200 per hour", methods=["POST"])
 @csrf.exempt
 def validate_single():
     """
