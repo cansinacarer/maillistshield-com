@@ -209,7 +209,7 @@ def api_test():
         return {
             "status": "success",
             "message": f"Hello, {user.firstName}! Good news: your API key works.",
-            "note:": "We have not checked your content type, but for the validation endpoints, you will need to send a JSON body.",
+            "note": "We have not checked your content type, but for the validation endpoints, you will need to send a JSON body.",
         }
 
 
