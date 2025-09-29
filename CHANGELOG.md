@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.8.0...v1.9.0) (2025-09-29)
+
+
+### Features
+
+* implement API endpoints for single email validation, balance check, and key test ([6949a61](https://github.com/cansinacarer/maillistshield-com/commit/6949a61b84d039b23b8ebac400860044634b73ac))
+
 # [1.8.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.7.0...v1.8.0) (2025-09-28)
 
 
