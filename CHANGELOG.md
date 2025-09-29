@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.10.0...v1.11.0) (2025-09-29)
+
+
+### Features
+
+* add links under the responses on the home page ([112968e](https://github.com/cansinacarer/maillistshield-com/commit/112968e5181ad52fbc5962805cdb2dc4aff54fd4))
+
 # [1.10.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.9.0...v1.10.0) (2025-09-29)
 
 
