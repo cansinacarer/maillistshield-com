@@ -384,7 +384,7 @@ window.addEventListener("load", () => mermaid.run());
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="s2">&quot;Please use POST requests to interact with the API.&quot;</span><span class="p">,</span>
-            <span class="mi">200</span><span class="p">,</span>
+            <span class="mi">405</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
@@ -398,7 +398,7 @@ window.addEventListener("load", () => mermaid.run());
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
             <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">firstName</span><span class="si">}</span><span class="s2">! Good news: your API key works.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;note:&quot;</span><span class="p">:</span> <span class="s2">&quot;We have not checked your content type, but for the validation endpoints, you will need to send a JSON body.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;We have not checked your content type, but for the validation endpoints, you will need to send a JSON body.&quot;</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 
