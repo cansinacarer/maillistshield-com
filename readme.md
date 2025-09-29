@@ -13,6 +13,8 @@
 [![Semantic Release](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml)
 [![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml)
 
+[![Run In Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/39218943-677d3df8-c28c-47ad-ab45-ae21166fe426?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D39218943-677d3df8-c28c-47ad-ab45-ae21166fe426%26entityType%3Dcollection%26workspaceId%3D0deedf09-e1c0-4689-b495-babe29e8d3c2#?env%5BMLS%20API%20Credentials%5D=W3sia2V5IjoiQVBJX0tFWSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InNlY3JldCIsImRlc2NyaXB0aW9uIjoiVGhlIEFQSSBrZXkgeW91IHJlY2VpdmVkIG9uIHRoZSBNTFMgZGFzaGJvYXJkLiIsInNlc3Npb25WYWx1ZSI6IjEzODU3MmRmNWZjMDRmNGM4YmRjNmMwMDRlNWUzYzhmNGRjYjE3YWEwNzQyNDBiM2JmMzg4MTliNTYyNjVhNmMiLCJjb21wbGV0ZVNlc3Npb25WYWx1ZSI6IjEzODU3MmRmNWZjMDRmNGM4YmRjNmMwMDRlNWUzYzhmNGRjYjE3YWEwNzQyNDBiM2JmMzg4MTliNTYyNjVhNmMiLCJzZXNzaW9uSW5kZXgiOjB9XQ==)
+
 ## Architecture
 
 ```mermaid
