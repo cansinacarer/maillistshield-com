@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>app.views_api &mdash; Mail List Shield v1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d29a5c0e"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Mail List Shield
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#developer-experience">🧑‍💻 Developer Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#deployment">☁️ Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#stripe-integrations">💳 Stripe Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#authentication">🔒 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#transactional-emails-with-smtp">📧 Transactional Emails with SMTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#security">🚨 Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features.html#ui">🎨 UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../features.html#notifications">🔔 Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../features.html#bootstrap-html-templates">🌐 Bootstrap HTML templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#database-model">Database Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#updating-the-database-model">Updating the Database Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#adding-new-pages">Adding New Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../development.html#updating-dependencies">Updating Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ci-cd.html">Continuous Integration and Continuous Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ci-cd.html#pre-commit-hooks">Pre-Commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ci-cd.html#run-tests">Run Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ci-cd.html#semantic-release">Semantic Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ci-cd.html#build-deploy">Build &amp; Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ci-cd.html#build-deploy-sphinx-docs">Build &amp; Deploy Sphinx Docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment.html">Deployment to Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../deployment.html#a-pitfall-for-cloudflare-proxy">A Pitfall for Cloudflare Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">Auto Generated Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/app/index.html">app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/app/index.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/config/index.html">app.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/decorators/index.html">app.decorators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/emails/index.html">app.emails</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/forms/index.html">app.forms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/models/index.html">app.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/utilities/index.html">app.utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/views/index.html">app.views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/views_api/index.html">app.views_api</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/views_auth/index.html">app.views_auth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/views_private/index.html">app.views_private</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/app/index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/app/index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/app/index.html#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.mail"><code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.bc"><code class="docutils literal notranslate"><span class="pre">bc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.lm"><code class="docutils literal notranslate"><span class="pre">lm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.csrf"><code class="docutils literal notranslate"><span class="pre">csrf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../autoapi/app/index.html#app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Resources:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact the Developer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mail List Shield</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../app.html">app</a></li>
+      <li class="breadcrumb-item active">app.views_api</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for app.views_api</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Flask modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Blueprint</span><span class="p">,</span>
+    <span class="n">abort</span><span class="p">,</span>
+    <span class="n">jsonify</span><span class="p">,</span>
+    <span class="n">make_response</span><span class="p">,</span>
+    <span class="n">request</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># App modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">csrf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Users</span><span class="p">,</span> <span class="n">APIKeys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">limiter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">appTimezone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.utilities.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_email</span>
+
+<div class="viewcode-block" id="api_bp">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.api_bp">[docs]</a>
+<span class="n">api_bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s2">&quot;api_bp&quot;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="invalid_api_key_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.invalid_api_key_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">invalid_api_key_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abort the request with a 403 error for invalid API keys.</span>
+
+<span class="sd">    We standardize the error response to avoid leaking information about</span>
+<span class="sd">    why the API key is invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abort</span><span class="p">(</span>
+        <span class="n">make_response</span><span class="p">(</span>
+            <span class="n">jsonify</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid API key.&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">),</span>
+            <span class="mi">403</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="no_api_key_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.no_api_key_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">no_api_key_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abort the request with a 401 error for missing API keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abort</span><span class="p">(</span>
+        <span class="n">make_response</span><span class="p">(</span>
+            <span class="n">jsonify</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;API key is missing. Please provide an API key in the &#39;x-api-key&#39; header.&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">),</span>
+            <span class="mi">401</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="no_json_body_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.no_json_body_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">no_json_body_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abort the request with a 415 Unsupported Media Type error for missing JSON body.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abort</span><span class="p">(</span>
+        <span class="n">make_response</span><span class="p">(</span>
+            <span class="n">jsonify</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;No JSON body provided. Please provide a valid JSON payload.&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">),</span>
+            <span class="mi">415</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="missing_key_in_json_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.missing_key_in_json_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">missing_key_in_json_response</span><span class="p">(</span><span class="n">key_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abort the request with a 400 Bad Request error for missing keys in JSON body.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abort</span><span class="p">(</span>
+        <span class="n">make_response</span><span class="p">(</span>
+            <span class="n">jsonify</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Missing &#39;</span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2">&#39; in JSON payload. Please include it.&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">),</span>
+            <span class="mi">400</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="insufficient_credit_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.insufficient_credit_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">insufficient_credit_response</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abort the request with a 402 Payment Required error for insufficient credits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">abort</span><span class="p">(</span>
+        <span class="n">make_response</span><span class="p">(</span>
+            <span class="n">jsonify</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Insufficient credits to perform this action. Please top up your account.&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">),</span>
+            <span class="mi">402</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="validate_request_json">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.validate_request_json">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_request_json</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate that the request has JSON content type and a JSON body.</span>
+
+<span class="sd">    Abort the request with appropriate error responses if validation fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if the request has JSON content type</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span> <span class="o">!=</span> <span class="s2">&quot;application/json&quot;</span><span class="p">:</span>
+        <span class="n">no_json_body_response</span><span class="p">()</span>
+
+    <span class="c1"># Check if the request has a JSON payload</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">:</span>
+        <span class="n">no_json_body_response</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="get_user_from_api_key">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.get_user_from_api_key">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_from_api_key</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetch the user associated with the provided API key.</span>
+
+<span class="sd">    All repeated error handling is abstracted into this function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get the API key from the request headers</span>
+    <span class="n">api_key</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;x-api-key&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">:</span>
+        <span class="n">no_api_key_response</span><span class="p">()</span>
+
+    <span class="c1"># Fetch all active API keys from the database</span>
+    <span class="n">all_keys</span> <span class="o">=</span> <span class="n">APIKeys</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_keys</span><span class="p">:</span>
+        <span class="n">invalid_api_key_response</span><span class="p">()</span>
+
+    <span class="c1"># Check if the provided API key matches any stored hashed keys</span>
+    <span class="n">matching_key</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">all_keys</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">check_key</span><span class="p">(</span><span class="n">api_key</span><span class="p">):</span>
+            <span class="n">matching_key</span> <span class="o">=</span> <span class="n">key</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matching_key</span><span class="p">:</span>
+        <span class="n">invalid_api_key_response</span><span class="p">()</span>
+
+    <span class="c1"># Fetch the user associated with the matching API key</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">Users</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">matching_key</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="k">if</span> <span class="n">matching_key</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+        <span class="n">invalid_api_key_response</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">user</span></div>
+
+
+
+<div class="viewcode-block" id="successful_validation_response">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.successful_validation_response">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">successful_validation_response</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a standardized successful validation response.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If the user want a single level response ...</span>
+    <span class="n">single_level_requested</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;single_level_response&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+
+    <span class="c1"># ... return the result dict in a single level</span>
+    <span class="k">if</span> <span class="n">single_level_requested</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># Otherwise, return the result with status and message</span>
+    <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span>
+        <span class="n">jsonify</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Email address is validated and 1 credit is deducted from your account.&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">result</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">),</span>
+        <span class="mi">200</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="nd">@api_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/test&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;50 per hour&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@csrf</span><span class="o">.</span><span class="n">exempt</span>
+<div class="viewcode-block" id="api_test">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.api_test">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">api_test</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A test API endpoint that requires an API key.</span>
+
+<span class="sd">    This endpoint forgives requests without their content-type</span>
+<span class="sd">    set to application/json, because it doesn&#39;t read your request body.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">&quot;Please use POST requests to interact with the API.&quot;</span><span class="p">,</span>
+            <span class="mi">200</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="c1"># We forgive non-JSON POST requests for this test endpoint</span>
+
+        <span class="c1"># Find the user associated with the provided API key</span>
+        <span class="c1"># (Error handling is abstracted into the function)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_from_api_key</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="c1"># Say hello to the user</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">firstName</span><span class="si">}</span><span class="s2">! Good news: your API key works.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;note:&quot;</span><span class="p">:</span> <span class="s2">&quot;We have not checked your content type, but for the validation endpoints, you will need to send a JSON body.&quot;</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+
+<span class="nd">@api_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/get-credit-balance&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;50 per hour&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@csrf</span><span class="o">.</span><span class="n">exempt</span>
+<div class="viewcode-block" id="get_credit_balance">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.get_credit_balance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_credit_balance</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The API endpoint to get the user&#39;s credit balance.</span>
+
+<span class="sd">    This endpoint forgives requests without their content-type</span>
+<span class="sd">    set to application/json, because it doesn&#39;t read your request body.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the user associated with the provided API key</span>
+    <span class="c1"># (Error handling is abstracted into the function)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_from_api_key</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Credit balance retrieved successfully.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;balance&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">credits</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+
+<span class="nd">@api_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/validate-single&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;50 per hour&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@csrf</span><span class="o">.</span><span class="n">exempt</span>
+<div class="viewcode-block" id="validate_single">
+<a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.validate_single">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_single</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The API endpoint to validate a single email address.</span>
+
+<span class="sd">    This endpoint requires the request content-type to be application/json</span>
+<span class="sd">    and a JSON body with an &quot;email&quot; key.</span>
+
+<span class="sd">    Optionally, the request JSON can include a boolean key &quot;single_level_response&quot;.</span>
+<span class="sd">    If set to true, the API will return the validation result in a single-level dictionary.</span>
+<span class="sd">    Otherwise, and by default, the response includes status and message keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Validate the request JSON</span>
+    <span class="n">validate_request_json</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="c1"># Find the user associated with the provided API key</span>
+    <span class="c1"># (Error handling is abstracted into the function)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_from_api_key</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="c1"># Check if the user has enough credits</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">credits</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">insufficient_credit_response</span><span class="p">()</span>
+
+    <span class="c1"># Try to process the validation request</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="n">missing_key_in_json_response</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Process the validation request</span>
+        <span class="n">validation_worker_response</span> <span class="o">=</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">validation_worker_response</span><span class="p">:</span>
+            <span class="c1"># Deduct a credit from the user as we are giving them a result</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">deduct_credits</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Return the response from the worker</span>
+            <span class="k">return</span> <span class="n">successful_validation_response</span><span class="p">(</span><span class="n">validation_worker_response</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Validation response from the worker is None&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Unable to process the validation request due to an issue with our validation system.&quot;</span><span class="p">,</span>
+            <span class="p">},</span> <span class="mi">503</span>  <span class="c1"># Service Unavailable</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Validation request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal server error during email validation.&quot;</span><span class="p">,</span>
+        <span class="p">},</span> <span class="mi">500</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Cansin Acarer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

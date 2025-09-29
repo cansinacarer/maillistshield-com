@@ -1,0 +1,112 @@
+app.views_api
+=============
+
+.. py:module:: app.views_api
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   app.views_api.api_bp
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   app.views_api.invalid_api_key_response
+   app.views_api.no_api_key_response
+   app.views_api.no_json_body_response
+   app.views_api.missing_key_in_json_response
+   app.views_api.insufficient_credit_response
+   app.views_api.validate_request_json
+   app.views_api.get_user_from_api_key
+   app.views_api.successful_validation_response
+   app.views_api.api_test
+   app.views_api.get_credit_balance
+   app.views_api.validate_single
+
+
+Module Contents
+---------------
+
+.. py:data:: api_bp
+
+.. py:function:: invalid_api_key_response()
+
+   Abort the request with a 403 error for invalid API keys.
+
+   We standardize the error response to avoid leaking information about
+   why the API key is invalid.
+
+
+.. py:function:: no_api_key_response()
+
+   Abort the request with a 401 error for missing API keys.
+
+
+.. py:function:: no_json_body_response()
+
+   Abort the request with a 415 Unsupported Media Type error for missing JSON body.
+
+
+.. py:function:: missing_key_in_json_response(key_name)
+
+   Abort the request with a 400 Bad Request error for missing keys in JSON body.
+
+
+.. py:function:: insufficient_credit_response()
+
+   Abort the request with a 402 Payment Required error for insufficient credits.
+
+
+.. py:function:: validate_request_json(request)
+
+   Validate that the request has JSON content type and a JSON body.
+
+   Abort the request with appropriate error responses if validation fails.
+
+
+.. py:function:: get_user_from_api_key(request)
+
+   Fetch the user associated with the provided API key.
+
+   All repeated error handling is abstracted into this function.
+
+
+.. py:function:: successful_validation_response(result)
+
+   Return a standardized successful validation response.
+
+
+.. py:function:: api_test()
+
+   A test API endpoint that requires an API key.
+
+   This endpoint forgives requests without their content-type
+   set to application/json, because it doesn't read your request body.
+
+
+.. py:function:: get_credit_balance()
+
+   The API endpoint to get the user's credit balance.
+
+   This endpoint forgives requests without their content-type
+   set to application/json, because it doesn't read your request body.
+
+
+.. py:function:: validate_single()
+
+   The API endpoint to validate a single email address.
+
+   This endpoint requires the request content-type to be application/json
+   and a JSON body with an "email" key.
+
+   Optionally, the request JSON can include a boolean key "single_level_response".
+   If set to true, the API will return the validation result in a single-level dictionary.
+   Otherwise, and by default, the response includes status and message keys.
+
+

@@ -106,6 +106,7 @@ window.addEventListener("load", () => mermaid.run());
 <li class="toctree-l4"><a class="reference internal" href="autoapi/app/models/index.html">app.models</a></li>
 <li class="toctree-l4"><a class="reference internal" href="autoapi/app/utilities/index.html">app.utilities</a></li>
 <li class="toctree-l4"><a class="reference internal" href="autoapi/app/views/index.html">app.views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoapi/app/views_api/index.html">app.views_api</a></li>
 <li class="toctree-l4"><a class="reference internal" href="autoapi/app/views_auth/index.html">app.views_auth</a></li>
 <li class="toctree-l4"><a class="reference internal" href="autoapi/app/views_private/index.html">app.views_private</a></li>
 </ul>
@@ -193,9 +194,13 @@ window.addEventListener("load", () => mermaid.run());
 </li>
       <li><a href="autoapi/app/views_private/index.html#app.views_private.admin">admin() (in module app.views_private)</a>
 </li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.api_bp">api_bp (in module app.views_api)</a>
+</li>
       <li><a href="autoapi/app/models/index.html#app.models.Users.api_keys">api_keys (app.models.Users attribute)</a>
 </li>
       <li><a href="autoapi/app/views_private/index.html#app.views_private.api_keys">api_keys() (in module app.views_private)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.api_test">api_test() (in module app.views_api)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.APIKeys">APIKeys (class in app.models)</a>
 </li>
@@ -311,6 +316,13 @@ window.addEventListener("load", () => mermaid.run());
 
       <ul>
         <li><a href="autoapi/app/views/index.html#module-app.views">module</a>
+</li>
+      </ul></li>
+      <li>
+    app.views_api
+
+      <ul>
+        <li><a href="autoapi/app/views_api/index.html#module-app.views_api">module</a>
 </li>
       </ul></li>
       <li>
@@ -535,15 +547,19 @@ window.addEventListener("load", () => mermaid.run());
 </li>
       <li><a href="autoapi/app/utilities/object_storage/index.html#app.utilities.object_storage.generate_upload_link">generate_upload_link() (in module app.utilities.object_storage)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="autoapi/app/utilities/object_storage/index.html#app.utilities.object_storage.generate_upload_link_profile_picture">generate_upload_link_profile_picture() (in module app.utilities.object_storage)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="autoapi/app/utilities/object_storage/index.html#app.utilities.object_storage.generate_upload_link_validation_file">generate_upload_link_validation_file() (in module app.utilities.object_storage)</a>
 </li>
       <li><a href="autoapi/app/utilities/object_storage/index.html#app.utilities.object_storage.generate_user_folder">generate_user_folder() (in module app.utilities.object_storage)</a>
 </li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.get_credit_balance">get_credit_balance() (in module app.views_api)</a>
+</li>
       <li><a href="autoapi/app/views_auth/index.html#app.views_auth.get_google_sso_config">get_google_sso_config() (in module app.views_auth)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.get_user_from_api_key">get_user_from_api_key() (in module app.views_api)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.Users.google_avatar_url">google_avatar_url (app.models.Users attribute)</a>
 </li>
@@ -581,8 +597,12 @@ window.addEventListener("load", () => mermaid.run());
       </ul></li>
       <li><a href="autoapi/app/views/index.html#app.views.index">index() (in module app.views)</a>
 </li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.insufficient_credit_response">insufficient_credit_response() (in module app.views_api)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.invalid_api_key_response">invalid_api_key_response() (in module app.views_api)</a>
+</li>
       <li><a href="autoapi/app/models/index.html#app.models.APIKeys.is_active">is_active (app.models.APIKeys attribute)</a>
 </li>
       <li><a href="autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.is_checkout_completed_event">is_checkout_completed_event() (in module app.utilities.stripe_event_handler)</a>
@@ -681,6 +701,8 @@ window.addEventListener("load", () => mermaid.run());
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.Users.member_since">member_since (app.models.Users attribute)</a>
 </li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.missing_key_in_json_response">missing_key_in_json_response() (in module app.views_api)</a>
+</li>
       <li><a href="autoapi/app/config/index.html#app.config.Config.MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS">MLS_FREE_CREDITS_FOR_NEW_ACCOUNTS (app.config.Config attribute)</a>
 </li>
       <li><a href="autoapi/app/config/index.html#app.config.Config.MLS_WORKER_API_KEY">MLS_WORKER_API_KEY (app.config.Config attribute)</a>
@@ -723,6 +745,8 @@ window.addEventListener("load", () => mermaid.run());
 </li>
         <li><a href="autoapi/app/views/index.html#module-app.views">app.views</a>
 </li>
+        <li><a href="autoapi/app/views_api/index.html#module-app.views_api">app.views_api</a>
+</li>
         <li><a href="autoapi/app/views_auth/index.html#module-app.views_auth">app.views_auth</a>
 </li>
         <li><a href="autoapi/app/views_private/index.html#module-app.views_private">app.views_private</a>
@@ -749,6 +773,10 @@ window.addEventListener("load", () => mermaid.run());
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="autoapi/app/config/index.html#app.config.Config.NEXT_WORKER">NEXT_WORKER (app.config.Config attribute)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.no_api_key_response">no_api_key_response() (in module app.views_api)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.no_json_body_response">no_json_body_response() (in module app.views_api)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.Users.number_of_email_confirmation_codes_sent">number_of_email_confirmation_codes_sent (app.models.Users attribute)</a>
 </li>
@@ -874,10 +902,10 @@ window.addEventListener("load", () => mermaid.run());
 </li>
       <li><a href="autoapi/app/views/index.html#app.views.server_error">server_error() (in module app.views)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="autoapi/app/views_auth/index.html#app.views_auth.set_new_password">set_new_password() (in module app.views_auth)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="autoapi/app/forms/index.html#app.forms.SetNewPassword">SetNewPassword (class in app.forms)</a>
 </li>
       <li><a href="autoapi/app/models/index.html#app.models.BatchJobs.source">source (app.models.BatchJobs attribute)</a>
@@ -907,6 +935,8 @@ window.addEventListener("load", () => mermaid.run());
       <li><a href="autoapi/app/config/index.html#app.config.Config.STRIPE_WEBHOOK_SECRET">STRIPE_WEBHOOK_SECRET (app.config.Config attribute)</a>
 </li>
       <li><a href="autoapi/app/forms/index.html#app.forms.CreateAPIKeyForm.submit">submit (app.forms.CreateAPIKeyForm attribute)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.successful_validation_response">successful_validation_response() (in module app.views_api)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -986,9 +1016,13 @@ window.addEventListener("load", () => mermaid.run());
 </li>
       <li><a href="autoapi/app/utilities/validation/index.html#app.utilities.validation.validate_email">validate_email() (in module app.utilities.validation)</a>
 </li>
+      <li><a href="autoapi/app/views/index.html#app.views.validate_file">validate_file() (in module app.views)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="autoapi/app/views/index.html#app.views.validate_file">validate_file() (in module app.views)</a>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.validate_request_json">validate_request_json() (in module app.views_api)</a>
+</li>
+      <li><a href="autoapi/app/views_api/index.html#app.views_api.validate_single">validate_single() (in module app.views_api)</a>
 </li>
       <li><a href="autoapi/app/utilities/recaptcha/index.html#app.utilities.recaptcha.verify_recaptcha">verify_recaptcha() (in module app.utilities.recaptcha)</a>
 </li>

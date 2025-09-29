@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>app.views_api &mdash; Mail List Shield v1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=d29a5c0e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="app.views_auth" href="../views_auth/index.html" />
+    <link rel="prev" title="app.views" href="../views/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Mail List Shield
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#developer-experience">🧑‍💻 Developer Experience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#deployment">☁️ Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#stripe-integrations">💳 Stripe Integrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#authentication">🔒 Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#transactional-emails-with-smtp">📧 Transactional Emails with SMTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#security">🚨 Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../features.html#ui">🎨 UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#notifications">🔔 Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../features.html#bootstrap-html-templates">🌐 Bootstrap HTML templates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../development.html#code-quality-conventional-commits-and-releases">Code Quality, Conventional Commits, and Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development.html#developing-in-dev-containers">Developing in Dev Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#local-endpoints-served-by-the-dev-containers">Local Endpoints Served by the Dev Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#debugging">Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#testing-stripe-webhooks">Testing Stripe Webhooks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development.html#database-model">Database Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#updating-the-database-model">Updating the Database Model</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../development.html#how-to-build-on-top-of-this-app">How to Build On Top of This App</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#adding-new-pages">Adding New Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#defining-more-configuration-variables">Defining More Configuration Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../development.html#updating-dependencies">Updating Dependencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ci-cd.html">Continuous Integration and Continuous Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ci-cd.html#pre-commit-hooks">Pre-Commit Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ci-cd.html#run-tests">Run Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ci-cd.html#semantic-release">Semantic Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ci-cd.html#build-deploy">Build &amp; Deploy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ci-cd.html#build-deploy-sphinx-docs">Build &amp; Deploy Sphinx Docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deployment.html">Deployment to Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../deployment.html#a-pitfall-for-cloudflare-proxy">A Pitfall for Cloudflare Proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Auto Generated Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">app</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../config/index.html">app.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../decorators/index.html">app.decorators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../emails/index.html">app.emails</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../forms/index.html">app.forms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../models/index.html">app.models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/index.html">app.utilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../views/index.html">app.views</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">app.views_api</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../views_auth/index.html">app.views_auth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../views_private/index.html">app.views_private</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.mail"><code class="docutils literal notranslate"><span class="pre">mail</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.db"><code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.bc"><code class="docutils literal notranslate"><span class="pre">bc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.lm"><code class="docutils literal notranslate"><span class="pre">lm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.csrf"><code class="docutils literal notranslate"><span class="pre">csrf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Resources:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contact.html">Contact the Developer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Mail List Shield</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Auto Generated Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">app</a></li>
+      <li class="breadcrumb-item active">app.views_api</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/app/views_api/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-app.views_api">
+<span id="app-views-api"></span><h1>app.views_api<a class="headerlink" href="#module-app.views_api" title="Link to this heading"></a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.api_bp" title="app.views_api.api_bp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">api_bp</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.invalid_api_key_response" title="app.views_api.invalid_api_key_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">invalid_api_key_response</span></code></a>()</p></td>
+<td><p>Abort the request with a 403 error for invalid API keys.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_api.no_api_key_response" title="app.views_api.no_api_key_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">no_api_key_response</span></code></a>()</p></td>
+<td><p>Abort the request with a 401 error for missing API keys.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.no_json_body_response" title="app.views_api.no_json_body_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">no_json_body_response</span></code></a>()</p></td>
+<td><p>Abort the request with a 415 Unsupported Media Type error for missing JSON body.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_api.missing_key_in_json_response" title="app.views_api.missing_key_in_json_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">missing_key_in_json_response</span></code></a>(key_name)</p></td>
+<td><p>Abort the request with a 400 Bad Request error for missing keys in JSON body.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.insufficient_credit_response" title="app.views_api.insufficient_credit_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insufficient_credit_response</span></code></a>()</p></td>
+<td><p>Abort the request with a 402 Payment Required error for insufficient credits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_api.validate_request_json" title="app.views_api.validate_request_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_request_json</span></code></a>(request)</p></td>
+<td><p>Validate that the request has JSON content type and a JSON body.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.get_user_from_api_key" title="app.views_api.get_user_from_api_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_user_from_api_key</span></code></a>(request)</p></td>
+<td><p>Fetch the user associated with the provided API key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_api.successful_validation_response" title="app.views_api.successful_validation_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">successful_validation_response</span></code></a>(result)</p></td>
+<td><p>Return a standardized successful validation response.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.api_test" title="app.views_api.api_test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">api_test</span></code></a>()</p></td>
+<td><p>A test API endpoint that requires an API key.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#app.views_api.get_credit_balance" title="app.views_api.get_credit_balance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_credit_balance</span></code></a>()</p></td>
+<td><p>The API endpoint to get the user's credit balance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.views_api.validate_single" title="app.views_api.validate_single"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_single</span></code></a>()</p></td>
+<td><p>The API endpoint to validate a single email address.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="app.views_api.api_bp">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">api_bp</span></span><a class="reference internal" href="../../../_modules/app/views_api.html#api_bp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.api_bp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.invalid_api_key_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">invalid_api_key_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#invalid_api_key_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.invalid_api_key_response" title="Link to this definition"></a></dt>
+<dd><p>Abort the request with a 403 error for invalid API keys.</p>
+<p>We standardize the error response to avoid leaking information about
+why the API key is invalid.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.no_api_key_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">no_api_key_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#no_api_key_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.no_api_key_response" title="Link to this definition"></a></dt>
+<dd><p>Abort the request with a 401 error for missing API keys.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.no_json_body_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">no_json_body_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#no_json_body_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.no_json_body_response" title="Link to this definition"></a></dt>
+<dd><p>Abort the request with a 415 Unsupported Media Type error for missing JSON body.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.missing_key_in_json_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">missing_key_in_json_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#missing_key_in_json_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.missing_key_in_json_response" title="Link to this definition"></a></dt>
+<dd><p>Abort the request with a 400 Bad Request error for missing keys in JSON body.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.insufficient_credit_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">insufficient_credit_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#insufficient_credit_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.insufficient_credit_response" title="Link to this definition"></a></dt>
+<dd><p>Abort the request with a 402 Payment Required error for insufficient credits.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.validate_request_json">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">validate_request_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#validate_request_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.validate_request_json" title="Link to this definition"></a></dt>
+<dd><p>Validate that the request has JSON content type and a JSON body.</p>
+<p>Abort the request with appropriate error responses if validation fails.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.get_user_from_api_key">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">get_user_from_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#get_user_from_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.get_user_from_api_key" title="Link to this definition"></a></dt>
+<dd><p>Fetch the user associated with the provided API key.</p>
+<p>All repeated error handling is abstracted into this function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.successful_validation_response">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">successful_validation_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#successful_validation_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.successful_validation_response" title="Link to this definition"></a></dt>
+<dd><p>Return a standardized successful validation response.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.api_test">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">api_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#api_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.api_test" title="Link to this definition"></a></dt>
+<dd><p>A test API endpoint that requires an API key.</p>
+<p>This endpoint forgives requests without their content-type
+set to application/json, because it doesn’t read your request body.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.get_credit_balance">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">get_credit_balance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#get_credit_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.get_credit_balance" title="Link to this definition"></a></dt>
+<dd><p>The API endpoint to get the user’s credit balance.</p>
+<p>This endpoint forgives requests without their content-type
+set to application/json, because it doesn’t read your request body.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.views_api.validate_single">
+<span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">validate_single</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#validate_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.validate_single" title="Link to this definition"></a></dt>
+<dd><p>The API endpoint to validate a single email address.</p>
+<p>This endpoint requires the request content-type to be application/json
+and a JSON body with an “email” key.</p>
+<p>Optionally, the request JSON can include a boolean key “single_level_response”.
+If set to true, the API will return the validation result in a single-level dictionary.
+Otherwise, and by default, the response includes status and message keys.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../views/index.html" class="btn btn-neutral float-left" title="app.views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../views_auth/index.html" class="btn btn-neutral float-right" title="app.views_auth" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Cansin Acarer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

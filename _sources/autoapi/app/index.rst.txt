@@ -17,6 +17,7 @@ Submodules
    /autoapi/app/models/index
    /autoapi/app/utilities/index
    /autoapi/app/views/index
+   /autoapi/app/views_api/index
    /autoapi/app/views_auth/index
    /autoapi/app/views_private/index
 
