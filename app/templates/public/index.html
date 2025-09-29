@@ -33,7 +33,7 @@
 									class="loading spinner-border spinner-border-sm d-none"
 									aria-hidden="true"
 								></span>
-								<span class="text">Validate</span>
+								<span class="text">🔍 Validate</span>
 							</button>
 						</form>
 					</div>
@@ -45,7 +45,8 @@
 								href="/app/validate-new-list"
 								class="icon-link btn btn-outline-primary"
 							>
-								Upload a CSV file
+								<i class="bi bi-cloud-upload-fill"></i> Upload a
+								CSV file
 							</a>
 						</div>
 						<!--  -->
@@ -81,7 +82,6 @@
 					Remove invalid emails from your list to improve your sender
 					reputation, opens, clicks, and conversions.
 				</p>
-				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
 			<div class="feature col text-center px-4">
 				<div
@@ -94,7 +94,6 @@
 					Find the email providers serving the custom domains to
 					control your send volume to each provider.
 				</p>
-				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
 			<div class="feature col text-center px-4">
 				<div
@@ -107,7 +106,6 @@
 					Identify the customers who gave you a throw-away email
 					address.
 				</p>
-				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
 			<div class="feature col text-center px-4">
 				<div
@@ -120,7 +118,6 @@
 					Avoid emailing to spam traps and damaging your sender
 					reputation.
 				</p>
-				<a class="btn btn-outline-primary" href="#">Learn more</a>
 			</div>
 		</div>
 	</div>
@@ -139,6 +136,13 @@
 							and
 							<b>inform your targeting</b>
 						</p>
+						<p class="mt-4">
+							<a
+								href="/documentation"
+								class="btn btn-primary btn-sm"
+								>📖 Documentation</a
+							>
+						</p>
 					</div>
 					<div
 						class="col-md-10 bg-body rounded-3 overflow-hidden shadow-sm mx-auto text-start"
@@ -146,13 +150,6 @@
 					>
 						{% include 'public/demo/demo-results-table.html' %}
 					</div>
-					<p class="mt-4">
-						<small class="text-body-secondary">
-							See our
-							<a href="#" target="_blank">Documentation</a> for
-							descriptions of the status codes.</small
-						>
-					</p>
 				</div>
 			</div>
 			<div class="col-md-6 px-0 pb-4">
@@ -162,6 +159,14 @@
 						<p class="lead">
 							What your software will see from our API
 						</p>
+						<p class="mt-4">
+							<a
+								href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"
+								target="_blank"
+								class="btn btn-primary btn-sm"
+								>🚀 API Reference</a
+							>
+						</p>
 					</div>
 					<div
 						class="col-md-10 bg-dark rounded-3 overflow-hidden shadow-sm mx-auto text-start"
@@ -169,17 +174,6 @@
 					>
 						{% include 'public/demo/demo-api-response.html' %}
 					</div>
-					<p class="mt-4">
-						<small class="text-body-secondary">
-							See our
-							<a
-								href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"
-								target="_blank"
-								>API Reference</a
-							>
-							for examples.
-						</small>
-					</p>
 				</div>
 			</div>
 		</div>
@@ -232,7 +226,7 @@
                                 <li><b>Continuous automated validation:</b> We connect your campaign software with our validation API to keep your list continuously cleaned.</li>
                             </ul>
                             <p>Would you like to hear more?</p>
-                            <a href="#" class="btn btn-primary">Let's talk!</a>
+                            <a href="mailto:support@maillistshield.com?subject=Implementation%20Service" class="btn btn-primary">Let's talk!</a>
                             `,
 								"Implementation services",
 								"mls-green",
