@@ -1,6 +1,6 @@
 # MailListShield.com SaaS
 
-[![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://www.postman.com/maillistshield-team/mail-list-shield-email-validation-api/overview)
+[![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://www.postman.com/maillistshield-team/mail-list-shield-api-reference/overview)
 [![Developer Docs](https://img.shields.io/badge/SaaS%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
 [![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
 ![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue)
