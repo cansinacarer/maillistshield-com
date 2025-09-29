@@ -1,9 +1,10 @@
 # MailListShield.com SaaS
 
-[![Docs](https://img.shields.io/badge/Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
-![Test Coverage](tests/coverage/coverage-badge.svg)
+[![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://www.postman.com/maillistshield-team/mail-list-shield-email-validation-api/overview)
+[![Developer Docs](https://img.shields.io/badge/SaaS%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
 [![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
 ![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue)
+![Test Coverage](tests/coverage/coverage-badge.svg)
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
 
 [![Build & Deploy](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml)
