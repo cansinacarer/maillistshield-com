@@ -92,11 +92,13 @@ def create_app(config_class="app.config.Config", test_config=False):
     from app.views import public_bp
     from app.views_private import private_bp
     from app.views_auth import auth_bp
+    from app.views_api import api_bp
 
     # Register the Blueprints
     app.register_blueprint(public_bp, url_prefix="/")
     app.register_blueprint(private_bp, url_prefix="/app")
     app.register_blueprint(auth_bp, url_prefix="/")
+    app.register_blueprint(api_bp, url_prefix="/api")
 
     # Variables available in all templates
     @app.context_processor
