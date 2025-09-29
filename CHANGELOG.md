@@ -1,3 +1,16 @@
+# [1.10.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.9.0...v1.10.0) (2025-09-29)
+
+
+### Bug Fixes
+
+* correct the error code on wrong method ([84ba1ea](https://github.com/cansinacarer/maillistshield-com/commit/84ba1eacbd3c36eb7049e0899cd4ce25d067c5a0))
+* remove redundant colons ([1560150](https://github.com/cansinacarer/maillistshield-com/commit/15601506ba255cebe12d339208e68b3539098776))
+
+
+### Features
+
+* add link for the api reference in the footer ([1517b0c](https://github.com/cansinacarer/maillistshield-com/commit/1517b0c35982bacbfb8eb921b4b8b924d5f85014))
+
 # [1.9.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.8.0...v1.9.0) (2025-09-29)
 
 
