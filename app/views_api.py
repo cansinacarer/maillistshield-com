@@ -195,7 +195,7 @@ def api_test():
     if request.method == "GET":
         return (
             "Please use POST requests to interact with the API.",
-            200,
+            405,
         )
 
     if request.method == "POST":
