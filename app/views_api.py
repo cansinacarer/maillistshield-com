@@ -148,6 +148,9 @@ def get_user_from_api_key(request):
     if not matching_key:
         invalid_api_key_response()
 
+    # Update the last used timestamp for the API key
+    matching_key.update_last_used()
+
     # Fetch the user associated with the matching API key
     user = (
         Users.query.filter_by(id=matching_key.user_id).first() if matching_key else None

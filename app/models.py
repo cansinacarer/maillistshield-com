@@ -40,6 +40,10 @@ class APIKeys(db.Model):
         db.session.commit()
         return True
 
+    def update_last_used(self):
+        self.last_used = datetime.now(timezone.utc).astimezone(appTimezone)
+        self.save()
+
     def save(self):
         # inject self into db session
         db.session.add(self)
