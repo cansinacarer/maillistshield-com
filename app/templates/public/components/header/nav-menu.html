@@ -76,9 +76,9 @@
 	</div>
 	<div class="offcanvas-lg offcanvas-end" id="topnav">
 		<header
-			class="d-flex flex-column-mobile flex-md-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom min-vh-100-mobile"
+			class="d-flex flex-column-mobile flex-md-wrap align-items-center justify-content-center justify-content-lg-between py-3 mb-4 border-bottom min-vh-100-mobile"
 		>
-			<div class="col-md-3 mb-2 mb-md-0">
+			<div class="col-lg-3 mb-2 mb-lg-0">
 				<a
 					href="/"
 					class="d-inline-flex fs-5 fw-semibold text-decoration-none"
@@ -97,7 +97,7 @@
 			</div>
 
 			<ul
-				class="nav nav-masthead col-12 col-md-auto mb-2 justify-content-center mb-md-0 d-block d-md-flex mb-auto mb-md-0"
+				class="nav nav-masthead col-12 col-lg-auto justify-content-center d-block d-lg-flex mb-lg-0 mb-auto"
 			>
 				<li class="nav-item px-2">
 					<a
@@ -153,7 +153,7 @@
 						<li class="nav-item pe-4">
 							Hello, {{ current_user.firstName }}!
 						</li>
-						<li class="nav-item btn-group">
+						<li class="nav-item btn-group mt-3 mt-md-0 mx-auto">
 							<a href="/app" class="btn btn-primary btn-sm"
 								><i class="bi bi-box-arrow-in-right"></i>
 								Dashboard</a
@@ -193,7 +193,7 @@
 				</div>
 				<!-- If anonymous user -->
 			{% else %}
-				<div class="col-md-3 text-end">
+				<div class="col-lg-3 text-end">
 					{% include 'shared-components/dark-mode-selector-button.html' %}
 					<a
 						href="/login"
