@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.11.0...v1.11.1) (2025-10-04)
+
+
+### Bug Fixes
+
+* correct the breakpoints and margins in public nav ([e70f060](https://github.com/cansinacarer/maillistshield-com/commit/e70f0606154cac39881249e81dd47bcae6a810c9))
+
 # [1.11.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.10.0...v1.11.0) (2025-09-29)
 
 
