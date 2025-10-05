@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.11.1...v1.12.0) (2025-10-05)
+
+
+### Features
+
+* everytime an api key is used, update last used field in APIKeys table ([ae4a700](https://github.com/cansinacarer/maillistshield-com/commit/ae4a70049d6e983505e79bb81807b404f8bea1e3))
+* parse csv files with papaparse instead ([d01aca0](https://github.com/cansinacarer/maillistshield-com/commit/d01aca00cae792d17ffb995961bad07b36094c05))
+
 ## [1.11.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.11.0...v1.11.1) (2025-10-04)
 
 
