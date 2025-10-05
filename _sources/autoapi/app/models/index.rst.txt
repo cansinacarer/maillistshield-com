@@ -53,6 +53,9 @@ Module Contents
    .. py:method:: delete_key()
 
 
+   .. py:method:: update_last_used()
+
+
    .. py:method:: save()
 
 

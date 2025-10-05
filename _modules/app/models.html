@@ -232,6 +232,13 @@ window.addEventListener("load", () => mermaid.run());
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
+<div class="viewcode-block" id="APIKeys.update_last_used">
+<a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.update_last_used">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_last_used</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_used</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">appTimezone</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="APIKeys.save">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

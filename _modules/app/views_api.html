@@ -331,6 +331,9 @@ window.addEventListener("load", () => mermaid.run());
     <span class="k">if</span> <span class="ow">not</span> <span class="n">matching_key</span><span class="p">:</span>
         <span class="n">invalid_api_key_response</span><span class="p">()</span>
 
+    <span class="c1"># Update the last used timestamp for the API key</span>
+    <span class="n">matching_key</span><span class="o">.</span><span class="n">update_last_used</span><span class="p">()</span>
+
     <span class="c1"># Fetch the user associated with the matching API key</span>
     <span class="n">user</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">Users</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">matching_key</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span> <span class="k">if</span> <span class="n">matching_key</span> <span class="k">else</span> <span class="kc">None</span>
