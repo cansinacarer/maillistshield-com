@@ -6,28 +6,28 @@
 		<div class="col-md-4 mb-4">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">Single Email Validation</h5>
-					<p class="card-text">Validate an email address</p>
-					<div class="d-flex gap-3 justify-content-center fw-normal">
-						<form class="input-group my-2" action="/" method="GET">
-							<input
-								class="form-control px-3 py-2"
-								id="validate"
-								name="validate"
-								placeholder="Validate an email"
-								required=""
-								type="email"
-								value=""
-							/>
-							<button type="submit" class="btn btn-primary">
-								<span
-									class="loading spinner-border spinner-border-sm d-none"
-									aria-hidden="true"
-								></span>
-								<span class="text">Validate</span>
-							</button>
-						</form>
-					</div>
+					<h5 class="card-title">Credits</h5>
+					<p class="card-text">
+						You have
+						<span class="fw-bold">
+							{{ current_user.credits | thousandSeparator }}
+						</span>
+						credits.
+					</p>
+					<p class="card-text">
+						<small class="text-body-secondary">
+							1 credit = 1 email validation
+						</small>
+					</p>
+					<a href="/app/billing" class="btn btn-primary">
+						Purchase Credits
+					</a>
+					<a
+						href="/app/billing"
+						class="btn btn-outline-primary my-md-2"
+					>
+						Billing History
+					</a>
 				</div>
 			</div>
 		</div>
@@ -122,28 +122,28 @@
 		<div class="col-md-4 mb-4">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">Credits</h5>
-					<p class="card-text">
-						You have
-						<span class="fw-bold">
-							{{ current_user.credits | thousandSeparator }}
-						</span>
-						credits.
-					</p>
-					<p class="card-text">
-						<small class="text-body-secondary">
-							1 credit = 1 email validation
-						</small>
-					</p>
-					<a href="/app/billing" class="btn btn-primary">
-						Purchase Credits
-					</a>
-					<a
-						href="/app/billing"
-						class="btn btn-outline-primary my-md-2"
-					>
-						Billing History
-					</a>
+					<h5 class="card-title">Single Email Validation</h5>
+					<p class="card-text">Validate an email address</p>
+					<div class="d-flex gap-3 justify-content-center fw-normal">
+						<form class="input-group my-2" action="/" method="GET">
+							<input
+								class="form-control px-3 py-2"
+								id="validate"
+								name="validate"
+								placeholder="Validate an email"
+								required=""
+								type="email"
+								value=""
+							/>
+							<button type="submit" class="btn btn-primary">
+								<span
+									class="loading spinner-border spinner-border-sm d-none"
+									aria-hidden="true"
+								></span>
+								<span class="text">Validate</span>
+							</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
