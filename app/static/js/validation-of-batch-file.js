@@ -118,11 +118,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		const reader = new FileReader();
 		reader.onload = (e) => {
 			const text = e.target.result;
-			const rows = text.split("\n").filter((row) => row.trim() !== ""); // select the non-empty rows
+
+			// Use Papa Parse to parse the CSV file
+			const parsed = Papa.parse(text, {
+				header: false,
+				skipEmptyLines: true,
+				dynamicTyping: false,
+				trimHeaders: true
+			});
+
+			const rows = parsed.data;
 			rowCount = rows.length;
 			fileValidationCostElement.innerText =
 				rowCount.toLocaleString("en-US");
-			const columns = rows[0].split(",");
+			const columns = rows[0];
 
 			// Create a table to display the file name, row count, column names, and first 3 rows
 			filePreviewElement.innerHTML = "";
@@ -172,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Create table body
 			const tbody = document.createElement("tbody");
 			for (let i = 1; i <= Math.min(maxTableLength, rowCount - 1); i++) {
-				const row = rows[i].split(",");
+				const row = rows[i];
 				const tr = document.createElement("tr");
 				row.forEach((cell) => {
 					const td = document.createElement("td");
