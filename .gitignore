@@ -1,3 +1,6 @@
+# Ignore the csv files used for manual testing of batch validation
+batch_validation_test_files/*
+
 # Ignore the coverage artifacts
 .coverage
 coverage.txt
