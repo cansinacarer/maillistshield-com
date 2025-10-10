@@ -3,15 +3,21 @@ Mail List Shield
 
 |Uptime| |Test Coverage| |Last Commit| |Code Style|
 
-Welcome! 👋 This is the documentation for the starter SaaS framework I built with Flask for my side projects with paid subscriptions.
+Welcome! 👋 You found the documentation for the Flask application served on `maillistshield.com <https://maillistshield.com>`_. Please refer to the `GitHub page of this project <https://github.com/cansinacarer/maillistshield-com>`_ for details about the microservices.
+
+What is Mail List Shield?
+-------------------------
+
+Mail List Shield is a SaaS application, designed to help marketers identify and remove invalid emails from their recipient lists to avoid sending to spam traps and improve their email deliverability.
+
+What is Base SaaS Flask?
+------------------------
+
+The Flask application is built using my Base SaaS Flask template, which provides base features used by all my SaaS projects built with Flask. You can find the source code for this project on my `GitHub <https://github.com/cansinacarer/My-Base-SaaS-Flask>`_. When I add a major SaaS feature that is not specific to Mail List Shield, I add it to the Base SaaS Flask template then pull it to this project.
+
+You might see the manually written pages of this documentation refer to Base SaaS instead of Mail List Shield. This is because I copied those pages from my Base SaaS. The auto generated documentation however, is built from the docstrings of this project, so it refers to Mail List Shield code specifically.
 
 – `Cansin Acarer <contact.html>`_
-
-Related links:
-~~~~~~~~~~~~~~
-
-- `Try the Live Demo <https://base-saas-flask.apps.cansin.net/>`_
-- `Find this project on GitHub <https://github.com/cansinacarer/My-Base-SaaS-Flask>`_
 
 .. toctree::
    :maxdepth: 4
