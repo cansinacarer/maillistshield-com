@@ -1,5 +1,6 @@
 # MailListShield.com SaaS
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cansinacarer/maillistshield-com)
 [![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://documenter.getpostman.com/view/39218943/2sB3QDxDUr)
 [![Developer Docs](https://img.shields.io/badge/Developer%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
 [![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
