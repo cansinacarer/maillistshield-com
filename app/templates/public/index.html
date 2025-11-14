@@ -245,13 +245,14 @@
 			};
 
 			// Create an Intersection Observer instance
-			const observer = new IntersectionObserver(offerCallback, {
-				root: null, // Use the viewport as the root
-				threshold: 0.4 // Trigger callback when 40% of the target is visible
-			});
+			// Disabled for now
+			// const observer = new IntersectionObserver(offerCallback, {
+			// 	root: null, // Use the viewport as the root
+			// 	threshold: 0.4 // Trigger callback when 40% of the target is visible
+			// });
 
 			// Start observing the target element
-			observer.observe(triggerElement);
+			// observer.observe(triggerElement);
 		});
 	</script>
 {% endblock %}
