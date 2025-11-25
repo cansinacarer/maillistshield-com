@@ -4,7 +4,167 @@
 <!--  -->
 {% block content %}
 	<div class="container my-5">
-		<h1>Pricing</h1>
-		<p class="fs-5">Content of the safge</p>
+		<div class="text-center mb-5">
+			<h1 class="display-4 fw-bold mb-3">Pricing</h1>
+			<p class="lead text-muted">Choose the plan that fits your needs</p>
+		</div>
+
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col">
+				<div class="card h-100 shadow-sm">
+					<div class="card-header text-center py-4">
+						<h3 class="card-title mb-0">Free trial</h3>
+						<div class="mt-3">
+							<span class="display-4 fw-bold">$0</span>
+						</div>
+					</div>
+					<div class="card-body d-flex flex-column">
+						<ul class="list-unstyled mb-4">
+							<li class="mb-3">
+								Create a free account to get started with:
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								100 validations,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Basic support,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Email validation API,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								CSV upload.
+							</li>
+						</ul>
+						<div class="mt-auto">
+							<a href="/app" class="btn btn-outline-primary w-100"
+								>Get Started</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Professional Tier (Featured) -->
+			<div class="col">
+				<div class="card h-100 shadow-lg border-primary">
+					<div
+						class="card-header bg-primary text-white text-center py-4"
+					>
+						<span class="badge bg-light text-primary mb-2"
+							>Most Popular</span
+						>
+						<h3 class="card-title mb-0 text-white">
+							Pay As You Go
+						</h3>
+						<div class="mt-3">
+							<span class="h4 fw-bold text-white">1 credit</span>
+							<span class="text-white-50">=</span>
+							<span class="h4 fw-bold text-white"
+								>1 email validation</span
+							>
+						</div>
+					</div>
+					<div class="card-body d-flex flex-column">
+						<ul class="list-unstyled mb-4">
+							<li class="mb-3">
+								No subscription required, only pay for what you
+								use:
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Unlimited number of validations,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Priority support,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Email validation API,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								CSV upload,
+							</li>
+						</ul>
+						<div class="mt-auto">
+							<a href="/app/billing" class="btn btn-primary w-100"
+								>Purchase Credits</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Enterprise Tier -->
+			<div class="col">
+				<div class="card h-100 shadow-sm">
+					<div class="card-header text-center py-4">
+						<h3 class="card-title mb-0">Enterprise</h3>
+						<div class="mt-3">
+							<span class="h4 fw-bold text-white"
+								>Volume discounts</span
+							>
+						</div>
+					</div>
+					<div class="card-body d-flex flex-column">
+						<ul class="list-unstyled mb-4">
+							<li class="mb-3">
+								Everything included in the Pay As You Go plan
+								plus:
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Volume discounts,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Dedicated servers, priority processing,
+							</li>
+							<li class="mb-3">
+								<i
+									class="bi bi-check-circle-fill text-success me-2"
+								></i>
+								Custom solutions supported by our team of
+								developers with experience in 20+ CDP and
+								campaign management solutions.
+							</li>
+						</ul>
+						<div class="mt-auto">
+							<a
+								href="mailto:support@maillistshield.com?subject=Request%20for%20Proposal"
+								class="btn btn-outline-primary w-100"
+								>Let's talk</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 {% endblock content %}
