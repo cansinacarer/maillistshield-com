@@ -4,22 +4,130 @@
 <!--  -->
 {% block content %}
 	<div class="container my-5">
-		<div class="row">
-			<div class="col-md-8">
-				<h1 class="h2">Documentation</h1>
-				<p class="fs-5">Content of the documentation page</p>
+		<h1 class="h2 mb-4">Documentation</h1>
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">User Documentation</h5>
+						<p class="card-text">
+							Validating an email address and interpreting the
+							results.
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<a
+								href="/documentation/user#single-email-validation"
+								class="text-decoration-none"
+								>✉️ Single email validation</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="/documentation/user#batch-email-validation"
+								class="text-decoration-none"
+								>📬 Batch email validation</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="/documentation/user#results-interpretation"
+								class="text-decoration-none"
+								>📊 Interpreting the data points in the
+								results</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="/documentation/user#status-codes"
+								class="text-decoration-none"
+								>🔍 Status descriptions</a
+							>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<h1 class="h2">API Reference</h1>
-				<p class="fs-5">
-					See our
-					<a
-						href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"
-						target="_blank"
-						>API reference</a
-					>
-					for example requests and responses.
-				</p>
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">API Reference</h5>
+						<p class="card-text">
+							The API endpoints, rate limits, sample requests and
+							responses.
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<a
+								href="https://maillistshield.com/app/api-keys"
+								class="text-decoration-none"
+								>🔑 Create an API key</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"
+								class="text-decoration-none"
+								target="_blank"
+								>📝 Sample requests and responses</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Self-Hosting Documentation</h5>
+						<p class="card-text">
+							For developers who want to self-host the
+							application.
+						</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<a
+								href="https://github.com/cansinacarer/maillistshield-com"
+								class="text-decoration-none"
+								target="_blank"
+								>🐙 GitHub repository</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="https://docs.maillistshield.com/features.html#developer-experience"
+								class="text-decoration-none"
+								target="_blank"
+								>👨‍💻 Developer experience</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="https://docs.maillistshield.com/development.html"
+								class="text-decoration-none"
+								target="_blank"
+								>⚙️ Setting up the developer environment</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="https://docs.maillistshield.com/ci-cd.html"
+								class="text-decoration-none"
+								target="_blank"
+								>🔄 CI/CD</a
+							>
+						</li>
+						<li class="list-group-item">
+							<a
+								href="https://docs.maillistshield.com/deployment.html"
+								class="text-decoration-none"
+								target="_blank"
+								>🚀 Deployment to production</a
+							>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

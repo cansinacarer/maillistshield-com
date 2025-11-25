@@ -1,0 +1,598 @@
+{% set page_title = "User Documentation" %}
+<!--  -->
+{% extends "public/layouts/base.html" %}
+<!--  -->
+{% block content %}
+	<div class="container my-5">
+		<section id="toc">
+			<h2 class="h2 mt-5 mb-3 pt-2">User Documentation</h2>
+			<ul class="list-unstyled">
+				<li class="mb-2">
+					<a
+						href="#single-email-validation"
+						class="text-decoration-none"
+						><i class="mx-2">✉️</i> Single email validation</a
+					>
+				</li>
+				<li class="mb-2">
+					<a
+						href="#batch-email-validation"
+						class="text-decoration-none"
+						><i class="mx-2">📬</i> Batch email validation</a
+					>
+				</li>
+				<li class="mb-2">
+					<a
+						href="#results-interpretation"
+						class="text-decoration-none"
+						><i class="mx-2">📊</i> Interpreting the data points in
+						the results</a
+					>
+				</li>
+				<li class="mb-2">
+					<a href="#status-codes" class="text-decoration-none"
+						><i class="mx-2">🔍</i> Status descriptions</a
+					>
+				</li>
+			</ul>
+		</section>
+		<section id="single-email-validation">
+			<h3 class="h3 mb-3 mt-5 pt-2">Single email validation</h3>
+			<p>
+				To validate a single email address, you can simply type it in
+				the home page and the results will be displayed in a table.
+			</p>
+			<p>
+				If you are logged in, you can also submit an email address for
+				validation on the <a href="/app">Dashboard</a>.
+			</p>
+		</section>
+		<section id="batch-email-validation">
+			<h3 class="h3 mb-3 mt-5 pt-2">Batch email validation</h3>
+			<ul class="list-unstyled">
+				<li class="mb-2">
+					<b>Step 1:</b> <a href="/register">Register</a> an account
+					to receive <b>100 free credits</b>. This will allow you to
+					batch-validate a file with up to 100 email addresses for
+					free.
+					<ul class="mt-2">
+						<li class="mb-2">
+							You can purchase more credits on the
+							<a href="/app/billing">Billing</a> page if you need
+							to validate more emails.
+						</li>
+					</ul>
+				</li>
+				<li class="mb-2">
+					<b>Step 2:</b>
+					<a href="/email-confirmation"
+						>Enter the verification code</a
+					>
+					we sent to your email address to verify your email address.
+					This will log you in automatically and take you to the
+					dashboard.
+				</li>
+				<li class="mb-2">
+					<b>Step 3:</b> Click
+					<a href="/app/validate-new-list"
+						>Upload a New List for Validation</a
+					>
+					on the dashboard and upload a CSV file with a single column
+					containing email addresses.
+				</li>
+				<li class="mb-2">
+					<b>Step 4:</b> Select the csv file containing the list of
+					email addresses, review the preview.
+					<ul class="mt-2">
+						<li class="mb-2">
+							If your file has column labels on the first row,
+							enable the "My table has column labels on the first
+							row" option.
+						</li>
+						<li class="mb-2">
+							If your file has multiple columns, select the column
+							containing the email addresses.
+						</li>
+					</ul>
+					Then click the "Submit File for Validation" button.
+				</li>
+				<li class="mb-2">
+					<b>Step 5:</b> You will be redirected to the dashboard and
+					you can see the status of the validation in the "List
+					Validation" card. When the result file is ready, you can
+					download it by clicking the "Download" button.
+				</li>
+			</ul>
+		</section>
+		<section id="results-interpretation">
+			<h3 class="h3 mb-3 mt-5 pt-2">
+				Interpreting the data points in the results
+			</h3>
+			<p>
+				Below are the descriptions of the data points returned after
+				validating an email address.
+			</p>
+			<table class="table table-sm table-hover align-middle m-0">
+				<thead>
+					<tr id="email">
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Field name
+						</th>
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Description
+						</th>
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Example value
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="email">
+						<td class="px-4 py-3">Address</td>
+						<td class="px-4 py-3">
+							The email address that was given for validation.
+						</td>
+						<td class="px-4 py-3">support+usa@deloitte.com</td>
+					</tr>
+					<tr id="status">
+						<td class="px-4 py-3">Status</td>
+						<td class="px-4 py-3">
+							The overall status of the email address validation.
+						</td>
+						<td class="px-4 py-3">
+							<span class="fw-bold text-danger">
+								Invalid
+								<i class="bi bi-x-circle-fill"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="status_detail">
+						<td class="px-4 py-3">Status detail</td>
+						<td class="px-4 py-3">
+							The detailed status description of the email address
+							validation.
+						</td>
+						<td class="px-4 py-3">
+							email provider confirmed tdat email address does not
+							exist
+						</td>
+					</tr>
+					<tr id="email_provider">
+						<td class="px-4 py-3">Email Provider</td>
+						<td class="px-4 py-3">
+							The email service provider that the email address
+							uses.
+							<br />
+							This information is useful to limit the number of
+							emails you send to specific email providers for
+							deliverability purposes.
+						</td>
+						<td class="px-4 text-capitalize fw-bold">
+							<span class="text-info">
+								<i class="me-2 bi bi-microsoft"></i>
+								Microsoft
+							</span>
+						</td>
+					</tr>
+					<tr id="email_security_gateway">
+						<td class="px-4 py-3">Security gateway</td>
+						<td class="px-4 py-3">
+							The email security gateway that the email address
+							uses, if any.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-capitalize">cisco ironport</span>
+						</td>
+					</tr>
+					<tr id="is_disposable">
+						<td class="px-4 py-3">Is disposable?</td>
+						<td class="px-4 py-3">
+							Whether the email address is a disposable email
+							address from a known disposable email address
+							provider.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								False
+								<i class="bi bi-x-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="is_free_provider">
+						<td class="px-4 py-3">Free provider</td>
+						<td class="px-4 py-3">
+							Whether the email address is from a free email
+							provider. e.g. Gmail, Yahoo, etc.
+							<br />
+							We return False if the email address if using the
+							paid version of a free email provider such as Google
+							Workspace or Microsoft 365.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								False
+								<i class="bi bi-x-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="has_mx_records">
+						<td class="px-4 py-3">
+							Can the domain receive emails?
+						</td>
+						<td class="px-4 py-3">
+							Whether the domain of the email address is
+							configured to be able to receive emails.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-success">
+								True
+								<i class="bi bi-check-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="has_catch_all">
+						<td class="px-4 py-3">
+							Does the domain has a catch-all inbox?
+						</td>
+						<td class="px-4 py-3">
+							Whether the domain of the email address is
+							configured to have a catch-all inbox.
+							<br />
+							A catch-all inbox is an inbox that will accept
+							emails for any email address that matches the
+							domain.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								False
+								<i class="bi bi-x-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="is_role">
+						<td class="px-4 py-3">
+							Is this an address for a role?
+						</td>
+						<td class="px-4 py-3">
+							Whether the email address is for a role instead of a
+							personal email address.
+							<br />
+							A role address is a special email address that is
+							used for a specific purpose. For example, a role
+							address for a company might be "support@company.com"
+							or "admin@company.com".
+							<br />
+							If you are planning to use person names in the email
+							content such as salutations, you might want to set
+							up a different content for role addresses.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-success">
+								True
+								<i class="bi bi-check-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="is_valid_syntax">
+						<td class="px-4 py-3">Is email syntax valid?</td>
+						<td class="px-4 py-3">
+							Whether the email address follows the correct basic
+							syntax of an email address.
+							<br />
+							This is useful to identify if the email address is
+							likely to be a valid email address before you send
+							an email to it.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-success">
+								True
+								<i class="bi bi-check-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="is_likely_spam_trap">
+						<td class="px-4 py-3">Is likely to be a spam trap?</td>
+						<td class="px-4 py-3">
+							Whether the email address is likely to be a spam
+							trap based on the signals we have collected from the
+							email address.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								False
+								<i class="bi bi-x-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="is_mailbox_full">
+						<td class="px-4 py-3">Is email inbox full?</td>
+						<td class="px-4 py-3">
+							Whether the email address is likely to be a full
+							inbox.
+							<br />
+							A full inbox is an inbox that is full and cannot
+							receive any more emails. Attempting to send an email
+							will result in a soft bounce.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								False
+								<i class="bi bi-x-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="account">
+						<td class="px-4 py-3">Email account</td>
+						<td class="px-4 py-3">
+							The part of the email address before the @ symbol.
+						</td>
+						<td class="px-4 py-3">support+usa</td>
+					</tr>
+					<tr id="is_alias">
+						<td class="px-4 py-3">Is this an alias?</td>
+						<td class="px-4 py-3">
+							Whether the email address is an alias of another
+							email address.
+							<br />
+							An alias is an email address contains a + or - sign
+							after the account name. For example,
+							"support+usa@deloitte.com" is an alias of
+							"support@deloitte.com".
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-success">
+								True
+								<i class="bi bi-check-lg"></i>
+							</span>
+						</td>
+					</tr>
+					<tr id="account_alias_stripped">
+						<td class="px-4 py-3">
+							Email account without the alias
+						</td>
+						<td class="px-4 py-3">
+							If the email address is an alias, this field will
+							contain the account name without the alias.
+						</td>
+						<td class="px-4 py-3">support</td>
+					</tr>
+					<tr id="email_alias_stripped">
+						<td class="px-4 py-3">
+							Email address witdout the alias
+						</td>
+						<td class="px-4 py-3">
+							If the email address is an alias, this field will
+							contain the email address without the alias so that
+							you can target the original email address directly.
+						</td>
+						<td class="px-4 py-3">support@deloitte.com</td>
+					</tr>
+					<tr id="fqdn">
+						<td class="px-4 py-3">
+							Full Qualified Domain Name (FQDN)
+						</td>
+						<td class="px-4 py-3">
+							The fully qualified domain name (FQDN) of the email
+							address.
+						</td>
+						<td class="px-4 py-3">deloitte.com</td>
+					</tr>
+					<tr id="subdomain">
+						<td class="px-4 py-3">Subdomain</td>
+						<td class="px-4 py-3">
+							<br />
+							If the email address has a subdomain, this field
+							will contain the subdomain. Otherwise, this field
+							will be n/a.
+						</td>
+						<td class="px-4 py-3">n/a</td>
+					</tr>
+					<tr id="domain">
+						<td class="px-4 py-3">Domain</td>
+						<td class="px-4 py-3">
+							This field will contain the domain name of the email
+							address without the tld (top-level domain) such as
+							.com, .net, .org, etc and without the subdomain.
+						</td>
+						<td class="px-4 py-3">deloitte</td>
+					</tr>
+					<tr id="tld">
+						<td class="px-4 py-3">Top-Level Domain (TLD)</td>
+						<td class="px-4 py-3">
+							The top-level domain (TLD) of the email address.
+						</td>
+						<td class="px-4 py-3">com</td>
+					</tr>
+					<tr id="domain_age">
+						<td class="px-4 py-3">Domain age (days)</td>
+						<td class="px-4 py-3">
+							The age of the domain in days based on the WHOIS
+							data.
+						</td>
+						<td class="px-4 py-3">10793</td>
+					</tr>
+					<tr id="smtp_provider_host">
+						<td class="px-4 py-3">Email provider FQDN</td>
+						<td class="px-4 py-3">
+							The FQDN of the email provider that the email
+							address uses.
+							<br />
+							If the email address has a security gateway, this
+							field will contain the FQDN of the security gateway.
+						</td>
+						<td class="px-4 py-3">mx2.hc5291-32.iphmx.com</td>
+					</tr>
+					<tr id="smtp_provider_host_domain">
+						<td class="px-4 py-3">Email provider domain</td>
+						<td class="px-4 py-3">
+							The domain name of the email provider that the email
+							address uses, without the tld (top-level domain)
+							such as .com, .net, .org, etc and without the
+							subdomain.
+							<br />
+							If the email address has a security gateway, this
+							field will contain the domain name of the security
+							gateway.
+						</td>
+						<td class="px-4 py-3">iphmx</td>
+					</tr>
+					<tr id="smtp_provider_host_tld">
+						<td class="px-4 py-3">Email provider TLD</td>
+						<td class="px-4 py-3">
+							The top-level domain (TLD) of the email provider
+							that the email address uses.
+							<br />
+							If the email address has a security gateway, this
+							field will contain the TLD of the security gateway.
+						</td>
+						<td class="px-4 py-3">com</td>
+					</tr>
+					<tr id="smtp_provider_ip">
+						<td class="px-4 py-3">Email provider IP</td>
+						<td class="px-4 py-3">
+							The IP address of the email provider that the email
+							address uses.
+							<br />
+							If the email address has a security gateway, this
+							field will contain the IP address of the security
+							gateway.
+						</td>
+						<td class="px-4 py-3">216.71.141.159</td>
+					</tr>
+					<tr id="smtp_provider_ip_ptr">
+						<td class="px-4 py-3">Email provider IP PTR</td>
+						<td class="px-4 py-3">
+							The PTR record of the email provider IP address.
+							<br />
+							If the email address has a security gateway, this
+							field will contain the PTR record of the security
+							gateway.
+						</td>
+						<td class="px-4 py-3">esa.hc5291-32.iphmx.com</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section id="status-codes">
+			<h3 class="h3 mb-3 mt-5 pt-2">Status descriptions</h3>
+			<p>
+				Below are the possible values for the status fields in the
+				results.
+			</p>
+			<table class="table table-sm table-hover align-middle m-0">
+				<thead>
+					<tr>
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Status
+						</th>
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Description
+						</th>
+						<th
+							class="px-4 py-3 sticky-top bg-body-secondary"
+							style="z-index: 10;"
+						>
+							Recommended action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="px-4 py-3">Valid</td>
+						<td class="px-4 py-3">
+							The email provider confirmed that the email address
+							is valid and can receive emails.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-success">
+								<i class="bi bi-check-lg"></i>
+								Send
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="px-4 py-3">Invalid</td>
+						<td class="px-4 py-3">
+							The email provider confirmed that the email address
+							is invalid and cannot receive emails.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								<i class="bi bi-x-lg"></i>
+								Do not send
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="px-4 py-3">Disabled</td>
+						<td class="px-4 py-3">
+							The email provider confirmed that the email address
+							is disabled and cannot receive emails.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								<i class="bi bi-x-lg"></i>
+								Do not send
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="px-4 py-3">Likely Invalid</td>
+						<td class="px-4 py-3">
+							Our algorithms indicate that the email address is
+							likely invalid, but we could not confirm it with the
+							email provider.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-danger">
+								<i class="bi bi-x-lg"></i>
+								Do not send
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td class="px-4 py-3">Unknown</td>
+						<td class="px-4 py-3">
+							The validation attempt was inconclusive. This might
+							be due to several reasons including the email
+							service provider blocking our requests.
+						</td>
+						<td class="px-4 py-3">
+							<span class="text-warning">
+								<i class="bi bi-exclamation-triangle"></i>
+								Try validating again later,<br />do not send if
+								the status is still unknown
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section>
+			<h3 class="h3 mb-3 mt-5 pt-2">Need more help?</h3>
+			<p>Please contact support if you encounter any issues:</p>
+			<p>
+				<a
+					href="mailto:support@maillistshield.com?subject=Support%20Request"
+					class="btn btn-success btn-sm"
+					><i class="bi bi-headset"></i> Contact support</a
+				>
+			</p>
+		</section>
+	</div>
+{% endblock content %}
