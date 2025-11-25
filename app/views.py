@@ -145,7 +145,7 @@ def validate():
 
 
 @public_bp.route("/", defaults={"path": "index"})
-@public_bp.route("/<path>")
+@public_bp.route("/<path:path>")
 def index(path):
     """Serve the index page or dynamically route for other pages with existing templates.
 
