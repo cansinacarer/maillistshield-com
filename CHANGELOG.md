@@ -1,3 +1,12 @@
+# [1.13.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.12.0...v1.13.0) (2025-11-25)
+
+
+### Features
+
+* add documentation ([38884ba](https://github.com/cansinacarer/maillistshield-com/commit/38884baab0eb702594c3858a4015a4375774f075))
+* add pricing page ([eed3af5](https://github.com/cansinacarer/maillistshield-com/commit/eed3af5a92665a58e4773f20ecd7c1474b48d6b2))
+* allow flask to find templates in subdirectories and map routes to them ([b463935](https://github.com/cansinacarer/maillistshield-com/commit/b46393524de1e4a7403ef3d7b6ecc07c3ea74959))
+
 # [1.12.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.11.1...v1.12.0) (2025-10-05)
 
 
