@@ -1,3 +1,10 @@
+"""Public views and routes for the Mail List Shield application.
+
+This module defines the public-facing routes including the landing page,
+email validation endpoints, and error handlers. It also configures
+rate limiting for the application.
+"""
+
 from flask import render_template, request, Blueprint, current_app, Response, jsonify
 from flask_login import login_required, current_user
 from flask_limiter import Limiter
@@ -18,35 +25,86 @@ public_bp = Blueprint("public_bp", __name__)
 # This callback is used to reload the user object from the user ID stored in the session.
 @lm.user_loader
 def load_user(user_id):
+    """Load a user from the database by ID.
+
+    This callback is used by Flask-Login to reload the user object
+    from the user ID stored in the session.
+
+    Args:
+        user_id: The ID of the user to load.
+
+    Returns:
+        Users: The user object, or None if not found.
+    """
     return Users.query.get(int(user_id))
 
 
 @public_bp.errorhandler(403)
-def page_not_found(e):
+def forbidden_error(e):
+    """Handle 403 Forbidden errors.
+
+    Args:
+        e: The exception that triggered the error.
+
+    Returns:
+        tuple: Error page response and status code.
+    """
     print(f"ERROR 403: {e}")
     return error_page(403)
 
 
 @public_bp.errorhandler(404)
-def page_not_found(e):
+def not_found_error(e):
+    """Handle 404 Not Found errors.
+
+    Args:
+        e: The exception that triggered the error.
+
+    Returns:
+        tuple: Error page response and status code.
+    """
     print(f"ERROR 404: {e}")
     return error_page(404)
 
 
 @public_bp.errorhandler(405)
-def page_not_found(e):
+def method_not_allowed_error(e):
+    """Handle 405 Method Not Allowed errors.
+
+    Args:
+        e: The exception that triggered the error.
+
+    Returns:
+        tuple: Error page response and status code.
+    """
     print(f"ERROR 405: {e}")
     return error_page(405)
 
 
 @public_bp.errorhandler(429)
 def rate_limited(e):
+    """Handle 429 Too Many Requests errors.
+
+    Args:
+        e: The exception that triggered the error.
+
+    Returns:
+        tuple: Error page response and status code.
+    """
     print(f"ERROR 429: {e}")
     return error_page(429)
 
 
 @public_bp.errorhandler(500)
 def server_error(e):
+    """Handle 500 Internal Server errors.
+
+    Args:
+        e: The exception that triggered the error.
+
+    Returns:
+        tuple: Error page response and status code.
+    """
     print(f"ERROR 500: {e}")
     return error_page(500)
 
@@ -61,19 +119,32 @@ limiter = Limiter(
 
 
 def is_user_logged_in():
+    """Check if the current user is authenticated.
+
+    Returns:
+        bool: True if the user is logged in, False otherwise.
+    """
     return current_user.is_authenticated
 
 
 # Serve favicon in the default route some clients expect
 @public_bp.route("/favicon.ico")
 def favicon():
-    """Serve the favicon.ico file."""
+    """Serve the favicon.ico file.
 
+    Returns:
+        Response: The favicon file from static assets.
+    """
     return current_app.send_static_file("media/favicon.ico")
 
 
 @public_bp.route("/robots.txt")
 def robots():
+    """Serve the robots.txt file for web crawlers.
+
+    Returns:
+        Response: A text response with crawler directives.
+    """
     return Response(
         "User-agent: *\nDisallow: /",
         mimetype="text/plain",
@@ -85,6 +156,19 @@ def robots():
 @login_required
 @limiter.limit("40 per day")
 def validate_file(path):
+    """Handle batch file validation uploads and job creation.
+
+    Provides endpoints for getting signed upload URLs and recording
+    batch job details after file upload.
+
+    Args:
+        path: The sub-path determining the action:
+            - 'getSignedRequest': Returns a signed URL for file upload.
+            - 'recordBatchFileDetails': Records job details after upload.
+
+    Returns:
+        Response: JSON response with signed URL or job confirmation.
+    """
     match path:
         # Authorize front end to upload to the bucket
         case "getSignedRequest":
@@ -113,6 +197,19 @@ def validate_file(path):
     exempt_when=is_user_logged_in,
 )
 def validate():
+    """Validate a single email address.
+
+    Processes email validation requests from the web interface.
+    Anonymous users are limited to 5 validations per day.
+    Authenticated users must have confirmed email and available credits.
+
+    Returns:
+        tuple: Validation result and HTTP status code.
+            - 200: Successful validation with result data.
+            - 402: Insufficient credits.
+            - 403: Email not confirmed.
+            - 500: Server error.
+    """
     # Grab the email from the request
     email = request.form.get("email")
 

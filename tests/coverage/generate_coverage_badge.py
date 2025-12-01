@@ -1,3 +1,10 @@
+"""Generate a test coverage badge for the Mail List Shield project.
+
+This script reads the coverage percentage from coverage.txt and generates
+an SVG badge using the anybadge library. The badge color changes based on
+coverage thresholds.
+"""
+
 import anybadge
 import re
 import os

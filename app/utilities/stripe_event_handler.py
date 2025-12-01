@@ -1,3 +1,9 @@
+"""Stripe webhook event handler for the Mail List Shield application.
+
+This module processes incoming Stripe webhook events for subscription
+management and credit purchases.
+"""
+
 import datetime
 
 from app.config import appTimezone
@@ -10,14 +16,41 @@ from app.emails import (
 
 
 def is_subscription_event(event):
+    """Check if a Stripe event is subscription-related.
+
+    Args:
+        event: The Stripe event object.
+
+    Returns:
+        bool: True if the event type starts with 'customer.subscription'.
+    """
     return event.type[:21] == "customer.subscription"
 
 
 def is_checkout_completed_event(event):
+    """Check if a Stripe event is a completed checkout.
+
+    Args:
+        event: The Stripe event object.
+
+    Returns:
+        bool: True if the event type is 'checkout.session.completed'.
+    """
     return event.type == "checkout.session.completed"
 
 
 def user_from_stripe_customer_id(customer_id):
+    """Look up a user by their Stripe customer ID.
+
+    Args:
+        customer_id: The Stripe customer ID.
+
+    Returns:
+        Users: The matching user object.
+
+    Raises:
+        Exception: If no user is found with the given customer ID.
+    """
     user_matched = Users.query.filter_by(stripe_customer_id=customer_id).first()
 
     if user_matched is None:
@@ -27,6 +60,17 @@ def user_from_stripe_customer_id(customer_id):
 
 
 def tier_from_stripe_price_id(price_id):
+    """Look up a subscription tier by its Stripe price ID.
+
+    Args:
+        price_id: The Stripe price ID.
+
+    Returns:
+        Tiers: The matching tier object.
+
+    Raises:
+        Exception: If no tier is found with the given price ID.
+    """
     tier_matched = Tiers.query.filter_by(stripe_price_id=price_id).first()
 
     if tier_matched is None:
@@ -36,6 +80,14 @@ def tier_from_stripe_price_id(price_id):
 
 
 def handle_stripe_event(event):
+    """Process a Stripe webhook event.
+
+    Handles checkout completions (credit purchases) and subscription
+    events (creation, updates, cancellation, deletion).
+
+    Args:
+        event: The Stripe event object to process.
+    """
     # If it is a credit purchase event, try to parse user and update credits
     if is_checkout_completed_event(event):
         # Get the Stripe customer and find the matching user

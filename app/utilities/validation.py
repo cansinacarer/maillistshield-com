@@ -1,10 +1,29 @@
+"""Email validation utilities for the Mail List Shield application.
+
+This module handles email validation by distributing requests across
+multiple worker servers using a round-robin strategy.
+"""
+
 import requests
 
 from flask import current_app
 
 
-# Distribute traffic to workers with round robin
 def validate_email(email):
+    """Validate an email address using available worker servers.
+
+    Distributes validation requests across workers using round-robin.
+    If a worker returns an 'unknown' status, tries the next worker.
+
+    Args:
+        email: The email address to validate.
+
+    Returns:
+        dict: Validation result containing status and details.
+
+    Raises:
+        Exception: If no worker could provide a valid response.
+    """
     workers = current_app.config["MLS_WORKERS"]
     first_worker_index = current_app.config["NEXT_WORKER"]
     best_result_so_far = {}
@@ -49,6 +68,15 @@ def validate_email(email):
 
 
 def request_validation(email, worker):
+    """Send a validation request to a specific worker server.
+
+    Args:
+        email: The email address to validate.
+        worker: The URL of the worker server.
+
+    Returns:
+        dict: The JSON response from the worker, or None on failure.
+    """
     data = {
         "email": email,
         "api_key": current_app.config["MLS_WORKER_API_KEY"],

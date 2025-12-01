@@ -1,3 +1,10 @@
+"""Private views and routes for authenticated users.
+
+This module defines the routes that require authentication, including
+the user dashboard, billing, account settings, API key management,
+admin pages, and webhook endpoints.
+"""
+
 # Flask modules
 from flask import (
     Blueprint,
@@ -87,8 +94,9 @@ def webhook(path):
     Returns:
         Response: A JSON response indicating success or failure.
 
-    Webhook endpoints for external services to give us updates.
-    Currently, this endpoint is used to receive webhook events from Stripe.
+    Note:
+        Webhook endpoints for external services to give us updates.
+        Currently, this endpoint is used to receive webhook events from Stripe.
     """
     try:
         match path:
@@ -135,7 +143,14 @@ def webhook(path):
 @private_bp.route("/api-keys/<path>", methods=["GET", "POST"])
 @login_required
 def api_keys(path):
-    """The view function for the page for managing API keys."""
+    """The view function for the page for managing API keys.
+
+    Args:
+        path: The sub-path for API key actions ('create', 'revoke', or 'api-keys').
+
+    Returns:
+        Response: The rendered template or JSON response for the action.
+    """
 
     # Redirect to email confirmation
     if current_user.email_confirmed != 1:
@@ -587,7 +602,7 @@ def account(path):
 @private_bp.route("/admin/<path:path>", methods=["GET", "POST"])
 @login_required
 def admin(path):
-    """The view function for the admin privilaged pages' routing.
+    """The view function for the admin privileged pages' routing.
 
     path:path is used to catch all paths, including those with multiple slashes (/)
 

@@ -1,17 +1,22 @@
+"""Custom decorators for the Mail List Shield application.
+
+This module provides utility decorators used throughout the application.
+"""
+
 from threading import Thread
 
 
 def asyncr(f):
-    """Decorator to run a function asynchronously.
+    """Decorator to run a function asynchronously in a separate thread.
 
-    We use this decorator to send emails on a separate thread without blocking the main thread.
+    This decorator is primarily used for sending emails without blocking
+    the main request thread.
 
     Args:
-        f (function): The function to be decorated.
+        f: The function to be decorated.
 
     Returns:
         function: A wrapper function that runs the original function in a separate thread.
-
     """
 
     def wrapper(*args, **kwargs):

@@ -1,3 +1,6 @@
+"""Tests for authentication views including login and registration."""
+
+
 def test_login_page_loads(client):
     """Test that the login page loads correctly"""
     response = client.get("/login", follow_redirects=True)

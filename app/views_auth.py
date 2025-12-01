@@ -1,3 +1,10 @@
+"""Authentication views and routes for the Mail List Shield application.
+
+This module defines the authentication-related routes including login,
+registration, logout, password reset, email confirmation, two-factor
+authentication, and Google OAuth integration.
+"""
+
 # Python modules
 from datetime import datetime, timezone
 import requests
@@ -51,29 +58,40 @@ auth_bp = Blueprint("auth_bp", __name__)
 
 @lm.user_loader
 def load_user(user_id):
-    """This function is used to load the user object from the user ID stored in the session.
+    """Load a user from the database by ID.
+
+    This function is used by Flask-Login to reload the user object
+    from the user ID stored in the session.
 
     Args:
-        user_id (str): The ID of the user to load.
+        user_id: The ID of the user to load.
 
     Returns:
-        Users: The user object from the db corresponding to the user ID.
+        Users: The user object from the database corresponding to the user ID.
     """
     return Users.query.get(int(user_id))
 
 
 @lm.unauthorized_handler
 def unauthorized_callback():
-    """This function is used to handle unauthorized access to protected routes.
+    """Handle unauthorized access to protected routes.
 
-    403 cases will be redirected to login
+    Redirects unauthenticated users to the login page with the
+    original destination preserved in the next parameter.
+
+    Returns:
+        Response: Redirect to the login page.
     """
     return redirect("/login?next=" + request.path)
 
 
 @auth_bp.route("/logout")
 def logout():
-    """This function is used to log out the user and redirect them to the login page."""
+    """Log out the current user and redirect to the login page.
+
+    Returns:
+        Response: Redirect to the login page.
+    """
     logout_user()
     return redirect(url_for("auth_bp.login"))
 
@@ -81,7 +99,13 @@ def logout():
 @auth_bp.route("/register", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def register():
-    """The view function for the registration page."""
+    """The view function for the registration page.
+
+    Handles new user registration with reCAPTCHA verification.
+
+    Returns:
+        Response: The registration form or redirect to email confirmation.
+    """
 
     # Don't allow logged in users here
     if current_user.is_authenticated:
@@ -165,7 +189,13 @@ def register():
 @auth_bp.route("/login", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def login():
-    """The view function for the login page."""
+    """The view function for the login page.
+
+    Handles user authentication with optional Google OAuth and reCAPTCHA.
+
+    Returns:
+        Response: The login form or redirect to dashboard/two-factor auth.
+    """
 
     # Don't allow logged in users here
     if current_user.is_authenticated:
@@ -247,7 +277,13 @@ def login():
 @auth_bp.route("/two-factor", methods=["GET", "POST"])
 @limiter.limit("10 per day", methods=["POST"])
 def two_factor():
-    """The view function for the two factor authentication page."""
+    """The view function for the two-factor authentication page.
+
+    Verifies TOTP codes for users with two-factor authentication enabled.
+
+    Returns:
+        Response: The two-factor form or redirect to dashboard.
+    """
 
     # Don't allow logged in users here
     if current_user.is_authenticated:
@@ -309,7 +345,13 @@ def two_factor():
 
 @auth_bp.route("/email-confirmation", methods=["GET", "POST"])
 def email_confirmation_by_code():
-    """The view function for the email verification page."""
+    """The view function for the email verification page.
+
+    Handles verification code entry and validation.
+
+    Returns:
+        Response: The email confirmation form or redirect to dashboard.
+    """
 
     codeMatched = True
 
@@ -371,7 +413,13 @@ def email_confirmation_by_code():
 @auth_bp.route("/forgot-password", methods=["GET", "POST"])
 @limiter.limit("1 per day", methods=["POST"])
 def password_reset():
-    """The view function for the password reset page."""
+    """The view function for the password reset page.
+
+    Initiates the password reset process by sending a reset email.
+
+    Returns:
+        Response: The password reset form or redirect to confirmation page.
+    """
 
     # Declare the form
     form = ResetPassword(request.form)
@@ -395,7 +443,13 @@ def password_reset():
 
 @auth_bp.route("/password-reset-requested")
 def password_reset_requested():
-    """The view function for the password reset requested page."""
+    """The view function for the password reset requested page.
+
+    Shows a confirmation message after a password reset request.
+
+    Returns:
+        Response: The password reset requested confirmation page.
+    """
 
     return render_template(
         "public/auth/password-reset-requested.html", user=current_user
@@ -407,8 +461,13 @@ def password_reset_requested():
 def set_new_password(token):
     """The view function for the set new password page.
 
+    Validates the reset token and allows the user to set a new password.
+
     Args:
         token (str): The token from the forgot password email, used to verify the user.
+
+    Returns:
+        Response: The new password form or redirect to login.
     """
 
     try:
@@ -443,8 +502,10 @@ def set_new_password(token):
 def get_google_sso_config():
     """Get the Google SSO configuration.
 
+    Fetches the OpenID Connect discovery document from Google.
+
     Returns:
-        dict: The Google SSO configuration.
+        dict: The Google SSO configuration including endpoints.
     """
     return requests.get(
         "https://accounts.google.com/.well-known/openid-configuration"
@@ -457,6 +518,10 @@ def login_callback_google():
     """The view function for the Google login callback.
 
     This is the page that Google redirects to after the Google authentication attempt.
+    Handles both existing users logging in and new user registration via Google OAuth.
+
+    Returns:
+        Response: Redirect to dashboard or login page based on authentication result.
     """
 
     # Don't allow logged in users here

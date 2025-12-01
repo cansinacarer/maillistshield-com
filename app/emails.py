@@ -1,3 +1,10 @@
+"""Email sending utilities for the Mail List Shield application.
+
+This module provides functions for sending various types of emails
+including password reset, email verification, and subscription notifications.
+All emails are sent asynchronously to avoid blocking the main thread.
+"""
+
 from datetime import datetime, timezone, timedelta
 from itsdangerous import URLSafeTimedSerializer
 
@@ -14,8 +21,7 @@ def send_email_to_reset_password(email):
     """Send an email with the password reset link.
 
     Args:
-        email (str): The email address of the user.
-
+        email: The email address of the user.
     """
 
     # Tokenize the email address
@@ -49,8 +55,11 @@ def send_email_to_reset_password(email):
 def send_email_with_code(user):
     """Send an email with the verification code.
 
+    Implements rate limiting: only sends if at least 60 seconds have passed
+    since the last email, and limits total emails to 5.
+
     Args:
-        user (Users): The user object.
+        user: The user object from the database.
     """
 
     # If last confirmation email was sent more than 60 seconds ago
@@ -105,8 +114,8 @@ def send_email_about_subscription_confirmation(user, tier_name):
     """Send an email with the paid subscription confirmation.
 
     Args:
-        user (Users): The user object.
-        tier_name (str): The name of the subscription tier.
+        user: The user object from the database.
+        tier_name: The name of the subscription tier.
     """
 
     # Email with this information:
@@ -137,9 +146,9 @@ def send_email_about_subscription_cancellation(user, tier_name, cancellation_dat
     is still active until the end of the billing period.
 
     Args:
-        user (Users): The user object.
-        tier_name (str): The name of the subscription tier.
-        cancellation_date (datetime): The date of cancellation.
+        user: The user object from the database.
+        tier_name: The name of the subscription tier.
+        cancellation_date: The date of cancellation.
     """
     # Email with this information:
     msg = Message("Subscription Canceled")
@@ -170,8 +179,8 @@ def send_email_about_subscription_deletion(user, tier_name):
     This is the email sent when the subscription has ended.
 
     Args:
-        user (Users): The user object.
-        tier_name (str): The name of the subscription tier.
+        user: The user object from the database.
+        tier_name: The name of the subscription tier.
     """
 
     # Email with this information:
@@ -195,14 +204,13 @@ def send_email_about_subscription_deletion(user, tier_name):
     send_async_email(msg, current_app._get_current_object())
 
 
-# Async emailing - all information is passed in an instance of the Message object
 @asyncr
 def send_async_email(msg, app):
     """Send an email asynchronously.
 
     Args:
-        msg (Message): The Message object containing email details.
-        app (Flask): The Flask application instance.
+        msg: The Message object containing email details.
+        app: The Flask application instance.
     """
     with app.app_context():
         mail.send(msg)

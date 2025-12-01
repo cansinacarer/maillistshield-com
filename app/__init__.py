@@ -1,3 +1,9 @@
+"""Mail List Shield Flask application factory and extensions.
+
+This module provides the Flask application factory function and initializes
+Flask extensions used throughout the application.
+"""
+
 from flask import Flask, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -29,10 +35,11 @@ def create_app(config_class="app.config.Config", test_config=False):
     with the specified configuration.
 
     Args:
-        config_class (str): Reference to the configuration object to use.
-        test_config (bool): If True, apply the test configuration.
+        config_class: Reference to the configuration object to use.
+        test_config: If True, apply the test configuration.
+
     Returns:
-        app (Flask): The Flask application instance.
+        Flask: The Flask application instance.
     """
 
     # Initialize the flask app
@@ -103,6 +110,11 @@ def create_app(config_class="app.config.Config", test_config=False):
     # Variables available in all templates
     @app.context_processor
     def inject_globals():
+        """Inject global variables into all templates.
+
+        Returns:
+            dict: Dictionary of variables available in all templates.
+        """
         return {
             "APP_NAME": app.config["APP_NAME"],
             "COPYRIGHT": f"2021–{datetime.now().year} - {app.config['APP_NAME']}",
@@ -112,6 +124,11 @@ def create_app(config_class="app.config.Config", test_config=False):
     # Applies to other Blueprints like app_private as well
     @app.before_request
     def remove_trailing_slash():
+        """Remove trailing slashes from URLs and redirect.
+
+        Returns:
+            Response: Redirect response if URL has trailing slash, None otherwise.
+        """
         if (
             request.path != "/"
             and request.path != "/app/"
@@ -122,31 +139,87 @@ def create_app(config_class="app.config.Config", test_config=False):
     # Register a Jinja2 filter for date formatting
     @app.template_filter("dateformat")
     def dateformat_filter(value, format="%B %d, %Y"):
+        """Format a Unix timestamp as a date string.
+
+        This is used to format the date in the Jinja templates.
+
+        Args:
+            value: Unix timestamp to format.
+            format: strftime format string.
+
+        Returns:
+            str: Formatted date string.
+        """
         return datetime.fromtimestamp(value).strftime(format)
 
     # Register a Jinja2 filter for time formatting
     @app.template_filter("timeformat")
     def timeformat_filter(value, format="%I:%M %p"):
+        """Format a Unix timestamp as a time string.
+
+        This is used to format the time in the Jinja templates.
+
+        Args:
+            value: Unix timestamp to format.
+            format: strftime format string.
+
+        Returns:
+            str: Formatted time string.
+        """
         return datetime.fromtimestamp(value).strftime(format)
 
     # Register a Jinja2 filter for date formatting for database dates
     @app.template_filter("dbDateformat")
     def dbDateformat_filter(value, format="%B %d, %Y"):
+        """Format a database datetime as a date string in the app timezone.
+
+        Args:
+            value: datetime object from the database.
+            format: strftime format string.
+
+        Returns:
+            str: Formatted date string.
+        """
         return value.astimezone(appTimezone).strftime(format)
 
     # Register a Jinja2 filter for time formatting for database dates
     @app.template_filter("dbTimeformat")
     def dbTimeformat_filter(value, format="%I:%M %p"):
+        """Format a database datetime as a time string in the app timezone.
+
+        Args:
+            value: datetime object from the database.
+            format: strftime format string.
+
+        Returns:
+            str: Formatted time string.
+        """
         return value.astimezone(appTimezone).strftime(format)
 
     # Register a Jinja2 filter for formatting numbers with thousand separators
     @app.template_filter("thousandSeparator")
     def thousandSeparator_filter(value):
+        """Format a number with thousand separators.
+
+        Args:
+            value: Number to format.
+
+        Returns:
+            str: Number formatted with commas as thousand separators.
+        """
         return "{:,}".format(value)
 
     # Prettify batch validation job status
     @app.template_filter("prettifyJobStatus")
     def prettifyJobStatus_filter(job):
+        """Convert a batch job status from the database into a nicer looking string.
+
+        Args:
+            job: BatchJob object with a status attribute.
+
+        Returns:
+            str: Human-readable status string.
+        """
         match job.status:
             case "pending_start":
                 return "Pending Start"

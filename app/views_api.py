@@ -1,3 +1,9 @@
+"""API views and routes for the Mail List Shield application.
+
+This module defines the REST API endpoints for email validation,
+credit balance retrieval, and API key testing.
+"""
+
 # Flask modules
 from flask import (
     Blueprint,
@@ -19,8 +25,7 @@ api_bp = Blueprint("api_bp", __name__)
 
 
 def invalid_api_key_response():
-    """
-    Abort the request with a 403 error for invalid API keys.
+    """Abort the request with a 403 error for invalid API keys.
 
     We standardize the error response to avoid leaking information about
     why the API key is invalid.
@@ -39,9 +44,7 @@ def invalid_api_key_response():
 
 
 def no_api_key_response():
-    """
-    Abort the request with a 401 error for missing API keys.
-    """
+    """Abort the request with a 401 error for missing API keys."""
     abort(
         make_response(
             jsonify(
@@ -56,9 +59,7 @@ def no_api_key_response():
 
 
 def no_json_body_response():
-    """
-    Abort the request with a 415 Unsupported Media Type error for missing JSON body.
-    """
+    """Abort the request with a 415 Unsupported Media Type error for missing JSON body."""
     abort(
         make_response(
             jsonify(
@@ -73,8 +74,10 @@ def no_json_body_response():
 
 
 def missing_key_in_json_response(key_name):
-    """
-    Abort the request with a 400 Bad Request error for missing keys in JSON body.
+    """Abort the request with a 400 Bad Request error for missing keys in JSON body.
+
+    Args:
+        key_name: The name of the missing key in the JSON payload.
     """
     abort(
         make_response(
@@ -90,9 +93,7 @@ def missing_key_in_json_response(key_name):
 
 
 def insufficient_credit_response():
-    """
-    Abort the request with a 402 Payment Required error for insufficient credits.
-    """
+    """Abort the request with a 402 Payment Required error for insufficient credits."""
     abort(
         make_response(
             jsonify(
@@ -107,10 +108,13 @@ def insufficient_credit_response():
 
 
 def validate_request_json(request):
-    """
-    Validate that the request has JSON content type and a JSON body.
+    """Validate that the request has JSON content type and a JSON body.
 
-    Abort the request with appropriate error responses if validation fails.
+    Args:
+        request: The Flask request object.
+
+    Note:
+        Aborts the request with appropriate error responses if validation fails.
     """
     # Check if the request has JSON content type
     if request.content_type != "application/json":
@@ -122,10 +126,17 @@ def validate_request_json(request):
 
 
 def get_user_from_api_key(request):
-    """
-    Fetch the user associated with the provided API key.
+    """Fetch the user associated with the provided API key.
 
-    All repeated error handling is abstracted into this function.
+    Args:
+        request: The Flask request object containing the x-api-key header.
+
+    Returns:
+        Users: The user object associated with the API key.
+
+    Note:
+        Aborts with appropriate error responses if the API key is
+        missing, invalid, or not associated with a user.
     """
 
     # Get the API key from the request headers
@@ -161,8 +172,15 @@ def get_user_from_api_key(request):
 
 
 def successful_validation_response(result):
-    """
-    Return a standardized successful validation response.
+    """Return a standardized successful validation response.
+
+    Args:
+        result: The validation result dictionary.
+
+    Returns:
+        Response: JSON response with validation results. If single_level_response
+            is requested, returns just the result dict. Otherwise, wraps it
+            with status and message.
     """
     # If the user want a single level response ...
     single_level_requested = request.json.get("single_level_response", False) == True
@@ -188,11 +206,14 @@ def successful_validation_response(result):
 @limiter.limit("50 per hour", methods=["GET", "POST"])
 @csrf.exempt
 def api_test():
-    """
-    A test API endpoint that requires an API key.
+    """A test API endpoint that requires an API key.
 
     This endpoint forgives requests without their content-type
     set to application/json, because it doesn't read your request body.
+
+    Returns:
+        Response: For GET requests, returns a 405 error message.
+            For POST requests, returns a success message with the user's name.
     """
 
     if request.method == "GET":
@@ -220,11 +241,13 @@ def api_test():
 @limiter.limit("50 per hour", methods=["POST"])
 @csrf.exempt
 def get_credit_balance():
-    """
-    The API endpoint to get the user's credit balance.
+    """The API endpoint to get the user's credit balance.
 
     This endpoint forgives requests without their content-type
     set to application/json, because it doesn't read your request body.
+
+    Returns:
+        dict: JSON response containing status, message, and credit balance.
     """
     # Find the user associated with the provided API key
     # (Error handling is abstracted into the function)
@@ -241,8 +264,7 @@ def get_credit_balance():
 @limiter.limit("200 per hour", methods=["POST"])
 @csrf.exempt
 def validate_single():
-    """
-    The API endpoint to validate a single email address.
+    """The API endpoint to validate a single email address.
 
     This endpoint requires the request content-type to be application/json
     and a JSON body with an "email" key.
@@ -250,6 +272,14 @@ def validate_single():
     Optionally, the request JSON can include a boolean key "single_level_response".
     If set to true, the API will return the validation result in a single-level dictionary.
     Otherwise, and by default, the response includes status and message keys.
+
+    Returns:
+        Response: JSON response with validation results or error message.
+            - 200: Successful validation with result.
+            - 400: Missing email key in request.
+            - 402: Insufficient credits.
+            - 500: Internal server error.
+            - 503: Validation service unavailable.
     """
 
     # Validate the request JSON

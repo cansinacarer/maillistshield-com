@@ -1,3 +1,9 @@
+"""Configuration settings for the Mail List Shield application.
+
+This module defines the Flask application configuration class and
+initializes shared resources like the S3 client and timezone.
+"""
+
 from decouple import config, Csv
 import pytz
 import boto3

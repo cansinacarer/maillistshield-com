@@ -1,3 +1,9 @@
+"""reCAPTCHA verification utilities for the Mail List Shield application.
+
+This module provides functions for verifying Google reCAPTCHA v2 responses
+to protect forms from automated submissions.
+"""
+
 import requests
 
 from flask import current_app

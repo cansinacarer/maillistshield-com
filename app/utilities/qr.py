@@ -1,10 +1,26 @@
+"""QR code generation utilities for the Mail List Shield application.
+
+This module provides functions for generating QR codes, primarily used
+for two-factor authentication setup.
+"""
+
 import qrcode
 import base64
 from io import BytesIO
 
 
-# Returns a base64 string of a QR code generated for the given string
 def qrcode_img_src(qr_string):
+    """Generate a base64-encoded QR code image as a data URI.
+
+    Creates a QR code from the given string and returns it as a
+    base64-encoded PNG image suitable for use in an HTML img src attribute.
+
+    Args:
+        qr_string: The string to encode in the QR code.
+
+    Returns:
+        str: A data URI string containing the base64-encoded PNG image.
+    """
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,

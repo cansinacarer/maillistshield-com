@@ -1,3 +1,5 @@
+"""Tests for private views requiring authentication."""
+
 import re
 
 
