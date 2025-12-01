@@ -1,8 +1,10 @@
 # MailListShield.com SaaS
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cansinacarer/maillistshield-com)
+![maillistshield.com](https://img.shields.io/badge/maillistshield.com-blueviolet?logo=Google%20Chrome&logoColor=white)
 [![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://documenter.getpostman.com/view/39218943/2sB3QDxDUr)
 [![Developer Docs](https://img.shields.io/badge/Developer%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
+[![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cansinacarer/maillistshield-com)
+
 [![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
 ![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue)
 ![Test Coverage](tests/coverage/coverage-badge.svg)
@@ -13,8 +15,6 @@
 [![Run Tests](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml)
 [![Semantic Release](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml)
 [![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml)
-
-[![Run In Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/39218943-677d3df8-c28c-47ad-ab45-ae21166fe426?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D39218943-677d3df8-c28c-47ad-ab45-ae21166fe426%26entityType%3Dcollection%26workspaceId%3D0deedf09-e1c0-4689-b495-babe29e8d3c2#?env%5BMLS%20API%20Credentials%5D=W3sia2V5IjoiQVBJX0tFWSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6InNlY3JldCIsImRlc2NyaXB0aW9uIjoiVGhlIEFQSSBrZXkgeW91IHJlY2VpdmVkIG9uIHRoZSBNTFMgZGFzaGJvYXJkLiIsInNlc3Npb25WYWx1ZSI6IjEzODU3MmRmNWZjMDRmNGM4YmRjNmMwMDRlNWUzYzhmNGRjYjE3YWEwNzQyNDBiM2JmMzg4MTliNTYyNjVhNmMiLCJjb21wbGV0ZVNlc3Npb25WYWx1ZSI6IjEzODU3MmRmNWZjMDRmNGM4YmRjNmMwMDRlNWUzYzhmNGRjYjE3YWEwNzQyNDBiM2JmMzg4MTliNTYyNjVhNmMiLCJzZXNzaW9uSW5kZXgiOjB9XQ==)
 
 ## Architecture
 
@@ -62,12 +62,11 @@ See [this drawio diagram](https://app.diagrams.net/#Uhttps://raw.githubuserconte
 
 ## Tech Stack
 
-- Backend: Python, Flask, PostgreSQL
-- Infrastructure: Docker, RabbitMQ, AWS S3, Loki, Grafana
+- Backend: Flask, PostgreSQL, RabbitMQ, AWS S3, Loki, Grafana
+- Developer Experience: GitHub Actions, Dev Containers, Sphinx AutoAPI
+- Documentation: Sphinx AutoAPI, Postman, DeepWiki
 - Auth: OAuth, 2FA
 - Payments: Stripe
-- CI/CD: GitHub Actions
-- Documentation: Sphinx AutoAPI, Postman
 
 ## Database Model
 
