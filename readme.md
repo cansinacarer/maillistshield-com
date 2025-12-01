@@ -1,20 +1,35 @@
-# MailListShield.com SaaS
+<p align="center">
+    <img alt="MailListShield Logo" height="50" src="app/static/media/mail-list-shield-logo.png#gh-light-mode-only">
+    <img alt="MailListShield Logo" height="50" src="app/static/media/mail-list-shield-logo-dark-mode.png#gh-dark-mode-only">
+</p>
+<p align="center">
+    A production-grade email validation platform built with microservices architecture
+</p>
 
-![maillistshield.com](https://img.shields.io/badge/maillistshield.com-blueviolet?logo=Google%20Chrome&logoColor=white)
-[![API Docs](https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://documenter.getpostman.com/view/39218943/2sB3QDxDUr)
-[![Developer Docs](https://img.shields.io/badge/Developer%20Docs-blue?&logo=read-the-docs&logoColor=white)](https://cansinacarer.github.io/My-Base-SaaS-Flask/)
-[![DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/cansinacarer/maillistshield-com)
+<!-- Links -->
+<p align="center">
+    <a href="https://maillistshield.com"><img alt="Live Demo" src="https://img.shields.io/badge/Live%20Demo-blueviolet?logo=Google%20Chrome&logoColor=white"></a>
+    <a href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"><img alt="API Docs" src="https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white"></a>
+    <a href="https://cansinacarer.github.io/My-Base-SaaS-Flask/"><img alt="Developer Docs" src="https://img.shields.io/badge/Developer%20Docs-blue?&logo=read-the-docs&logoColor=white"></a>
+    <a href="https://deepwiki.com/cansinacarer/maillistshield-com"><img alt="DeepWiki" src="https://deepwiki.com/badge.svg"></a>
+</p>
 
-[![Uptime](https://status.maillistshield.com/api/badge/5/uptime)](https://status.maillistshield.com/status/maillistshield)
-![Last Commit](https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue)
-![Test Coverage](tests/coverage/coverage-badge.svg)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000)](https://github.com/psf/black)
+<!-- Status -->
+<p align="center">
+    <a href="https://status.maillistshield.com/status/maillistshield"><img alt="Uptime" src="https://status.maillistshield.com/api/badge/5/uptime"></a>
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/cansinacarer/maillistshield-com?color=blue">
+    <img alt="Test Coverage" src="tests/coverage/coverage-badge.svg">
+    <a href="https://github.com/psf/black"><img alt="Code Style" src="https://img.shields.io/badge/code%20style-black-000000"></a>
+</p>
 
-[![Build & Deploy](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml)
-[![Pre-Commit Hooks](https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml)
-[![Run Tests](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml)
-[![Semantic Release](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml)
-[![Build & Deploy Sphinx Docs](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml)
+<!-- CI/CD -->
+<p align="center">
+    <a href="https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml"><img alt="Build & Deploy" src="https://github.com/cansinacarer/maillistshield-com/actions/workflows/deploy.yml/badge.svg"></a>
+    <a href="https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml"><img alt="Pre-Commit Hooks" src="https://github.com/cansinacarer/maillistshield-com/actions/workflows/pre-commit.yml/badge.svg"></a>
+    <a href="https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml"><img alt="Run Tests" src="https://github.com/cansinacarer/maillistshield-com/actions/workflows/test.yml/badge.svg"></a>
+    <a href="https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml"><img alt="Semantic Release" src="https://github.com/cansinacarer/maillistshield-com/actions/workflows/semantic-release.yml/badge.svg"></a>
+    <a href="https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml"><img alt="Build & Deploy Sphinx Docs" src="https://github.com/cansinacarer/maillistshield-com/actions/workflows/docs.yml/badge.svg"></a>
+</p>
 
 ## Architecture
 
@@ -58,17 +73,25 @@ This application consists of 6 event driven services:
 5. [Validation Orchestrator](https://github.com/cansinacarer/maillistshield-validation-orchestrator)
 6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
 
-See [this drawio diagram](https://app.diagrams.net/#Uhttps://raw.githubusercontent.com/cansinacarer/maillistshield-com/main/docs/drawio/mls-service-architecture.drawio) for a more detailed description of the interactions between these services.
+[See a more detailed architecture diagram →](https://app.diagrams.net/#Uhttps://raw.githubusercontent.com/cansinacarer/maillistshield-com/main/docs/drawio/mls-service-architecture.drawio)
 
 ## Tech Stack
 
-- Backend: Flask, PostgreSQL, RabbitMQ, AWS S3, Loki, Grafana
-- Developer Experience: GitHub Actions, Dev Containers, Sphinx AutoAPI
-- Documentation: Sphinx AutoAPI, Postman, DeepWiki
-- Auth: OAuth, 2FA
-- Payments: Stripe
+| Category | Technologies |
+|----------|-------------|
+| **Backend** | Python, Flask |
+| **Database** | PostgreSQL, SQLAlchemy ORM |
+| **Message Queue** | RabbitMQ |
+| **Infrastructure** | Docker, AWS S3, CapRover (PaaS deployment) |
+| **Security** | OAuth 2.0, TOTP 2FA, reCAPTCHA, CSRF/XSS protection |
+| **Observability** | Loki, Grafana, Uptime Kuma |
+| **CI/CD** | GitHub Actions, Semantic Release |
+| **Payments** | Stripe (subscriptions + one-time purchases) |
 
 ## Database Model
+
+<details>
+<summary>See the ER diagram</summary>
 
 ```mermaid
     erDiagram
@@ -141,19 +164,15 @@ See [this drawio diagram](https://app.diagrams.net/#Uhttps://raw.githubuserconte
         Users ||--o{ BatchJobs : "creates"
 ```
 
-## Service Descriptions
+</details>
 
-### 1. [Flask SaaS](https://github.com/cansinacarer/maillistshield-com)
+## Features of the Flask Application
 
-This is the Flask application served at [maillistshield.com](https://maillistshield.com/).
-
-#### Features
-
-##### 🧑‍💻 Developer Experience
+### 🧑‍💻 Developer Experience
 
 - Dev containers:
 
-  - __Flask__ container with pre-configured with:
+  - **Flask** container with pre-configured with:
     - VSCode launch.json for debugging the Flask app,
     - Prettier for HTML, CSS, and JS formatting,
     - Pre-commit hooks for code quality checks,
@@ -161,11 +180,11 @@ This is the Flask application served at [maillistshield.com](https://maillistshi
     - Black for Python code formatting,
     - Commitlint for commit message linting.
 
-  - __Postgres__ as a development database,
+  - **Postgres** as a development database,
 
-  - __pgAdmin__ pre-connected to the development,
+  - **pgAdmin** pre-connected to the development,
 
-  - __docs__ serving the built html files of the Sphinx documentation..
+  - **docs** serving the built html files of the Sphinx documentation..
 
 - CI/CD pipelines with GitHub Actions to:
   - Run pre-commit hooks,
@@ -174,13 +193,13 @@ This is the Flask application served at [maillistshield.com](https://maillistshi
   - Build and deploy the documentation,
   - Build and deploy the app to production.
 
-##### ☁️ Deployment
+### ☁️ Deployment
 
 - 🐳 Dockerized Flask for stateless continuous deployment for scalability,
 - 🗄️ Database model abstracted with ORM,
 - 📦 S3 object storage with pre-signed URLs.
 
-##### 💳 Stripe Integrations
+### 💳 Stripe Integrations
 
 - Subscriptions,
   - Different subscription tiers,
@@ -192,7 +211,7 @@ This is the Flask application served at [maillistshield.com](https://maillistshi
 
 - One-off credit purchases for pre-paid metered usage.
 
-##### 🔒 Authentication
+### 🔒 Authentication
 
 - Sign up flow,
   - Sign up with Google option,
@@ -205,7 +224,7 @@ This is the Flask application served at [maillistshield.com](https://maillistshi
   - Upload a profile picture (stored in S3),
   - Change profile details like first & last name.
 
-##### 📧 Transactional Emails with SMTP
+### 📧 Transactional Emails with SMTP
 
 - About Stripe subscription changes:
   - Confirmation,
@@ -215,142 +234,9 @@ This is the Flask application served at [maillistshield.com](https://maillistshi
 - Email verification on registration,
 - Forgot password.
 
-##### 🚨 Security
+### 🚨 Security
 
 - Cross-Site Request Forgery (CSRF) protection in all forms,
 - Rate limiting: App-wide and form specific limits,
 - Cross-Site Scripting (XSS) protection,
 - Cross-Origin Resource Sharing (CORS) protection.
-
-#### My Base SaaS
-
-This project uses my [my base saas](https://github.com/cansinacarer/my-base-saas-flask) as an upstream repository. When I build a feature that is generally applicable and not specific to MailListShield, I build it in my base saas and pull them into this repository.
-
-To pull updates from my base saas, connect it as an upstream:
-
-```sh
-git remote add upstream https://github.com/cansinacarer/my-base-saas-flask
-```
-
-Then you can fetch and merge:
-
-```sh
-git fetch upstream
-git merge upstream/main
-```
-
-#### 📄 Developer Documentation
-
-- [Development](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html)
-  - [Code Quality, Conventional Commits, and Releases](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#code-quality-conventional-commits-and-releases)
-  - [Developing in Dev Containers](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#developing-in-dev-containers)
-    - [Local Endpoints Served by the Dev Containers](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#local-endpoints-served-by-the-dev-containers)
-    - [Debugging](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#debugging)
-    - [Testing Stripe Webhooks](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#testing-stripe-webhooks)
-  - [Developing in a Virtual Environment](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#developing-in-a-virtual-environment)
-  - [Database Model](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#database-model)
-  - [How to Build On Top of This App](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#how-to-build-on-top-of-this-app)
-    - [Adding New Pages](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#adding-new-pages)
-    - [Defining More Configuration Variables](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#defining-more-configuration-variables)
-    - [Updating Dependencies](https://cansinacarer.github.io/My-Base-SaaS-Flask/development.html#updating-dependencies)
-- [Continuous Integration and Continuous Deployment](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html)
-  - [Pre-Commit Hooks](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#pre-commit-hooks)
-  - [Run Tests](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#run-tests)
-  - [Semantic Release](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#semantic-release)
-  - [Build & Deploy](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#build-deploy)
-  - [Build & Deploy Sphinx Docs](https://cansinacarer.github.io/My-Base-SaaS-Flask/ci-cd.html#build-deploy-sphinx-docs)
-- [Deployment to Production](https://cansinacarer.github.io/My-Base-SaaS-Flask/deployment.html)
-  - [A Pitfall for Cloudflare Proxy](https://cansinacarer.github.io/My-Base-SaaS-Flask/deployment.html#a-pitfall-for-cloudflare-proxy)
-- [Auto Generated Documentation](https://cansinacarer.github.io/My-Base-SaaS-Flask/autoapi/index.html)
-
-### 2. [File Intake Service](https://github.com/cansinacarer/maillistshield-file-intake-service)
-
-This microservice runs a monitoring loop to check the `/validation/uploaded` directory on the S3 bucket and the `Jobs` table in the database for matching job records.
-
-When a new file and a corresponding job is found, this service performs the following tasks:
-
-- Remove all columns except email,
-- Remove empty rows,
-- Rename the email column as "Email",
-- Count the rows and record it into the job record in the database,
-- Deduct credits based on the record count in the cleaned up file,
-- Create a standardized version of the file in `/validation/in-progress` in the S3 bucket.
-
-This loop can be paused by setting an environment variable: `PAUSE=True`.
-
-__Job States:__
-
-- Expected before:
-  - `pending_start`
-- Error states
-  - `error_too_old` : file deleted because it has been here too long
-  - `error_df` : file could not be read
-  - `error_column_count` : user did not select a column name but we detect more than 1 column
-  - `error_insufficient_credits` :  User didn't have enough credits to process the file.
-- Success state:
-  - `file_accepted`
-
-#### Clean up of orphan files
-
-If a file is found but a corresponding job is not found, there is a retention period to allow for delays in database update. This retention period is declared in seconds with the environment variable `RETENTION_PERIOD_FOR_ORPHAN_FILES`. If there is no job record found in the database for a file found on the S3 bucket at the end of the retention period, the file is deleted.
-
-### 3. [File to Validation Queue Publisher](https://github.com/cansinacarer/maillistshield-file-to-validation-queue-publisher)
-
-This microservice monitors the S3 bucket for cleaned, standardized files. When a file is found, its rows are queued in a RabbitMQ Queue at `RABBITMQ_DEFAULT_VHOSTS[0]`. The queued files are moved to `validation/queued`.
-
-__Job States:__
-
-- Expected before:
-  - `file_accepted`
-- Error states
-  - `error_?`
-- Success state:
-  - `file_queued`
-
-### 4. [Email Validation Worker](https://github.com/cansinacarer/maillistshield-validation-worker)
-
-This service performs the email validation. It takes API requests with an API key and responds with the validation result JSON shown on the SaaS home page.
-
-#### Deployment note for the validation worker
-
-This service should be deployed in multiple servers in different IP blocks (preferably in different regions) because the success of the validation depends on the IP reputation determined by the email service providers. A worker in one server might return an unknown result while another instance that is deployed on a server with a different IP reputation can find a valid result.
-
-The other services that use this worker can try multiple workers and use the best result.
-
-__Job States:__
-
-This service does not change the job state, because it only works with individual email addresses and is unaware of files.
-
-### 5. [Validation Orchestrator](https://github.com/cansinacarer/maillistshield-validation-orchestrator)
-
-This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]` and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are consumed and bundled into a final results file.
-
-__Job States:__
-
-This service does not change the job state in the database. The progress of a file is tracked using the number of messages in the queue for that file at vhost `RABBITMQ_DEFAULT_VHOSTS[1]`.
-
-### 6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
-
-This service monitors the results queues at vhost `RABBITMQ_DEFAULT_VHOSTS[1]` and when a queue at this vhost has the expected number of messages (i.e. `row_count` attribute of the queue), the messages from this queue are consumed and bundled into a final results file.
-
-Tasks of this service include the following:
-
-- List all the queues and their message
-  - If a queue has as many messages as its row_count, process it:
-    - Create the output file,
-    - Update in database:
-      - Status
-      - Results file
-    - Delete the queue
-  - Else, update `last_pick_row` in the `BatchJobs` table with message count.
-
-__Job States:__
-
-- Expected before:
-  - `file_queued`
-- Progress while the file rows have begun being processed
-  - `file_validation_in_progress`
-- Error states
-  - `error_?`
-- Success state:
-  - `file_completed`
