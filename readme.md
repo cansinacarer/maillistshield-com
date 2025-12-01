@@ -355,9 +355,3 @@ __Job States:__
   - `error_?`
 - Success state:
   - `file_completed`
-
----
-
-### [Initial Tests & Notes](https://github.com/cansinacarer/email-verification-test)
-
-### [File Processor OLD](https://github.com/cansinacarer/maillistshield-scheduler)
