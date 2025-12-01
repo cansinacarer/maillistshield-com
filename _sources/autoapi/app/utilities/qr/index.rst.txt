@@ -3,6 +3,14 @@ app.utilities.qr
 
 .. py:module:: app.utilities.qr
 
+.. autoapi-nested-parse::
+
+   QR code generation utilities for the Mail List Shield application.
+
+   This module provides functions for generating QR codes, primarily used
+   for two-factor authentication setup.
+
+
 
 Functions
 ---------
@@ -16,4 +24,15 @@ Module Contents
 ---------------
 
 .. py:function:: qrcode_img_src(qr_string)
+
+   Generate a base64-encoded QR code image as a data URI.
+
+   Creates a QR code from the given string and returns it as a
+   base64-encoded PNG image suitable for use in an HTML img src attribute.
+
+   :param qr_string: The string to encode in the QR code.
+
+   :returns: A data URI string containing the base64-encoded PNG image.
+   :rtype: str
+
 

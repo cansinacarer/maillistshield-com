@@ -3,6 +3,14 @@ app.utilities.validation
 
 .. py:module:: app.utilities.validation
 
+.. autoapi-nested-parse::
+
+   Email validation utilities for the Mail List Shield application.
+
+   This module handles email validation by distributing requests across
+   multiple worker servers using a round-robin strategy.
+
+
 
 Functions
 ---------
@@ -18,5 +26,27 @@ Module Contents
 
 .. py:function:: validate_email(email)
 
+   Validate an email address using available worker servers.
+
+   Distributes validation requests across workers using round-robin.
+   If a worker returns an 'unknown' status, tries the next worker.
+
+   :param email: The email address to validate.
+
+   :returns: Validation result containing status and details.
+   :rtype: dict
+
+   :raises Exception: If no worker could provide a valid response.
+
+
 .. py:function:: request_validation(email, worker)
+
+   Send a validation request to a specific worker server.
+
+   :param email: The email address to validate.
+   :param worker: The URL of the worker server.
+
+   :returns: The JSON response from the worker, or None on failure.
+   :rtype: dict
+
 

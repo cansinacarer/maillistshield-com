@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,14 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.views_auth</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Python modules</span>
+<span></span><span class="sd">&quot;&quot;&quot;Authentication views and routes for the Mail List Shield application.</span>
+
+<span class="sd">This module defines the authentication-related routes including login,</span>
+<span class="sd">registration, logout, password reset, email confirmation, two-factor</span>
+<span class="sd">authentication, and Google OAuth integration.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Python modules</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
@@ -573,13 +580,16 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="load_user">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.load_user">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is used to load the user object from the user ID stored in the session.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a user from the database by ID.</span>
+
+<span class="sd">    This function is used by Flask-Login to reload the user object</span>
+<span class="sd">    from the user ID stored in the session.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        user_id (str): The ID of the user to load.</span>
+<span class="sd">        user_id: The ID of the user to load.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Users: The user object from the db corresponding to the user ID.</span>
+<span class="sd">        Users: The user object from the database corresponding to the user ID.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Users</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span></div>
 
@@ -589,9 +599,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="unauthorized_callback">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.unauthorized_callback">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unauthorized_callback</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is used to handle unauthorized access to protected routes.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle unauthorized access to protected routes.</span>
 
-<span class="sd">    403 cases will be redirected to login</span>
+<span class="sd">    Redirects unauthenticated users to the login page with the</span>
+<span class="sd">    original destination preserved in the next parameter.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: Redirect to the login page.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;/login?next=&quot;</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span></div>
 
@@ -601,7 +615,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="logout">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.logout">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function is used to log out the user and redirect them to the login page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Log out the current user and redirect to the login page.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: Redirect to the login page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">logout_user</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;auth_bp.login&quot;</span><span class="p">))</span></div>
 
@@ -612,7 +630,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="register">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.register">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the registration page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the registration page.</span>
+
+<span class="sd">    Handles new user registration with reCAPTCHA verification.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The registration form or redirect to email confirmation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Don&#39;t allow logged in users here</span>
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
@@ -699,7 +723,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="login">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.login">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the login page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the login page.</span>
+
+<span class="sd">    Handles user authentication with optional Google OAuth and reCAPTCHA.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The login form or redirect to dashboard/two-factor auth.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Don&#39;t allow logged in users here</span>
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
@@ -784,7 +814,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="two_factor">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.two_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">two_factor</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the two factor authentication page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the two-factor authentication page.</span>
+
+<span class="sd">    Verifies TOTP codes for users with two-factor authentication enabled.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The two-factor form or redirect to dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Don&#39;t allow logged in users here</span>
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
@@ -849,7 +885,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="email_confirmation_by_code">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.email_confirmation_by_code">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">email_confirmation_by_code</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the email verification page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the email verification page.</span>
+
+<span class="sd">    Handles verification code entry and validation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The email confirmation form or redirect to dashboard.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">codeMatched</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -914,7 +956,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="password_reset">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.password_reset">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">password_reset</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the password reset page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the password reset page.</span>
+
+<span class="sd">    Initiates the password reset process by sending a reset email.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The password reset form or redirect to confirmation page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Declare the form</span>
     <span class="n">form</span> <span class="o">=</span> <span class="n">ResetPassword</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">)</span>
@@ -941,7 +989,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="password_reset_requested">
 <a class="viewcode-back" href="../../autoapi/app/views_auth/index.html#app.views_auth.password_reset_requested">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">password_reset_requested</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the password reset requested page.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the password reset requested page.</span>
+
+<span class="sd">    Shows a confirmation message after a password reset request.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The password reset requested confirmation page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
         <span class="s2">&quot;public/auth/password-reset-requested.html&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">current_user</span>
@@ -956,8 +1010,13 @@ window.addEventListener("load", load);
 <span class="k">def</span><span class="w"> </span><span class="nf">set_new_password</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the set new password page.</span>
 
+<span class="sd">    Validates the reset token and allows the user to set a new password.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        token (str): The token from the forgot password email, used to verify the user.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The new password form or redirect to login.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
@@ -995,8 +1054,10 @@ window.addEventListener("load", load);
 <span class="k">def</span><span class="w"> </span><span class="nf">get_google_sso_config</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the Google SSO configuration.</span>
 
+<span class="sd">    Fetches the OpenID Connect discovery document from Google.</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        dict: The Google SSO configuration.</span>
+<span class="sd">        dict: The Google SSO configuration including endpoints.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
         <span class="s2">&quot;https://accounts.google.com/.well-known/openid-configuration&quot;</span>
@@ -1012,6 +1073,10 @@ window.addEventListener("load", load);
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the Google login callback.</span>
 
 <span class="sd">    This is the page that Google redirects to after the Google authentication attempt.</span>
+<span class="sd">    Handles both existing users logging in and new user registration via Google OAuth.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: Redirect to dashboard or login page based on authentication result.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Don&#39;t allow logged in users here</span>

@@ -3,6 +3,14 @@ app.forms
 
 .. py:module:: app.forms
 
+.. autoapi-nested-parse::
+
+   WTForms form definitions for the Mail List Shield application.
+
+   This module defines Flask-WTF form classes for user authentication,
+   profile management, and API key creation.
+
+
 
 Classes
 -------
@@ -27,6 +35,17 @@ Module Contents
    Bases: :py:obj:`flask_wtf.FlaskForm`
 
 
+   Form for user login.
+
+   .. attribute:: email
+
+      Email address field with validation.
+
+   .. attribute:: password
+
+      Password field with validation.
+
+
    .. py:attribute:: email
 
 
@@ -36,6 +55,29 @@ Module Contents
 .. py:class:: RegisterForm
 
    Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Form for new user registration.
+
+   .. attribute:: email
+
+      Email address field with validation.
+
+   .. attribute:: password
+
+      Password field with validation.
+
+   .. attribute:: firstName
+
+      First name field (required).
+
+   .. attribute:: lastName
+
+      Last name field (optional).
+
+   .. attribute:: newsletter
+
+      Newsletter subscription checkbox.
 
 
    .. py:attribute:: email
@@ -56,6 +98,15 @@ Module Contents
 .. py:class:: EmailConfirmationForm
 
    Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Form for email confirmation code entry.
+
+   Contains 6 individual fields for each digit of the confirmation code.
+
+   .. attribute:: code0-code5
+
+      Individual digit fields for the 6-digit confirmation code.
 
 
    .. py:attribute:: code0
@@ -81,6 +132,13 @@ Module Contents
    Bases: :py:obj:`flask_wtf.FlaskForm`
 
 
+   Form for requesting a password reset.
+
+   .. attribute:: email
+
+      Email address field for the account to reset.
+
+
    .. py:attribute:: email
 
 
@@ -89,12 +147,34 @@ Module Contents
    Bases: :py:obj:`flask_wtf.FlaskForm`
 
 
+   Form for setting a new password after reset.
+
+   .. attribute:: password
+
+      New password field with validation.
+
+
    .. py:attribute:: password
 
 
 .. py:class:: ProfileDetailsForm
 
    Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Form for updating user profile details.
+
+   .. attribute:: firstName
+
+      First name field (required).
+
+   .. attribute:: lastName
+
+      Last name field (optional).
+
+   .. attribute:: newsletter
+
+      Newsletter subscription checkbox.
 
 
    .. py:attribute:: firstName
@@ -109,6 +189,15 @@ Module Contents
 .. py:class:: TwoFactorAuthenticationForm
 
    Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Form for two-factor authentication code entry.
+
+   Contains 6 individual fields for each digit of the TOTP code.
+
+   .. attribute:: code0-code5
+
+      Individual digit fields for the 6-digit TOTP code.
 
 
    .. py:attribute:: code0
@@ -132,6 +221,21 @@ Module Contents
 .. py:class:: CreateAPIKeyForm
 
    Bases: :py:obj:`flask_wtf.FlaskForm`
+
+
+   Form for creating a new API key.
+
+   .. attribute:: label
+
+      Optional label for identifying the API key.
+
+   .. attribute:: expires_at
+
+      Optional expiration date for the key.
+
+   .. attribute:: submit
+
+      Submit button.
 
 
    .. py:attribute:: label

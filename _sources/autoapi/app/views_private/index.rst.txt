@@ -3,6 +3,15 @@ app.views_private
 
 .. py:module:: app.views_private
 
+.. autoapi-nested-parse::
+
+   Private views and routes for authenticated users.
+
+   This module defines the routes that require authentication, including
+   the user dashboard, billing, account settings, API key management,
+   admin pages, and webhook endpoints.
+
+
 
 Attributes
 ----------
@@ -49,13 +58,20 @@ Module Contents
    :returns: A JSON response indicating success or failure.
    :rtype: Response
 
-   Webhook endpoints for external services to give us updates.
-   Currently, this endpoint is used to receive webhook events from Stripe.
+   .. note::
+
+      Webhook endpoints for external services to give us updates.
+      Currently, this endpoint is used to receive webhook events from Stripe.
 
 
 .. py:function:: api_keys(path)
 
    The view function for the page for managing API keys.
+
+   :param path: The sub-path for API key actions ('create', 'revoke', or 'api-keys').
+
+   :returns: The rendered template or JSON response for the action.
+   :rtype: Response
 
 
 .. py:function:: billing(path)
@@ -82,7 +98,7 @@ Module Contents
 
 .. py:function:: admin(path)
 
-   The view function for the admin privilaged pages' routing.
+   The view function for the admin privileged pages' routing.
 
    path:path is used to catch all paths, including those with multiple slashes (/)
 

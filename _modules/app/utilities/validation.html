@@ -17,8 +17,8 @@
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,15 +515,34 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.utilities.validation</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span></span><span class="sd">&quot;&quot;&quot;Email validation utilities for the Mail List Shield application.</span>
+
+<span class="sd">This module handles email validation by distributing requests across</span>
+<span class="sd">multiple worker servers using a round-robin strategy.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">current_app</span>
 
 
-<span class="c1"># Distribute traffic to workers with round robin</span>
 <div class="viewcode-block" id="validate_email">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/validation/index.html#app.utilities.validation.validate_email">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate an email address using available worker servers.</span>
+
+<span class="sd">    Distributes validation requests across workers using round-robin.</span>
+<span class="sd">    If a worker returns an &#39;unknown&#39; status, tries the next worker.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        email: The email address to validate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Validation result containing status and details.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If no worker could provide a valid response.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">workers</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKERS&quot;</span><span class="p">]</span>
     <span class="n">first_worker_index</span> <span class="o">=</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;NEXT_WORKER&quot;</span><span class="p">]</span>
     <span class="n">best_result_so_far</span> <span class="o">=</span> <span class="p">{}</span>
@@ -571,6 +590,15 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="request_validation">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/validation/index.html#app.utilities.validation.request_validation">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">request_validation</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">worker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Send a validation request to a specific worker server.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        email: The email address to validate.</span>
+<span class="sd">        worker: The URL of the worker server.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The JSON response from the worker, or None on failure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
         <span class="s2">&quot;api_key&quot;</span><span class="p">:</span> <span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;MLS_WORKER_API_KEY&quot;</span><span class="p">],</span>

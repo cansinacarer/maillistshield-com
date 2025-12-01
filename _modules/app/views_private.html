@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,14 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.views_private</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Flask modules</span>
+<span></span><span class="sd">&quot;&quot;&quot;Private views and routes for authenticated users.</span>
+
+<span class="sd">This module defines the routes that require authentication, including</span>
+<span class="sd">the user dashboard, billing, account settings, API key management,</span>
+<span class="sd">admin pages, and webhook endpoints.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Flask modules</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Blueprint</span><span class="p">,</span>
     <span class="n">render_template</span><span class="p">,</span>
@@ -612,8 +619,9 @@ window.addEventListener("load", load);
 <span class="sd">    Returns:</span>
 <span class="sd">        Response: A JSON response indicating success or failure.</span>
 
-<span class="sd">    Webhook endpoints for external services to give us updates.</span>
-<span class="sd">    Currently, this endpoint is used to receive webhook events from Stripe.</span>
+<span class="sd">    Note:</span>
+<span class="sd">        Webhook endpoints for external services to give us updates.</span>
+<span class="sd">        Currently, this endpoint is used to receive webhook events from Stripe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
@@ -663,7 +671,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="api_keys">
 <a class="viewcode-back" href="../../autoapi/app/views_private/index.html#app.views_private.api_keys">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">api_keys</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the page for managing API keys.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the page for managing API keys.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: The sub-path for API key actions (&#39;create&#39;, &#39;revoke&#39;, or &#39;api-keys&#39;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The rendered template or JSON response for the action.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Redirect to email confirmation</span>
     <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">email_confirmed</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
@@ -1124,7 +1139,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="admin">
 <a class="viewcode-back" href="../../autoapi/app/views_private/index.html#app.views_private.admin">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">admin</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the admin privilaged pages&#39; routing.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The view function for the admin privileged pages&#39; routing.</span>
 
 <span class="sd">    path:path is used to catch all paths, including those with multiple slashes (/)</span>
 

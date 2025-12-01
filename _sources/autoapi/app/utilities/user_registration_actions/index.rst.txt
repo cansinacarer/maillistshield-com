@@ -3,6 +3,14 @@ app.utilities.user_registration_actions
 
 .. py:module:: app.utilities.user_registration_actions
 
+.. autoapi-nested-parse::
+
+   User registration actions for the Mail List Shield application.
+
+   This module contains actions that are performed when a new user
+   confirms their email address.
+
+
 
 Functions
 ---------
@@ -16,4 +24,12 @@ Module Contents
 ---------------
 
 .. py:function:: new_user_actions_for_email_confirmed(user)
+
+   Perform setup actions for a newly email-confirmed user.
+
+   This function is called when a user confirms their email address
+   for the first time. It sets up their account resources.
+
+   :param user: The user object whose email was just confirmed.
+
 

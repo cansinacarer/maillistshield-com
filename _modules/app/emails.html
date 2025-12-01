@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,14 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.emails</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span><span class="p">,</span> <span class="n">timedelta</span>
+<span></span><span class="sd">&quot;&quot;&quot;Email sending utilities for the Mail List Shield application.</span>
+
+<span class="sd">This module provides functions for sending various types of emails</span>
+<span class="sd">including password reset, email verification, and subscription notifications.</span>
+<span class="sd">All emails are sent asynchronously to avoid blocking the main thread.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">itsdangerous</span><span class="w"> </span><span class="kn">import</span> <span class="n">URLSafeTimedSerializer</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">flash</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">current_app</span>
@@ -533,8 +540,7 @@ window.addEventListener("load", load);
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Send an email with the password reset link.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        email (str): The email address of the user.</span>
-
+<span class="sd">        email: The email address of the user.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Tokenize the email address</span>
@@ -571,8 +577,11 @@ window.addEventListener("load", load);
 <span class="k">def</span><span class="w"> </span><span class="nf">send_email_with_code</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Send an email with the verification code.</span>
 
+<span class="sd">    Implements rate limiting: only sends if at least 60 seconds have passed</span>
+<span class="sd">    since the last email, and limits total emails to 5.</span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        user (Users): The user object.</span>
+<span class="sd">        user: The user object from the database.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># If last confirmation email was sent more than 60 seconds ago</span>
@@ -630,8 +639,8 @@ window.addEventListener("load", load);
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Send an email with the paid subscription confirmation.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        user (Users): The user object.</span>
-<span class="sd">        tier_name (str): The name of the subscription tier.</span>
+<span class="sd">        user: The user object from the database.</span>
+<span class="sd">        tier_name: The name of the subscription tier.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Email with this information:</span>
@@ -665,9 +674,9 @@ window.addEventListener("load", load);
 <span class="sd">    is still active until the end of the billing period.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        user (Users): The user object.</span>
-<span class="sd">        tier_name (str): The name of the subscription tier.</span>
-<span class="sd">        cancellation_date (datetime): The date of cancellation.</span>
+<span class="sd">        user: The user object from the database.</span>
+<span class="sd">        tier_name: The name of the subscription tier.</span>
+<span class="sd">        cancellation_date: The date of cancellation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Email with this information:</span>
     <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="s2">&quot;Subscription Canceled&quot;</span><span class="p">)</span>
@@ -701,8 +710,8 @@ window.addEventListener("load", load);
 <span class="sd">    This is the email sent when the subscription has ended.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        user (Users): The user object.</span>
-<span class="sd">        tier_name (str): The name of the subscription tier.</span>
+<span class="sd">        user: The user object from the database.</span>
+<span class="sd">        tier_name: The name of the subscription tier.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Email with this information:</span>
@@ -727,7 +736,6 @@ window.addEventListener("load", load);
 
 
 
-<span class="c1"># Async emailing - all information is passed in an instance of the Message object</span>
 <span class="nd">@asyncr</span>
 <div class="viewcode-block" id="send_async_email">
 <a class="viewcode-back" href="../../autoapi/app/emails/index.html#app.emails.send_async_email">[docs]</a>
@@ -735,8 +743,8 @@ window.addEventListener("load", load);
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Send an email asynchronously.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        msg (Message): The Message object containing email details.</span>
-<span class="sd">        app (Flask): The Flask application instance.</span>
+<span class="sd">        msg: The Message object containing email details.</span>
+<span class="sd">        app: The Flask application instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
         <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>

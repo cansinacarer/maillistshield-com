@@ -155,6 +155,10 @@
              
   <section id="module-app.emails">
 <span id="app-emails"></span><h1>app.emails<a class="headerlink" href="#module-app.emails" title="Link to this heading"></a></h1>
+<p>Email sending utilities for the Mail List Shield application.</p>
+<p>This module provides functions for sending various types of emails
+including password reset, email verification, and subscription notifications.
+All emails are sent asynchronously to avoid blocking the main thread.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -188,7 +192,7 @@
 <dd><p>Send an email with the password reset link.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>email</strong> (<em>str</em>) – The email address of the user.</p>
+<dd class="field-odd"><p><strong>email</strong> – The email address of the user.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -197,9 +201,11 @@
 <dt class="sig sig-object py" id="app.emails.send_email_with_code">
 <span class="sig-prename descclassname"><span class="pre">app.emails.</span></span><span class="sig-name descname"><span class="pre">send_email_with_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/emails.html#send_email_with_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.emails.send_email_with_code" title="Link to this definition"></a></dt>
 <dd><p>Send an email with the verification code.</p>
+<p>Implements rate limiting: only sends if at least 60 seconds have passed
+since the last email, and limits total emails to 5.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user</strong> (<a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users"><em>Users</em></a>) – The user object.</p>
+<dd class="field-odd"><p><strong>user</strong> – The user object from the database.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -211,8 +217,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users"><em>Users</em></a>) – The user object.</p></li>
-<li><p><strong>tier_name</strong> (<em>str</em>) – The name of the subscription tier.</p></li>
+<li><p><strong>user</strong> – The user object from the database.</p></li>
+<li><p><strong>tier_name</strong> – The name of the subscription tier.</p></li>
 </ul>
 </dd>
 </dl>
@@ -227,9 +233,9 @@ is still active until the end of the billing period.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users"><em>Users</em></a>) – The user object.</p></li>
-<li><p><strong>tier_name</strong> (<em>str</em>) – The name of the subscription tier.</p></li>
-<li><p><strong>cancellation_date</strong> (<em>datetime</em>) – The date of cancellation.</p></li>
+<li><p><strong>user</strong> – The user object from the database.</p></li>
+<li><p><strong>tier_name</strong> – The name of the subscription tier.</p></li>
+<li><p><strong>cancellation_date</strong> – The date of cancellation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -243,8 +249,8 @@ is still active until the end of the billing period.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users"><em>Users</em></a>) – The user object.</p></li>
-<li><p><strong>tier_name</strong> (<em>str</em>) – The name of the subscription tier.</p></li>
+<li><p><strong>user</strong> – The user object from the database.</p></li>
+<li><p><strong>tier_name</strong> – The name of the subscription tier.</p></li>
 </ul>
 </dd>
 </dl>
@@ -257,8 +263,8 @@ is still active until the end of the billing period.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>msg</strong> (<em>Message</em>) – The Message object containing email details.</p></li>
-<li><p><strong>app</strong> (<em>Flask</em>) – The Flask application instance.</p></li>
+<li><p><strong>msg</strong> – The Message object containing email details.</p></li>
+<li><p><strong>app</strong> – The Flask application instance.</p></li>
 </ul>
 </dd>
 </dl>

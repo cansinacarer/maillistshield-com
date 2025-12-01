@@ -3,6 +3,15 @@ app.views
 
 .. py:module:: app.views
 
+.. autoapi-nested-parse::
+
+   Public views and routes for the Mail List Shield application.
+
+   This module defines the public-facing routes including the landing page,
+   email validation endpoints, and error handlers. It also configures
+   rate limiting for the application.
+
+
 
 Attributes
 ----------
@@ -19,9 +28,9 @@ Functions
 .. autoapisummary::
 
    app.views.load_user
-   app.views.page_not_found
-   app.views.page_not_found
-   app.views.page_not_found
+   app.views.forbidden_error
+   app.views.not_found_error
+   app.views.method_not_allowed_error
    app.views.rate_limited
    app.views.server_error
    app.views.is_user_logged_in
@@ -39,30 +48,125 @@ Module Contents
 
 .. py:function:: load_user(user_id)
 
-.. py:function:: page_not_found(e)
+   Load a user from the database by ID.
 
-.. py:function:: page_not_found(e)
+   This callback is used by Flask-Login to reload the user object
+   from the user ID stored in the session.
 
-.. py:function:: page_not_found(e)
+   :param user_id: The ID of the user to load.
+
+   :returns: The user object, or None if not found.
+   :rtype: Users
+
+
+.. py:function:: forbidden_error(e)
+
+   Handle 403 Forbidden errors.
+
+   :param e: The exception that triggered the error.
+
+   :returns: Error page response and status code.
+   :rtype: tuple
+
+
+.. py:function:: not_found_error(e)
+
+   Handle 404 Not Found errors.
+
+   :param e: The exception that triggered the error.
+
+   :returns: Error page response and status code.
+   :rtype: tuple
+
+
+.. py:function:: method_not_allowed_error(e)
+
+   Handle 405 Method Not Allowed errors.
+
+   :param e: The exception that triggered the error.
+
+   :returns: Error page response and status code.
+   :rtype: tuple
+
 
 .. py:function:: rate_limited(e)
 
+   Handle 429 Too Many Requests errors.
+
+   :param e: The exception that triggered the error.
+
+   :returns: Error page response and status code.
+   :rtype: tuple
+
+
 .. py:function:: server_error(e)
+
+   Handle 500 Internal Server errors.
+
+   :param e: The exception that triggered the error.
+
+   :returns: Error page response and status code.
+   :rtype: tuple
+
 
 .. py:data:: limiter
 
 .. py:function:: is_user_logged_in()
 
+   Check if the current user is authenticated.
+
+   :returns: True if the user is logged in, False otherwise.
+   :rtype: bool
+
+
 .. py:function:: favicon()
 
    Serve the favicon.ico file.
 
+   :returns: The favicon file from static assets.
+   :rtype: Response
+
 
 .. py:function:: robots()
 
+   Serve the robots.txt file for web crawlers.
+
+   :returns: A text response with crawler directives.
+   :rtype: Response
+
+
 .. py:function:: validate_file(path)
 
+   Handle batch file validation uploads and job creation.
+
+   Provides endpoints for getting signed upload URLs and recording
+   batch job details after file upload.
+
+   :param path: The sub-path determining the action:
+                - 'getSignedRequest': Returns a signed URL for file upload.
+                - 'recordBatchFileDetails': Records job details after upload.
+
+   :returns: JSON response with signed URL or job confirmation.
+   :rtype: Response
+
+
 .. py:function:: validate()
+
+   Validate a single email address.
+
+   Processes email validation requests from the web interface.
+   Anonymous users are limited to 5 validations per day.
+   Authenticated users must have confirmed email and available credits.
+
+   :returns:
+
+             Validation result and HTTP status code.
+                 - 200: Successful validation with result data.
+                 - 402: Insufficient credits.
+                 - 403: Email not confirmed.
+                 - 500: Server error.
+   :rtype: tuple
+
 
 .. py:function:: index(path)
 

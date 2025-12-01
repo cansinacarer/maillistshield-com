@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,14 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.views</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">jsonify</span>
+<span></span><span class="sd">&quot;&quot;&quot;Public views and routes for the Mail List Shield application.</span>
+
+<span class="sd">This module defines the public-facing routes including the landing page,</span>
+<span class="sd">email validation endpoints, and error handlers. It also configures</span>
+<span class="sd">rate limiting for the application.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">current_app</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">jsonify</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask_login</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">current_user</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask_limiter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Limiter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask_limiter.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_remote_address</span>
@@ -540,26 +547,67 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="load_user">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.load_user">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a user from the database by ID.</span>
+
+<span class="sd">    This callback is used by Flask-Login to reload the user object</span>
+<span class="sd">    from the user ID stored in the session.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        user_id: The ID of the user to load.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Users: The user object, or None if not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Users</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span></div>
 
 
 
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<div class="viewcode-block" id="forbidden_error">
+<a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.forbidden_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">forbidden_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 403 Forbidden errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        e: The exception that triggered the error.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Error page response and status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR 403: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span></div>
+
 
 
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<div class="viewcode-block" id="not_found_error">
+<a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.not_found_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">not_found_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 404 Not Found errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        e: The exception that triggered the error.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Error page response and status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR 404: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span></div>
+
 
 
 <span class="nd">@public_bp</span><span class="o">.</span><span class="n">errorhandler</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span>
-<div class="viewcode-block" id="page_not_found">
-<a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.page_not_found">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">page_not_found</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<div class="viewcode-block" id="method_not_allowed_error">
+<a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.method_not_allowed_error">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">method_not_allowed_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 405 Method Not Allowed errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        e: The exception that triggered the error.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Error page response and status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR 405: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span></div>
 
@@ -569,6 +617,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="rate_limited">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.rate_limited">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rate_limited</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 429 Too Many Requests errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        e: The exception that triggered the error.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Error page response and status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR 429: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">429</span><span class="p">)</span></div>
 
@@ -578,6 +634,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="server_error">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.server_error">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">server_error</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle 500 Internal Server errors.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        e: The exception that triggered the error.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Error page response and status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR 500: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">error_page</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span></div>
 
@@ -598,6 +662,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="is_user_logged_in">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.is_user_logged_in">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_user_logged_in</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the current user is authenticated.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the user is logged in, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_authenticated</span></div>
 
 
@@ -607,8 +676,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="favicon">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.favicon">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">favicon</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve the favicon.ico file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve the favicon.ico file.</span>
 
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: The favicon file from static assets.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">current_app</span><span class="o">.</span><span class="n">send_static_file</span><span class="p">(</span><span class="s2">&quot;media/favicon.ico&quot;</span><span class="p">)</span></div>
 
 
@@ -617,8 +689,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="robots">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.robots">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">robots</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve the robots.txt file for web crawlers.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: A text response with crawler directives.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Response</span><span class="p">(</span>
-        <span class="s2">&quot;User-agent: *</span><span class="se">\n</span><span class="s2">Disallow: /&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;User-agent: *</span><span class="se">\n</span><span class="s2">Allow: /&quot;</span><span class="p">,</span>
         <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
     <span class="p">)</span></div>
 
@@ -631,6 +708,19 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="validate_file">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.validate_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_file</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle batch file validation uploads and job creation.</span>
+
+<span class="sd">    Provides endpoints for getting signed upload URLs and recording</span>
+<span class="sd">    batch job details after file upload.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: The sub-path determining the action:</span>
+<span class="sd">            - &#39;getSignedRequest&#39;: Returns a signed URL for file upload.</span>
+<span class="sd">            - &#39;recordBatchFileDetails&#39;: Records job details after upload.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: JSON response with signed URL or job confirmation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
         <span class="c1"># Authorize front end to upload to the bucket</span>
         <span class="k">case</span> <span class="s2">&quot;getSignedRequest&quot;</span><span class="p">:</span>
@@ -662,6 +752,19 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="validate">
 <a class="viewcode-back" href="../../autoapi/app/views/index.html#app.views.validate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate a single email address.</span>
+
+<span class="sd">    Processes email validation requests from the web interface.</span>
+<span class="sd">    Anonymous users are limited to 5 validations per day.</span>
+<span class="sd">    Authenticated users must have confirmed email and available credits.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Validation result and HTTP status code.</span>
+<span class="sd">            - 200: Successful validation with result data.</span>
+<span class="sd">            - 402: Insufficient credits.</span>
+<span class="sd">            - 403: Email not confirmed.</span>
+<span class="sd">            - 500: Server error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Grab the email from the request</span>
     <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
 

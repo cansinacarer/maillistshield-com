@@ -156,15 +156,18 @@
              
   <section id="module-app.utilities.validation">
 <span id="app-utilities-validation"></span><h1>app.utilities.validation<a class="headerlink" href="#module-app.utilities.validation" title="Link to this heading"></a></h1>
+<p>Email validation utilities for the Mail List Shield application.</p>
+<p>This module handles email validation by distributing requests across
+multiple worker servers using a round-robin strategy.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.validation.validate_email" title="app.utilities.validation.validate_email"><code class="xref py py-obj docutils literal notranslate"><span class="pre">validate_email</span></code></a>(email)</p></td>
-<td><p></p></td>
+<td><p>Validate an email address using available worker servers.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.utilities.validation.request_validation" title="app.utilities.validation.request_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">request_validation</span></code></a>(email, worker)</p></td>
-<td><p></p></td>
+<td><p>Send a validation request to a specific worker server.</p></td>
 </tr>
 </tbody>
 </table>
@@ -174,12 +177,44 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.validation.validate_email">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.validation.</span></span><span class="sig-name descname"><span class="pre">validate_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/validation.html#validate_email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.validation.validate_email" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Validate an email address using available worker servers.</p>
+<p>Distributes validation requests across workers using round-robin.
+If a worker returns an ‘unknown’ status, tries the next worker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>email</strong> – The email address to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Validation result containing status and details.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If no worker could provide a valid response.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.validation.request_validation">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.validation.</span></span><span class="sig-name descname"><span class="pre">request_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worker</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/validation.html#request_validation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.validation.request_validation" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Send a validation request to a specific worker server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email</strong> – The email address to validate.</p></li>
+<li><p><strong>worker</strong> – The URL of the worker server.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The JSON response from the worker, or None on failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

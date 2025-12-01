@@ -156,12 +156,14 @@
              
   <section id="module-app.utilities.error_handlers">
 <span id="app-utilities-error-handlers"></span><h1>app.utilities.error_handlers<a class="headerlink" href="#module-app.utilities.error_handlers" title="Link to this heading"></a></h1>
+<p>Error handling utilities for the Mail List Shield application.</p>
+<p>This module provides functions for rendering error pages.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.error_handlers.error_page" title="app.utilities.error_handlers.error_page"><code class="xref py py-obj docutils literal notranslate"><span class="pre">error_page</span></code></a>(code)</p></td>
-<td><p></p></td>
+<td><p>Render an error page for the given HTTP status code.</p></td>
 </tr>
 </tbody>
 </table>
@@ -171,7 +173,19 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.error_handlers.error_page">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.error_handlers.</span></span><span class="sig-name descname"><span class="pre">error_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/error_handlers.html#error_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.error_handlers.error_page" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Render an error page for the given HTTP status code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> – The HTTP status code (e.g., 404, 500).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing (rendered_template, status_code).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

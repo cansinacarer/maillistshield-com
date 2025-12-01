@@ -155,33 +155,36 @@
              
   <section id="module-app.forms">
 <span id="app-forms"></span><h1>app.forms<a class="headerlink" href="#module-app.forms" title="Link to this heading"></a></h1>
+<p>WTForms form definitions for the Mail List Shield application.</p>
+<p>This module defines Flask-WTF form classes for user authentication,
+profile management, and API key creation.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.forms.LoginForm" title="app.forms.LoginForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoginForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for user login.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.forms.RegisterForm" title="app.forms.RegisterForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RegisterForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for new user registration.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.forms.EmailConfirmationForm" title="app.forms.EmailConfirmationForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EmailConfirmationForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for email confirmation code entry.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.forms.ResetPassword" title="app.forms.ResetPassword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResetPassword</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for requesting a password reset.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.forms.SetNewPassword" title="app.forms.SetNewPassword"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetNewPassword</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for setting a new password after reset.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.forms.ProfileDetailsForm" title="app.forms.ProfileDetailsForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProfileDetailsForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for updating user profile details.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.forms.TwoFactorAuthenticationForm" title="app.forms.TwoFactorAuthenticationForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TwoFactorAuthenticationForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for two-factor authentication code entry.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.forms.CreateAPIKeyForm" title="app.forms.CreateAPIKeyForm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CreateAPIKeyForm</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Form for creating a new API key.</p></td>
 </tr>
 </tbody>
 </table>
@@ -192,14 +195,27 @@
 <dt class="sig sig-object py" id="app.forms.LoginForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">LoginForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#LoginForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.LoginForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for user login.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.LoginForm.email">
 <span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#LoginForm.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.LoginForm.email" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Email address field with validation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.LoginForm.password">
 <span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#LoginForm.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.LoginForm.password" title="Link to this definition"></a></dt>
+<dd><p>Password field with validation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#LoginForm.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#LoginForm.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -208,29 +224,60 @@
 <dt class="sig sig-object py" id="app.forms.RegisterForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for new user registration.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.RegisterForm.email">
 <span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm.email" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Email address field with validation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.RegisterForm.password">
 <span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm.password" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Password field with validation.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.RegisterForm.firstName">
 <span class="sig-name descname"><span class="pre">firstName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.firstName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm.firstName" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>First name field (required).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.RegisterForm.lastName">
 <span class="sig-name descname"><span class="pre">lastName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.lastName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm.lastName" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Last name field (optional).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.RegisterForm.newsletter">
 <span class="sig-name descname"><span class="pre">newsletter</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.newsletter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.RegisterForm.newsletter" title="Link to this definition"></a></dt>
+<dd><p>Newsletter subscription checkbox.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">firstName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.firstName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">lastName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.lastName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">newsletter</span></span><a class="reference internal" href="../../../_modules/app/forms.html#RegisterForm.newsletter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -239,6 +286,14 @@
 <dt class="sig sig-object py" id="app.forms.EmailConfirmationForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">EmailConfirmationForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#EmailConfirmationForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.EmailConfirmationForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for email confirmation code entry.</p>
+<p>Contains 6 individual fields for each digit of the confirmation code.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">code0-code5</span></span></dt>
+<dd><p>Individual digit fields for the 6-digit confirmation code.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.EmailConfirmationForm.code0">
 <span class="sig-name descname"><span class="pre">code0</span></span><a class="reference internal" href="../../../_modules/app/forms.html#EmailConfirmationForm.code0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.EmailConfirmationForm.code0" title="Link to this definition"></a></dt>
@@ -275,9 +330,16 @@
 <dt class="sig sig-object py" id="app.forms.ResetPassword">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">ResetPassword</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ResetPassword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ResetPassword" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for requesting a password reset.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.ResetPassword.email">
 <span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ResetPassword.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ResetPassword.email" title="Link to this definition"></a></dt>
+<dd><p>Email address field for the account to reset.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ResetPassword.email"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -286,9 +348,16 @@
 <dt class="sig sig-object py" id="app.forms.SetNewPassword">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">SetNewPassword</span></span><a class="reference internal" href="../../../_modules/app/forms.html#SetNewPassword"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.SetNewPassword" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for setting a new password after reset.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.SetNewPassword.password">
 <span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#SetNewPassword.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.SetNewPassword.password" title="Link to this definition"></a></dt>
+<dd><p>New password field with validation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">password</span></span><a class="reference internal" href="../../../_modules/app/forms.html#SetNewPassword.password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -297,19 +366,38 @@
 <dt class="sig sig-object py" id="app.forms.ProfileDetailsForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">ProfileDetailsForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ProfileDetailsForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for updating user profile details.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.ProfileDetailsForm.firstName">
 <span class="sig-name descname"><span class="pre">firstName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.firstName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ProfileDetailsForm.firstName" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>First name field (required).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.ProfileDetailsForm.lastName">
 <span class="sig-name descname"><span class="pre">lastName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.lastName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ProfileDetailsForm.lastName" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Last name field (optional).</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.ProfileDetailsForm.newsletter">
 <span class="sig-name descname"><span class="pre">newsletter</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.newsletter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.ProfileDetailsForm.newsletter" title="Link to this definition"></a></dt>
+<dd><p>Newsletter subscription checkbox.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">firstName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.firstName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">lastName</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.lastName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">newsletter</span></span><a class="reference internal" href="../../../_modules/app/forms.html#ProfileDetailsForm.newsletter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -318,6 +406,14 @@
 <dt class="sig sig-object py" id="app.forms.TwoFactorAuthenticationForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">TwoFactorAuthenticationForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#TwoFactorAuthenticationForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.TwoFactorAuthenticationForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for two-factor authentication code entry.</p>
+<p>Contains 6 individual fields for each digit of the TOTP code.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">code0-code5</span></span></dt>
+<dd><p>Individual digit fields for the 6-digit TOTP code.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.TwoFactorAuthenticationForm.code0">
 <span class="sig-name descname"><span class="pre">code0</span></span><a class="reference internal" href="../../../_modules/app/forms.html#TwoFactorAuthenticationForm.code0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.TwoFactorAuthenticationForm.code0" title="Link to this definition"></a></dt>
@@ -354,19 +450,38 @@
 <dt class="sig sig-object py" id="app.forms.CreateAPIKeyForm">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.forms.</span></span><span class="sig-name descname"><span class="pre">CreateAPIKeyForm</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.CreateAPIKeyForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">flask_wtf.FlaskForm</span></code></p>
+<p>Form for creating a new API key.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.CreateAPIKeyForm.label">
 <span class="sig-name descname"><span class="pre">label</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.CreateAPIKeyForm.label" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Optional label for identifying the API key.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.CreateAPIKeyForm.expires_at">
 <span class="sig-name descname"><span class="pre">expires_at</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.expires_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.CreateAPIKeyForm.expires_at" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Optional expiration date for the key.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="app.forms.CreateAPIKeyForm.submit">
 <span class="sig-name descname"><span class="pre">submit</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.forms.CreateAPIKeyForm.submit" title="Link to this definition"></a></dt>
+<dd><p>Submit button.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">label</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">expires_at</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.expires_at"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">submit</span></span><a class="reference internal" href="../../../_modules/app/forms.html#CreateAPIKeyForm.submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

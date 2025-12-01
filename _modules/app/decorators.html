@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,22 +515,27 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.decorators</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span></span><span class="sd">&quot;&quot;&quot;Custom decorators for the Mail List Shield application.</span>
+
+<span class="sd">This module provides utility decorators used throughout the application.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
 
 
 <div class="viewcode-block" id="asyncr">
 <a class="viewcode-back" href="../../autoapi/app/decorators/index.html#app.decorators.asyncr">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">asyncr</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to run a function asynchronously.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to run a function asynchronously in a separate thread.</span>
 
-<span class="sd">    We use this decorator to send emails on a separate thread without blocking the main thread.</span>
+<span class="sd">    This decorator is primarily used for sending emails without blocking</span>
+<span class="sd">    the main request thread.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        f (function): The function to be decorated.</span>
+<span class="sd">        f: The function to be decorated.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        function: A wrapper function that runs the original function in a separate thread.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

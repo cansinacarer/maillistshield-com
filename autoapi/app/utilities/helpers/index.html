@@ -156,18 +156,21 @@
              
   <section id="module-app.utilities.helpers">
 <span id="app-utilities-helpers"></span><h1>app.utilities.helpers<a class="headerlink" href="#module-app.utilities.helpers" title="Link to this heading"></a></h1>
+<p>Helper utility functions for the Mail List Shield application.</p>
+<p>This module provides general-purpose helper functions including file size
+formatting, code generation, and API key generation.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.helpers.readable_file_size" title="app.utilities.helpers.readable_file_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">readable_file_size</span></code></a>(size_in_bytes[, significant_digits])</p></td>
-<td><p></p></td>
+<td><p>Convert a file size in bytes to a human-readable string.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.utilities.helpers.generate_n_digit_code" title="app.utilities.helpers.generate_n_digit_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_n_digit_code</span></code></a>(n)</p></td>
-<td><p></p></td>
+<td><p>Generate a random n-digit numeric code.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.helpers.generate_api_key_and_hash" title="app.utilities.helpers.generate_api_key_and_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_api_key_and_hash</span></code></a>()</p></td>
-<td><p></p></td>
+<td><p>Generate a new API key and its bcrypt hash.</p></td>
 </tr>
 </tbody>
 </table>
@@ -177,17 +180,60 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.helpers.readable_file_size">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.helpers.</span></span><span class="sig-name descname"><span class="pre">readable_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size_in_bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">significant_digits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/helpers.html#readable_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.helpers.readable_file_size" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Convert a file size in bytes to a human-readable string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size_in_bytes</strong> – The size in bytes to convert.</p></li>
+<li><p><strong>significant_digits</strong> – Number of decimal places to include.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Human-readable size string (e.g., ‘5 MB’, ‘1.5 GB’).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.helpers.generate_n_digit_code">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.helpers.</span></span><span class="sig-name descname"><span class="pre">generate_n_digit_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/helpers.html#generate_n_digit_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.helpers.generate_n_digit_code" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generate a random n-digit numeric code.</p>
+<p>Each digit is between 1-9 (no zeros) for better readability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – The number of digits in the code.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string of n random digits.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.helpers.generate_api_key_and_hash">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.helpers.</span></span><span class="sig-name descname"><span class="pre">generate_api_key_and_hash</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/helpers.html#generate_api_key_and_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.helpers.generate_api_key_and_hash" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generate a new API key and its bcrypt hash.</p>
+<p>Creates a 64-character random API key and hashes it for secure storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A tuple containing (plaintext_key, hashed_key).</dt><dd><p>The plaintext key should be shown to the user once,
+while the hash is stored in the database.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

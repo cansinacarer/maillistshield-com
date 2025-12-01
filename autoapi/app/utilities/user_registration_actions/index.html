@@ -156,12 +156,15 @@
              
   <section id="module-app.utilities.user_registration_actions">
 <span id="app-utilities-user-registration-actions"></span><h1>app.utilities.user_registration_actions<a class="headerlink" href="#module-app.utilities.user_registration_actions" title="Link to this heading"></a></h1>
+<p>User registration actions for the Mail List Shield application.</p>
+<p>This module contains actions that are performed when a new user
+confirms their email address.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.user_registration_actions.new_user_actions_for_email_confirmed" title="app.utilities.user_registration_actions.new_user_actions_for_email_confirmed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">new_user_actions_for_email_confirmed</span></code></a>(user)</p></td>
-<td><p></p></td>
+<td><p>Perform setup actions for a newly email-confirmed user.</p></td>
 </tr>
 </tbody>
 </table>
@@ -171,7 +174,15 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.user_registration_actions.new_user_actions_for_email_confirmed">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.user_registration_actions.</span></span><span class="sig-name descname"><span class="pre">new_user_actions_for_email_confirmed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/user_registration_actions.html#new_user_actions_for_email_confirmed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.user_registration_actions.new_user_actions_for_email_confirmed" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Perform setup actions for a newly email-confirmed user.</p>
+<p>This function is called when a user confirms their email address
+for the first time. It sets up their account resources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> – The user object whose email was just confirmed.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

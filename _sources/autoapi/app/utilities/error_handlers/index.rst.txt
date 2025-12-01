@@ -3,6 +3,13 @@ app.utilities.error_handlers
 
 .. py:module:: app.utilities.error_handlers
 
+.. autoapi-nested-parse::
+
+   Error handling utilities for the Mail List Shield application.
+
+   This module provides functions for rendering error pages.
+
+
 
 Functions
 ---------
@@ -16,4 +23,12 @@ Module Contents
 ---------------
 
 .. py:function:: error_page(code)
+
+   Render an error page for the given HTTP status code.
+
+   :param code: The HTTP status code (e.g., 404, 500).
+
+   :returns: A tuple containing (rendered_template, status_code).
+   :rtype: tuple
+
 

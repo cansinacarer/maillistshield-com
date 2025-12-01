@@ -3,6 +3,14 @@ app.utilities.stripe_event_handler
 
 .. py:module:: app.utilities.stripe_event_handler
 
+.. autoapi-nested-parse::
+
+   Stripe webhook event handler for the Mail List Shield application.
+
+   This module processes incoming Stripe webhook events for subscription
+   management and credit purchases.
+
+
 
 Functions
 ---------
@@ -21,11 +29,55 @@ Module Contents
 
 .. py:function:: is_subscription_event(event)
 
+   Check if a Stripe event is subscription-related.
+
+   :param event: The Stripe event object.
+
+   :returns: True if the event type starts with 'customer.subscription'.
+   :rtype: bool
+
+
 .. py:function:: is_checkout_completed_event(event)
+
+   Check if a Stripe event is a completed checkout.
+
+   :param event: The Stripe event object.
+
+   :returns: True if the event type is 'checkout.session.completed'.
+   :rtype: bool
+
 
 .. py:function:: user_from_stripe_customer_id(customer_id)
 
+   Look up a user by their Stripe customer ID.
+
+   :param customer_id: The Stripe customer ID.
+
+   :returns: The matching user object.
+   :rtype: Users
+
+   :raises Exception: If no user is found with the given customer ID.
+
+
 .. py:function:: tier_from_stripe_price_id(price_id)
 
+   Look up a subscription tier by its Stripe price ID.
+
+   :param price_id: The Stripe price ID.
+
+   :returns: The matching tier object.
+   :rtype: Tiers
+
+   :raises Exception: If no tier is found with the given price ID.
+
+
 .. py:function:: handle_stripe_event(event)
+
+   Process a Stripe webhook event.
+
+   Handles checkout completions (credit purchases) and subscription
+   events (creation, updates, cancellation, deletion).
+
+   :param event: The Stripe event object to process.
+
 

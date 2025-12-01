@@ -3,6 +3,14 @@ app.views_api
 
 .. py:module:: app.views_api
 
+.. autoapi-nested-parse::
+
+   API views and routes for the Mail List Shield application.
+
+   This module defines the REST API endpoints for email validation,
+   credit balance retrieval, and API key testing.
+
+
 
 Attributes
 ----------
@@ -57,6 +65,8 @@ Module Contents
 
    Abort the request with a 400 Bad Request error for missing keys in JSON body.
 
+   :param key_name: The name of the missing key in the JSON payload.
+
 
 .. py:function:: insufficient_credit_response()
 
@@ -67,19 +77,38 @@ Module Contents
 
    Validate that the request has JSON content type and a JSON body.
 
-   Abort the request with appropriate error responses if validation fails.
+   :param request: The Flask request object.
+
+   .. note:: Aborts the request with appropriate error responses if validation fails.
 
 
 .. py:function:: get_user_from_api_key(request)
 
    Fetch the user associated with the provided API key.
 
-   All repeated error handling is abstracted into this function.
+   :param request: The Flask request object containing the x-api-key header.
+
+   :returns: The user object associated with the API key.
+   :rtype: Users
+
+   .. note::
+
+      Aborts with appropriate error responses if the API key is
+      missing, invalid, or not associated with a user.
 
 
 .. py:function:: successful_validation_response(result)
 
    Return a standardized successful validation response.
+
+   :param result: The validation result dictionary.
+
+   :returns:
+
+             JSON response with validation results. If single_level_response
+                 is requested, returns just the result dict. Otherwise, wraps it
+                 with status and message.
+   :rtype: Response
 
 
 .. py:function:: api_test()
@@ -89,6 +118,12 @@ Module Contents
    This endpoint forgives requests without their content-type
    set to application/json, because it doesn't read your request body.
 
+   :returns:
+
+             For GET requests, returns a 405 error message.
+                 For POST requests, returns a success message with the user's name.
+   :rtype: Response
+
 
 .. py:function:: get_credit_balance()
 
@@ -96,6 +131,9 @@ Module Contents
 
    This endpoint forgives requests without their content-type
    set to application/json, because it doesn't read your request body.
+
+   :returns: JSON response containing status, message, and credit balance.
+   :rtype: dict
 
 
 .. py:function:: validate_single()
@@ -108,5 +146,15 @@ Module Contents
    Optionally, the request JSON can include a boolean key "single_level_response".
    If set to true, the API will return the validation result in a single-level dictionary.
    Otherwise, and by default, the response includes status and message keys.
+
+   :returns:
+
+             JSON response with validation results or error message.
+                 - 200: Successful validation with result.
+                 - 400: Missing email key in request.
+                 - 402: Insufficient credits.
+                 - 500: Internal server error.
+                 - 503: Validation service unavailable.
+   :rtype: Response
 
 

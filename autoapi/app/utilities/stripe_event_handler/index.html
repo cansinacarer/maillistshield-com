@@ -156,24 +156,27 @@
              
   <section id="module-app.utilities.stripe_event_handler">
 <span id="app-utilities-stripe-event-handler"></span><h1>app.utilities.stripe_event_handler<a class="headerlink" href="#module-app.utilities.stripe_event_handler" title="Link to this heading"></a></h1>
+<p>Stripe webhook event handler for the Mail List Shield application.</p>
+<p>This module processes incoming Stripe webhook events for subscription
+management and credit purchases.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.stripe_event_handler.is_subscription_event" title="app.utilities.stripe_event_handler.is_subscription_event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_subscription_event</span></code></a>(event)</p></td>
-<td><p></p></td>
+<td><p>Check if a Stripe event is subscription-related.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.utilities.stripe_event_handler.is_checkout_completed_event" title="app.utilities.stripe_event_handler.is_checkout_completed_event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_checkout_completed_event</span></code></a>(event)</p></td>
-<td><p></p></td>
+<td><p>Check if a Stripe event is a completed checkout.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.stripe_event_handler.user_from_stripe_customer_id" title="app.utilities.stripe_event_handler.user_from_stripe_customer_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_from_stripe_customer_id</span></code></a>(customer_id)</p></td>
-<td><p></p></td>
+<td><p>Look up a user by their Stripe customer ID.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.utilities.stripe_event_handler.tier_from_stripe_price_id" title="app.utilities.stripe_event_handler.tier_from_stripe_price_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tier_from_stripe_price_id</span></code></a>(price_id)</p></td>
-<td><p></p></td>
+<td><p>Look up a subscription tier by its Stripe price ID.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.stripe_event_handler.handle_stripe_event" title="app.utilities.stripe_event_handler.handle_stripe_event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_stripe_event</span></code></a>(event)</p></td>
-<td><p></p></td>
+<td><p>Process a Stripe webhook event.</p></td>
 </tr>
 </tbody>
 </table>
@@ -183,27 +186,89 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.stripe_event_handler.is_subscription_event">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.stripe_event_handler.</span></span><span class="sig-name descname"><span class="pre">is_subscription_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/stripe_event_handler.html#is_subscription_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.stripe_event_handler.is_subscription_event" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Check if a Stripe event is subscription-related.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – The Stripe event object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the event type starts with ‘customer.subscription’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.stripe_event_handler.is_checkout_completed_event">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.stripe_event_handler.</span></span><span class="sig-name descname"><span class="pre">is_checkout_completed_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/stripe_event_handler.html#is_checkout_completed_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.stripe_event_handler.is_checkout_completed_event" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Check if a Stripe event is a completed checkout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – The Stripe event object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the event type is ‘checkout.session.completed’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.stripe_event_handler.user_from_stripe_customer_id">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.stripe_event_handler.</span></span><span class="sig-name descname"><span class="pre">user_from_stripe_customer_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/stripe_event_handler.html#user_from_stripe_customer_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.stripe_event_handler.user_from_stripe_customer_id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Look up a user by their Stripe customer ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_id</strong> – The Stripe customer ID.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching user object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../models/index.html#app.models.Users" title="app.models.Users">Users</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If no user is found with the given customer ID.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.stripe_event_handler.tier_from_stripe_price_id">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.stripe_event_handler.</span></span><span class="sig-name descname"><span class="pre">tier_from_stripe_price_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/stripe_event_handler.html#tier_from_stripe_price_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.stripe_event_handler.tier_from_stripe_price_id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Look up a subscription tier by its Stripe price ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>price_id</strong> – The Stripe price ID.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The matching tier object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../models/index.html#app.models.Tiers" title="app.models.Tiers">Tiers</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If no tier is found with the given price ID.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.stripe_event_handler.handle_stripe_event">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.stripe_event_handler.</span></span><span class="sig-name descname"><span class="pre">handle_stripe_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/stripe_event_handler.html#handle_stripe_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.stripe_event_handler.handle_stripe_event" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Process a Stripe webhook event.</p>
+<p>Handles checkout completions (credit purchases) and subscription
+events (creation, updates, cancellation, deletion).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – The Stripe event object to process.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

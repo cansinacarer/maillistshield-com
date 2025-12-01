@@ -3,6 +3,15 @@ app.views_auth
 
 .. py:module:: app.views_auth
 
+.. autoapi-nested-parse::
+
+   Authentication views and routes for the Mail List Shield application.
+
+   This module defines the authentication-related routes including login,
+   registration, logout, password reset, email confirmation, two-factor
+   authentication, and Google OAuth integration.
+
+
 
 Attributes
 ----------
@@ -38,70 +47,116 @@ Module Contents
 
 .. py:function:: load_user(user_id)
 
-   This function is used to load the user object from the user ID stored in the session.
+   Load a user from the database by ID.
+
+   This function is used by Flask-Login to reload the user object
+   from the user ID stored in the session.
 
    :param user_id: The ID of the user to load.
-   :type user_id: str
 
-   :returns: The user object from the db corresponding to the user ID.
+   :returns: The user object from the database corresponding to the user ID.
    :rtype: Users
 
 
 .. py:function:: unauthorized_callback()
 
-   This function is used to handle unauthorized access to protected routes.
+   Handle unauthorized access to protected routes.
 
-   403 cases will be redirected to login
+   Redirects unauthenticated users to the login page with the
+   original destination preserved in the next parameter.
+
+   :returns: Redirect to the login page.
+   :rtype: Response
 
 
 .. py:function:: logout()
 
-   This function is used to log out the user and redirect them to the login page.
+   Log out the current user and redirect to the login page.
+
+   :returns: Redirect to the login page.
+   :rtype: Response
 
 
 .. py:function:: register()
 
    The view function for the registration page.
 
+   Handles new user registration with reCAPTCHA verification.
+
+   :returns: The registration form or redirect to email confirmation.
+   :rtype: Response
+
 
 .. py:function:: login()
 
    The view function for the login page.
 
+   Handles user authentication with optional Google OAuth and reCAPTCHA.
+
+   :returns: The login form or redirect to dashboard/two-factor auth.
+   :rtype: Response
+
 
 .. py:function:: two_factor()
 
-   The view function for the two factor authentication page.
+   The view function for the two-factor authentication page.
+
+   Verifies TOTP codes for users with two-factor authentication enabled.
+
+   :returns: The two-factor form or redirect to dashboard.
+   :rtype: Response
 
 
 .. py:function:: email_confirmation_by_code()
 
    The view function for the email verification page.
 
+   Handles verification code entry and validation.
+
+   :returns: The email confirmation form or redirect to dashboard.
+   :rtype: Response
+
 
 .. py:function:: password_reset()
 
    The view function for the password reset page.
+
+   Initiates the password reset process by sending a reset email.
+
+   :returns: The password reset form or redirect to confirmation page.
+   :rtype: Response
 
 
 .. py:function:: password_reset_requested()
 
    The view function for the password reset requested page.
 
+   Shows a confirmation message after a password reset request.
+
+   :returns: The password reset requested confirmation page.
+   :rtype: Response
+
 
 .. py:function:: set_new_password(token)
 
    The view function for the set new password page.
 
+   Validates the reset token and allows the user to set a new password.
+
    :param token: The token from the forgot password email, used to verify the user.
    :type token: str
+
+   :returns: The new password form or redirect to login.
+   :rtype: Response
 
 
 .. py:function:: get_google_sso_config()
 
    Get the Google SSO configuration.
 
-   :returns: The Google SSO configuration.
+   Fetches the OpenID Connect discovery document from Google.
+
+   :returns: The Google SSO configuration including endpoints.
    :rtype: dict
 
 
@@ -110,5 +165,9 @@ Module Contents
    The view function for the Google login callback.
 
    This is the page that Google redirects to after the Google authentication attempt.
+   Handles both existing users logging in and new user registration via Google OAuth.
+
+   :returns: Redirect to dashboard or login page based on authentication result.
+   :rtype: Response
 
 

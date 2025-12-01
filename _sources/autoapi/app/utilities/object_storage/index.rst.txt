@@ -3,6 +3,14 @@ app.utilities.object_storage
 
 .. py:module:: app.utilities.object_storage
 
+.. autoapi-nested-parse::
+
+   Object storage utilities for S3-compatible storage operations.
+
+   This module provides functions for interacting with S3-compatible object storage,
+   including file uploads, downloads, deletions, and pre-signed URL generation.
+
+
 
 Functions
 ---------
@@ -32,33 +40,174 @@ Module Contents
 
 .. py:function:: upload_file(bucket_name, directory, file, s3, s3path=None)
 
+   Upload a file to an S3 bucket.
+
+   :param bucket_name: The name of the target S3 bucket.
+   :param directory: Local directory containing the file.
+   :param file: The filename to upload.
+   :param s3: The boto3 S3 resource object.
+   :param s3path: Optional custom path in the bucket. Defaults to the filename.
+
+
 .. py:function:: download_file(bucket_name, directory, local_name, key_name, s3)
+
+   Download a file from an S3 bucket.
+
+   :param bucket_name: The name of the source S3 bucket.
+   :param directory: Local directory to save the file.
+   :param local_name: The local filename to save as.
+   :param key_name: The S3 object key to download.
+   :param s3: The boto3 S3 resource object.
+
 
 .. py:function:: delete_file(bucket_name, keys, s3)
 
+   Delete one or more files from an S3 bucket.
+
+   :param bucket_name: The name of the S3 bucket.
+   :param keys: List of S3 object keys to delete.
+   :param s3: The boto3 S3 resource object.
+
+
 .. py:function:: list_objects(bucket, s3)
+
+   List all objects in an S3 bucket.
+
+   :param bucket: The name of the S3 bucket.
+   :param s3: The boto3 S3 resource object.
+
+   :returns: A list of object keys in the bucket.
+   :rtype: list
+
 
 .. py:function:: copy_file(source_bucket, destination_bucket, source_key, destination_key, s3)
 
+   Copy a file between S3 buckets or within a bucket.
+
+   :param source_bucket: The name of the source bucket.
+   :param destination_bucket: The name of the destination bucket.
+   :param source_key: The S3 key of the source object.
+   :param destination_key: The S3 key for the destination object.
+   :param s3: The boto3 S3 resource object.
+
+
 .. py:function:: prevent_public_access(bucket, s3)
+
+   Configure a bucket to block all public access.
+
+   :param bucket: The name of the S3 bucket.
+   :param s3: The boto3 S3 resource object.
+
 
 .. py:function:: create_bucket(name, s3, secure=False)
 
+   Create a new S3 bucket.
+
+   :param name: The name for the new bucket.
+   :param s3: The boto3 S3 resource object.
+   :param secure: If True, block all public access to the bucket.
+
+
 .. py:function:: generate_download_link(bucket_name, key, s3, expiration_in_seconds=60)
+
+   Generate a pre-signed URL for downloading an S3 object.
+
+   :param bucket_name: The name of the S3 bucket.
+   :param key: The S3 object key.
+   :param s3: The boto3 S3 resource object.
+   :param expiration_in_seconds: URL expiration time in seconds.
+
+   :returns: A pre-signed URL for downloading the object.
+   :rtype: str
+
 
 .. py:function:: generate_upload_link(bucket_name, file_name, file_type, s3, expiration_in_seconds=60)
 
+   Generate a pre-signed POST URL for uploading to S3.
+
+   :param bucket_name: The name of the S3 bucket.
+   :param file_name: The target filename/key in the bucket.
+   :param file_type: The Content-Type of the file being uploaded.
+   :param s3: The boto3 S3 resource object.
+   :param expiration_in_seconds: URL expiration time in seconds.
+
+   :returns: JSON string containing upload data and preview URL.
+   :rtype: str
+
+
 .. py:function:: folder_size(bucket_name, folder_path, s3)
+
+   Calculate the total size of all objects in a folder.
+
+   :param bucket_name: The name of the S3 bucket.
+   :param folder_path: The folder prefix to calculate size for.
+   :param s3: The boto3 S3 resource object.
+
+   :returns: Total size in bytes of all objects in the folder.
+   :rtype: int
+
 
 .. py:function:: generate_remote_file(bucket_name, folder_path, file_name, s3, content)
 
+   Create a file directly in S3 with the specified content.
+
+   :param bucket_name: The name of the S3 bucket.
+   :param folder_path: The folder path in the bucket.
+   :param file_name: The name of the file to create.
+   :param s3: The boto3 S3 resource object.
+   :param content: The content to write to the file.
+
+   :returns: The S3 put_object response.
+   :rtype: dict
+
+
 .. py:function:: timestamp()
+
+   Generate a timestamp string for file naming.
+
+   :returns: Current timestamp in YYYYMMDDHHmmss format.
+   :rtype: str
+
 
 .. py:function:: generate_upload_link_profile_picture(user, file_type)
 
+   Generate a pre-signed upload URL for a user's profile picture.
+
+   :param user: The user object.
+   :param file_type: The MIME type of the image being uploaded.
+
+   :returns: JSON string containing upload data and preview URL.
+   :rtype: str
+
+
 .. py:function:: generate_upload_link_validation_file(user, file_type, file)
+
+   Generate a pre-signed upload URL for a batch validation file.
+
+   :param user: The user object.
+   :param file_type: The MIME type of the file being uploaded.
+   :param file: The original filename.
+
+   :returns: JSON string containing upload data and preview URL.
+   :rtype: str
+
 
 .. py:function:: generate_user_folder(user)
 
+   Create a user's personal folder in object storage.
+
+   Creates a placeholder file to establish the folder structure.
+
+   :param user: The user object.
+
+
 .. py:function:: user_folder_size(user)
+
+   Calculate the total size of a user's folder.
+
+   :param user: The user object.
+
+   :returns: Total size in bytes of the user's folder.
+   :rtype: int
+
 

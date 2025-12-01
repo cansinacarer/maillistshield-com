@@ -155,6 +155,9 @@
              
   <section id="module-app.views_api">
 <span id="app-views-api"></span><h1>app.views_api<a class="headerlink" href="#module-app.views_api" title="Link to this heading"></a></h1>
+<p>API views and routes for the Mail List Shield application.</p>
+<p>This module defines the REST API endpoints for email validation,
+credit balance retrieval, and API key testing.</p>
 <section id="attributes">
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -236,6 +239,11 @@ why the API key is invalid.</p>
 <dt class="sig sig-object py" id="app.views_api.missing_key_in_json_response">
 <span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">missing_key_in_json_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#missing_key_in_json_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.missing_key_in_json_response" title="Link to this definition"></a></dt>
 <dd><p>Abort the request with a 400 Bad Request error for missing keys in JSON body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key_name</strong> – The name of the missing key in the JSON payload.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -248,20 +256,59 @@ why the API key is invalid.</p>
 <dt class="sig sig-object py" id="app.views_api.validate_request_json">
 <span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">validate_request_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#validate_request_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.validate_request_json" title="Link to this definition"></a></dt>
 <dd><p>Validate that the request has JSON content type and a JSON body.</p>
-<p>Abort the request with appropriate error responses if validation fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The Flask request object.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Aborts the request with appropriate error responses if validation fails.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_api.get_user_from_api_key">
 <span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">get_user_from_api_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#get_user_from_api_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.get_user_from_api_key" title="Link to this definition"></a></dt>
 <dd><p>Fetch the user associated with the provided API key.</p>
-<p>All repeated error handling is abstracted into this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – The Flask request object containing the x-api-key header.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The user object associated with the API key.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users">Users</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Aborts with appropriate error responses if the API key is
+missing, invalid, or not associated with a user.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_api.successful_validation_response">
 <span class="sig-prename descclassname"><span class="pre">app.views_api.</span></span><span class="sig-name descname"><span class="pre">successful_validation_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_api.html#successful_validation_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_api.successful_validation_response" title="Link to this definition"></a></dt>
 <dd><p>Return a standardized successful validation response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>result</strong> – The validation result dictionary.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>JSON response with validation results. If single_level_response</dt><dd><p>is requested, returns just the result dict. Otherwise, wraps it
+with status and message.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -270,6 +317,18 @@ why the API key is invalid.</p>
 <dd><p>A test API endpoint that requires an API key.</p>
 <p>This endpoint forgives requests without their content-type
 set to application/json, because it doesn’t read your request body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>For GET requests, returns a 405 error message.</dt><dd><p>For POST requests, returns a success message with the user’s name.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -278,6 +337,14 @@ set to application/json, because it doesn’t read your request body.</p>
 <dd><p>The API endpoint to get the user’s credit balance.</p>
 <p>This endpoint forgives requests without their content-type
 set to application/json, because it doesn’t read your request body.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response containing status, message, and credit balance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -289,6 +356,24 @@ and a JSON body with an “email” key.</p>
 <p>Optionally, the request JSON can include a boolean key “single_level_response”.
 If set to true, the API will return the validation result in a single-level dictionary.
 Otherwise, and by default, the response includes status and message keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>JSON response with validation results or error message.</dt><dd><ul class="simple">
+<li><p>200: Successful validation with result.</p></li>
+<li><p>400: Missing email key in request.</p></li>
+<li><p>402: Insufficient credits.</p></li>
+<li><p>500: Internal server error.</p></li>
+<li><p>503: Validation service unavailable.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

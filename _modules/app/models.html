@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,13 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.models</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span><span class="p">,</span> <span class="n">timedelta</span>
+<span></span><span class="sd">&quot;&quot;&quot;Database models for the Mail List Shield application.</span>
+
+<span class="sd">This module defines the SQLAlchemy ORM models for the application&#39;s database,</span>
+<span class="sd">including user accounts, API keys, batch validation jobs, and subscription tiers.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span><span class="p">,</span> <span class="n">timedelta</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">email.policy</span><span class="w"> </span><span class="kn">import</span> <span class="n">default</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">hashlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">md5</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pyotp</span>
@@ -534,6 +540,22 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="APIKeys">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">APIKeys</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table for storing API keys associated with user accounts.</span>
+
+<span class="sd">    API keys are hashed before storage for security. Each key belongs to a single</span>
+<span class="sd">    user and can be active or revoked.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id: Primary key.</span>
+<span class="sd">        user_id: Foreign key to the Users table.</span>
+<span class="sd">        key_hash: Bcrypt hash of the API key.</span>
+<span class="sd">        label: Optional user-provided label for the key.</span>
+<span class="sd">        created_at: Timestamp when the key was created.</span>
+<span class="sd">        expires_at: Optional expiration timestamp.</span>
+<span class="sd">        last_used: Timestamp of the last API call using this key.</span>
+<span class="sd">        is_active: Whether the key is currently active.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;APIKeys&quot;</span>
 
 <div class="viewcode-block" id="APIKeys.id">
@@ -570,6 +592,14 @@ window.addEventListener("load", load);
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">key_hash</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">expires_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new API key.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            user: The user object this key belongs to.</span>
+<span class="sd">            key_hash: The bcrypt hash of the API key.</span>
+<span class="sd">            label: Optional label for identifying the key.</span>
+<span class="sd">            expires_at: Optional expiration datetime.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_hash</span> <span class="o">=</span> <span class="n">key_hash</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
@@ -578,12 +608,25 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="APIKeys.check_key">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.check_key">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">check_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_plain</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify if a plaintext key matches this key&#39;s hash.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key_plain: The plaintext API key to verify.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the key matches, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">bc</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_hash</span><span class="p">,</span> <span class="n">key_plain</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="APIKeys.delete_key">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.delete_key">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete this API key from the database.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if deletion was successful.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
         <span class="k">return</span> <span class="kc">True</span></div>
@@ -592,6 +635,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="APIKeys.update_last_used">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.update_last_used">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update_last_used</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the last_used timestamp to the current time.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_used</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">appTimezone</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 
@@ -599,6 +643,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="APIKeys.save">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.APIKeys.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the current state of this API key to the database.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            APIKeys: The saved API key instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># inject self into db session</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -613,6 +662,33 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="BatchJobs">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.BatchJobs">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BatchJobs</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table for batch email validation jobs.</span>
+
+<span class="sd">    Tracks the status and metadata of batch validation jobs, including</span>
+<span class="sd">    uploaded files, processing status, and results.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id: Primary key.</span>
+<span class="sd">        uid: Unique 6-character identifier for the job.</span>
+<span class="sd">        user_id: Foreign key to the Users table.</span>
+<span class="sd">        user: Relationship to the user who created the job.</span>
+<span class="sd">        status: Current status of the job.</span>
+<span class="sd">        original_file_name: Original name of the uploaded file.</span>
+<span class="sd">        uploaded_file: Path to the uploaded file in object storage.</span>
+<span class="sd">        accepted_file: Path to the accepted/processed file.</span>
+<span class="sd">        results_file: Path to the results file in object storage.</span>
+<span class="sd">        row_count: Number of rows in the uploaded file.</span>
+<span class="sd">        last_pick_row: Last row processed by the worker.</span>
+<span class="sd">        last_pick_time: Timestamp of the last worker pick.</span>
+<span class="sd">        source: Source of the job (e.g., &#39;web&#39;, &#39;api&#39;).</span>
+<span class="sd">        header_row: Row number containing headers (0 or 1).</span>
+<span class="sd">        email_column: Name of the column containing email addresses.</span>
+<span class="sd">        uploaded: Timestamp when the file was uploaded.</span>
+<span class="sd">        started: Timestamp when processing started.</span>
+<span class="sd">        finished: Timestamp when processing finished.</span>
+<span class="sd">        result: Final result summary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;BatchJobs&quot;</span>
 
 <div class="viewcode-block" id="BatchJobs.id">
@@ -704,12 +780,17 @@ window.addEventListener("load", load);
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new batch job and generate a unique ID.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generate_job_uid</span><span class="p">()</span>
 
 <div class="viewcode-block" id="BatchJobs.generate_job_uid">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.BatchJobs.generate_job_uid">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_job_uid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a unique 6-character identifier for this job.</span>
+
+<span class="sd">        Ensures uniqueness by checking against existing jobs in the database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">new_uid</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">6</span><span class="p">]</span>
             <span class="n">existing_job</span> <span class="o">=</span> <span class="n">BatchJobs</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">uid</span><span class="o">=</span><span class="n">new_uid</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
@@ -721,6 +802,12 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="BatchJobs.generate_results_download_link">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.BatchJobs.generate_results_download_link">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_results_download_link</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a pre-signed download URL for the results file.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A pre-signed URL for downloading the results file,</span>
+<span class="sd">                or None if no results file exists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_file</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">generate_download_link</span><span class="p">(</span>
                 <span class="n">bucket_name</span><span class="o">=</span><span class="n">current_app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;S3_BUCKET_NAME&quot;</span><span class="p">],</span>
@@ -732,6 +819,11 @@ window.addEventListener("load", load);
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the batch job.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The unique identifier of the job.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">uid</span></div>
 
 
@@ -739,6 +831,19 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Tiers">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Tiers">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Tiers</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table for subscription tiers.</span>
+
+<span class="sd">    Defines the available subscription tiers and their associated</span>
+<span class="sd">    Stripe price IDs.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id: Primary key.</span>
+<span class="sd">        name: Internal name of the tier.</span>
+<span class="sd">        label: Display label for the tier.</span>
+<span class="sd">        stripe_price_id: Associated Stripe price ID for subscriptions.</span>
+<span class="sd">        users: Relationship to users on this tier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;Tiers&quot;</span>
 
 <div class="viewcode-block" id="Tiers.id">
@@ -765,6 +870,11 @@ window.addEventListener("load", load);
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the tier.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The name of the tier.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
 
 
@@ -772,6 +882,37 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Users</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Table for user accounts.</span>
+
+<span class="sd">    Stores user account information including authentication credentials,</span>
+<span class="sd">    profile data, subscription status, and security settings.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        id: Primary key.</span>
+<span class="sd">        email: Unique email address for the user.</span>
+<span class="sd">        password: Bcrypt-hashed password.</span>
+<span class="sd">        role: User role (e.g., &#39;user&#39;, &#39;admin&#39;).</span>
+<span class="sd">        stripe_customer_id: Associated Stripe customer ID.</span>
+<span class="sd">        tier_id: Foreign key to the subscription tier.</span>
+<span class="sd">        credits: Number of validation credits available.</span>
+<span class="sd">        tier: Relationship to the user&#39;s subscription tier.</span>
+<span class="sd">        cancel_at: Scheduled subscription cancellation date.</span>
+<span class="sd">        firstName: User&#39;s first name.</span>
+<span class="sd">        lastName: User&#39;s last name.</span>
+<span class="sd">        newsletter: Newsletter subscription status.</span>
+<span class="sd">        member_since: Account creation timestamp.</span>
+<span class="sd">        last_login: Last login timestamp.</span>
+<span class="sd">        email_confirmation_code: Code for email verification.</span>
+<span class="sd">        last_confirmation_codes_sent: Last time a confirmation code was sent.</span>
+<span class="sd">        number_of_email_confirmation_codes_sent: Count of confirmation codes sent.</span>
+<span class="sd">        email_confirmed: Whether the email is confirmed (0 or 1).</span>
+<span class="sd">        google_avatar_url: URL to Google avatar if using OAuth.</span>
+<span class="sd">        avatar_uploaded: Whether a custom avatar was uploaded.</span>
+<span class="sd">        totp_secret: Secret key for TOTP two-factor authentication.</span>
+<span class="sd">        totp_enabled: Whether TOTP is enabled (0 or 1).</span>
+<span class="sd">        api_keys: Relationship to user&#39;s API keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;Users&quot;</span>
 
 <div class="viewcode-block" id="Users.id">
@@ -900,6 +1041,19 @@ window.addEventListener("load", load);
         <span class="n">last_login</span><span class="p">,</span>
         <span class="n">email_confirmation_code</span><span class="p">,</span>
     <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a new user account.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            email: The user&#39;s email address.</span>
+<span class="sd">            password: The bcrypt-hashed password.</span>
+<span class="sd">            tier_id: The ID of the subscription tier.</span>
+<span class="sd">            firstName: The user&#39;s first name.</span>
+<span class="sd">            lastName: The user&#39;s last name.</span>
+<span class="sd">            newsletter: Newsletter subscription status.</span>
+<span class="sd">            member_since: Account creation timestamp.</span>
+<span class="sd">            last_login: Last login timestamp.</span>
+<span class="sd">            email_confirmation_code: Code for email verification.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tier_id</span> <span class="o">=</span> <span class="n">tier_id</span>
@@ -911,11 +1065,21 @@ window.addEventListener("load", load);
         <span class="bp">self</span><span class="o">.</span><span class="n">email_confirmation_code</span> <span class="o">=</span> <span class="n">email_confirmation_code</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a string representation of the user.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The user ID and email.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; - &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Users.save">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save the current state of this user to the database.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Users: The saved user instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># inject self into db session</span>
         <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -928,6 +1092,17 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.avatar">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.avatar">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">avatar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the URL for the user&#39;s avatar image.</span>
+
+<span class="sd">        Returns the avatar from uploaded file, Google OAuth, or Gravatar</span>
+<span class="sd">        in order of priority.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            size: The size of the avatar image in pixels.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: URL to the user&#39;s avatar image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># If the user has uploaded an avatar, we return the s3 link</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">avatar_uploaded</span><span class="p">:</span>
             <span class="n">url</span> <span class="o">=</span> <span class="n">generate_download_link</span><span class="p">(</span>
@@ -950,12 +1125,22 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.is_connected_google">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.is_connected_google">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_connected_google</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user has connected their Google account.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if Google account is connected, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">google_avatar_url</span> <span class="o">!=</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="Users.totp">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.totp">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">totp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the TOTP secret and QR code for two-factor authentication setup.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: A tuple containing (secret, qr_code_data_uri).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">secret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">totp_secret</span>
         <span class="n">totp</span> <span class="o">=</span> <span class="n">pyotp</span><span class="o">.</span><span class="n">TOTP</span><span class="p">(</span><span class="n">secret</span><span class="p">)</span>
 
@@ -971,6 +1156,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.totp_match">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.totp_match">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">totp_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify a TOTP code against the user&#39;s secret.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code: The 6-digit TOTP code to verify.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the code is valid, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">totp</span> <span class="o">=</span> <span class="n">pyotp</span><span class="o">.</span><span class="n">TOTP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">totp_secret</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">totp</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">code</span><span class="p">)</span></div>
 
@@ -978,6 +1171,10 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.totp_reset_secret">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.totp_reset_secret">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">totp_reset_secret</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a new TOTP secret for the user.</span>
+
+<span class="sd">        This invalidates any existing authenticator app configurations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">totp_secret</span> <span class="o">=</span> <span class="n">pyotp</span><span class="o">.</span><span class="n">random_base32</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 
@@ -985,6 +1182,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.folder_size">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.folder_size">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">folder_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the human-readable size of the user&#39;s storage folder.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The folder size with appropriate units (e.g., &#39;5 MB&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">user_folder_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">readable_file_size</span><span class="p">(</span><span class="n">size</span><span class="p">)</span></div>
 
@@ -992,18 +1194,33 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.folder_quota">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.folder_quota">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">folder_quota</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the human-readable storage quota for the user.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The storage quota (currently fixed at 500 MB).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">readable_file_size</span><span class="p">(</span><span class="mi">500</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Users.folder_usage_percentage">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.folder_usage_percentage">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">folder_usage_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the percentage of storage quota used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: The usage percentage (0-100).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_folder_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">500</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Users.add_credits">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.add_credits">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_credits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add validation credits to the user&#39;s account.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amount: The number of credits to add.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">credits</span> <span class="o">+=</span> <span class="n">amount</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 
@@ -1011,6 +1228,11 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="Users.deduct_credits">
 <a class="viewcode-back" href="../../autoapi/app/models/index.html#app.models.Users.deduct_credits">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">deduct_credits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deduct validation credits from the user&#39;s account.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amount: The number of credits to deduct.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">credits</span> <span class="o">-=</span> <span class="n">amount</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 </div>

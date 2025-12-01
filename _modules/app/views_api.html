@@ -17,8 +17,8 @@
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,13 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.views_api</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Flask modules</span>
+<span></span><span class="sd">&quot;&quot;&quot;API views and routes for the Mail List Shield application.</span>
+
+<span class="sd">This module defines the REST API endpoints for email validation,</span>
+<span class="sd">credit balance retrieval, and API key testing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Flask modules</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">Blueprint</span><span class="p">,</span>
     <span class="n">abort</span><span class="p">,</span>
@@ -541,8 +547,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="invalid_api_key_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.invalid_api_key_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">invalid_api_key_response</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abort the request with a 403 error for invalid API keys.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abort the request with a 403 error for invalid API keys.</span>
 
 <span class="sd">    We standardize the error response to avoid leaking information about</span>
 <span class="sd">    why the API key is invalid.</span>
@@ -564,9 +569,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="no_api_key_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.no_api_key_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">no_api_key_response</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abort the request with a 401 error for missing API keys.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abort the request with a 401 error for missing API keys.&quot;&quot;&quot;</span>
     <span class="n">abort</span><span class="p">(</span>
         <span class="n">make_response</span><span class="p">(</span>
             <span class="n">jsonify</span><span class="p">(</span>
@@ -584,9 +587,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="no_json_body_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.no_json_body_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">no_json_body_response</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abort the request with a 415 Unsupported Media Type error for missing JSON body.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abort the request with a 415 Unsupported Media Type error for missing JSON body.&quot;&quot;&quot;</span>
     <span class="n">abort</span><span class="p">(</span>
         <span class="n">make_response</span><span class="p">(</span>
             <span class="n">jsonify</span><span class="p">(</span>
@@ -604,8 +605,10 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="missing_key_in_json_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.missing_key_in_json_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">missing_key_in_json_response</span><span class="p">(</span><span class="n">key_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abort the request with a 400 Bad Request error for missing keys in JSON body.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abort the request with a 400 Bad Request error for missing keys in JSON body.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key_name: The name of the missing key in the JSON payload.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">abort</span><span class="p">(</span>
         <span class="n">make_response</span><span class="p">(</span>
@@ -624,9 +627,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="insufficient_credit_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.insufficient_credit_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">insufficient_credit_response</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abort the request with a 402 Payment Required error for insufficient credits.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abort the request with a 402 Payment Required error for insufficient credits.&quot;&quot;&quot;</span>
     <span class="n">abort</span><span class="p">(</span>
         <span class="n">make_response</span><span class="p">(</span>
             <span class="n">jsonify</span><span class="p">(</span>
@@ -644,10 +645,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="validate_request_json">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.validate_request_json">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_request_json</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validate that the request has JSON content type and a JSON body.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate that the request has JSON content type and a JSON body.</span>
 
-<span class="sd">    Abort the request with appropriate error responses if validation fails.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: The Flask request object.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Aborts the request with appropriate error responses if validation fails.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check if the request has JSON content type</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span> <span class="o">!=</span> <span class="s2">&quot;application/json&quot;</span><span class="p">:</span>
@@ -662,10 +666,17 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="get_user_from_api_key">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.get_user_from_api_key">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_user_from_api_key</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fetch the user associated with the provided API key.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch the user associated with the provided API key.</span>
 
-<span class="sd">    All repeated error handling is abstracted into this function.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: The Flask request object containing the x-api-key header.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Users: The user object associated with the API key.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Aborts with appropriate error responses if the API key is</span>
+<span class="sd">        missing, invalid, or not associated with a user.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Get the API key from the request headers</span>
@@ -704,8 +715,15 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="successful_validation_response">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.successful_validation_response">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">successful_validation_response</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return a standardized successful validation response.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a standardized successful validation response.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        result: The validation result dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: JSON response with validation results. If single_level_response</span>
+<span class="sd">            is requested, returns just the result dict. Otherwise, wraps it</span>
+<span class="sd">            with status and message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># If the user want a single level response ...</span>
     <span class="n">single_level_requested</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;single_level_response&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
@@ -734,11 +752,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="api_test">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.api_test">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">api_test</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A test API endpoint that requires an API key.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A test API endpoint that requires an API key.</span>
 
 <span class="sd">    This endpoint forgives requests without their content-type</span>
 <span class="sd">    set to application/json, because it doesn&#39;t read your request body.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: For GET requests, returns a 405 error message.</span>
+<span class="sd">            For POST requests, returns a success message with the user&#39;s name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
@@ -769,11 +790,13 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="get_credit_balance">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.get_credit_balance">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_credit_balance</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The API endpoint to get the user&#39;s credit balance.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The API endpoint to get the user&#39;s credit balance.</span>
 
 <span class="sd">    This endpoint forgives requests without their content-type</span>
 <span class="sd">    set to application/json, because it doesn&#39;t read your request body.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: JSON response containing status, message, and credit balance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the user associated with the provided API key</span>
     <span class="c1"># (Error handling is abstracted into the function)</span>
@@ -793,8 +816,7 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="validate_single">
 <a class="viewcode-back" href="../../autoapi/app/views_api/index.html#app.views_api.validate_single">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_single</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The API endpoint to validate a single email address.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The API endpoint to validate a single email address.</span>
 
 <span class="sd">    This endpoint requires the request content-type to be application/json</span>
 <span class="sd">    and a JSON body with an &quot;email&quot; key.</span>
@@ -802,6 +824,14 @@ window.addEventListener("load", load);
 <span class="sd">    Optionally, the request JSON can include a boolean key &quot;single_level_response&quot;.</span>
 <span class="sd">    If set to true, the API will return the validation result in a single-level dictionary.</span>
 <span class="sd">    Otherwise, and by default, the response includes status and message keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response: JSON response with validation results or error message.</span>
+<span class="sd">            - 200: Successful validation with result.</span>
+<span class="sd">            - 400: Missing email key in request.</span>
+<span class="sd">            - 402: Insufficient credits.</span>
+<span class="sd">            - 500: Internal server error.</span>
+<span class="sd">            - 503: Validation service unavailable.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Validate the request JSON</span>

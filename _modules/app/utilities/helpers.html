@@ -17,8 +17,8 @@
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,16 +515,30 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.utilities.helpers</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randrange</span>
+<span></span><span class="sd">&quot;&quot;&quot;Helper utility functions for the Mail List Shield application.</span>
+
+<span class="sd">This module provides general-purpose helper functions including file size</span>
+<span class="sd">formatting, code generation, and API key generation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randrange</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">bc</span>
 
 
-<span class="c1"># Returns the file/folder size given in bytes in the appropriate units as text</span>
 <div class="viewcode-block" id="readable_file_size">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/helpers/index.html#app.utilities.helpers.readable_file_size">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">readable_file_size</span><span class="p">(</span><span class="n">size_in_bytes</span><span class="p">,</span> <span class="n">significant_digits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a file size in bytes to a human-readable string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        size_in_bytes: The size in bytes to convert.</span>
+<span class="sd">        significant_digits: Number of decimal places to include.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Human-readable size string (e.g., &#39;5 MB&#39;, &#39;1.5 GB&#39;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">size_in_bytes</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
         <span class="n">size_rounded</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">size_in_bytes</span><span class="p">,</span> <span class="n">significant_digits</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">significant_digits</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -552,6 +566,16 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="generate_n_digit_code">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/helpers/index.html#app.utilities.helpers.generate_n_digit_code">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_n_digit_code</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a random n-digit numeric code.</span>
+
+<span class="sd">    Each digit is between 1-9 (no zeros) for better readability.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n: The number of digits in the code.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A string of n random digits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">code</span> <span class="o">=</span> <span class="n">code</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">randrange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -562,6 +586,15 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="generate_api_key_and_hash">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/helpers/index.html#app.utilities.helpers.generate_api_key_and_hash">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_api_key_and_hash</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a new API key and its bcrypt hash.</span>
+
+<span class="sd">    Creates a 64-character random API key and hashes it for secure storage.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing (plaintext_key, hashed_key).</span>
+<span class="sd">            The plaintext key should be shown to the user once,</span>
+<span class="sd">            while the hash is stored in the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Generate a new random key</span>
     <span class="n">new_key</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span> <span class="o">+</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>  <span class="c1"># 64 characters</span>
 

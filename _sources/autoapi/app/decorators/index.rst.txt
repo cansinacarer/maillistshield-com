@@ -3,6 +3,13 @@ app.decorators
 
 .. py:module:: app.decorators
 
+.. autoapi-nested-parse::
+
+   Custom decorators for the Mail List Shield application.
+
+   This module provides utility decorators used throughout the application.
+
+
 
 Functions
 ---------
@@ -17,12 +24,12 @@ Module Contents
 
 .. py:function:: asyncr(f)
 
-   Decorator to run a function asynchronously.
+   Decorator to run a function asynchronously in a separate thread.
 
-   We use this decorator to send emails on a separate thread without blocking the main thread.
+   This decorator is primarily used for sending emails without blocking
+   the main request thread.
 
    :param f: The function to be decorated.
-   :type f: function
 
    :returns: A wrapper function that runs the original function in a separate thread.
    :rtype: function

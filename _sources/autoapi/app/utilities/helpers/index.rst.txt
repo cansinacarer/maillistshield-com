@@ -3,6 +3,14 @@ app.utilities.helpers
 
 .. py:module:: app.utilities.helpers
 
+.. autoapi-nested-parse::
+
+   Helper utility functions for the Mail List Shield application.
+
+   This module provides general-purpose helper functions including file size
+   formatting, code generation, and API key generation.
+
+
 
 Functions
 ---------
@@ -19,7 +27,38 @@ Module Contents
 
 .. py:function:: readable_file_size(size_in_bytes, significant_digits=0)
 
+   Convert a file size in bytes to a human-readable string.
+
+   :param size_in_bytes: The size in bytes to convert.
+   :param significant_digits: Number of decimal places to include.
+
+   :returns: Human-readable size string (e.g., '5 MB', '1.5 GB').
+   :rtype: str
+
+
 .. py:function:: generate_n_digit_code(n)
 
+   Generate a random n-digit numeric code.
+
+   Each digit is between 1-9 (no zeros) for better readability.
+
+   :param n: The number of digits in the code.
+
+   :returns: A string of n random digits.
+   :rtype: str
+
+
 .. py:function:: generate_api_key_and_hash()
+
+   Generate a new API key and its bcrypt hash.
+
+   Creates a 64-character random API key and hashes it for secure storage.
+
+   :returns:
+
+             A tuple containing (plaintext_key, hashed_key).
+                 The plaintext key should be shown to the user once,
+                 while the hash is stored in the database.
+   :rtype: tuple
+
 

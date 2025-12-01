@@ -17,8 +17,8 @@
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,7 +515,13 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.utilities.stripe_event_handler</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span></span><span class="sd">&quot;&quot;&quot;Stripe webhook event handler for the Mail List Shield application.</span>
+
+<span class="sd">This module processes incoming Stripe webhook events for subscription</span>
+<span class="sd">management and credit purchases.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">app.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">appTimezone</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Users</span><span class="p">,</span> <span class="n">Tiers</span>
@@ -529,6 +535,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="is_subscription_event">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.is_subscription_event">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_subscription_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a Stripe event is subscription-related.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        event: The Stripe event object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the event type starts with &#39;customer.subscription&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">[:</span><span class="mi">21</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;customer.subscription&quot;</span></div>
 
 
@@ -536,6 +550,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="is_checkout_completed_event">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.is_checkout_completed_event">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_checkout_completed_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a Stripe event is a completed checkout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        event: The Stripe event object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the event type is &#39;checkout.session.completed&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;checkout.session.completed&quot;</span></div>
 
 
@@ -543,6 +565,17 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="user_from_stripe_customer_id">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.user_from_stripe_customer_id">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">user_from_stripe_customer_id</span><span class="p">(</span><span class="n">customer_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up a user by their Stripe customer ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        customer_id: The Stripe customer ID.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Users: The matching user object.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If no user is found with the given customer ID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">user_matched</span> <span class="o">=</span> <span class="n">Users</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">stripe_customer_id</span><span class="o">=</span><span class="n">customer_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">user_matched</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -555,6 +588,17 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="tier_from_stripe_price_id">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.tier_from_stripe_price_id">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">tier_from_stripe_price_id</span><span class="p">(</span><span class="n">price_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Look up a subscription tier by its Stripe price ID.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        price_id: The Stripe price ID.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tiers: The matching tier object.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If no tier is found with the given price ID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tier_matched</span> <span class="o">=</span> <span class="n">Tiers</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">stripe_price_id</span><span class="o">=</span><span class="n">price_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">tier_matched</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -567,6 +611,14 @@ window.addEventListener("load", load);
 <div class="viewcode-block" id="handle_stripe_event">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/stripe_event_handler/index.html#app.utilities.stripe_event_handler.handle_stripe_event">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">handle_stripe_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process a Stripe webhook event.</span>
+
+<span class="sd">    Handles checkout completions (credit purchases) and subscription</span>
+<span class="sd">    events (creation, updates, cancellation, deletion).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        event: The Stripe event object to process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># If it is a credit purchase event, try to parse user and update credits</span>
     <span class="k">if</span> <span class="n">is_checkout_completed_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
         <span class="c1"># Get the Stripe customer and find the matching user</span>

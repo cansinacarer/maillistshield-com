@@ -3,6 +3,15 @@ app.emails
 
 .. py:module:: app.emails
 
+.. autoapi-nested-parse::
+
+   Email sending utilities for the Mail List Shield application.
+
+   This module provides functions for sending various types of emails
+   including password reset, email verification, and subscription notifications.
+   All emails are sent asynchronously to avoid blocking the main thread.
+
+
 
 Functions
 ---------
@@ -25,25 +34,24 @@ Module Contents
    Send an email with the password reset link.
 
    :param email: The email address of the user.
-   :type email: str
 
 
 .. py:function:: send_email_with_code(user)
 
    Send an email with the verification code.
 
-   :param user: The user object.
-   :type user: Users
+   Implements rate limiting: only sends if at least 60 seconds have passed
+   since the last email, and limits total emails to 5.
+
+   :param user: The user object from the database.
 
 
 .. py:function:: send_email_about_subscription_confirmation(user, tier_name)
 
    Send an email with the paid subscription confirmation.
 
-   :param user: The user object.
-   :type user: Users
+   :param user: The user object from the database.
    :param tier_name: The name of the subscription tier.
-   :type tier_name: str
 
 
 .. py:function:: send_email_about_subscription_cancellation(user, tier_name, cancellation_date)
@@ -53,12 +61,9 @@ Module Contents
    This is the email sent when the user cancels their subscription but the subscription
    is still active until the end of the billing period.
 
-   :param user: The user object.
-   :type user: Users
+   :param user: The user object from the database.
    :param tier_name: The name of the subscription tier.
-   :type tier_name: str
    :param cancellation_date: The date of cancellation.
-   :type cancellation_date: datetime
 
 
 .. py:function:: send_email_about_subscription_deletion(user, tier_name)
@@ -67,10 +72,8 @@ Module Contents
 
    This is the email sent when the subscription has ended.
 
-   :param user: The user object.
-   :type user: Users
+   :param user: The user object from the database.
    :param tier_name: The name of the subscription tier.
-   :type tier_name: str
 
 
 .. py:function:: send_async_email(msg, app)
@@ -78,8 +81,6 @@ Module Contents
    Send an email asynchronously.
 
    :param msg: The Message object containing email details.
-   :type msg: Message
    :param app: The Flask application instance.
-   :type app: Flask
 
 

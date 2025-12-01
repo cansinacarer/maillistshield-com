@@ -155,6 +155,10 @@
              
   <section id="module-app.views_auth">
 <span id="app-views-auth"></span><h1>app.views_auth<a class="headerlink" href="#module-app.views_auth" title="Link to this heading"></a></h1>
+<p>Authentication views and routes for the Mail List Shield application.</p>
+<p>This module defines the authentication-related routes including login,
+registration, logout, password reset, email confirmation, two-factor
+authentication, and Google OAuth integration.</p>
 <section id="attributes">
 <h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -170,13 +174,13 @@
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_auth.load_user" title="app.views_auth.load_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_user</span></code></a>(user_id)</p></td>
-<td><p>This function is used to load the user object from the user ID stored in the session.</p></td>
+<td><p>Load a user from the database by ID.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.views_auth.unauthorized_callback" title="app.views_auth.unauthorized_callback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unauthorized_callback</span></code></a>()</p></td>
-<td><p>This function is used to handle unauthorized access to protected routes.</p></td>
+<td><p>Handle unauthorized access to protected routes.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_auth.logout" title="app.views_auth.logout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logout</span></code></a>()</p></td>
-<td><p>This function is used to log out the user and redirect them to the login page.</p></td>
+<td><p>Log out the current user and redirect to the login page.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.views_auth.register" title="app.views_auth.register"><code class="xref py py-obj docutils literal notranslate"><span class="pre">register</span></code></a>()</p></td>
 <td><p>The view function for the registration page.</p></td>
@@ -185,7 +189,7 @@
 <td><p>The view function for the login page.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#app.views_auth.two_factor" title="app.views_auth.two_factor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">two_factor</span></code></a>()</p></td>
-<td><p>The view function for the two factor authentication page.</p></td>
+<td><p>The view function for the two-factor authentication page.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.views_auth.email_confirmation_by_code" title="app.views_auth.email_confirmation_by_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">email_confirmation_by_code</span></code></a>()</p></td>
 <td><p>The view function for the email verification page.</p></td>
@@ -218,13 +222,15 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.load_user">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">load_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#load_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.load_user" title="Link to this definition"></a></dt>
-<dd><p>This function is used to load the user object from the user ID stored in the session.</p>
+<dd><p>Load a user from the database by ID.</p>
+<p>This function is used by Flask-Login to reload the user object
+from the user ID stored in the session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<em>str</em>) – The ID of the user to load.</p>
+<dd class="field-odd"><p><strong>user_id</strong> – The ID of the user to load.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The user object from the db corresponding to the user ID.</p>
+<dd class="field-even"><p>The user object from the database corresponding to the user ID.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../models/index.html#app.models.Users" title="app.models.Users">Users</a></p>
@@ -235,59 +241,137 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.unauthorized_callback">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">unauthorized_callback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#unauthorized_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.unauthorized_callback" title="Link to this definition"></a></dt>
-<dd><p>This function is used to handle unauthorized access to protected routes.</p>
-<p>403 cases will be redirected to login</p>
+<dd><p>Handle unauthorized access to protected routes.</p>
+<p>Redirects unauthenticated users to the login page with the
+original destination preserved in the next parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Redirect to the login page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.logout">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.logout" title="Link to this definition"></a></dt>
-<dd><p>This function is used to log out the user and redirect them to the login page.</p>
+<dd><p>Log out the current user and redirect to the login page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Redirect to the login page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.register">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#register"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.register" title="Link to this definition"></a></dt>
 <dd><p>The view function for the registration page.</p>
+<p>Handles new user registration with reCAPTCHA verification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The registration form or redirect to email confirmation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.login">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.login" title="Link to this definition"></a></dt>
 <dd><p>The view function for the login page.</p>
+<p>Handles user authentication with optional Google OAuth and reCAPTCHA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The login form or redirect to dashboard/two-factor auth.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.two_factor">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">two_factor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#two_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.two_factor" title="Link to this definition"></a></dt>
-<dd><p>The view function for the two factor authentication page.</p>
+<dd><p>The view function for the two-factor authentication page.</p>
+<p>Verifies TOTP codes for users with two-factor authentication enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The two-factor form or redirect to dashboard.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.email_confirmation_by_code">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">email_confirmation_by_code</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#email_confirmation_by_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.email_confirmation_by_code" title="Link to this definition"></a></dt>
 <dd><p>The view function for the email verification page.</p>
+<p>Handles verification code entry and validation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The email confirmation form or redirect to dashboard.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.password_reset">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">password_reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#password_reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.password_reset" title="Link to this definition"></a></dt>
 <dd><p>The view function for the password reset page.</p>
+<p>Initiates the password reset process by sending a reset email.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The password reset form or redirect to confirmation page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.password_reset_requested">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">password_reset_requested</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#password_reset_requested"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.password_reset_requested" title="Link to this definition"></a></dt>
 <dd><p>The view function for the password reset requested page.</p>
+<p>Shows a confirmation message after a password reset request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The password reset requested confirmation page.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="app.views_auth.set_new_password">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">set_new_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#set_new_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.set_new_password" title="Link to this definition"></a></dt>
 <dd><p>The view function for the set new password page.</p>
+<p>Validates the reset token and allows the user to set a new password.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – The token from the forgot password email, used to verify the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new password form or redirect to login.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response</p>
 </dd>
 </dl>
 </dd></dl>
@@ -296,9 +380,10 @@
 <dt class="sig sig-object py" id="app.views_auth.get_google_sso_config">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">get_google_sso_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#get_google_sso_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.get_google_sso_config" title="Link to this definition"></a></dt>
 <dd><p>Get the Google SSO configuration.</p>
+<p>Fetches the OpenID Connect discovery document from Google.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The Google SSO configuration.</p>
+<dd class="field-odd"><p>The Google SSO configuration including endpoints.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -310,7 +395,16 @@
 <dt class="sig sig-object py" id="app.views_auth.login_callback_google">
 <span class="sig-prename descclassname"><span class="pre">app.views_auth.</span></span><span class="sig-name descname"><span class="pre">login_callback_google</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/app/views_auth.html#login_callback_google"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.views_auth.login_callback_google" title="Link to this definition"></a></dt>
 <dd><p>The view function for the Google login callback.</p>
-<p>This is the page that Google redirects to after the Google authentication attempt.</p>
+<p>This is the page that Google redirects to after the Google authentication attempt.
+Handles both existing users logging in and new user registration via Google OAuth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Redirect to dashboard or login page based on authentication result.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

@@ -3,6 +3,11 @@ app.utilities
 
 .. py:module:: app.utilities
 
+.. autoapi-nested-parse::
+
+   Utility modules for the Mail List Shield application.
+
+
 
 Submodules
 ----------

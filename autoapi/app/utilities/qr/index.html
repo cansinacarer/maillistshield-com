@@ -156,12 +156,15 @@
              
   <section id="module-app.utilities.qr">
 <span id="app-utilities-qr"></span><h1>app.utilities.qr<a class="headerlink" href="#module-app.utilities.qr" title="Link to this heading"></a></h1>
+<p>QR code generation utilities for the Mail List Shield application.</p>
+<p>This module provides functions for generating QR codes, primarily used
+for two-factor authentication setup.</p>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#app.utilities.qr.qrcode_img_src" title="app.utilities.qr.qrcode_img_src"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qrcode_img_src</span></code></a>(qr_string)</p></td>
-<td><p></p></td>
+<td><p>Generate a base64-encoded QR code image as a data URI.</p></td>
 </tr>
 </tbody>
 </table>
@@ -171,7 +174,21 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="app.utilities.qr.qrcode_img_src">
 <span class="sig-prename descclassname"><span class="pre">app.utilities.qr.</span></span><span class="sig-name descname"><span class="pre">qrcode_img_src</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qr_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/app/utilities/qr.html#qrcode_img_src"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#app.utilities.qr.qrcode_img_src" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generate a base64-encoded QR code image as a data URI.</p>
+<p>Creates a QR code from the given string and returns it as a
+base64-encoded PNG image suitable for use in an HTML img src attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qr_string</strong> – The string to encode in the QR code.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A data URI string containing the base64-encoded PNG image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>

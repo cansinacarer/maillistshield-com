@@ -17,8 +17,8 @@
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
-      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.2.0/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
       <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
       <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -515,12 +515,26 @@ window.addEventListener("load", load);
            <div itemprop="articleBody">
              
   <h1>Source code for app.utilities.user_registration_actions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">app.utilities.object_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_user_folder</span>
+<span></span><span class="sd">&quot;&quot;&quot;User registration actions for the Mail List Shield application.</span>
+
+<span class="sd">This module contains actions that are performed when a new user</span>
+<span class="sd">confirms their email address.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.utilities.object_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_user_folder</span>
 
 
 <div class="viewcode-block" id="new_user_actions_for_email_confirmed">
 <a class="viewcode-back" href="../../../autoapi/app/utilities/user_registration_actions/index.html#app.utilities.user_registration_actions.new_user_actions_for_email_confirmed">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">new_user_actions_for_email_confirmed</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform setup actions for a newly email-confirmed user.</span>
+
+<span class="sd">    This function is called when a user confirms their email address</span>
+<span class="sd">    for the first time. It sets up their account resources.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        user: The user object whose email was just confirmed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Create a user folder for them in s3</span>
     <span class="n">generate_user_folder</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 

@@ -3,6 +3,14 @@ app.models
 
 .. py:module:: app.models
 
+.. autoapi-nested-parse::
+
+   Database models for the Mail List Shield application.
+
+   This module defines the SQLAlchemy ORM models for the application's database,
+   including user accounts, API keys, batch validation jobs, and subscription tiers.
+
+
 
 Classes
 -------
@@ -21,6 +29,44 @@ Module Contents
 .. py:class:: APIKeys(user, key_hash, label=None, expires_at=None)
 
    Bases: :py:obj:`app.db.Model`
+
+
+   Table for storing API keys associated with user accounts.
+
+   API keys are hashed before storage for security. Each key belongs to a single
+   user and can be active or revoked.
+
+   .. attribute:: id
+
+      Primary key.
+
+   .. attribute:: user_id
+
+      Foreign key to the Users table.
+
+   .. attribute:: key_hash
+
+      Bcrypt hash of the API key.
+
+   .. attribute:: label
+
+      Optional user-provided label for the key.
+
+   .. attribute:: created_at
+
+      Timestamp when the key was created.
+
+   .. attribute:: expires_at
+
+      Optional expiration timestamp.
+
+   .. attribute:: last_used
+
+      Timestamp of the last API call using this key.
+
+   .. attribute:: is_active
+
+      Whether the key is currently active.
 
 
    .. py:attribute:: id
@@ -49,19 +95,124 @@ Module Contents
 
    .. py:method:: check_key(key_plain)
 
+      Verify if a plaintext key matches this key's hash.
+
+      :param key_plain: The plaintext API key to verify.
+
+      :returns: True if the key matches, False otherwise.
+      :rtype: bool
+
+
 
    .. py:method:: delete_key()
+
+      Delete this API key from the database.
+
+      :returns: True if deletion was successful.
+      :rtype: bool
+
 
 
    .. py:method:: update_last_used()
 
+      Update the last_used timestamp to the current time.
+
+
 
    .. py:method:: save()
+
+      Save the current state of this API key to the database.
+
+      :returns: The saved API key instance.
+      :rtype: APIKeys
+
 
 
 .. py:class:: BatchJobs(*args, **kwargs)
 
    Bases: :py:obj:`app.db.Model`
+
+
+   Table for batch email validation jobs.
+
+   Tracks the status and metadata of batch validation jobs, including
+   uploaded files, processing status, and results.
+
+   .. attribute:: id
+
+      Primary key.
+
+   .. attribute:: uid
+
+      Unique 6-character identifier for the job.
+
+   .. attribute:: user_id
+
+      Foreign key to the Users table.
+
+   .. attribute:: user
+
+      Relationship to the user who created the job.
+
+   .. attribute:: status
+
+      Current status of the job.
+
+   .. attribute:: original_file_name
+
+      Original name of the uploaded file.
+
+   .. attribute:: uploaded_file
+
+      Path to the uploaded file in object storage.
+
+   .. attribute:: accepted_file
+
+      Path to the accepted/processed file.
+
+   .. attribute:: results_file
+
+      Path to the results file in object storage.
+
+   .. attribute:: row_count
+
+      Number of rows in the uploaded file.
+
+   .. attribute:: last_pick_row
+
+      Last row processed by the worker.
+
+   .. attribute:: last_pick_time
+
+      Timestamp of the last worker pick.
+
+   .. attribute:: source
+
+      Source of the job (e.g., 'web', 'api').
+
+   .. attribute:: header_row
+
+      Row number containing headers (0 or 1).
+
+   .. attribute:: email_column
+
+      Name of the column containing email addresses.
+
+   .. attribute:: uploaded
+
+      Timestamp when the file was uploaded.
+
+   .. attribute:: started
+
+      Timestamp when processing started.
+
+   .. attribute:: finished
+
+      Timestamp when processing finished.
+
+   .. attribute:: result
+
+      Final result summary.
 
 
    .. py:attribute:: id
@@ -123,13 +274,53 @@ Module Contents
 
    .. py:method:: generate_job_uid()
 
+      Generate a unique 6-character identifier for this job.
+
+      Ensures uniqueness by checking against existing jobs in the database.
+
+
 
    .. py:method:: generate_results_download_link()
+
+      Generate a pre-signed download URL for the results file.
+
+      :returns:
+
+                A pre-signed URL for downloading the results file,
+                    or None if no results file exists.
+      :rtype: str
+
 
 
 .. py:class:: Tiers
 
    Bases: :py:obj:`app.db.Model`
+
+
+   Table for subscription tiers.
+
+   Defines the available subscription tiers and their associated
+   Stripe price IDs.
+
+   .. attribute:: id
+
+      Primary key.
+
+   .. attribute:: name
+
+      Internal name of the tier.
+
+   .. attribute:: label
+
+      Display label for the tier.
+
+   .. attribute:: stripe_price_id
+
+      Associated Stripe price ID for subscriptions.
+
+   .. attribute:: users
+
+      Relationship to users on this tier.
 
 
    .. py:attribute:: id
@@ -150,6 +341,104 @@ Module Contents
 .. py:class:: Users(email, password, tier_id, firstName, lastName, newsletter, member_since, last_login, email_confirmation_code)
 
    Bases: :py:obj:`app.db.Model`, :py:obj:`flask_login.UserMixin`
+
+
+   Table for user accounts.
+
+   Stores user account information including authentication credentials,
+   profile data, subscription status, and security settings.
+
+   .. attribute:: id
+
+      Primary key.
+
+   .. attribute:: email
+
+      Unique email address for the user.
+
+   .. attribute:: password
+
+      Bcrypt-hashed password.
+
+   .. attribute:: role
+
+      User role (e.g., 'user', 'admin').
+
+   .. attribute:: stripe_customer_id
+
+      Associated Stripe customer ID.
+
+   .. attribute:: tier_id
+
+      Foreign key to the subscription tier.
+
+   .. attribute:: credits
+
+      Number of validation credits available.
+
+   .. attribute:: tier
+
+      Relationship to the user's subscription tier.
+
+   .. attribute:: cancel_at
+
+      Scheduled subscription cancellation date.
+
+   .. attribute:: firstName
+
+      User's first name.
+
+   .. attribute:: lastName
+
+      User's last name.
+
+   .. attribute:: newsletter
+
+      Newsletter subscription status.
+
+   .. attribute:: member_since
+
+      Account creation timestamp.
+
+   .. attribute:: last_login
+
+      Last login timestamp.
+
+   .. attribute:: email_confirmation_code
+
+      Code for email verification.
+
+   .. attribute:: last_confirmation_codes_sent
+
+      Last time a confirmation code was sent.
+
+   .. attribute:: number_of_email_confirmation_codes_sent
+
+      Count of confirmation codes sent.
+
+   .. attribute:: email_confirmed
+
+      Whether the email is confirmed (0 or 1).
+
+   .. attribute:: google_avatar_url
+
+      URL to Google avatar if using OAuth.
+
+   .. attribute:: avatar_uploaded
+
+      Whether a custom avatar was uploaded.
+
+   .. attribute:: totp_secret
+
+      Secret key for TOTP two-factor authentication.
+
+   .. attribute:: totp_enabled
+
+      Whether TOTP is enabled (0 or 1).
+
+   .. attribute:: api_keys
+
+      Relationship to user's API keys.
 
 
    .. py:attribute:: id
@@ -223,34 +512,104 @@ Module Contents
 
    .. py:method:: save()
 
+      Save the current state of this user to the database.
+
+      :returns: The saved user instance.
+      :rtype: Users
+
+
 
    .. py:method:: avatar(size=256)
+
+      Get the URL for the user's avatar image.
+
+      Returns the avatar from uploaded file, Google OAuth, or Gravatar
+      in order of priority.
+
+      :param size: The size of the avatar image in pixels.
+
+      :returns: URL to the user's avatar image.
+      :rtype: str
+
 
 
    .. py:method:: is_connected_google()
 
+      Check if the user has connected their Google account.
+
+      :returns: True if Google account is connected, False otherwise.
+      :rtype: bool
+
+
 
    .. py:method:: totp()
+
+      Get the TOTP secret and QR code for two-factor authentication setup.
+
+      :returns: A tuple containing (secret, qr_code_data_uri).
+      :rtype: tuple
+
 
 
    .. py:method:: totp_match(code)
 
+      Verify a TOTP code against the user's secret.
+
+      :param code: The 6-digit TOTP code to verify.
+
+      :returns: True if the code is valid, False otherwise.
+      :rtype: bool
+
+
 
    .. py:method:: totp_reset_secret()
+
+      Generate a new TOTP secret for the user.
+
+      This invalidates any existing authenticator app configurations.
+
 
 
    .. py:method:: folder_size()
 
+      Get the human-readable size of the user's storage folder.
+
+      :returns: The folder size with appropriate units (e.g., '5 MB').
+      :rtype: str
+
+
 
    .. py:method:: folder_quota()
+
+      Get the human-readable storage quota for the user.
+
+      :returns: The storage quota (currently fixed at 500 MB).
+      :rtype: str
+
 
 
    .. py:method:: folder_usage_percentage()
 
+      Calculate the percentage of storage quota used.
+
+      :returns: The usage percentage (0-100).
+      :rtype: int
+
+
 
    .. py:method:: add_credits(amount)
 
+      Add validation credits to the user's account.
+
+      :param amount: The number of credits to add.
+
+
 
    .. py:method:: deduct_credits(amount)
+
+      Deduct validation credits from the user's account.
+
+      :param amount: The number of credits to deduct.
+
 
 
