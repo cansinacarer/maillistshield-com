@@ -146,7 +146,7 @@ def robots():
         Response: A text response with crawler directives.
     """
     return Response(
-        "User-agent: *\nDisallow: /",
+        "User-agent: *\nAllow: /",
         mimetype="text/plain",
     )
 
