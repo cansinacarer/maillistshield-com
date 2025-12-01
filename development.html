@@ -657,7 +657,41 @@ are created, a free tier is automatically added in the Tiers table.</p>
         string stripe_price_id
     }
 
+    APIKeys {
+        int id PK
+        int user_id FK
+        string key_hash
+        string label
+        datetime created_at
+        datetime expires_at
+        datetime last_used
+        boolean is_active
+    }
+
+    BatchJobs {
+        int id PK
+        string uid
+        int user_id FK
+        string status
+        string original_file_name
+        string uploaded_file
+        string accepted_file
+        string results_file
+        int row_count
+        bigint last_pick_row
+        datetime last_pick_time
+        string source
+        int header_row
+        string email_column
+        datetime uploaded
+        datetime started
+        datetime finished
+        string result
+    }
+
     Users }o--|| Tiers : &quot;has&quot;
+    Users ||--o{ APIKeys : &quot;owns&quot;
+    Users ||--o{ BatchJobs : &quot;creates&quot;
     </pre><section id="updating-the-database-model">
 <h3>Updating the Database Model<a class="headerlink" href="#updating-the-database-model" title="Link to this heading"></a></h3>
 <p>To ensure that the database schema is updated without losing existing data, we use database migrations with <code class="docutils literal notranslate"><span class="pre">Flask-Migrate</span></code>. This uses <code class="docutils literal notranslate"><span class="pre">Alembic</span></code> under the hood to manage database migrations. Here are the steps to update the database model:</p>

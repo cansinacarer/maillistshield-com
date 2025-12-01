@@ -133,7 +133,41 @@ are created, a free tier is automatically added in the Tiers table.
             string stripe_price_id
         }
 
+        APIKeys {
+            int id PK
+            int user_id FK
+            string key_hash
+            string label
+            datetime created_at
+            datetime expires_at
+            datetime last_used
+            boolean is_active
+        }
+
+        BatchJobs {
+            int id PK
+            string uid
+            int user_id FK
+            string status
+            string original_file_name
+            string uploaded_file
+            string accepted_file
+            string results_file
+            int row_count
+            bigint last_pick_row
+            datetime last_pick_time
+            string source
+            int header_row
+            string email_column
+            datetime uploaded
+            datetime started
+            datetime finished
+            string result
+        }
+
         Users }o--|| Tiers : "has"
+        Users ||--o{ APIKeys : "owns"
+        Users ||--o{ BatchJobs : "creates"
 
 Updating the Database Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
