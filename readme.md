@@ -58,16 +58,89 @@ This application consists of 6 event driven services:
 5. [Validation Orchestrator](https://github.com/cansinacarer/maillistshield-validation-orchestrator)
 6. [Results File Generator](https://github.com/cansinacarer/maillistshield-results-file-generator)
 
-### Tech Stack
+See [this drawio diagram](https://app.diagrams.net/#Uhttps://raw.githubusercontent.com/cansinacarer/maillistshield-com/main/docs/drawio/mls-service-architecture.drawio) for a more detailed description of the interactions between these services.
 
-The services are triggered by:
+## Tech Stack
 
-- Messages on a __RabbitMQ__ server on designated vhosts,
-- Files created at an __AWS S3__ compatible object storage service, at designated directories.
+- Backend: Python, Flask, PostgreSQL
+- Infrastructure: Docker, RabbitMQ, AWS S3, Loki, Grafana
+- Auth: OAuth, 2FA
+- Payments: Stripe
+- CI/CD: GitHub Actions
+- Documentation: Sphinx AutoAPI, Postman
 
-All services share a common __Postgres__ database, and configured to send logs to a __Loki__ server.
+## Database Model
 
-See [this drawio diagram](docs/drawio/mls-service-architecture.drawio) for a more detailed description of the interactions between these services.
+```mermaid
+    erDiagram
+        
+        Users {
+            int id PK
+            string email
+            string password
+            string role
+            string stripe_customer_id
+            int tier_id FK
+            bigint credits
+            datetime cancel_at
+            string firstName
+            string lastName
+            int newsletter
+            datetime member_since
+            datetime last_login
+            string email_confirmation_code
+            datetime last_confirmation_codes_sent
+            int number_of_email_confirmation_codes_sent
+            int email_confirmed
+            string google_avatar_url
+            boolean avatar_uploaded
+            string totp_secret
+            int totp_enabled
+        }
+        
+        Tiers {
+            int id PK
+            string name
+            string label
+            string stripe_price_id
+        }
+
+        APIKeys {
+            int id PK
+            int user_id FK
+            string key_hash
+            string label
+            datetime created_at
+            datetime expires_at
+            datetime last_used
+            boolean is_active
+        }
+
+        BatchJobs {
+            int id PK
+            string uid
+            int user_id FK
+            string status
+            string original_file_name
+            string uploaded_file
+            string accepted_file
+            string results_file
+            int row_count
+            bigint last_pick_row
+            datetime last_pick_time
+            string source
+            int header_row
+            string email_column
+            datetime uploaded
+            datetime started
+            datetime finished
+            string result
+        }
+
+        Users }o--|| Tiers : "has"
+        Users ||--o{ APIKeys : "owns"
+        Users ||--o{ BatchJobs : "creates"
+```
 
 ## Service Descriptions
 
