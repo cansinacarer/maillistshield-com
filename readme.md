@@ -3,7 +3,7 @@
     <img alt="MailListShield Logo" height="50" src="app/static/media/mail-list-shield-logo-dark-mode.png#gh-dark-mode-only">
 </p>
 <p align="center">
-    A production-grade email validation platform built with microservices architecture
+    An email validation SaaS built with microservices architecture
 </p>
 
 <!-- Links -->
