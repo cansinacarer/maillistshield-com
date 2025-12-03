@@ -1,3 +1,11 @@
+# [1.14.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.13.0...v1.14.0) (2025-12-03)
+
+
+### Features
+
+* add new pricing and descriptions ([d910d78](https://github.com/cansinacarer/maillistshield-com/commit/d910d78e64b54490b2ff9c9ad5af598623e20042))
+* set and enforce minimum 1000 credits purchase ([da7f7dd](https://github.com/cansinacarer/maillistshield-com/commit/da7f7dd257e0969b66db6b7e5bb43cebdb7d934f))
+
 # [1.13.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.12.0...v1.13.0) (2025-11-25)
 
 
