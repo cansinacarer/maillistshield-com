@@ -12,7 +12,13 @@
     <a href="https://documenter.getpostman.com/view/39218943/2sB3QDxDUr"><img alt="API Docs" src="https://img.shields.io/badge/API%20Docs-blue?&logo=read-the-docs&logoColor=white"></a>
     <a href="https://cansinacarer.github.io/My-Base-SaaS-Flask/"><img alt="Developer Docs" src="https://img.shields.io/badge/Developer%20Docs-blue?&logo=read-the-docs&logoColor=white"></a>
     <a href="https://deepwiki.com/cansinacarer/maillistshield-com"><img alt="DeepWiki" src="https://deepwiki.com/badge.svg"></a>
-    <a href="https://www.producthunt.com/products/mail-list-shield?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mail&#0045;list&#0045;shield" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045775&theme=light&t=1764802529738" alt="Mail&#0032;List&#0032;Shield - Remove&#0032;spam&#0032;traps&#0032;and&#0032;invalid&#0032;addresses&#0032;from&#0032;your&#0032;email&#0032;list | Product Hunt" style="height: 20px;" height="20" /></a>
+    <a href="https://www.producthunt.com/products/mail-list-shield?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mail&#0045;list&#0045;shield" target="_blank">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045775&theme=dark&t=1764802768331">
+            <source media="(prefers-color-scheme: light)" srcset="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045775&theme=light&t=1764802529738">
+            <img alt="Mail&#0032;List&#0032;Shield - Remove&#0032;spam&#0032;traps&#0032;and&#0032;invalid&#0032;addresses&#0032;from&#0032;your&#0032;email&#0032;list | Product Hunt" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1045775&theme=light&t=1764802529738" height="20" />
+        </picture>
+    </a>
 </p>
 
 <!-- Status -->
