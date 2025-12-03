@@ -324,6 +324,16 @@ def billing(path):
                             flash("Invalid number of credits selected.", "danger")
                             return redirect(url_for("private_bp.billing"))
 
+                        if int(creditsRequested) < 1000:
+                            flash("You must purchase at least 1000 credits.", "danger")
+                            return redirect(url_for("private_bp.billing"))
+
+                        if int(creditsRequested) > 10000000:
+                            flash(
+                                "You can purchase up to 10,000,000 credits.", "danger"
+                            )
+                            return redirect(url_for("private_bp.billing"))
+
                     except Exception as e:
                         print(f"Error while parsing the numberOfCredits requested: {e}")
                         flash("Invalid tier selected.", "danger")
