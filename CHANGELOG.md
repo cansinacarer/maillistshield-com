@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/cansinacarer/maillistshield-com/compare/v1.14.0...v1.14.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* populate the decimal point in file progress percentage ([2c143d7](https://github.com/cansinacarer/maillistshield-com/commit/2c143d74365d855ac4daff1a233fbfeec7585829))
+
 # [1.14.0](https://github.com/cansinacarer/maillistshield-com/compare/v1.13.0...v1.14.0) (2025-12-03)
 
 
